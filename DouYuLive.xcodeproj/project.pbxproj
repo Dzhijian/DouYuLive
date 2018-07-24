@@ -13,6 +13,14 @@
 		048EA3832106447300E30720 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 048EA3812106447300E30720 /* LaunchScreen.storyboard */; };
 		048EA38E2106447300E30720 /* DouYuLiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EA38D2106447300E30720 /* DouYuLiveTests.swift */; };
 		048EA3992106447300E30720 /* DouYuLiveUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EA3982106447300E30720 /* DouYuLiveUITests.swift */; };
+		048EA3AF21078F8400E30720 /* ZJTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EA3AE21078F8400E30720 /* ZJTabBarController.swift */; };
+		048EA3B121078F9700E30720 /* ZJHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EA3B021078F9700E30720 /* ZJHomeViewController.swift */; };
+		048EA3B62107909F00E30720 /* ZJRecreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EA3B52107909F00E30720 /* ZJRecreationViewController.swift */; };
+		048EA3B8210790A900E30720 /* ZJFollowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EA3B7210790A900E30720 /* ZJFollowViewController.swift */; };
+		048EA3BA210790B700E30720 /* ZJFishBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EA3B9210790B700E30720 /* ZJFishBarViewController.swift */; };
+		048EA3BC210790E400E30720 /* ZJDiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EA3BB210790E400E30720 /* ZJDiscoverViewController.swift */; };
+		048EA3C02107911D00E30720 /* ZJNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EA3BF2107911D00E30720 /* ZJNavigationController.swift */; };
+		048EA3C22107974800E30720 /* ZJBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EA3C12107974800E30720 /* ZJBaseViewController.swift */; };
 		619E8571C0B788E9A48A4DAA /* Pods_DouYuLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52719E315E383F8AB1095B8F /* Pods_DouYuLive.framework */; };
 		8E2442C1E2E3458193C78A68 /* Pods_DouYuLiveTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC0A7B02291A71D9FB1D44C1 /* Pods_DouYuLiveTests.framework */; };
 		CBD36C3FC40B699FAABC0BA0 /* Pods_DouYuLiveUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD64D94DCEEB5C1488907B46 /* Pods_DouYuLiveUITests.framework */; };
@@ -48,6 +56,14 @@
 		048EA3942106447300E30720 /* DouYuLiveUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DouYuLiveUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		048EA3982106447300E30720 /* DouYuLiveUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DouYuLiveUITests.swift; sourceTree = "<group>"; };
 		048EA39A2106447300E30720 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		048EA3AE21078F8400E30720 /* ZJTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJTabBarController.swift; sourceTree = "<group>"; };
+		048EA3B021078F9700E30720 /* ZJHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJHomeViewController.swift; sourceTree = "<group>"; };
+		048EA3B52107909F00E30720 /* ZJRecreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJRecreationViewController.swift; sourceTree = "<group>"; };
+		048EA3B7210790A900E30720 /* ZJFollowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFollowViewController.swift; sourceTree = "<group>"; };
+		048EA3B9210790B700E30720 /* ZJFishBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFishBarViewController.swift; sourceTree = "<group>"; };
+		048EA3BB210790E400E30720 /* ZJDiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJDiscoverViewController.swift; sourceTree = "<group>"; };
+		048EA3BF2107911D00E30720 /* ZJNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJNavigationController.swift; sourceTree = "<group>"; };
+		048EA3C12107974800E30720 /* ZJBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJBaseViewController.swift; sourceTree = "<group>"; };
 		453A662B8E021BC466F245AE /* Pods-DouYuLiveUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DouYuLiveUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DouYuLiveUITests/Pods-DouYuLiveUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		52719E315E383F8AB1095B8F /* Pods_DouYuLive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DouYuLive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53CFB983BF35608199568833 /* Pods-DouYuLive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DouYuLive.release.xcconfig"; path = "Pods/Target Support Files/Pods-DouYuLive/Pods-DouYuLive.release.xcconfig"; sourceTree = "<group>"; };
@@ -156,9 +172,10 @@
 				048EA3A82107873B00E30720 /* Tools */,
 				048EA3AD2107873B00E30720 /* Main */,
 				048EA3A72107873B00E30720 /* Home */,
-				048EA3AB2107873B00E30720 /* Live */,
+				048EA3AB2107873B00E30720 /* Recreation */,
 				048EA3A92107873B00E30720 /* Follow */,
-				048EA3AC2107873B00E30720 /* Proflie */,
+				048EA3B42107904E00E30720 /* FishBar */,
+				048EA3AC2107873B00E30720 /* discover */,
 				048EA3AA2107873B00E30720 /* Other */,
 			);
 			path = Classes;
@@ -167,6 +184,7 @@
 		048EA3A72107873B00E30720 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				048EA3B021078F9700E30720 /* ZJHomeViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -181,6 +199,7 @@
 		048EA3A92107873B00E30720 /* Follow */ = {
 			isa = PBXGroup;
 			children = (
+				048EA3B7210790A900E30720 /* ZJFollowViewController.swift */,
 			);
 			path = Follow;
 			sourceTree = "<group>";
@@ -192,26 +211,40 @@
 			path = Other;
 			sourceTree = "<group>";
 		};
-		048EA3AB2107873B00E30720 /* Live */ = {
+		048EA3AB2107873B00E30720 /* Recreation */ = {
 			isa = PBXGroup;
 			children = (
+				048EA3B52107909F00E30720 /* ZJRecreationViewController.swift */,
 			);
-			path = Live;
+			path = Recreation;
 			sourceTree = "<group>";
 		};
-		048EA3AC2107873B00E30720 /* Proflie */ = {
+		048EA3AC2107873B00E30720 /* discover */ = {
 			isa = PBXGroup;
 			children = (
+				048EA3BB210790E400E30720 /* ZJDiscoverViewController.swift */,
 			);
-			path = Proflie;
+			path = discover;
 			sourceTree = "<group>";
 		};
 		048EA3AD2107873B00E30720 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				048EA3AE21078F8400E30720 /* ZJTabBarController.swift */,
+				048EA3BF2107911D00E30720 /* ZJNavigationController.swift */,
+				048EA3C12107974800E30720 /* ZJBaseViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
+		};
+		048EA3B42107904E00E30720 /* FishBar */ = {
+			isa = PBXGroup;
+			children = (
+				048EA3B9210790B700E30720 /* ZJFishBarViewController.swift */,
+			);
+			name = FishBar;
+			path = DouYuLive/Classes/FishBar;
+			sourceTree = SOURCE_ROOT;
 		};
 		1D1F37440CECC817327578EC /* Pods */ = {
 			isa = PBXGroup;
@@ -291,6 +324,7 @@
 		048EA36D2106447200E30720 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = ZJ;
 				LastSwiftUpdateCheck = 0940;
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "邓志坚";
@@ -417,7 +451,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				048EA3BA210790B700E30720 /* ZJFishBarViewController.swift in Sources */,
+				048EA3B8210790A900E30720 /* ZJFollowViewController.swift in Sources */,
+				048EA3B62107909F00E30720 /* ZJRecreationViewController.swift in Sources */,
+				048EA3B121078F9700E30720 /* ZJHomeViewController.swift in Sources */,
 				048EA3792106447200E30720 /* AppDelegate.swift in Sources */,
+				048EA3BC210790E400E30720 /* ZJDiscoverViewController.swift in Sources */,
+				048EA3C22107974800E30720 /* ZJBaseViewController.swift in Sources */,
+				048EA3AF21078F8400E30720 /* ZJTabBarController.swift in Sources */,
+				048EA3C02107911D00E30720 /* ZJNavigationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
