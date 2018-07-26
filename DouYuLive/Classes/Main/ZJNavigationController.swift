@@ -13,7 +13,7 @@ class ZJNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationBar.isTranslucent = false
-//        self.navigationBar.tintColor = UIColor.black
+
     }
     
     //MARK: 重写跳转

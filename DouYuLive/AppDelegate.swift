@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let root = ZJTabBarController()
         self.window?.rootViewController = root
         self.window?.makeKeyAndVisible()
-        UITabBar.appearance().tintColor = UIColor.orange
+        
         return true
     }
 

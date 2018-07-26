@@ -7,29 +7,44 @@
 //
 
 import UIKit
+import Alamofire
+import SnapKit
 
 class ZJHomeViewController: ZJBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.red
-        self.title = "首页";
+        self.title = ""
+        
+        setUpUI()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
+}
+
+
+extension ZJHomeViewController {
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // 配置 UI
+    func setUpUI(){
+     
+        setUpNavigation()
     }
-    */
-
+    
+    // 配置 NavigationBar
+    func setUpNavigation() -> Void {
+        self.navigationController?.navigationBar.barTintColor = UIColor.orange
+        
+        let size = CGSize(width: 30, height: 30)
+        // 左边的按钮
+//        navigationItem.leftBarButtonItem = UIBarButtonItem.createBarButton("home_newSaoicon","micLink_seatAreaPlaceholder",size)
+        navigationItem.leftBarButtonItem = UIBarButtonItem("home_newSaoicon", "home_newSaoicon", size)
+        // 右边的按钮
+        navigationItem.rightBarButtonItem = UIBarButtonItem.createBarButton("home_column_more", "home_column_more", size)
+        
+    }
 }

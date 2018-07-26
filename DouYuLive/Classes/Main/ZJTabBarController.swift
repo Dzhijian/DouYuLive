@@ -21,8 +21,8 @@ class ZJTabBarController: UITabBarController {
         
         //设置 tabBar 工具栏字体颜色 (未选中  和  选中)
         
-        // 设置图片选中时颜色必须设置（系统默认选中蓝色）
-        self.tabBar.tintColor = UIColor.black
+        // 设置图片和文字选中时的颜色   必须设置（系统默认选中蓝色）
+        self.tabBar.tintColor = UIColor.orange
         self.tabBar.isTranslucent = false
 
     }
