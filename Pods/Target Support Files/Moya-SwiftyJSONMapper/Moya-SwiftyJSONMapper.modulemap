@@ -1,0 +1,6 @@
+framework module Moya_SwiftyJSONMapper {
+  umbrella header "Moya-SwiftyJSONMapper-umbrella.h"
+
+  export *
+  module * { export * }
+}
