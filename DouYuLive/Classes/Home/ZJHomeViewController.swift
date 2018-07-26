@@ -41,8 +41,7 @@ extension ZJHomeViewController {
         
         let size = CGSize(width: 30, height: 30)
         // 左边的按钮
-//        navigationItem.leftBarButtonItem = UIBarButtonItem.createBarButton("home_newSaoicon","micLink_seatAreaPlaceholder",size)
-        navigationItem.leftBarButtonItem = UIBarButtonItem("home_newSaoicon", "home_newSaoicon", size)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(norImageName: "home_newSaoicon", size: size)
         // 右边的按钮
         navigationItem.rightBarButtonItem = UIBarButtonItem.createBarButton("home_column_more", "home_column_more", size)
         
