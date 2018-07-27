@@ -12,8 +12,8 @@ target 'DouYuLive' do
   pod 'Moya'
   pod 'Moya-SwiftyJSONMapper'
   pod 'IQKeyboardManagerSwift'
-  
-  
+#  pod 'ZJKitTool'
+
   target 'DouYuLiveTests' do
     inherit! :search_paths
     # Pods for testing

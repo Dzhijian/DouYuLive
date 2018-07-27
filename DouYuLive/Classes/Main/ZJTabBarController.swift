@@ -43,7 +43,7 @@ class ZJTabBarController: UITabBarController {
     // 设置子控件属性
     private func setUpChildController(_ controller : UIViewController,_ title : String,_ norImage : String,_ selectedImage : String){
         
-        controller.tabBarItem.title = "首页"
+        controller.tabBarItem.title = title
         // 修改TabBar标题位置
         controller.tabBarItem.titlePositionAdjustment = UIOffsetMake(0, -3)
         controller.tabBarItem.image = UIImage(named: norImage)

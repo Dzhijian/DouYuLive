@@ -14,7 +14,7 @@ class ZJHomeViewController: ZJBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = ""
+        self.navigationItem.title = ""
         
         setUpUI()
     }
@@ -26,13 +26,15 @@ class ZJHomeViewController: ZJBaseViewController {
 
 }
 
-
+// MARK - 配置子控件
 extension ZJHomeViewController {
     
     // 配置 UI
     func setUpUI(){
      
         setUpNavigation()
+        
+        setUpPageTitleView()
     }
     
     // 配置 NavigationBar
@@ -44,6 +46,21 @@ extension ZJHomeViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(norImageName: "home_newSaoicon", size: size)
         // 右边的按钮
         navigationItem.rightBarButtonItem = UIBarButtonItem.createBarButton("home_column_more", "home_column_more", size)
+        
+        let searchView = ZJHomeSearchView(frame: CGRect(x: 0, y: 0, width: 300, height: 30))
+        searchView.backgroundColor = UIColor.white
+        navigationItem.titleView = searchView
+        
+        
+    }
+    
+    
+    func setUpPageTitleView() {
+        let frame = CGRect(x: 0, y: 0, width: kScreenW, height: 40)
+    
+        let pageTitleViw = ZJPageTitleView(frame: frame, titles: ["1","2","3","4"])
+        pageTitleViw.backgroundColor = UIColor.red
+        self.view.addSubview(pageTitleViw)
         
     }
 }
