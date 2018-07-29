@@ -17,7 +17,9 @@ extension UIBarButtonItem {
         btn.setImage(UIImage(named: norImageName) , for: .normal)
         btn.setImage(UIImage(named: highLightImageName) , for: .highlighted)
         btn.frame = CGRect(origin: CGPoint.zero, size: size)
+        
         return UIBarButtonItem(customView: btn)
+        
     }
     
     

@@ -11,7 +11,7 @@ import Alamofire
 import SnapKit
 
 class ZJHomeViewController: ZJBaseViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = ""
@@ -29,6 +29,7 @@ class ZJHomeViewController: ZJBaseViewController {
 // MARK - 配置子控件
 extension ZJHomeViewController {
     
+    
     // 配置 UI
     func setUpUI(){
      
@@ -39,7 +40,7 @@ extension ZJHomeViewController {
     
     // 配置 NavigationBar
     func setUpNavigation() -> Void {
-        self.navigationController?.navigationBar.barTintColor = UIColor.orange
+        self.navigationController?.navigationBar.barTintColor = MainOrangeColor
         
         let size = CGSize(width: 30, height: 30)
         // 左边的按钮
@@ -47,9 +48,14 @@ extension ZJHomeViewController {
         // 右边的按钮
         navigationItem.rightBarButtonItem = UIBarButtonItem.createBarButton("home_column_more", "home_column_more", size)
         
-        let searchView = ZJHomeSearchView(frame: CGRect(x: 0, y: 0, width: 300, height: 30))
-        searchView.backgroundColor = UIColor.white
+        let searchView  = ZJHomeSearchView()
+        searchView.backgroundColor = SearchBGColor
         navigationItem.titleView = searchView
+        searchView.snp.makeConstraints { (make) in
+            make.center.equalTo((navigationItem.titleView?.snp.center)!)
+            make.width.equalTo(250)
+            make.height.equalTo(35)
+        }
         
         
     }
