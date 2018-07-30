@@ -59,8 +59,6 @@ extension ZJHomeViewController {
             make.width.equalTo(AdaptW(230))
             make.height.equalTo(33)
         }
-        
-        
     }
     
     func setUpPageTitleView() {

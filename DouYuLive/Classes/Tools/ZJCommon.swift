@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 let kScreenW = UIScreen.main.bounds.size.width
 
