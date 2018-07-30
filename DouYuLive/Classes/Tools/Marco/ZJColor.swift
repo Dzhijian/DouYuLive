@@ -7,12 +7,18 @@
 //
 
 import UIKit
-// 主颜色 Orange
 
+
+
+
+// 主颜色 Orange
+let MainOrangeColor = UIColor(red: colorValue(238.0), green:colorValue(120.0), blue: colorValue(59), alpha: 1.0)
+
+let SearchBGColor = UIColor(red: colorValue(237.0), green:colorValue(143.0), blue: colorValue(90), alpha: 1.0)
+
+// function
 func colorValue(_ value : CGFloat) -> CGFloat {
     return value / 255.0
 }
 
-let MainOrangeColor = UIColor(red: colorValue(238.0), green:colorValue(120.0), blue: colorValue(59), alpha: 1.0)
 
-let SearchBGColor = UIColor(red: colorValue(237.0), green:colorValue(143.0), blue: colorValue(90), alpha: 1.0)

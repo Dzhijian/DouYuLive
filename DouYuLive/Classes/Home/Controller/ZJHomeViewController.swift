@@ -40,33 +40,42 @@ extension ZJHomeViewController {
     
     // 配置 NavigationBar
     func setUpNavigation() -> Void {
+        // 修改状态栏背景颜色
         self.navigationController?.navigationBar.barTintColor = MainOrangeColor
-        
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+
         let size = CGSize(width: 30, height: 30)
         // 左边的按钮
         navigationItem.leftBarButtonItem = UIBarButtonItem(norImageName: "home_newSaoicon", size: size)
         // 右边的按钮
-        navigationItem.rightBarButtonItem = UIBarButtonItem.createBarButton("home_column_more", "home_column_more", size)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "search_history"), style:.done, target: self, action: #selector(self.rightItemClick)) //UIBarButtonItem.createBarButton("search_history", "search_history", size)
         
         let searchView  = ZJHomeSearchView()
+        searchView.layer.cornerRadius = 5
         searchView.backgroundColor = SearchBGColor
         navigationItem.titleView = searchView
         searchView.snp.makeConstraints { (make) in
             make.center.equalTo((navigationItem.titleView?.snp.center)!)
-            make.width.equalTo(250)
-            make.height.equalTo(35)
+            make.width.equalTo(AdaptW(230))
+            make.height.equalTo(33)
         }
         
         
     }
     
-    
     func setUpPageTitleView() {
+        
         let frame = CGRect(x: 0, y: 0, width: kScreenW, height: 40)
-    
         let pageTitleViw = ZJPageTitleView(frame: frame, titles: ["1","2","3","4"])
         pageTitleViw.backgroundColor = UIColor.red
         self.view.addSubview(pageTitleViw)
         
     }
+    
+    @objc func rightItemClick() {
+        print("rightItem cLick")
+    }
+    
+    
+  
 }

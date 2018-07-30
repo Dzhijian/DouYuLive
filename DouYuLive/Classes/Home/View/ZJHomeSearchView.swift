@@ -14,7 +14,7 @@ class ZJHomeSearchView : UIView {
         let textField = UITextField()
         textField.backgroundColor = UIColor.clear
         textField.borderStyle = .none
-        textField.font = UIFont.systemFont(ofSize: 14)
+        textField.font = FontSize(14)
         textField.placeholder = "请输入搜索内容"
         return textField
     }()
@@ -39,7 +39,6 @@ class ZJHomeSearchView : UIView {
     }
     
     
-    
      func setUpChildView() {
         
         self.addSubview(textField)
@@ -47,21 +46,21 @@ class ZJHomeSearchView : UIView {
         self.addSubview(QcodeIcon)
 
         textField.snp.makeConstraints { (make) in
-            make.left.equalTo(self).offset(40)
-            make.right.equalTo(self).offset(-40)
+            make.left.equalTo(self).offset(AdaptW(35))
+            make.right.equalTo(self).offset(AdaptW(-35))
             make.height.equalTo(30)
             make.center.equalTo(self)
         }
         searchIcon.snp.makeConstraints { (make) in
             make.centerY.equalTo(self)
             make.left.equalTo(5)
-            make.width.height.equalTo(35)
+            make.width.height.equalTo(AdaptW(30))
         }
         
         QcodeIcon.snp.makeConstraints { (make) in
             make.centerY.equalTo(self)
-            make.right.equalTo(-5)
-            make.width.height.equalTo(35)
+            make.right.equalTo(AdaptW(-5))
+            make.width.height.equalTo(AdaptW(30))
         }
     }
     
