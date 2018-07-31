@@ -10,8 +10,13 @@ import UIKit
 import SnapKit
 
 let kScreenW = UIScreen.main.bounds.size.width
-
 let kScreenH = UIScreen.main.bounds.size.height
+
+let kStatuHeight : CGFloat = 20
+let kNavigationBarHeight :CGFloat = 44
+let kTabBarHeight : CGFloat = 49
+
+
 
 // 宽度比
 let kWidthRatio = kScreenW / 375.0
