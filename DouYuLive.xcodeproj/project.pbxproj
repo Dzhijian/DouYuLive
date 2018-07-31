@@ -150,8 +150,8 @@
 		0419BCDF210ABAAE008661D3 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0419BCE0210ABACB008661D3 /* ZJPageTitleView.swift */,
 				0419BCE5210AF22A008661D3 /* ZJHomeSearchView.swift */,
+				0419BCE0210ABACB008661D3 /* ZJPageTitleView.swift */,
 				0419BCF2210F7FE5008661D3 /* ZJPageContentView.swift */,
 			);
 			path = View;

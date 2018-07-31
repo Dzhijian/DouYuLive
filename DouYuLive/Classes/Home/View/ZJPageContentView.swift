@@ -8,7 +8,152 @@
 
 import UIKit
 
-class ZJPageContentView: UIView {
 
+protocol PageContentViewDelegate : class {
+    func pageContentView(contentView : ZJPageContentView,progress : CGFloat, sourceIndex : Int,targetIndex : Int)
+}
+
+private let ContentCellID = "ContentCellID"
+
+class ZJPageContentView: UIView {
+    
+    // 代理协议
+    weak var delegate : PageContentViewDelegate?
+    
+    // 自控制器数组
+    private var childVCs : [UIViewController]
+    // 父控制器 weak 修饰,防止循环引用
+    private weak var parentViewController : UIViewController?
+    // 滑动偏移量
+    private var startOffSetX : CGFloat = 0
+
+    // collectionView 容器
+    private lazy var collectionView : UICollectionView = { [weak self] in
+         // 创建 layout
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = (self?.bounds.size)!
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        layout.scrollDirection = .horizontal
+        // 创建 UICollectionView
+        let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.isPagingEnabled = true
+        collectionView.bounces = false
+        collectionView.dataSource = self
+        collectionView.delegate =  self
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: ContentCellID)
+        return collectionView
+    }()
+    
+    init(frame : CGRect, childVCs : [UIViewController] ,parentViewController : UIViewController?) {
+        
+        self.childVCs = childVCs
+        self.parentViewController = parentViewController
+        print(frame)
+        super.init(frame:frame)
+        
+        setUpView()
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}
+
+
+
+// MARK: - 对外暴露的方法
+extension ZJPageContentView {
+    
+    // 切换控制器
+    func setCurrentIndex(currentIndex: Int) {
+        let offSetX = CGFloat(currentIndex) * collectionView.frame.width
+        collectionView.setContentOffset(CGPoint(x: offSetX, y: 0), animated: false )
+        
+    }
+}
+
+// 设置 UI
+extension ZJPageContentView{
+    private func setUpView(){
+        // 将所有的子控制器添加到父控制器中
+        for childVC in childVCs {
+            self.parentViewController?.addChildViewController(childVC)
+        }
+        
+        // 添加 UIColletionView 存放子控制器的 View
+        addSubview(collectionView)
+        collectionView.frame = bounds
+    }
+}
+
+
+// MARK: - 遵守协议
+extension ZJPageContentView : UICollectionViewDataSource,UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return childVCs.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentCellID, for: indexPath)
+        let childVC = childVCs[indexPath.item]
+        childVC.view.frame = cell.contentView.bounds 
+        cell.contentView.addSubview(childVC.view)
+        return cell
+        
+    }
+    
+    // 开始拖拽
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        startOffSetX = scrollView.contentOffset.x
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // 获取需要的数据资源
+        var progress : CGFloat = 0
+        var sourceIndex : Int = 0
+        var targetIndex : Int = 0
+        
+        // 判断左滑还是右滑
+        let currentOffSetX = scrollView.contentOffset.x
+        let scrollViewW = scrollView.bounds.width
+        if currentOffSetX > startOffSetX {
+             // 左滑
+            // 1.计算 progress
+            progress = currentOffSetX / scrollViewW - floor(currentOffSetX / scrollViewW)
+            // 2.计算 sourceIndex
+            sourceIndex = Int(currentOffSetX / scrollViewW)
+            // 3.计算 targetIndex
+            targetIndex = sourceIndex + 1
+            
+            if targetIndex >= childVCs.count  {
+                targetIndex = childVCs.count - 1
+            }
+            
+            // 4. 如果完全划过去了
+            if currentOffSetX - startOffSetX == scrollViewW {
+                progress = 1
+                targetIndex = sourceIndex
+            }
+        }else{
+            // 右滑
+            // 计算 progress
+            progress = 1  - (currentOffSetX / scrollViewW - floor(currentOffSetX / scrollViewW))
+            // 2.计算 targetIndex
+            targetIndex = Int(currentOffSetX / scrollViewW)
+            // 3.计算 sourceIndex
+            sourceIndex = targetIndex + 1
+            
+            if sourceIndex >= childVCs.count  {
+                sourceIndex = childVCs.count - 1
+            }
+        }
+        
+        delegate?.pageContentView(contentView: self, progress: progress, sourceIndex: sourceIndex, targetIndex: targetIndex)
+//        print("progress:\(progress)  targetIndex:\(targetIndex)  sourceIndex:\(sourceIndex)")
+    }
 
 }

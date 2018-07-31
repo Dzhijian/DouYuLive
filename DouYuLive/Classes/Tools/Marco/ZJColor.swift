@@ -9,16 +9,42 @@
 import UIKit
 
 
+let kWhite       = UIColor.white
+let kRed         = UIColor.red
+let kOrange      = UIColor.orange
+let kBlack       = UIColor.black
+let kGreen       = UIColor.green
 
 
-// 主颜色 Orange
+// 主颜色 MainOrange
 let MainOrangeColor = UIColor(red: colorValue(238.0), green:colorValue(120.0), blue: colorValue(59), alpha: 1.0)
+
+// low  r: 239 130 62
+// high r: 237 105 57
+let LowOrangeColor = UIColor(red: colorValue(239), green:colorValue(130), blue: colorValue(62), alpha: 1.0)
+let HighOrangeColor = UIColor(red: colorValue(237), green:colorValue(105), blue: colorValue(57), alpha: 1.0)
+// 渐变色色组
+let gradientColors: [CGColor] = [LowOrangeColor.cgColor, HighOrangeColor.cgColor]
 
 let SearchBGColor = UIColor(red: colorValue(237.0), green:colorValue(143.0), blue: colorValue(90), alpha: 1.0)
 
 // function
+
 func colorValue(_ value : CGFloat) -> CGFloat {
     return value / 255.0
 }
 
+
+/// UIColor,通过 RGBA数值设置颜色
+///
+/// - Parameters:
+///   - red: 红色值
+///   - green: 绿色值
+///   - blue: 蓝色值
+///   - alpha: 透明度
+/// - Returns:  UIColor
+func colorWithRGBA(_ red : CGFloat,_ green : CGFloat , _ blue : CGFloat, alpha : CGFloat) -> UIColor{
+    
+    return UIColor(red: colorValue(red), green: colorValue(green), blue: colorValue(blue), alpha: alpha)
+}
 
