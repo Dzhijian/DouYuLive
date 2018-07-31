@@ -12,6 +12,14 @@ import SnapKit
 
 class ZJHomeViewController: ZJBaseViewController {
     
+    private lazy var pageTitleView : ZJPageTitleView = {
+        let frame = CGRect(x: 0, y: 0, width: kScreenW, height: 40)
+        let titles = ["分类","推荐","全部","LoL","绝地求生","王者荣耀","QQ飞车"]
+        let pageTitleViw = ZJPageTitleView(frame: frame, titles: titles)
+//        pageTitleViw.backgroundColor = UIColor.red
+        return pageTitleViw
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = ""
@@ -32,6 +40,9 @@ extension ZJHomeViewController {
     
     // 配置 UI
     func setUpUI(){
+        
+        // 不需要调整 scrollview 的内边距
+        automaticallyAdjustsScrollViewInsets = false
      
         setUpNavigation()
         
@@ -63,10 +74,8 @@ extension ZJHomeViewController {
     
     func setUpPageTitleView() {
         
-        let frame = CGRect(x: 0, y: 0, width: kScreenW, height: 40)
-        let pageTitleViw = ZJPageTitleView(frame: frame, titles: ["1","2","3","4"])
-        pageTitleViw.backgroundColor = UIColor.red
-        self.view.addSubview(pageTitleViw)
+        
+        self.view.addSubview(pageTitleView)
         
     }
     
