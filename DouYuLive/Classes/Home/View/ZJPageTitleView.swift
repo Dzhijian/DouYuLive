@@ -17,7 +17,10 @@ protocol  PageTitleViewDelegate : class {
 // 滚动线的高度
 private let scrollLineH : CGFloat = 2
 
- class ZJPageTitleView: UIView {
+// 定义颜色
+private let kNormalColor : (CGFloat,CGFloat,CGFloat) = (220,220,220)
+private let kSelectColor : (CGFloat,CGFloat,CGFloat) = (255,255,255)
+class ZJPageTitleView: UIView {
     // 代理协议
     weak var delegate : PageTitleViewDelegate?
     
@@ -34,7 +37,6 @@ private let scrollLineH : CGFloat = 2
     private lazy var scrollLine : UIView = {
         let scrollLine = UIView()
         scrollLine.backgroundColor = kWhite
-        
         return scrollLine
     }()
     
@@ -97,7 +99,7 @@ extension ZJPageTitleView {
             lab.text = title
             lab.tag = index
             lab.font = FontSize(14)
-            lab.textColor = UIColor.lightText
+            lab.textColor = colorWithRGBA(kNormalColor.0, kNormalColor.1, kNormalColor.2, alpha: 1.0)
             lab.textAlignment = .center
             let labX : CGFloat = labW * CGFloat(index)
             lab.frame = CGRect(x: labX, y: labY, width: labW, height: labH)
@@ -122,7 +124,8 @@ extension ZJPageTitleView {
         
         // 如果没有就返回
         guard let firstLab = titleLabs.first else { return }
-        firstLab.textColor = UIColor.white
+        firstLab.textColor = colorWithRGBA(kSelectColor.0, kSelectColor.1, kSelectColor.2, alpha: 1.0)
+
         firstLab.font = BoldFontSize(15)
         // 添加 scrollLine
         scrollLine.frame = CGRect(x: firstLab.frame.origin.x, y: frame.height-scrollLineH, width: firstLab.frame.width, height: scrollLineH)
@@ -135,8 +138,30 @@ extension ZJPageTitleView {
 // MARK: - 对外暴露的方法
 extension ZJPageTitleView {
     func setPageTitleWithProgress(progress: CGFloat,  sourceIndex: Int, targetIndex:Int) {
+        // 取得 lab
+        let sourceLab = titleLabs[sourceIndex]
+        let targetLab = titleLabs[targetIndex]
         
-    }
+        // 处理滑块
+        let movtotalX = targetLab.frame.origin.x - sourceLab.frame.origin.x
+        let movX = movtotalX * progress
+        scrollLine.frame.origin.x = sourceLab.frame.origin.x + movX
+        
+        // 颜色的渐变
+        // 取出颜色变化的范围
+        let colorDelta = (kSelectColor.0 - kNormalColor.0, kSelectColor.1 - kNormalColor.1, kSelectColor.2 - kNormalColor.2)
+        
+        // 变化 sourceLab 的文字颜色
+        sourceLab.textColor = colorWithRGBA(kSelectColor.0 - colorDelta.0 * progress, kSelectColor.1 - colorDelta.1 * progress, kSelectColor.2 - colorDelta.2 * progress, alpha: 1.0)
+        
+        // 变化 targetLab 的文字颜色
+        targetLab.textColor = colorWithRGBA(kNormalColor.0 + colorDelta.0 * progress, kNormalColor.1 + colorDelta.1 * progress, kNormalColor.2 + colorDelta.2 * progress, alpha: 1.0)
+        
+//        targetLab.font = BoldFontSize (14 + 1 * progress)
+//        sourceLab.font = FontSize(15 - 1 * progress)
+        // 记录最新的 index
+        currentIndex = targetIndex
+     }
 }
 
 // MARK: - 监听Label 的点击
@@ -151,10 +176,10 @@ extension ZJPageTitleView {
         let oldLab = titleLabs[currentIndex]
         
         // 切换文字颜色和字体大小
-        currentLab?.textColor = kWhite
-        currentLab?.font = FontSize(15)
+        currentLab?.textColor = colorWithRGBA(kSelectColor.0, kSelectColor.1, kSelectColor.2, alpha: 1.0)
+        currentLab?.font = BoldFontSize (15)
         
-        oldLab.textColor = UIColor.lightText
+        oldLab.textColor = colorWithRGBA(kNormalColor.0, kNormalColor.1, kNormalColor.2, alpha: 1.0)
         oldLab.font = FontSize(14)
         
         // 保存最新 lab 的下标值

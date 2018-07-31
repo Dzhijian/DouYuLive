@@ -19,7 +19,8 @@ class ZJPageContentView: UIView {
     
     // 代理协议
     weak var delegate : PageContentViewDelegate?
-    
+    // 禁止点击的时候走代理的方法
+    private var isForbidScrollDelegate : Bool = false
     // 自控制器数组
     private var childVCs : [UIViewController]
     // 父控制器 weak 修饰,防止循环引用
@@ -70,6 +71,11 @@ extension ZJPageContentView {
     
     // 切换控制器
     func setCurrentIndex(currentIndex: Int) {
+        
+        // 记录是否需要禁止执行的代理方法
+        isForbidScrollDelegate = true
+        
+        // 滚到正确的位置
         let offSetX = CGFloat(currentIndex) * collectionView.frame.width
         collectionView.setContentOffset(CGPoint(x: offSetX, y: 0), animated: false )
         
@@ -108,10 +114,18 @@ extension ZJPageContentView : UICollectionViewDataSource,UICollectionViewDelegat
     
     // 开始拖拽
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        // 记录是否需要禁止执行的代理方法
+        isForbidScrollDelegate = false
+        
         startOffSetX = scrollView.contentOffset.x
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        // 判断是点击事件还是滑动,点击事件不走下面的计算,滑动走下面的计算
+        if isForbidScrollDelegate {
+            return 
+        }
         // 获取需要的数据资源
         var progress : CGFloat = 0
         var sourceIndex : Int = 0
@@ -133,7 +147,7 @@ extension ZJPageContentView : UICollectionViewDataSource,UICollectionViewDelegat
                 targetIndex = childVCs.count - 1
             }
             
-            // 4. 如果完全划过去了
+            // 4. 如果完全划过去了, progress = 1
             if currentOffSetX - startOffSetX == scrollViewW {
                 progress = 1
                 targetIndex = sourceIndex
