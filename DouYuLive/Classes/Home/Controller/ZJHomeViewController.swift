@@ -10,25 +10,22 @@ import UIKit
 import Alamofire
 import SnapKit
 
+private let kTitleH : CGFloat = 40
+
 class ZJHomeViewController: ZJBaseViewController {
     
+    private lazy var titles : [String] = ["分类","推荐","全部","LoL","绝地求生","王者荣耀","QQ飞车"]
     private lazy var pageTitleView : ZJPageTitleView = { [weak self] in
-        let frame = CGRect(x: 0, y: 0, width: kScreenW, height: 40)
-        let titles = ["分类","推荐","全部","LoL","绝地求生","王者荣耀","QQ飞车"]
+        let frame = CGRect(x: 0, y: 0, width: kScreenW, height: kTitleH)
         let pageTitleViw = ZJPageTitleView(frame: frame, titles: titles)
         pageTitleViw.delegate = self
         return pageTitleViw
     }()
     
-    private lazy var pageContenView : ZJPageContentView = { [weak self] in 
-        let frame = CGRect(x: 0, y: 40, width: kScreenW, height: kScreenH)
-        var childVCs = [UIViewController]()
-        for _ in 0..<5 {
-            let VC = UIViewController()
-            VC.view.backgroundColor = colorWithRGBA(CGFloat(arc4random_uniform(255)), CGFloat(arc4random_uniform(255)), CGFloat(arc4random_uniform (255)), alpha: 1.0)
-            
-            childVCs.append(VC)
-        }
+    private lazy var pageContenView : ZJPageContentView = { [weak self] in
+        let height : CGFloat = kScreenH - kStatuHeight - kNavigationBarHeight - kTitleH - kTabBarHeight
+        let frame = CGRect(x: 0, y: 40, width: kScreenW, height: height)
+        var childVCs : [UIViewController] =  [ZJClassifyViewController(),ZJRecommendViewController(),ZJAllViewController(),ZJLOLViewController(),ZJJDQSViewController(),ZJWZRYViewController(),ZJQQCarViewController()]
         let contentView = ZJPageContentView(frame: frame, childVCs: childVCs, parentViewController:self!)
         contentView.delegate = self
         return contentView

@@ -1,18 +1,18 @@
 //
-//  ZJBaseViewController.swift
+//  ZJWZRYViewController.swift
 //  DouYuLive
 //
-//  Created by 邓志坚 on 2018/7/25.
+//  Created by 邓志坚 on 2018/8/1.
 //  Copyright © 2018年 邓志坚. All rights reserved.
 //
 
 import UIKit
 
-class ZJBaseViewController: UIViewController {
+class ZJWZRYViewController: ZJBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = kWhite
+
         // Do any additional setup after loading the view.
     }
 

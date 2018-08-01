@@ -16,7 +16,7 @@ protocol  PageTitleViewDelegate : class {
 
 // 滚动线的高度
 private let scrollLineH : CGFloat = 2
-
+private let klabelWidth : CGFloat = 80
 // 定义颜色
 private let kNormalColor : (CGFloat,CGFloat,CGFloat) = (220,220,220)
 private let kSelectColor : (CGFloat,CGFloat,CGFloat) = (255,255,255)
@@ -89,7 +89,7 @@ extension ZJPageTitleView {
     private func setUpTitleLabel(){
         
         // 确定 lab的一些确定的值
-        let labW : CGFloat = frame.width / CGFloat(titles.count)
+//        let labW : CGFloat = frame.width / CGFloat(titles.count)
         let labH : CGFloat = frame.height  - scrollLineH
         let labY : CGFloat = 0
         
@@ -101,8 +101,8 @@ extension ZJPageTitleView {
             lab.font = FontSize(14)
             lab.textColor = colorWithRGBA(kNormalColor.0, kNormalColor.1, kNormalColor.2, alpha: 1.0)
             lab.textAlignment = .center
-            let labX : CGFloat = labW * CGFloat(index)
-            lab.frame = CGRect(x: labX, y: labY, width: labW, height: labH)
+            let labX : CGFloat = klabelWidth * CGFloat(index)
+            lab.frame = CGRect(x: labX, y: labY, width: klabelWidth, height: labH)
             // 添加 lab
             scrollerView.addSubview(lab)
             titleLabs.append(lab)
@@ -111,6 +111,7 @@ extension ZJPageTitleView {
             let tap = UITapGestureRecognizer(target: self, action: #selector(self.titleLabelClick(tapGesture:)))
             lab.addGestureRecognizer(tap)
         }
+        scrollerView.contentSize = CGSize(width: klabelWidth * CGFloat(titles.count), height: 40)
     }
     
     private func setBottomMenuAndScrollLine(){
@@ -132,6 +133,8 @@ extension ZJPageTitleView {
         scrollerView.addSubview(scrollLine)
         
     }
+    
+
 }
 
 
@@ -153,12 +156,12 @@ extension ZJPageTitleView {
         
         // 变化 sourceLab 的文字颜色
         sourceLab.textColor = colorWithRGBA(kSelectColor.0 - colorDelta.0 * progress, kSelectColor.1 - colorDelta.1 * progress, kSelectColor.2 - colorDelta.2 * progress, alpha: 1.0)
+        sourceLab.font = FontSize(16 - 2 * progress)
         
         // 变化 targetLab 的文字颜色
         targetLab.textColor = colorWithRGBA(kNormalColor.0 + colorDelta.0 * progress, kNormalColor.1 + colorDelta.1 * progress, kNormalColor.2 + colorDelta.2 * progress, alpha: 1.0)
+        targetLab.font = BoldFontSize (14 + 2  * progress)
         
-//        targetLab.font = BoldFontSize (14 + 1 * progress)
-//        sourceLab.font = FontSize(15 - 1 * progress)
         // 记录最新的 index
         currentIndex = targetIndex
      }
@@ -169,6 +172,10 @@ extension ZJPageTitleView {
     
     @objc fileprivate func titleLabelClick(tapGesture : UITapGestureRecognizer) {
         
+        // 如果下标相同,不做处理
+        if tapGesture.view?.tag == currentIndex {
+            return
+        }
         // 获取当前 lab 的下标值
         let currentLab = tapGesture.view as? UILabel //else { return }
         
@@ -189,6 +196,11 @@ extension ZJPageTitleView {
         let scrollLineX = CGFloat((currentLab?.tag)!) * scrollLine.frame.width
         UIView.animate(withDuration: 0.15) {
             self.scrollLine.frame.origin.x = scrollLineX
+        }
+        
+        // 自动滚动到中间
+        if scrollLine.frame.origin.x > kScreenW / 2 {
+            scrollerView.setContentOffset(CGPoint(x: kScreenW / 2 - klabelWidth/2, y: 0), animated: true)
         }
         
         //通知代理

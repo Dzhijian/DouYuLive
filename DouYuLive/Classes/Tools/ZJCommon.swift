@@ -14,7 +14,7 @@ let kScreenH = UIScreen.main.bounds.size.height
 
 let kStatuHeight : CGFloat = 20
 let kNavigationBarHeight :CGFloat = 44
-let kTabBarHeight : CGFloat = 49
+let kTabBarHeight : CGFloat = 44
 
 
 
