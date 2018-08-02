@@ -100,4 +100,33 @@ extension UIView {
         }
         return btn
     }
+    
+    
+    /// 快速创建 Label,设置文本, 文本颜色,Font,文本位置,父视图,约束
+    ///
+    /// - Parameters:
+    ///   - text: 文本
+    ///   - textColor: 文本颜色
+    ///   - font: 字体大小
+    ///   - textAlignment: 文本位置
+    ///   - supView: 父视图
+    ///   - closure: 越是
+    /// - Returns:  UILabel
+    class func zj_createLabel(text : String? , textColor : UIColor?, font : UIFont?, textAlignment : NSTextAlignment = .left,supView : UIView? ,closure:(_ make : ConstraintMaker) ->()) -> UILabel {
+        
+        let label = UILabel()
+        label.text = text
+        
+        if (textColor != nil) { label.textColor = textColor }
+        if (font != nil) { label.font = font }
+        label.textAlignment = textAlignment
+        
+        if supView != nil {
+            supView?.addSubview(label)
+            label.snp.makeConstraints { (make) in
+                closure(make)
+            }
+        }
+        return label
+    }
 }

@@ -30,7 +30,7 @@ class ZJRecommendViewController: ZJBaseViewController {
         collectionView.backgroundColor = kRed
         collectionView.dataSource = self
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: kNormalCellID)
-        collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: kHeaderViewID)
+        collectionView.register(ZJCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: kHeaderViewID)
         return collectionView
     }()
     
@@ -38,6 +38,9 @@ class ZJRecommendViewController: ZJBaseViewController {
         super.viewDidLoad()
         
         setUpUI()
+        collectionView.snp.makeConstraints { (make) in
+            make.edges.equalTo(0)
+        }
     }
 
     override func didReceiveMemoryWarning() {

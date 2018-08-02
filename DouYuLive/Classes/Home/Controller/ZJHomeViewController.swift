@@ -36,6 +36,11 @@ class ZJHomeViewController: ZJBaseViewController {
         self.navigationItem.title = ""
         
         setUpUI()
+        
+        ZJNetWorking.requestData(type: .GET, URlString: "http://httpbin.org/get", parameters: ["name":"haha"]) { (response) in
+//            print(response)
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {

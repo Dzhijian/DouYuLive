@@ -22,6 +22,9 @@
 		0419BCFD2111BEB1008661D3 /* ZJWZRYViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419BCFC2111BEB1008661D3 /* ZJWZRYViewController.swift */; };
 		0419BCFF2111BEBE008661D3 /* ZJQQCarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419BCFE2111BEBE008661D3 /* ZJQQCarViewController.swift */; };
 		0419BD012111BFBC008661D3 /* ZJJDQSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419BD002111BFBC008661D3 /* ZJJDQSViewController.swift */; };
+		0419BD03211205FF008661D3 /* ZJCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419BD02211205FF008661D3 /* ZJCollectionHeaderView.swift */; };
+		0419BD0F2112E920008661D3 /* ZJNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419BD0E2112E920008661D3 /* ZJNetworking.swift */; };
+		0419BD122112EDCA008661D3 /* ZJRecommendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419BD112112EDCA008661D3 /* ZJRecommendViewModel.swift */; };
 		048EA3792106447200E30720 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EA3782106447200E30720 /* AppDelegate.swift */; };
 		048EA37E2106447200E30720 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 048EA37C2106447200E30720 /* Main.storyboard */; };
 		048EA3802106447300E30720 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 048EA37F2106447300E30720 /* Assets.xcassets */; };
@@ -75,6 +78,9 @@
 		0419BCFC2111BEB1008661D3 /* ZJWZRYViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJWZRYViewController.swift; sourceTree = "<group>"; };
 		0419BCFE2111BEBE008661D3 /* ZJQQCarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJQQCarViewController.swift; sourceTree = "<group>"; };
 		0419BD002111BFBC008661D3 /* ZJJDQSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJJDQSViewController.swift; sourceTree = "<group>"; };
+		0419BD02211205FF008661D3 /* ZJCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCollectionHeaderView.swift; sourceTree = "<group>"; };
+		0419BD0E2112E920008661D3 /* ZJNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJNetworking.swift; sourceTree = "<group>"; };
+		0419BD112112EDCA008661D3 /* ZJRecommendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJRecommendViewModel.swift; sourceTree = "<group>"; };
 		048EA3752106447200E30720 /* DouYuLive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DouYuLive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		048EA3782106447200E30720 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		048EA37D2106447200E30720 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -174,6 +180,7 @@
 				0419BCE5210AF22A008661D3 /* ZJHomeSearchView.swift */,
 				0419BCE0210ABACB008661D3 /* ZJPageTitleView.swift */,
 				0419BCF2210F7FE5008661D3 /* ZJPageContentView.swift */,
+				0419BD02211205FF008661D3 /* ZJCollectionHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -185,6 +192,22 @@
 				0419BCEA210EB554008661D3 /* ZJFont.swift */,
 			);
 			path = Marco;
+			sourceTree = "<group>";
+		};
+		0419BD0D2112E90B008661D3 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				0419BD0E2112E920008661D3 /* ZJNetworking.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		0419BD102112EDA8008661D3 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0419BD112112EDCA008661D3 /* ZJRecommendViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		048EA36C2106447200E30720 = {
@@ -243,6 +266,7 @@
 		048EA3A62107873B00E30720 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				0419BD0D2112E90B008661D3 /* Network */,
 				048EA3AD2107873B00E30720 /* Main */,
 				048EA3A72107873B00E30720 /* Home */,
 				048EA3AB2107873B00E30720 /* Recreation */,
@@ -258,6 +282,7 @@
 		048EA3A72107873B00E30720 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				0419BD102112EDA8008661D3 /* ViewModel */,
 				0419BCDE210ABAA8008661D3 /* Controller */,
 				0419BCDF210ABAAE008661D3 /* View */,
 			);
@@ -569,6 +594,7 @@
 				048EA3B8210790A900E30720 /* ZJFollowViewController.swift in Sources */,
 				048EA3B62107909F00E30720 /* ZJRecreationViewController.swift in Sources */,
 				0419BCED210EC64E008661D3 /* ZJView-Extension.swift in Sources */,
+				0419BD03211205FF008661D3 /* ZJCollectionHeaderView.swift in Sources */,
 				048EA3B121078F9700E30720 /* ZJHomeViewController.swift in Sources */,
 				0419BCF52111BE24008661D3 /* ZJRecommendViewController.swift in Sources */,
 				0419BCF72111BE62008661D3 /* ZJClassifyViewController.swift in Sources */,
@@ -579,6 +605,7 @@
 				0419BCD8210A2245008661D3 /* ZJBarButtonItem_Extension.swift in Sources */,
 				048EA3C22107974800E30720 /* ZJBaseViewController.swift in Sources */,
 				0419BCFF2111BEBE008661D3 /* ZJQQCarViewController.swift in Sources */,
+				0419BD0F2112E920008661D3 /* ZJNetworking.swift in Sources */,
 				0419BCFD2111BEB1008661D3 /* ZJWZRYViewController.swift in Sources */,
 				048EA3AF21078F8400E30720 /* ZJTabBarController.swift in Sources */,
 				0419BCE1210ABACB008661D3 /* ZJPageTitleView.swift in Sources */,
@@ -586,6 +613,7 @@
 				0419BCF3210F7FE5008661D3 /* ZJPageContentView.swift in Sources */,
 				048EA3C02107911D00E30720 /* ZJNavigationController.swift in Sources */,
 				0419BCFB2111BE8F008661D3 /* ZJLOLViewController.swift in Sources */,
+				0419BD122112EDCA008661D3 /* ZJRecommendViewModel.swift in Sources */,
 				0419BCE8210E2ABB008661D3 /* ZJColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
