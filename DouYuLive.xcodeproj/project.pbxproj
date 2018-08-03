@@ -40,6 +40,7 @@
 		048EA3BC210790E400E30720 /* ZJDiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EA3BB210790E400E30720 /* ZJDiscoverViewController.swift */; };
 		048EA3C02107911D00E30720 /* ZJNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EA3BF2107911D00E30720 /* ZJNavigationController.swift */; };
 		048EA3C22107974800E30720 /* ZJBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EA3C12107974800E30720 /* ZJBaseViewController.swift */; };
+		04907E712113F19E006B70EC /* ZJLiveListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04907E702113F19E006B70EC /* ZJLiveListItem.swift */; };
 		366FC9B6D5DFAAE0CA4E59A1 /* Pods_DouYuLiveUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB779BB5E54804A55579F7C4 /* Pods_DouYuLiveUITests.framework */; };
 		8456442C257792BF58C6C119 /* Pods_DouYuLiveTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A917041522094C4F3A3FD4 /* Pods_DouYuLiveTests.framework */; };
 		8E737CB4577C25D2F3200271 /* Pods_DouYuLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 573FFBD125983AA274BAA29B /* Pods_DouYuLive.framework */; };
@@ -103,6 +104,7 @@
 		048EA3BB210790E400E30720 /* ZJDiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJDiscoverViewController.swift; sourceTree = "<group>"; };
 		048EA3BF2107911D00E30720 /* ZJNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJNavigationController.swift; sourceTree = "<group>"; };
 		048EA3C12107974800E30720 /* ZJBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJBaseViewController.swift; sourceTree = "<group>"; };
+		04907E702113F19E006B70EC /* ZJLiveListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJLiveListItem.swift; sourceTree = "<group>"; };
 		453A662B8E021BC466F245AE /* Pods-DouYuLiveUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DouYuLiveUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DouYuLiveUITests/Pods-DouYuLiveUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		53CFB983BF35608199568833 /* Pods-DouYuLive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DouYuLive.release.xcconfig"; path = "Pods/Target Support Files/Pods-DouYuLive/Pods-DouYuLive.release.xcconfig"; sourceTree = "<group>"; };
 		573FFBD125983AA274BAA29B /* Pods_DouYuLive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DouYuLive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -183,6 +185,7 @@
 				0419BCE0210ABACB008661D3 /* ZJPageTitleView.swift */,
 				0419BCF2210F7FE5008661D3 /* ZJPageContentView.swift */,
 				0419BD02211205FF008661D3 /* ZJCollectionHeaderView.swift */,
+				04907E702113F19E006B70EC /* ZJLiveListItem.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -605,6 +608,7 @@
 				048EA3792106447200E30720 /* AppDelegate.swift in Sources */,
 				0419BCE6210AF22A008661D3 /* ZJHomeSearchView.swift in Sources */,
 				048EA3BC210790E400E30720 /* ZJDiscoverViewController.swift in Sources */,
+				04907E712113F19E006B70EC /* ZJLiveListItem.swift in Sources */,
 				0419BCDD210AB99A008661D3 /* ZJCommon.swift in Sources */,
 				0419BCD8210A2245008661D3 /* ZJBarButtonItem_Extension.swift in Sources */,
 				048EA3C22107974800E30720 /* ZJBaseViewController.swift in Sources */,

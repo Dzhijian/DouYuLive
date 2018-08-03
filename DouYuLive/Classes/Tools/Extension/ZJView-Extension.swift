@@ -41,7 +41,7 @@ extension UIView {
     ///   - supView: 父视图
     ///   - closure: 约束
     /// - Returns:  UIImageView
-    class func zj_createImageView(imageName : String? , contentMode : UIViewContentMode?,supView : UIView? ,closure:(_ make : ConstraintMaker) ->()) -> UIImageView {
+    class func zj_createImageView(imageName : String? , contentMode : UIViewContentMode? = nil,supView : UIView? ,closure:(_ make : ConstraintMaker) ->()) -> UIImageView {
         
         let imageV = UIImageView()
         

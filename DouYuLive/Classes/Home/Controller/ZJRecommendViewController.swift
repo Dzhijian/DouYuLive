@@ -10,7 +10,7 @@ import UIKit
 
 private let kItemMargin : CGFloat = 10
 private let kItemW = (kScreenW - kItemMargin * 3) / 2
-private let kItemH = kItemW * 3 / 4
+private let kItemH = kItemW * 6 / 7
 private let kHeaderViewH : CGFloat = 50
 
 private let kNormalCellID = "kNormalCellID"
@@ -27,9 +27,9 @@ class ZJRecommendViewController: ZJBaseViewController {
         layout.headerReferenceSize = CGSize(width: kScreenW, height: 50)
         layout.sectionInset = UIEdgeInsetsMake(0, kItemMargin, 0, kItemMargin)
         let collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: layout)
-        collectionView.backgroundColor = kRed
+        collectionView.backgroundColor = kWhite
         collectionView.dataSource = self
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: kNormalCellID)
+        collectionView.register(ZJLiveListItem.self, forCellWithReuseIdentifier: kNormalCellID)
         collectionView.register(ZJCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: kHeaderViewID)
         return collectionView
     }()
@@ -85,7 +85,7 @@ extension ZJRecommendViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kNormalCellID, for: indexPath)
-        cell.contentView.backgroundColor = UIColor.orange
+        
         return cell
     }
     
