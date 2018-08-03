@@ -38,9 +38,11 @@ class ZJRecommendViewController: ZJBaseViewController {
         super.viewDidLoad()
         
         setUpUI()
-        collectionView.snp.makeConstraints { (make) in
-            make.edges.equalTo(0)
-        }
+        
+        // 获取热门推荐列表数据
+        loadHotRecommendListData()
+        
+        getActivityList()
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,7 +52,25 @@ class ZJRecommendViewController: ZJBaseViewController {
     
 }
 
-
+// MARK: - 网络请求
+extension ZJRecommendViewController {
+    
+    // 获取热门推荐数据
+    
+    private func loadHotRecommendListData() {
+        //?limit=10&client_sys=ios&offset=0
+        let dict : [String : NSString] = ["limit":"10","client_sys":"ios","offset":"0"]
+        ZJNetWorking.requestData(type: .POST, URlString:ZJRecommendHotURL , parameters: dict) { (response) in
+            print(response)
+        }
+    }
+    
+    private func getActivityList() {
+        ZJNetWorking.requestData(type: .GET, URlString: ZJActivityListURL, parameters: nil) { (response) in
+            print(response)
+        }
+    }
+}
 
 // MARK: - 遵守UICollectionView的协议
 extension ZJRecommendViewController : UICollectionViewDataSource {
@@ -83,5 +103,8 @@ extension ZJRecommendViewController {
     private func setUpUI(){
         // 添加 collectionView
         view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { (make) in
+            make.edges.equalTo(0)
+        }
     }
 }

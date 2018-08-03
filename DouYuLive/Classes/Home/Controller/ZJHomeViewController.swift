@@ -37,8 +37,8 @@ class ZJHomeViewController: ZJBaseViewController {
         
         setUpUI()
         
-        ZJNetWorking.requestData(type: .GET, URlString: "http://httpbin.org/get", parameters: ["name":"haha"]) { (response) in
-//            print(response)
+        ZJNetWorking.requestData(type: .POST, URlString: ZJSignAppURL, parameters: nil) { (response) in
+            print(response)
         }
         
     }
@@ -49,6 +49,9 @@ class ZJHomeViewController: ZJBaseViewController {
     }
 
 }
+
+
+
 
 // MARK: - 遵守PageTitleViewDelegate协议
 extension ZJHomeViewController : PageTitleViewDelegate {

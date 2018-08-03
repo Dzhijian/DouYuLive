@@ -19,15 +19,21 @@ class ZJNetWorking {
     class func requestData(type : ZJMethod, URlString: String, parameters : [String : NSString]? = nil,  finishCallBack : @escaping (_ response : AnyObject)->()){
         
         let type = type == ZJMethod.GET ? HTTPMethod.get : HTTPMethod.post
-        
-        Alamofire.request(URlString, method: type, parameters: parameters, encoding: JSONEncoding.default).response { (resResult) in
-            
-            guard let result = resResult.response else {
-
-                return
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json",
+            "charset":"utf-8"
+        ]
+        Alamofire.request(URlString, method: type, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
+            print("Method:\(type)请求\nURL: \(URlString)\n请求参数: \(String(describing: parameters))")
+            if parameters != nil{
+                print(parameters ?? String())
             }
-            
-            finishCallBack(result as AnyObject)
+
+            if let json = response.result.value {
+                print("请求成功 🍏:\n\(json)")
+            }
         }
+    
+ 
     }
 }

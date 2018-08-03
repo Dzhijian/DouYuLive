@@ -25,6 +25,7 @@
 		0419BD03211205FF008661D3 /* ZJCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419BD02211205FF008661D3 /* ZJCollectionHeaderView.swift */; };
 		0419BD0F2112E920008661D3 /* ZJNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419BD0E2112E920008661D3 /* ZJNetworking.swift */; };
 		0419BD122112EDCA008661D3 /* ZJRecommendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419BD112112EDCA008661D3 /* ZJRecommendViewModel.swift */; };
+		0419BD1421135904008661D3 /* ZJInterfaceURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419BD1321135904008661D3 /* ZJInterfaceURL.swift */; };
 		048EA3792106447200E30720 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EA3782106447200E30720 /* AppDelegate.swift */; };
 		048EA37E2106447200E30720 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 048EA37C2106447200E30720 /* Main.storyboard */; };
 		048EA3802106447300E30720 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 048EA37F2106447300E30720 /* Assets.xcassets */; };
@@ -81,6 +82,7 @@
 		0419BD02211205FF008661D3 /* ZJCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCollectionHeaderView.swift; sourceTree = "<group>"; };
 		0419BD0E2112E920008661D3 /* ZJNetworking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJNetworking.swift; sourceTree = "<group>"; };
 		0419BD112112EDCA008661D3 /* ZJRecommendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJRecommendViewModel.swift; sourceTree = "<group>"; };
+		0419BD1321135904008661D3 /* ZJInterfaceURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJInterfaceURL.swift; sourceTree = "<group>"; };
 		048EA3752106447200E30720 /* DouYuLive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DouYuLive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		048EA3782106447200E30720 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		048EA37D2106447200E30720 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				0419BD0E2112E920008661D3 /* ZJNetworking.swift */,
+				0419BD1321135904008661D3 /* ZJInterfaceURL.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -595,6 +598,7 @@
 				048EA3B62107909F00E30720 /* ZJRecreationViewController.swift in Sources */,
 				0419BCED210EC64E008661D3 /* ZJView-Extension.swift in Sources */,
 				0419BD03211205FF008661D3 /* ZJCollectionHeaderView.swift in Sources */,
+				0419BD1421135904008661D3 /* ZJInterfaceURL.swift in Sources */,
 				048EA3B121078F9700E30720 /* ZJHomeViewController.swift in Sources */,
 				0419BCF52111BE24008661D3 /* ZJRecommendViewController.swift in Sources */,
 				0419BCF72111BE62008661D3 /* ZJClassifyViewController.swift in Sources */,
