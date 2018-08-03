@@ -20,6 +20,7 @@ private let kHeaderViewID = "kHeaderViewID"
 class ZJRecommendViewController: ZJBaseViewController {
     
     private lazy var collectionView : UICollectionView = {
+        
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: kItemW, height: kItemH)
         layout.minimumLineSpacing = 10
@@ -29,6 +30,7 @@ class ZJRecommendViewController: ZJBaseViewController {
         let collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: layout)
         collectionView.backgroundColor = kWhite
         collectionView.dataSource = self
+//        collectionView.delegate = self
         collectionView.register(ZJLiveListItem.self, forCellWithReuseIdentifier: kNormalCellID)
         collectionView.register(ZJCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: kHeaderViewID)
         return collectionView
@@ -49,6 +51,8 @@ class ZJRecommendViewController: ZJBaseViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
     
 }
 

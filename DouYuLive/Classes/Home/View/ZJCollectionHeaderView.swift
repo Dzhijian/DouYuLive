@@ -26,9 +26,19 @@ extension ZJCollectionHeaderView {
     
     private func setUpView(){
         
-        _ = UILabel.zj_createLabel(text: "精彩推荐", textColor: UIColor.black, font: BoldFontSize(16), supView: self, closure: { (make) in
+        _ = UIView.zj_createView(bgClor: klineColor, supView: self, closure: { (make) in
+            make.left.right.top.equalTo(0)
+            make.height.equalTo(0.6)
+        })
+        
+        _ = UILabel.zj_createLabel(text: "精彩推荐", textColor: kMainTextColor, font: BoldFontSize(16), supView: self, closure: { (make) in
             make.centerY.equalTo(self.snp.centerY)
-            make.left.equalTo(AdaptW(20))
+            make.left.equalTo(AdaptW(15))
+        })
+        
+        _ = UIView.zj_createView(bgClor: klineColor, supView: self, closure: { (make) in
+            make.left.right.bottom.equalTo(0)
+            make.height.equalTo(0.6)
         })
     }
 }

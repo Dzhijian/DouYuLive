@@ -28,6 +28,10 @@ let gradientColors: [CGColor] = [LowOrangeColor.cgColor, HighOrangeColor.cgColor
 
 let SearchBGColor = UIColor(red: colorValue(237.0), green:colorValue(143.0), blue: colorValue(90), alpha: 1.0)
 
+// 分割线的颜色
+let klineColor : UIColor = colorWithRGBA(230, 230, 230, 1.0)
+// 文字颜色
+let kMainTextColor : UIColor = colorWithRGBA(33, 33, 33, 1.0)
 // function
 
 func colorValue(_ value : CGFloat) -> CGFloat {
@@ -43,7 +47,7 @@ func colorValue(_ value : CGFloat) -> CGFloat {
 ///   - blue: 蓝色值
 ///   - alpha: 透明度
 /// - Returns:  UIColor
-func colorWithRGBA(_ red : CGFloat,_ green : CGFloat , _ blue : CGFloat, alpha : CGFloat) -> UIColor{
+func colorWithRGBA(_ red : CGFloat,_ green : CGFloat , _ blue : CGFloat,_ alpha : CGFloat) -> UIColor{
     
     return UIColor(red: colorValue(red), green: colorValue(green), blue: colorValue(blue), alpha: alpha)
 }

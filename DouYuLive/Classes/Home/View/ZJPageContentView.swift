@@ -43,6 +43,7 @@ class ZJPageContentView: UIView {
         collectionView.bounces = false
         collectionView.dataSource = self
         collectionView.delegate =  self
+        collectionView.backgroundColor = kWhite
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: ContentCellID)
         return collectionView
     }()

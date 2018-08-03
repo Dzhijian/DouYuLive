@@ -62,6 +62,8 @@ class ZJHomeSearchView : UIView {
             make.right.equalTo(AdaptW(-5))
             make.width.height.equalTo(AdaptW(30))
         }
+        
+    
     }
     
 

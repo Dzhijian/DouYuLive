@@ -8,12 +8,28 @@
 
 import UIKit
 
+let itemWH = kScreenW / 4
+
+private let CellID = "CellID"
+
 class ZJClassifyViewController: ZJBaseViewController {
 
+    private lazy var mainTable : UITableView = {
+        let tableView = UITableView(frame: CGRect.zero, style: .grouped)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .none
+        //设置 footerview 的高度为0
+        tableView.sectionFooterHeight = 0
+        tableView.backgroundColor = kWhite
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellID)
+        return tableView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        view.backgroundColor = kWhite
+        setUpAllView()
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,15 +37,65 @@ class ZJClassifyViewController: ZJBaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        
     }
-    */
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offSetY = scrollView.contentOffset.y
+        if offSetY > 100 {
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+           
+        }else{
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+        }
+    }
 
 }
+
+// 配置 UI
+extension ZJClassifyViewController {
+    private func setUpAllView () {
+        view.addSubview(mainTable)
+        mainTable.snp.makeConstraints { (make) in
+            make.edges.equalTo(0)
+        }
+    }
+}
+
+extension ZJClassifyViewController : UITableViewDelegate,UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 9
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellID, for: indexPath)
+        cell.selectionStyle = .none
+
+        cell.backgroundColor = kWhite
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return Adapt(100);
+    }
+    
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = ZJCollectionHeaderView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: Adapt(50)))
+        return header
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return Adapt(50)
+    }
+    
+    
+    
+}
+
+

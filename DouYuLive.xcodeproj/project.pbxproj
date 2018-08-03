@@ -167,8 +167,8 @@
 			isa = PBXGroup;
 			children = (
 				048EA3B021078F9700E30720 /* ZJHomeViewController.swift */,
-				0419BCF42111BE24008661D3 /* ZJRecommendViewController.swift */,
 				0419BCF62111BE62008661D3 /* ZJClassifyViewController.swift */,
+				0419BCF42111BE24008661D3 /* ZJRecommendViewController.swift */,
 				0419BCF82111BE82008661D3 /* ZJAllViewController.swift */,
 				0419BCFA2111BE8F008661D3 /* ZJLOLViewController.swift */,
 				0419BD002111BFBC008661D3 /* ZJJDQSViewController.swift */,

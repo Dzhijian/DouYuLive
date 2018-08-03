@@ -23,13 +23,18 @@ let kWidthRatio = kScreenW / 375.0
 // 高度比
 let kHeightRatio = kScreenH / 667.0
 
+// 自适应
+
+func Adapt(_ value : CGFloat) -> CGFloat {
+    
+    return AdaptW(value)
+}
 
 // 自适应宽度
 func AdaptW(_ value : CGFloat) -> CGFloat {
     
     return ceil(value) * kWidthRatio
 }
-
 
 
 // 自适应高度

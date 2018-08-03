@@ -99,7 +99,7 @@ extension ZJPageTitleView {
             lab.text = title
             lab.tag = index
             lab.font = FontSize(14)
-            lab.textColor = colorWithRGBA(kNormalColor.0, kNormalColor.1, kNormalColor.2, alpha: 1.0)
+            lab.textColor = colorWithRGBA(kNormalColor.0, kNormalColor.1, kNormalColor.2, 1.0)
             lab.textAlignment = .center
             let labX : CGFloat = klabelWidth * CGFloat(index)
             lab.frame = CGRect(x: labX, y: labY, width: klabelWidth, height: labH)
@@ -125,7 +125,7 @@ extension ZJPageTitleView {
         
         // 如果没有就返回
         guard let firstLab = titleLabs.first else { return }
-        firstLab.textColor = colorWithRGBA(kSelectColor.0, kSelectColor.1, kSelectColor.2, alpha: 1.0)
+        firstLab.textColor = colorWithRGBA(kSelectColor.0, kSelectColor.1, kSelectColor.2, 1.0)
 
         firstLab.font = BoldFontSize(15)
         // 添加 scrollLine
@@ -155,11 +155,11 @@ extension ZJPageTitleView {
         let colorDelta = (kSelectColor.0 - kNormalColor.0, kSelectColor.1 - kNormalColor.1, kSelectColor.2 - kNormalColor.2)
         
         // 变化 sourceLab 的文字颜色
-        sourceLab.textColor = colorWithRGBA(kSelectColor.0 - colorDelta.0 * progress, kSelectColor.1 - colorDelta.1 * progress, kSelectColor.2 - colorDelta.2 * progress, alpha: 1.0)
+        sourceLab.textColor = colorWithRGBA(kSelectColor.0 - colorDelta.0 * progress, kSelectColor.1 - colorDelta.1 * progress, kSelectColor.2 - colorDelta.2 * progress, 1.0)
         sourceLab.font = FontSize(16 - 2 * progress)
         
         // 变化 targetLab 的文字颜色
-        targetLab.textColor = colorWithRGBA(kNormalColor.0 + colorDelta.0 * progress, kNormalColor.1 + colorDelta.1 * progress, kNormalColor.2 + colorDelta.2 * progress, alpha: 1.0)
+        targetLab.textColor = colorWithRGBA(kNormalColor.0 + colorDelta.0 * progress, kNormalColor.1 + colorDelta.1 * progress, kNormalColor.2 + colorDelta.2 * progress, 1.0)
         targetLab.font = BoldFontSize (14 + 2  * progress)
         
         // 记录最新的 index
@@ -183,10 +183,10 @@ extension ZJPageTitleView {
         let oldLab = titleLabs[currentIndex]
         
         // 切换文字颜色和字体大小
-        currentLab?.textColor = colorWithRGBA(kSelectColor.0, kSelectColor.1, kSelectColor.2, alpha: 1.0)
+        currentLab?.textColor = colorWithRGBA(kSelectColor.0, kSelectColor.1, kSelectColor.2,  1.0)
         currentLab?.font = BoldFontSize (15)
         
-        oldLab.textColor = colorWithRGBA(kNormalColor.0, kNormalColor.1, kNormalColor.2, alpha: 1.0)
+        oldLab.textColor = colorWithRGBA(kNormalColor.0, kNormalColor.1, kNormalColor.2, 1.0)
         oldLab.font = FontSize(14)
         
         // 保存最新 lab 的下标值
