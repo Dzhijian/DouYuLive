@@ -22,7 +22,7 @@ class ZJClassifyViewController: ZJBaseViewController {
         //设置 footerview 的高度为0
         tableView.sectionFooterHeight = 0
         tableView.backgroundColor = kWhite
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: CellID)
+        tableView.register(ZJCategroyListCell.self, forCellReuseIdentifier: CellID)
         return tableView
     }()
     
@@ -103,7 +103,7 @@ extension ZJClassifyViewController : UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return Adapt(100);
+        return Adapt(220);
     }
     
     
