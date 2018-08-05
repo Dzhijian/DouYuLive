@@ -14,3 +14,8 @@ let ZJRecommendHotURL : String = "https://apiv2.douyucdn.cn/mgapi/livenc/home/ge
 let ZJActivityListURL : String = "https://apiv2.douyucdn.cn/Live/Subactivity/getActivityList?client_sys=ios&cid2=0"
 
 let ZJSignAppURL : String = "https://rtbapi.douyucdn.cn/japi/sign/app/getinfo?uid=&client_sys=ios&mdid=iphone"
+
+// 分类推荐列表
+let ZJRecommendCategoryURL : String = "https://apiv2.douyucdn.cn/live/cate/getLiveRecommendCate2?client_sys=ios"
+
+let ZJLiveCateURL : String = "https://apiv2.douyucdn.cn/live/cate/getLiveCate1List?client_sys=ios"

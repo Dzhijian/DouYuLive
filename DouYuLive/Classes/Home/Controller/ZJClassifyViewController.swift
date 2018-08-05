@@ -30,6 +30,10 @@ class ZJClassifyViewController: ZJBaseViewController {
         super.viewDidLoad()
         view.backgroundColor = kWhite
         setUpAllView()
+        // 获取分类列表数据
+        loadCateListData()
+        // 获取推荐分类列表数据
+        loadRecommendCateItemData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,6 +55,24 @@ class ZJClassifyViewController: ZJBaseViewController {
         }
     }
 
+}
+
+
+extension ZJClassifyViewController {
+    
+    private func loadCateListData() {
+        ZJNetWorking.requestData(type: .GET, URlString: ZJLiveCateURL) { (response) in
+            
+        }
+    }
+    
+    
+    private func loadRecommendCateItemData() {
+        ZJNetWorking.requestData(type: .GET, URlString: ZJRecommendCategoryURL) { (response) in
+            
+        }
+    }
+    
 }
 
 // 配置 UI
