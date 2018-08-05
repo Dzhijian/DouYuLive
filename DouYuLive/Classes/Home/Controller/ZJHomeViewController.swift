@@ -37,10 +37,10 @@ class ZJHomeViewController: ZJBaseViewController {
         
         setUpUI()
         
-        ZJNetWorking.requestData(type: .POST, URlString: ZJSignAppURL, parameters: nil) { (response) in
-            print(response)
-        }
-        
+//        ZJNetWorking.requestData(type: .POST, URlString: ZJSignAppURL, parameters: nil) { (response) in
+//            print(response)
+//        }
+//        
         self.navigationController?.navigationBar.shadowImage = UIImage()
         
         // 设置背景渐变

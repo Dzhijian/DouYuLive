@@ -40,15 +40,17 @@ extension ZJCategoryItem {
         addSubview(titleLab)
         
         icon.snp.makeConstraints { (make) in
-            make.top.left.equalTo(10);
+            make.top.equalTo(15)
+            make.left.equalTo(10)
             make.right.equalTo(-10)
-            make.height.equalTo(60)
+            make.height.equalTo(50)
         }
         
         titleLab.snp.makeConstraints { (make) in
             make.centerX.equalTo(self.snp.centerX)
-            make.bottom.equalTo(-15)
-            make.left.right.equalTo(0)
+            make.bottom.equalTo(-10)
+            make.left.equalTo(3)
+            make.right.equalTo(-3)
         }
         
         icon.backgroundColor = kOrange

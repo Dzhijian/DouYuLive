@@ -22,6 +22,7 @@ class ZJBaseCollectionCell: UICollectionViewCell {
     
     
     public func zj_setUpAllView() {
+        
         self.contentView.backgroundColor = kWhite
     }
     

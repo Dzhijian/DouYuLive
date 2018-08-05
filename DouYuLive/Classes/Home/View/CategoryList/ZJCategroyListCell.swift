@@ -9,15 +9,15 @@
 
 import UIKit
 
-//
-private let ItemWH : CGFloat = kScreenW / 4
+private let ItemHeight = kScreenW / 4
 
 class ZJCategroyListCell: ZJBaseTableCell {
     
     // 分页控制器
     private lazy var pageControl : UIPageControl = {
         let pageControl = UIPageControl()
-        
+        pageControl.pageIndicatorTintColor = kRed
+        pageControl.currentPageIndicatorTintColor = kOrange
         return pageControl
     }()
     
@@ -32,19 +32,21 @@ class ZJCategroyListCell: ZJBaseTableCell {
     
     private lazy var collectionView : UICollectionView = {
         let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = kOrange
+        collectionView.backgroundColor = kWhite
         collectionView.dataSource = self
-        collectionView.register(ZJCategoryItem.self, forCellWithReuseIdentifier:ZJCategoryItem.identifier())
+        collectionView.delegate = self
+        collectionView.register(ZJCategoryScrollItem.self, forCellWithReuseIdentifier:ZJCategoryScrollItem.identifier())
         // 分页控制
         collectionView.isPagingEnabled = true
-        
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.bounces = false
         return collectionView
     }()
     
     override func zj_setUpAllView() {
         setUpAllView()
-        layout.itemSize = CGSize(width: kScreenW, height: 200)
-        
+        layout.itemSize = CGSize(width: kScreenW, height: itemWH * 2.0)
+        pageControl.numberOfPages = 8
     }
     
 }
@@ -56,10 +58,8 @@ extension ZJCategroyListCell : UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: ZJCategoryItem.identifier(), for: indexPath)
-        cell.contentView.backgroundColor = kRed
-        cell.contentView.layer.borderColor = klineColor.cgColor
-        cell.contentView.layer.borderWidth = 0.5
+        let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: ZJCategoryScrollItem.identifier(), for: indexPath)
+        cell.backgroundColor = kRed
         return cell
     }
     
@@ -67,6 +67,12 @@ extension ZJCategroyListCell : UICollectionViewDataSource {
 }
 
 
+extension ZJCategroyListCell : UICollectionViewDelegate {
+    // pageControl 的滚动事件
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        pageControl.currentPage = Int(scrollView.contentOffset.x / scrollView.bounds.width + 0.5)
+    }
+}
 
 // 配置 UI
 extension ZJCategroyListCell {
@@ -76,7 +82,15 @@ extension ZJCategroyListCell {
         addSubview(collectionView)
         collectionView.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(0)
-            make.height.equalTo(200)
+            make.height.equalTo(ItemHeight * 2)
+        }
+        
+        
+        addSubview(pageControl)
+        pageControl.snp.makeConstraints { (make) in
+            make.bottom.equalTo(-5)
+            make.centerX.equalTo(self.snp.centerX)
+            make.width.equalTo(150)
         }
         
         

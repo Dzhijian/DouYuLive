@@ -16,7 +16,7 @@ enum ZJMethod {
 
 class ZJNetWorking {
     
-    class func requestData(type : ZJMethod, URlString: String, parameters : [String : NSString]? = nil,  finishCallBack : @escaping (_ response : AnyObject)->()){
+    class func requestData(type : ZJMethod, URlString: String, parameters : [String : NSString]? = nil,  finishCallBack : @escaping (_ responseCall : String)->()){
         
         let type = type == ZJMethod.GET ? HTTPMethod.get : HTTPMethod.post
         let headers: HTTPHeaders = [
@@ -33,12 +33,16 @@ class ZJNetWorking {
             if parameters != nil{
                 print(parameters ?? String())
             }
-
-            if let json = response.result.value {
-                print("请求成功 🍏:\n\(json)")
+            
+            let jsonStr = String(data: response.data!, encoding:.utf8);
+//            print(jsonStr ?? "")
+            if jsonStr != nil{
+                
+                finishCallBack(jsonStr!)
             }
         }
-    
- 
+        
+        
     }
+    
 }

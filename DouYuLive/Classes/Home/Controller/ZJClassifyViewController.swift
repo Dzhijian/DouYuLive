@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 let itemWH = kScreenW / 4
 
 private let CellID = "CellID"
 
 class ZJClassifyViewController: ZJBaseViewController {
-
+    var cateOneList : Array<JSON> = []
     private lazy var mainTable : UITableView = {
         let tableView = UITableView(frame: CGRect.zero, style: .grouped)
         tableView.delegate = self
@@ -34,6 +35,8 @@ class ZJClassifyViewController: ZJBaseViewController {
         loadCateListData()
         // 获取推荐分类列表数据
         loadRecommendCateItemData()
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,15 +65,47 @@ extension ZJClassifyViewController {
     
     private func loadCateListData() {
         ZJNetWorking.requestData(type: .GET, URlString: ZJLiveCateURL) { (response) in
-            
+
+//            do {
+//                let list = try JSONDecoder().decode(ZJRecommendCate.self, from: response)
+//                print(list)
+//
+//            }catch{
+//
+//            }
         }
+//        HomeProvider.request(.recommendCategoryList) { (result) in
+////            print(result)
+//
+////            if case let .success(response) = result {
+////                //解析数据
+////                let data = try? response.mapJSON()
+////                let json = JSON(data!)
+////                print(json)
+////                self.cateOneList = json["cate2_list"].arrayValue
+////                print(self.cateOneList)
+////                //刷新表格数据
+////                DispatchQueue.main.async{
+//////                    self.tableView.reloadData()
+////                }
+////            }
+//        }
     }
     
     
     private func loadRecommendCateItemData() {
         ZJNetWorking.requestData(type: .GET, URlString: ZJRecommendCategoryURL) { (response) in
             
+            do {
+                let list = try JSONDecoder().decode(ZJRecommendCate.self, from: response.data(using: .utf8)!)
+                print(list)
+                
+            }catch{
+                
+            }
+            
         }
+    
     }
     
 }
