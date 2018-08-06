@@ -52,6 +52,7 @@
 		04907E8821174B70006B70EC /* ZJRecommendCate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04907E8721174B70006B70EC /* ZJRecommendCate.swift */; };
 		04907E8A21183D7D006B70EC /* ZJCateOneList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04907E8921183D7D006B70EC /* ZJCateOneList.swift */; };
 		04907E8C21183EE7006B70EC /* ZJCateOneItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04907E8B21183EE7006B70EC /* ZJCateOneItem.swift */; };
+		04907E8E21185E94006B70EC /* ZJNotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04907E8D21185E94006B70EC /* ZJNotificationName.swift */; };
 		366FC9B6D5DFAAE0CA4E59A1 /* Pods_DouYuLiveUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB779BB5E54804A55579F7C4 /* Pods_DouYuLiveUITests.framework */; };
 		8456442C257792BF58C6C119 /* Pods_DouYuLiveTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A917041522094C4F3A3FD4 /* Pods_DouYuLiveTests.framework */; };
 		8E737CB4577C25D2F3200271 /* Pods_DouYuLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 573FFBD125983AA274BAA29B /* Pods_DouYuLive.framework */; };
@@ -127,6 +128,7 @@
 		04907E8721174B70006B70EC /* ZJRecommendCate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJRecommendCate.swift; sourceTree = "<group>"; };
 		04907E8921183D7D006B70EC /* ZJCateOneList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCateOneList.swift; sourceTree = "<group>"; };
 		04907E8B21183EE7006B70EC /* ZJCateOneItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCateOneItem.swift; sourceTree = "<group>"; };
+		04907E8D21185E94006B70EC /* ZJNotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJNotificationName.swift; sourceTree = "<group>"; };
 		453A662B8E021BC466F245AE /* Pods-DouYuLiveUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DouYuLiveUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DouYuLiveUITests/Pods-DouYuLiveUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		53CFB983BF35608199568833 /* Pods-DouYuLive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DouYuLive.release.xcconfig"; path = "Pods/Target Support Files/Pods-DouYuLive/Pods-DouYuLive.release.xcconfig"; sourceTree = "<group>"; };
 		573FFBD125983AA274BAA29B /* Pods_DouYuLive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DouYuLive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -218,6 +220,7 @@
 			children = (
 				0419BCE7210E2ABB008661D3 /* ZJColor.swift */,
 				0419BCEA210EB554008661D3 /* ZJFont.swift */,
+				04907E8D21185E94006B70EC /* ZJNotificationName.swift */,
 			);
 			path = Marco;
 			sourceTree = "<group>";
@@ -686,6 +689,7 @@
 				0419BCE1210ABACB008661D3 /* ZJPageTitleView.swift in Sources */,
 				04907E7D2116D4A2006B70EC /* ZJCategoryScrollItem.swift in Sources */,
 				0419BCEB210EB554008661D3 /* ZJFont.swift in Sources */,
+				04907E8E21185E94006B70EC /* ZJNotificationName.swift in Sources */,
 				0419BCF3210F7FE5008661D3 /* ZJPageContentView.swift in Sources */,
 				048EA3C02107911D00E30720 /* ZJNavigationController.swift in Sources */,
 				0419BCFB2111BE8F008661D3 /* ZJLOLViewController.swift in Sources */,

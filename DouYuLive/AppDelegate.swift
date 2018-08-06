@@ -18,9 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.backgroundColor = UIColor.white
-        
         let root = ZJTabBarController()
         self.window?.rootViewController = root
+        UIApplication.shared.statusBarStyle = .lightContent
+
         self.window?.makeKeyAndVisible()
         
         return true

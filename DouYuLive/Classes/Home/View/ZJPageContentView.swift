@@ -28,14 +28,18 @@ class ZJPageContentView: UIView {
     // 滑动偏移量
     private var startOffSetX : CGFloat = 0
 
-    // collectionView 容器
-    private lazy var collectionView : UICollectionView = { [weak self] in
-         // 创建 layout
+    private lazy var layout : UICollectionViewFlowLayout = {
+        // 创建 layout
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = (self?.bounds.size)!
+        layout.itemSize = (self.bounds.size)
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         layout.scrollDirection = .horizontal
+        return layout
+    }()
+    // collectionView 容器
+    private lazy var collectionView : UICollectionView = { [weak self] in
+        
         // 创建 UICollectionView
         let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         collectionView.showsHorizontalScrollIndicator = false
@@ -57,6 +61,11 @@ class ZJPageContentView: UIView {
         
         setUpView()
         
+    }
+    func refreshColllectionView(height : CGFloat) {
+        collectionView.frame = CGRect(x: 0, y: 0, width: kScreenW, height: height)
+        layout.itemSize = collectionView.frame.size
+//        collectionView.reloadData()
     }
     
     required init?(coder aDecoder: NSCoder) {

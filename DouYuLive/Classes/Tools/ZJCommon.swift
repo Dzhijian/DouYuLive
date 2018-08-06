@@ -18,6 +18,9 @@ let kNavigationBarHeight :CGFloat = 44
 let kTabBarHeight : CGFloat = 49
 let CateItemHeight = kScreenW / 4
 
+let kNavBarHidden : [String:String] = ["isHidden":"true"]
+
+let kNavBarNotHidden : [String:String] = ["isHidden":"false"]
 
 // 宽度比
 let kWidthRatio = kScreenW / 375.0

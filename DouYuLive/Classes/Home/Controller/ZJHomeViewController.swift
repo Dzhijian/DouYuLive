@@ -14,6 +14,24 @@ private let kTitleH : CGFloat = 40
 
 class ZJHomeViewController: ZJBaseViewController {
     
+    private lazy var  topView : UIView = {
+        let view = UIView()
+        view.backgroundColor = MainOrangeColor;
+        view.frame = CGRect(x: 0, y: 0, width: kScreenW, height: 20)
+        // 设置背景渐变
+        let gradientLayer: CAGradientLayer = CAGradientLayer()
+        gradientLayer.colors = gradientColors
+        //(这里的起始和终止位置就是按照坐标系,四个角分别是左上(0,0),左下(0,1),右上(1,0),右下(1,1))
+        //渲染的起始位置
+        gradientLayer.startPoint = CGPoint.init(x: 0, y: 0)
+        //渲染的终止位置
+        gradientLayer.endPoint = CGPoint.init(x: 1, y: 0)
+        //设置frame和插入view的layer
+        gradientLayer.frame = view.frame
+        view.layer.insertSublayer(gradientLayer, at: 0)
+        return view
+    }()
+    
     private lazy var titles : [String] = ["分类","推荐","全部","LoL","绝地求生","王者荣耀","QQ飞车"]
     private lazy var pageTitleView : ZJPageTitleView = { [weak self] in
         let frame = CGRect(x: 0, y: 0, width: kScreenW, height: kTitleH)
@@ -34,14 +52,8 @@ class ZJHomeViewController: ZJBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = ""
-        
+//        view.backgroundColor = UIColor.brown
         setUpUI()
-        
-//        ZJNetWorking.requestData(type: .POST, URlString: ZJSignAppURL, parameters: nil) { (response) in
-//            print(response)
-//        }
-//        
-        self.navigationController?.navigationBar.shadowImage = UIImage()
         
         // 设置背景渐变
         let gradientLayer: CAGradientLayer = CAGradientLayer()
@@ -52,10 +64,32 @@ class ZJHomeViewController: ZJBaseViewController {
         //渲染的终止位置
         gradientLayer.endPoint = CGPoint.init(x: 1, y: 0)
         //设置frame和插入view的layer
-//        gradientLayer.frame = bounds
-//        self.navigationController?.navigationBar..insertSublayer(gradientLayer, at: 0)
+     
+        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshNavBar), name: NSNotification.Name(rawValue: ZJNotiRefreshHomeNavBar), object: nil)
     }
 
+    @objc func refreshNavBar(noti:Notification) {
+        
+        
+        
+        let isHidden : String = noti.userInfo!["isHidden"] as! String
+        if isHidden == "true" {
+
+            pageTitleView.frame = CGRect(x: 0, y: kStatuHeight, width: kScreenW, height: kTitleH)
+            let height : CGFloat = kScreenH - kStatuHeight - kTitleH - kTabBarHeight
+            let frame = CGRect(x: 0, y: kTitleH+kStatuHeight, width: kScreenW, height: height)
+            pageContenView.frame = frame
+            pageContenView.backgroundColor = UIColor.red
+            pageContenView.refreshColllectionView(height:pageContenView.frame.size.height)
+        }else{
+            pageTitleView.frame = CGRect(x: 0, y: 0, width: kScreenW, height: kTitleH)
+            let height : CGFloat = kScreenH - kStatuHeight - kNavigationBarHeight - kTitleH - kTabBarHeight
+            let frame = CGRect(x: 0, y: kTitleH, width: kScreenW, height: height)
+            pageContenView.frame = frame
+        }
+        
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -77,10 +111,14 @@ extension ZJHomeViewController : PageTitleViewDelegate {
 
 // MARK: - 遵守PageContentViewDelegate协议
 extension ZJHomeViewController : PageContentViewDelegate{
+    
     func pageContentView(contentView: ZJPageContentView, progress: CGFloat, sourceIndex: Int, targetIndex: Int) {
         pageTitleView.setPageTitleWithProgress(progress: progress, sourceIndex: sourceIndex, targetIndex: targetIndex)
     }
+    
+    
 }
+
 
 
 // MARK - 配置子控件
@@ -88,13 +126,15 @@ extension ZJHomeViewController {
     
     // 配置 UI
     func setUpUI(){
-        
+        self.navigationController?.navigationBar.shadowImage = UIImage()
         // 不需要调整 scrollview 的内边距
         automaticallyAdjustsScrollViewInsets = false
+        view.addSubview(topView)
         // 添加导航栏
         setUpNavigation()
         // 添加标题栏
         setUpPageTitleView()
+        
         
         // 添加 ContentView
         view.addSubview(pageContenView)

@@ -41,8 +41,6 @@ class ZJNetWorking {
                 return
             }
             
-            
-            
             guard let dict = result as? [String : Any] else { return }
             guard let dataDict = dict["data"] as? [String : Any] else { return }
             

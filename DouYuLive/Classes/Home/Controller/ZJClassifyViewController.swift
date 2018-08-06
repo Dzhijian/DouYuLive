@@ -19,6 +19,7 @@ class ZJClassifyViewController: ZJBaseViewController {
     private var recommenCateData : ZJRecommendCate = ZJRecommendCate()
     private var cateListData : ZJCateOneList = ZJCateOneList()
     
+
     private lazy var mainTable : UITableView = {
         let tableView = UITableView(frame: CGRect.zero, style: .grouped)
         tableView.delegate = self
@@ -39,8 +40,7 @@ class ZJClassifyViewController: ZJBaseViewController {
         loadCateListData()
         // 获取推荐分类列表数据
         loadRecommendCateItemData()
-        
-        
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,13 +52,16 @@ class ZJClassifyViewController: ZJBaseViewController {
         
     }
     
+    // 列表滚动事件
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offSetY = scrollView.contentOffset.y
-        if offSetY > 100 {
+        if offSetY > 120 {
             self.navigationController?.setNavigationBarHidden(true, animated: true)
-           
+            
+            NotificationCenter.default.post(name: Notification.Name(rawValue: ZJNotiRefreshHomeNavBar), object: nil, userInfo: kNavBarHidden)
         }else{
             self.navigationController?.setNavigationBarHidden(false, animated: true)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: ZJNotiRefreshHomeNavBar), object: nil, userInfo: kNavBarNotHidden)
         }
     }
 
@@ -121,7 +124,6 @@ extension ZJClassifyViewController : UITableViewDelegate,UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: CellID, for: indexPath) as! ZJCategroyListCell
         if indexPath.section == 0 {
-//            cell.pageControl.isHidden = true
             cell.cateTwoList = self.recommenCateData.cate2_list
         }else{
             if self.cateListData.cate1_list.count != 0 {

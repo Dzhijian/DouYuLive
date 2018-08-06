@@ -15,15 +15,14 @@ class ZJCategroyListCell: ZJBaseTableCell {
     
     var cateTwoList : [ZJCategoryList]? {
         didSet {
-            print(cateTwoList?.count ?? "0")
             collectionView.reloadData()
         }
     }
     // 分页控制器
     lazy var pageControl : UIPageControl = {
         let pageControl = UIPageControl()
-        pageControl.pageIndicatorTintColor = kRed
-        pageControl.currentPageIndicatorTintColor = kOrange
+        pageControl.pageIndicatorTintColor = colorWithRGBA(236, 236, 236, 1.0)
+        pageControl.currentPageIndicatorTintColor = colorWithRGBA(212, 212, 212, 1.0)
         return pageControl
     }()
     

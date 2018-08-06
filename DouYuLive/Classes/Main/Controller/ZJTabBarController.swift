@@ -23,7 +23,7 @@ class ZJTabBarController: UITabBarController {
         
         // 设置图片和文字选中时的颜色   必须设置（系统默认选中蓝色）
         self.tabBar.tintColor = UIColor.orange
-        self.tabBar.isTranslucent = false
+//        self.tabBar.isTranslucent = false
 
     }
     
