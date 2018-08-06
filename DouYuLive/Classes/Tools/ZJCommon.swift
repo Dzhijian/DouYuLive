@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 let kScreenW = UIScreen.main.bounds.size.width
 let kScreenH = UIScreen.main.bounds.size.height
@@ -15,7 +16,7 @@ let kScreenH = UIScreen.main.bounds.size.height
 let kStatuHeight : CGFloat = 20
 let kNavigationBarHeight :CGFloat = 44
 let kTabBarHeight : CGFloat = 49
-
+let CateItemHeight = kScreenW / 4
 
 
 // 宽度比

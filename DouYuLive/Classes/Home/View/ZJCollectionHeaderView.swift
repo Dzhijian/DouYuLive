@@ -9,11 +9,16 @@
 import UIKit
 
 class ZJCollectionHeaderView: UICollectionReusableView {
+    private var titleLab = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpView()
         backgroundColor = kWhite
+    }
+    
+    func configTitle(title : String) {
+        titleLab.text = title
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -31,7 +36,7 @@ extension ZJCollectionHeaderView {
             make.height.equalTo(0.6)
         })
         
-        _ = UILabel.zj_createLabel(text: "精彩推荐", textColor: kMainTextColor, font: BoldFontSize(16), supView: self, closure: { (make) in
+        titleLab = UILabel.zj_createLabel(text: "", textColor: kMainTextColor, font: BoldFontSize(16), supView: self, closure: { (make) in
             make.centerY.equalTo(self.snp.centerY)
             make.left.equalTo(AdaptW(15))
         })

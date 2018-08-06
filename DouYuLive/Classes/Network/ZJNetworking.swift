@@ -9,6 +9,8 @@
 
 import UIKit
 import Alamofire
+import SwiftyJSON
+
 enum ZJMethod {
     case GET
     case POST
@@ -16,7 +18,7 @@ enum ZJMethod {
 
 class ZJNetWorking {
     
-    class func requestData(type : ZJMethod, URlString: String, parameters : [String : NSString]? = nil,  finishCallBack : @escaping (_ responseCall : String)->()){
+    class func requestData(type : ZJMethod, URlString: String, parameters : [String : NSString]? = nil,  finishCallBack : @escaping (_ responseCall : Data)->()){
         
         let type = type == ZJMethod.GET ? HTTPMethod.get : HTTPMethod.post
         let headers: HTTPHeaders = [
@@ -34,15 +36,31 @@ class ZJNetWorking {
                 print(parameters ?? String())
             }
             
-            let jsonStr = String(data: response.data!, encoding:.utf8);
-//            print(jsonStr ?? "")
-            if jsonStr != nil{
-                
-                finishCallBack(jsonStr!)
+            guard let result = response.result.value else {
+                print(response.result.error ?? "错误❌")
+                return
             }
+            
+            
+            
+            guard let dict = result as? [String : Any] else { return }
+            guard let dataDict = dict["data"] as? [String : Any] else { return }
+            
+            
+            let jsonData = try?JSONSerialization.data(withJSONObject: dataDict, options: .prettyPrinted)
+            
+            print(dict)
+            
+            
+            if jsonData != nil {
+                finishCallBack(jsonData!)
+            }
+            
+        
+            }
+            
         }
         
-        
-    }
-    
 }
+    
+

@@ -12,6 +12,13 @@ private let ItemWH : CGFloat = kScreenW / 4
 
 class ZJCategoryScrollItem: ZJBaseCollectionCell {
     
+    var dataArr : [ZJCategoryList]? {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    
+    
     private lazy var collectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: itemWH, height: itemWH)
@@ -40,14 +47,15 @@ class ZJCategoryScrollItem: ZJBaseCollectionCell {
 extension ZJCategoryScrollItem : UICollectionViewDelegate,UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
+        return dataArr?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: ZJCategoryItem.identifier(), for: indexPath)
+        let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: ZJCategoryItem.identifier(), for: indexPath) as! ZJCategoryItem
         cell.contentView.layer.borderColor = klineColor.cgColor
         cell.contentView.layer.borderWidth = 0.5
+        cell.model = dataArr?[indexPath.row]
         return cell
     }
     

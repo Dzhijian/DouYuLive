@@ -15,6 +15,10 @@ private let CellID = "CellID"
 
 class ZJClassifyViewController: ZJBaseViewController {
     var cateOneList : Array<JSON> = []
+    
+    private var recommenCateData : ZJRecommendCate = ZJRecommendCate()
+    private var cateListData : ZJCateOneList = ZJCateOneList()
+    
     private lazy var mainTable : UITableView = {
         let tableView = UITableView(frame: CGRect.zero, style: .grouped)
         tableView.delegate = self
@@ -66,43 +70,25 @@ extension ZJClassifyViewController {
     private func loadCateListData() {
         ZJNetWorking.requestData(type: .GET, URlString: ZJLiveCateURL) { (response) in
 
-//            do {
-//                let list = try JSONDecoder().decode(ZJRecommendCate.self, from: response)
-//                print(list)
-//
-//            }catch{
-//
-//            }
+            do {
+                let data = try JSONDecoder().decode(ZJCateOneList.self, from: response)
+                
+                self.cateListData = data
+                self.mainTable.reloadData()
+                
+            }catch{}
         }
-//        HomeProvider.request(.recommendCategoryList) { (result) in
-////            print(result)
-//
-////            if case let .success(response) = result {
-////                //解析数据
-////                let data = try? response.mapJSON()
-////                let json = JSON(data!)
-////                print(json)
-////                self.cateOneList = json["cate2_list"].arrayValue
-////                print(self.cateOneList)
-////                //刷新表格数据
-////                DispatchQueue.main.async{
-//////                    self.tableView.reloadData()
-////                }
-////            }
-//        }
+
     }
     
     
     private func loadRecommendCateItemData() {
         ZJNetWorking.requestData(type: .GET, URlString: ZJRecommendCategoryURL) { (response) in
-            
             do {
-                let list = try JSONDecoder().decode(ZJRecommendCate.self, from: response.data(using: .utf8)!)
-                print(list)
-                
-            }catch{
-                
-            }
+                let data = try JSONDecoder().decode(ZJRecommendCate.self, from: response)
+                self.recommenCateData = data
+                self.mainTable.reloadData()
+            }catch{}
             
         }
     
@@ -122,7 +108,8 @@ extension ZJClassifyViewController {
 
 extension ZJClassifyViewController : UITableViewDelegate,UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 9
+        
+        return 1 + (self.cateListData.cate1_list.count)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -130,20 +117,41 @@ extension ZJClassifyViewController : UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellID, for: indexPath)
-        cell.selectionStyle = .none
-
-        cell.backgroundColor = kWhite
+        
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellID, for: indexPath) as! ZJCategroyListCell
+        if indexPath.section == 0 {
+//            cell.pageControl.isHidden = true
+            cell.cateTwoList = self.recommenCateData.cate2_list
+        }else{
+            if self.cateListData.cate1_list.count != 0 {
+                let item : ZJCateOneItem = self.cateListData.cate1_list[indexPath.section - 1]
+                cell.cateTwoList = item.cate2_list
+            }
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+//        if indexPath.section == 0 {
+//            return CateItemHeight * 2
+//        }
         return Adapt(220);
     }
     
-    
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = ZJCollectionHeaderView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: Adapt(50)))
+        if section == 0 {
+            header.configTitle(title: "推荐分类")
+        }else{
+            if self.cateListData.cate1_list.count != 0 {
+                let item : ZJCateOneItem = self.cateListData.cate1_list[section - 1]
+                header.configTitle(title:item.cate_name!)
+            }
+        }
+        
         return header
     }
     

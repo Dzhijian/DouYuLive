@@ -10,7 +10,7 @@ import UIKit
 
 struct ZJRecommendCate : Decodable {
     
-    var total : String?
+    var total : Int32?
     var cate2_list : [ZJCategoryList] = Array<ZJCategoryList>()
 }
 

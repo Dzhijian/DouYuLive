@@ -32,6 +32,8 @@ let SearchBGColor = UIColor(red: colorValue(237.0), green:colorValue(143.0), blu
 let klineColor : UIColor = colorWithRGBA(230, 230, 230, 1.0)
 // 文字颜色
 let kMainTextColor : UIColor = colorWithRGBA(33, 33, 33, 1.0)
+// 文字颜色
+let kGrayTextColor : UIColor = colorWithRGBA(99, 99, 99, 1.0)
 // function
 
 func colorValue(_ value : CGFloat) -> CGFloat {

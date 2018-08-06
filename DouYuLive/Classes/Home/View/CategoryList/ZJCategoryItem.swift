@@ -10,16 +10,29 @@ import UIKit
 
 class ZJCategoryItem: ZJBaseCollectionCell {
     
+    
+    var model : ZJCategoryList? {
+        didSet{
+            titleLab.text = model?.cate2_name
+            //不能使用强制解包策略
+            if let iconURL = URL(string: model?.square_icon_url ?? "") {
+                icon.kf.setImage(with: iconURL)
+            } else {
+                icon.image = UIImage(named: "home_column_more")//home_more_btn
+            }
+        }
+    }
+    
+    
     private lazy var icon : UIImageView = {
         let icon = UIImageView()
-        
         return icon
     }()
     
     private lazy var titleLab :UILabel = {
         let lab = UILabel()
-        lab.textColor = kMainTextColor
-        lab.font = FontSize(15)
+        lab.textColor = kGrayTextColor
+        lab.font = FontSize(12)
         lab.backgroundColor = kWhite
         lab.textAlignment = .center
         return lab
@@ -40,10 +53,10 @@ extension ZJCategoryItem {
         addSubview(titleLab)
         
         icon.snp.makeConstraints { (make) in
-            make.top.equalTo(15)
+            make.top.equalTo(10)
             make.left.equalTo(10)
             make.right.equalTo(-10)
-            make.height.equalTo(50)
+            make.height.equalTo(60)
         }
         
         titleLab.snp.makeConstraints { (make) in
@@ -53,7 +66,5 @@ extension ZJCategoryItem {
             make.right.equalTo(-3)
         }
         
-        icon.backgroundColor = kOrange
-        titleLab.text = "英雄联盟"
     }
 }

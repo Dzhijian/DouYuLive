@@ -9,12 +9,18 @@
 
 import UIKit
 
-private let ItemHeight = kScreenW / 4
+
 
 class ZJCategroyListCell: ZJBaseTableCell {
     
+    var cateTwoList : [ZJCategoryList]? {
+        didSet {
+            print(cateTwoList?.count ?? "0")
+            collectionView.reloadData()
+        }
+    }
     // 分页控制器
-    private lazy var pageControl : UIPageControl = {
+    lazy var pageControl : UIPageControl = {
         let pageControl = UIPageControl()
         pageControl.pageIndicatorTintColor = kRed
         pageControl.currentPageIndicatorTintColor = kOrange
@@ -45,7 +51,7 @@ class ZJCategroyListCell: ZJBaseTableCell {
     
     override func zj_setUpAllView() {
         setUpAllView()
-        layout.itemSize = CGSize(width: kScreenW, height: itemWH * 2.0)
+        layout.itemSize = CGSize(width: kScreenW, height: CateItemHeight * 2.0)
         pageControl.numberOfPages = 8
     }
     
@@ -54,12 +60,33 @@ class ZJCategroyListCell: ZJBaseTableCell {
 
 extension ZJCategroyListCell : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
+        if cateTwoList == nil{ return 0 }
+        
+        let pageNum = (cateTwoList!.count - 1) / 8 + 1
+        pageControl.numberOfPages = pageNum
+        
+        if pageNum <= 1 {
+            pageControl.isHidden = true
+        }else{
+            pageControl.isHidden = false
+        }
+        return pageNum
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: ZJCategoryScrollItem.identifier(), for: indexPath)
+        let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: ZJCategoryScrollItem.identifier(), for: indexPath) as! ZJCategoryScrollItem
+        
         cell.backgroundColor = kRed
+        
+        let startIndex = indexPath.item * 8
+        var endIndex = (indexPath.item + 1) * 8 - 1
+        if endIndex > cateTwoList!.count - 1 {
+            endIndex = cateTwoList!.count - 1
+        }
+        if (self.cateTwoList?.count)! > 0  {
+            cell.dataArr = Array(cateTwoList![startIndex...endIndex])
+        }
+        
         return cell
     }
     
@@ -82,13 +109,13 @@ extension ZJCategroyListCell {
         addSubview(collectionView)
         collectionView.snp.makeConstraints { (make) in
             make.top.left.right.equalTo(0)
-            make.height.equalTo(ItemHeight * 2)
+            make.height.equalTo(CateItemHeight * 2)
         }
         
         
         addSubview(pageControl)
         pageControl.snp.makeConstraints { (make) in
-            make.bottom.equalTo(-5)
+            make.bottom.equalTo(0)
             make.centerX.equalTo(self.snp.centerX)
             make.width.equalTo(150)
         }

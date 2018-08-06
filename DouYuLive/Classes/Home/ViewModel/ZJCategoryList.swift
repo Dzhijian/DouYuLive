@@ -17,4 +17,5 @@ struct ZJCategoryList : Decodable {
     var push_nearby : Int32?
     var square_icon_url : String?
     var small_icon_url : String?
+    
 }
