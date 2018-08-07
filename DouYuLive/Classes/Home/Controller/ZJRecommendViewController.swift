@@ -125,7 +125,7 @@ extension ZJRecommendViewController : UICollectionViewDataSource,UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         if section == 0 {
-            return CGSize(width: kScreenW, height: 370)
+            return CGSize(width: kScreenW, height: Adapt(330))
         }else{
             return CGSize(width: kScreenW, height: 50)
         }

@@ -14,6 +14,7 @@ class ZJBaseView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.backgroundColor = kWhite
         // 配置所有子视图
         zj_initWithAllView()
     }

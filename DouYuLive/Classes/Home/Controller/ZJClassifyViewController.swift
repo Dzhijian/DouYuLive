@@ -143,6 +143,7 @@ extension ZJClassifyViewController : UITableViewDelegate,UITableViewDataSource {
         
         
         let cell = tableView.dequeueReusableCell(withIdentifier: CellID, for: indexPath) as! ZJCategroyListCell
+        cell.selectionStyle = .none
         if indexPath.section == 0 {
             cell.cateTwoList = self.recommenCateData.cate2_list
         }else{

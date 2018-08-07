@@ -11,7 +11,8 @@ import Alamofire
 import SnapKit
 
 private let kTitleH : CGFloat = 40
-
+// 记录导航栏是否隐藏
+private var isNavHidden : Bool = false
 class ZJHomeViewController: ZJBaseViewController {
     
     private lazy var  topView : UIView = {
@@ -71,10 +72,10 @@ class ZJHomeViewController: ZJBaseViewController {
     @objc func refreshNavBar(noti:Notification) {
         
         
-        
         let isHidden : String = noti.userInfo!["isHidden"] as! String
         if isHidden == "true" {
-
+            if isNavHidden { return }
+            isNavHidden = true
             pageTitleView.frame = CGRect(x: 0, y: kStatuHeight, width: kScreenW, height: kTitleH)
             let height : CGFloat = kScreenH - kStatuHeight - kTitleH - kTabBarHeight
             let frame = CGRect(x: 0, y: kTitleH+kStatuHeight, width: kScreenW, height: height)
@@ -82,6 +83,8 @@ class ZJHomeViewController: ZJBaseViewController {
             // 刷新 contentView Frame
             pageContenView.refreshColllectionView(height:pageContenView.frame.size.height)
         }else{
+            if !isNavHidden { return }
+            isNavHidden = false
             pageTitleView.frame = CGRect(x: 0, y: 0, width: kScreenW, height: kTitleH)
             let height : CGFloat = kScreenH - kStatuHeight - kNavigationBarHeight - kTitleH - kTabBarHeight
             let frame = CGRect(x: 0, y: kTitleH, width: kScreenW, height: height)

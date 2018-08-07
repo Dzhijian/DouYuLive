@@ -26,6 +26,14 @@ class ZJRecommendHeadView: UICollectionReusableView {
         return activityView
     }()
     
+    private lazy var titleLab : UILabel = {
+        let titleLab = UILabel()
+        titleLab.text = "热门推荐"
+        titleLab.textColor = kMainTextColor
+        titleLab.font = BoldFontSize(18)
+        return titleLab
+    }()
+    
     private lazy var collectionView : UICollectionView = {
         let colletionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         colletionView.delegate = self
@@ -70,7 +78,7 @@ extension ZJRecommendHeadView {
     func setUpAllView() {
         addSubview(collectionView)
         addSubview(activityView)
-        
+        addSubview(titleLab)
         collectionView.snp.makeConstraints { (make) in
             make.top.equalTo(5)
             make.left.equalTo(ItemMargin)
@@ -89,8 +97,13 @@ extension ZJRecommendHeadView {
             make.top.equalTo(collectionView.snp.bottom).offset(Adapt(20))
             make.left.equalTo(ItemMargin)
             make.right.equalTo(-ItemMargin)
-            make.height.equalTo(Adapt(70))
+            make.height.equalTo(Adapt(65))
         }
         
+        titleLab.snp.makeConstraints { (make) in
+            make.left.equalTo(ItemMargin)
+            make.bottom.equalTo(Adapt(-15))
+            
+        }
     }
 }

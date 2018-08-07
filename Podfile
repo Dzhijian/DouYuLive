@@ -13,6 +13,8 @@ target 'DouYuLive' do
   pod 'Moya-SwiftyJSONMapper'
   pod 'IQKeyboardManagerSwift'
 #  pod 'ZJKitTool'
+  # 轮播图
+  pod 'SBCycleScrollView','~> 0.0.8'
 
   target 'DouYuLiveTests' do
     inherit! :search_paths

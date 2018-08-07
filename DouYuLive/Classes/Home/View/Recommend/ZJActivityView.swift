@@ -63,13 +63,13 @@ extension ZJActivityView {
         btn.setBackgroundImage(UIImage(named: "free_flow_background_1_1"), for: .normal)
         
         titleLab = UILabel.zj_createLabel(text: "小苏菲 《空心》MV首发", textColor:  kMainTextColor, font: FontSize(14), supView: self, closure: { (make) in
-            make.top.equalTo(Adapt(15))
+            make.top.equalTo(Adapt(13))
             make.left.equalTo(line.snp.right).offset(Adapt(10))
             make.right.equalTo(btn.snp.left).offset(Adapt(-10))
         })
         
          descLab = UILabel.zj_createLabel(text: "8月31日 20:00开始 1888人预定", textColor:  kGrayTextColor, font: FontSize(12), supView: self, closure: { (make) in
-            make.bottom.equalTo(Adapt(-15))
+            make.bottom.equalTo(Adapt(-13))
             make.left.equalTo(line.snp.right).offset(Adapt(10))
             make.right.equalTo(btn.snp.left).offset(Adapt(-10))
         })
