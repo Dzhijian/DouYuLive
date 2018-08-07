@@ -36,8 +36,6 @@ class ZJCategoryScrollItem: ZJBaseCollectionCell {
     }()
     
     override func zj_setUpAllView() {
-        
-        self.contentView.backgroundColor = UIColor.orange
         addSubview(collectionView)
     }
     

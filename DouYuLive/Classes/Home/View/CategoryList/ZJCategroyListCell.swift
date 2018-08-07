@@ -75,8 +75,6 @@ extension ZJCategroyListCell : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: ZJCategoryScrollItem.identifier(), for: indexPath) as! ZJCategoryScrollItem
         
-        cell.backgroundColor = kRed
-        
         let startIndex = indexPath.item * 8
         var endIndex = (indexPath.item + 1) * 8 - 1
         if endIndex > cateTwoList!.count - 1 {

@@ -19,7 +19,7 @@ class ZJClassifyViewController: ZJBaseViewController {
     private var recommenCateData : ZJRecommendCate = ZJRecommendCate()
     private var cateListData : ZJCateOneList = ZJCateOneList()
     
-
+    
     private lazy var mainTable : UITableView = {
         let tableView = UITableView(frame: CGRect.zero, style: .grouped)
         tableView.delegate = self
@@ -40,16 +40,12 @@ class ZJClassifyViewController: ZJBaseViewController {
         loadCateListData()
         // 获取推荐分类列表数据
         loadRecommendCateItemData()
-
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        
     }
     
     // 列表滚动事件
@@ -64,37 +60,77 @@ class ZJClassifyViewController: ZJBaseViewController {
             NotificationCenter.default.post(name: Notification.Name(rawValue: ZJNotiRefreshHomeNavBar), object: nil, userInfo: kNavBarNotHidden)
         }
     }
-
+    
 }
 
 
 extension ZJClassifyViewController {
     
     private func loadCateListData() {
-        ZJNetWorking.requestData(type: .GET, URlString: ZJLiveCateURL) { (response) in
-
-            do {
-                let data = try JSONDecoder().decode(ZJCateOneList.self, from: response)
+        
+        //初始化信号量为1
+        let semaphoreA = DispatchSemaphore(value: 1)
+        //第二个信号量为0
+        let semaphoreB = DispatchSemaphore(value: 0)
+        //第二个信号量为0
+        let semaphoreC = DispatchSemaphore(value: 0)
+        let queue = DispatchQueue(label: "com.douyuLive.cate1.queue", qos: .utility, attributes: .concurrent)
+        let mainQueue = DispatchQueue.main
+        //        let queueB = DispatchQueue(label: "com.douyuLive.cate2.queue", qos: .utility, attributes: .concurrent)
+        queue.async{
+            ZJNetWorking.requestData(type: .GET, URlString: ZJLiveCateURL) { (response) in
                 
-                self.cateListData = data
-                self.mainTable.reloadData()
+                do {
+                    let data = try JSONDecoder().decode(ZJCateOneList.self, from: response)
+                    self.cateListData = data
+                    
+                }catch{}
                 
-            }catch{}
+                print("第一个任务执行完毕")
+                
+                
+                
+            }
+            semaphoreB.signal()
+            
         }
+        queue.async{
+            semaphoreB.wait()
+            ZJNetWorking.requestData(type: .GET, URlString: ZJRecommendCategoryURL) { (response) in
+                
+                do {
+                    let data = try JSONDecoder().decode(ZJRecommendCate.self, from: response)
+                    self.recommenCateData = data
+                    
+                }catch{}
+                
+                self.mainTable.reloadData()
+                print("第二个任务执行完毕")
 
+            }
+            semaphoreC.signal()
+        }
+//        queue.async{
+//
+//            semaphoreC.wait()
+//            mainQueue.async {
+//                print("全部任务执行完毕,刷新页面")
+//
+//            }
+//        }
+        
+        //        //group内所有线程的任务执行完毕
+        //        group.notify(queue: DispatchQueue.main) {
+        //
+        //            print("全部任务执行完毕,刷新页面")
+        //            self.mainTable.reloadData()
+        //        }
+        
     }
     
     
     private func loadRecommendCateItemData() {
-        ZJNetWorking.requestData(type: .GET, URlString: ZJRecommendCategoryURL) { (response) in
-            do {
-                let data = try JSONDecoder().decode(ZJRecommendCate.self, from: response)
-                self.recommenCateData = data
-                self.mainTable.reloadData()
-            }catch{}
-            
-        }
-    
+        
     }
     
 }
@@ -136,13 +172,10 @@ extension ZJClassifyViewController : UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-//        if indexPath.section == 0 {
-//            return CateItemHeight * 2
-//        }
         return Adapt(220);
     }
     
-
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = ZJCollectionHeaderView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: Adapt(50)))
         if section == 0 {

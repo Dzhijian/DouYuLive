@@ -17,7 +17,7 @@ private let kNormalCellID = "kNormalCellID"
 private let kHeaderViewID = "kHeaderViewID"
 
 
-class ZJRecommendViewController: ZJBaseViewController {
+class ZJRecommendViewController: ZJBaseViewController ,UIScrollViewDelegate{
     
     private lazy var collectionView : UICollectionView = {
         
@@ -30,7 +30,7 @@ class ZJRecommendViewController: ZJBaseViewController {
         let collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: layout)
         collectionView.backgroundColor = kWhite
         collectionView.dataSource = self
-//        collectionView.delegate = self
+        collectionView.delegate = self
         collectionView.register(ZJLiveListItem.self, forCellWithReuseIdentifier: kNormalCellID)
         collectionView.register(ZJCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: kHeaderViewID)
         return collectionView
@@ -46,13 +46,26 @@ class ZJRecommendViewController: ZJBaseViewController {
         
         getActivityList()
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    
+    // 列表滚动事件
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offSetY = scrollView.contentOffset.y
+        if offSetY > 120 {
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: ZJNotiRefreshHomeNavBar), object: nil, userInfo: kNavBarHidden)
+        }else{
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: ZJNotiRefreshHomeNavBar), object: nil, userInfo: kNavBarNotHidden)
+        }
+    }
+
     
 }
 
@@ -62,7 +75,6 @@ extension ZJRecommendViewController {
     // 获取热门推荐数据
     
     private func loadHotRecommendListData() {
-        //?limit=10&client_sys=ios&offset=0
         let dict : [String : NSString] = ["limit":"10","client_sys":"ios","offset":"0"]
         ZJNetWorking.requestData(type: .POST, URlString:ZJRecommendHotURL , parameters: dict) { (response) in
             print(response)
@@ -77,7 +89,7 @@ extension ZJRecommendViewController {
 }
 
 // MARK: - 遵守UICollectionView的协议
-extension ZJRecommendViewController : UICollectionViewDataSource {
+extension ZJRecommendViewController : UICollectionViewDataSource,UICollectionViewDelegate {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 4

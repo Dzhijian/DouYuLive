@@ -65,7 +65,6 @@ class ZJPageContentView: UIView {
     func refreshColllectionView(height : CGFloat) {
         collectionView.frame = CGRect(x: 0, y: 0, width: kScreenW, height: height)
         layout.itemSize = collectionView.frame.size
-//        collectionView.reloadData()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -118,6 +117,7 @@ extension ZJPageContentView : UICollectionViewDataSource,UICollectionViewDelegat
         let childVC = childVCs[indexPath.item]
         childVC.view.frame = cell.contentView.bounds 
         cell.contentView.addSubview(childVC.view)
+        cell.backgroundColor = kWhite
         return cell
         
     }

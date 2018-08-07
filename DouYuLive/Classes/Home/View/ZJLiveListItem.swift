@@ -10,22 +10,18 @@ import UIKit
 
 let ItemH : CGFloat = (kScreenW - 30) / 2 * 9 / 16
 
-class ZJLiveListItem: UICollectionViewCell {
+class ZJLiveListItem: ZJBaseCollectionCell {
     var imageV = UIImageView()
     var nameLab = UILabel()
     var titleLab = UILabel()
     var descLab = UILabel()
     var hotLab = UILabel()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.contentView.backgroundColor = kWhite
+
+    override func zj_setUpAllView() {
         setUpAllView()
     }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+
     
 }
 

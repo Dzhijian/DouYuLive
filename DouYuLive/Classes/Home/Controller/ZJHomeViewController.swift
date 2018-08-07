@@ -79,7 +79,7 @@ class ZJHomeViewController: ZJBaseViewController {
             let height : CGFloat = kScreenH - kStatuHeight - kTitleH - kTabBarHeight
             let frame = CGRect(x: 0, y: kTitleH+kStatuHeight, width: kScreenW, height: height)
             pageContenView.frame = frame
-            pageContenView.backgroundColor = UIColor.red
+            // 刷新 contentView Frame
             pageContenView.refreshColllectionView(height:pageContenView.frame.size.height)
         }else{
             pageTitleView.frame = CGRect(x: 0, y: 0, width: kScreenW, height: kTitleH)
