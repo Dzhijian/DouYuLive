@@ -72,12 +72,12 @@ extension ZJClassifyViewController {
         let semaphoreA = DispatchSemaphore(value: 1)
         //第二个信号量为0
         let semaphoreB = DispatchSemaphore(value: 0)
-        //第二个信号量为0
+        //第三个信号量为0
         let semaphoreC = DispatchSemaphore(value: 0)
         let queue = DispatchQueue(label: "com.douyuLive.cate1.queue", qos: .utility, attributes: .concurrent)
         let mainQueue = DispatchQueue.main
-        //        let queueB = DispatchQueue(label: "com.douyuLive.cate2.queue", qos: .utility, attributes: .concurrent)
         queue.async{
+            semaphoreA.signal()
             ZJNetWorking.requestData(type: .GET, URlString: ZJLiveCateURL) { (response) in
                 
                 do {
@@ -85,15 +85,13 @@ extension ZJClassifyViewController {
                     self.cateListData = data
                     
                 }catch{}
-                
+                semaphoreB.signal()
                 print("第一个任务执行完毕")
-                
-                
-                
             }
-            semaphoreB.signal()
+            
             
         }
+        
         queue.async{
             semaphoreB.wait()
             ZJNetWorking.requestData(type: .GET, URlString: ZJRecommendCategoryURL) { (response) in
@@ -104,27 +102,23 @@ extension ZJClassifyViewController {
                     
                 }catch{}
                 
-                self.mainTable.reloadData()
+                semaphoreC.signal()
                 print("第二个任务执行完毕")
 
             }
-            semaphoreC.signal()
+            
         }
-//        queue.async{
-//
-//            semaphoreC.wait()
-//            mainQueue.async {
-//                print("全部任务执行完毕,刷新页面")
-//
-//            }
-//        }
         
-        //        //group内所有线程的任务执行完毕
-        //        group.notify(queue: DispatchQueue.main) {
-        //
-        //            print("全部任务执行完毕,刷新页面")
-        //            self.mainTable.reloadData()
-        //        }
+        queue.async{
+            
+            if semaphoreC.wait(wallTimeout: .distantFuture) == .success{
+                mainQueue.async {
+                    print("全部任务执行完毕,刷新页面")
+                    self.mainTable.reloadData()
+                }
+                
+            }
+        }
         
     }
     
