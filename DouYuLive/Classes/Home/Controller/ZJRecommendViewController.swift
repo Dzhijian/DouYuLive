@@ -15,7 +15,7 @@ private let kHeaderViewH : CGFloat = 50
 
 private let kNormalCellID = "kNormalCellID"
 private let kHeaderViewID = "kHeaderViewID"
-
+private let kRecommendHeaderViewID = "kRecommendHeaderViewID"
 
 class ZJRecommendViewController: ZJBaseViewController ,UIScrollViewDelegate{
     
@@ -25,7 +25,7 @@ class ZJRecommendViewController: ZJBaseViewController ,UIScrollViewDelegate{
         layout.itemSize = CGSize(width: kItemW, height: kItemH)
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = kItemMargin
-        layout.headerReferenceSize = CGSize(width: kScreenW, height: 50)
+//        layout.headerReferenceSize = CGSize(width: kScreenW, height: 50)
         layout.sectionInset = UIEdgeInsetsMake(0, kItemMargin, 0, kItemMargin)
         let collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: layout)
         collectionView.backgroundColor = kWhite
@@ -33,6 +33,7 @@ class ZJRecommendViewController: ZJBaseViewController ,UIScrollViewDelegate{
         collectionView.delegate = self
         collectionView.register(ZJLiveListItem.self, forCellWithReuseIdentifier: kNormalCellID)
         collectionView.register(ZJCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: kHeaderViewID)
+        collectionView.register(ZJRecommendHeadView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: kRecommendHeaderViewID)
         return collectionView
     }()
     
@@ -89,7 +90,7 @@ extension ZJRecommendViewController {
 }
 
 // MARK: - 遵守UICollectionView的协议
-extension ZJRecommendViewController : UICollectionViewDataSource,UICollectionViewDelegate {
+extension ZJRecommendViewController : UICollectionViewDataSource,UICollectionViewDelegate ,UICollectionViewDelegateFlowLayout{
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 4
@@ -106,11 +107,30 @@ extension ZJRecommendViewController : UICollectionViewDataSource,UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-         // 取出 section 的 headerView
-        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: kHeaderViewID, for: indexPath)
-        headerView.backgroundColor = kWhite
-        return headerView
+        
+        if indexPath.section == 0 {
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: kRecommendHeaderViewID, for: indexPath)
+            
+            return headerView
+            
+        }else{
+            
+            // 取出 section 的 headerView
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: kHeaderViewID, for: indexPath)
+            headerView.backgroundColor = kWhite
+            return headerView
+            
+        }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        if section == 0 {
+            return CGSize(width: kScreenW, height: 370)
+        }else{
+            return CGSize(width: kScreenW, height: 50)
+        }
+    }
+    
 }
 
 

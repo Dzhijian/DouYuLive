@@ -54,6 +54,9 @@
 		04907E8C21183EE7006B70EC /* ZJCateOneItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04907E8B21183EE7006B70EC /* ZJCateOneItem.swift */; };
 		04907E8E21185E94006B70EC /* ZJNotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04907E8D21185E94006B70EC /* ZJNotificationName.swift */; };
 		04907E90211954A8006B70EC /* ZJDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04907E8F211954A8006B70EC /* ZJDecoder.swift */; };
+		04DE708621198D4E0073DE82 /* ZJRecommendHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE708521198D4E0073DE82 /* ZJRecommendHeadView.swift */; };
+		04DE70882119953F0073DE82 /* ZJActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE70872119953F0073DE82 /* ZJActivityView.swift */; };
+		04DE708A2119967E0073DE82 /* ZJBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE70892119967E0073DE82 /* ZJBaseView.swift */; };
 		366FC9B6D5DFAAE0CA4E59A1 /* Pods_DouYuLiveUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB779BB5E54804A55579F7C4 /* Pods_DouYuLiveUITests.framework */; };
 		8456442C257792BF58C6C119 /* Pods_DouYuLiveTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A917041522094C4F3A3FD4 /* Pods_DouYuLiveTests.framework */; };
 		8E737CB4577C25D2F3200271 /* Pods_DouYuLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 573FFBD125983AA274BAA29B /* Pods_DouYuLive.framework */; };
@@ -131,6 +134,9 @@
 		04907E8B21183EE7006B70EC /* ZJCateOneItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCateOneItem.swift; sourceTree = "<group>"; };
 		04907E8D21185E94006B70EC /* ZJNotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJNotificationName.swift; sourceTree = "<group>"; };
 		04907E8F211954A8006B70EC /* ZJDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJDecoder.swift; sourceTree = "<group>"; };
+		04DE708521198D4E0073DE82 /* ZJRecommendHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJRecommendHeadView.swift; sourceTree = "<group>"; };
+		04DE70872119953F0073DE82 /* ZJActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJActivityView.swift; sourceTree = "<group>"; };
+		04DE70892119967E0073DE82 /* ZJBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJBaseView.swift; sourceTree = "<group>"; };
 		453A662B8E021BC466F245AE /* Pods-DouYuLiveUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DouYuLiveUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DouYuLiveUITests/Pods-DouYuLiveUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		53CFB983BF35608199568833 /* Pods-DouYuLive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DouYuLive.release.xcconfig"; path = "Pods/Target Support Files/Pods-DouYuLive/Pods-DouYuLive.release.xcconfig"; sourceTree = "<group>"; };
 		573FFBD125983AA274BAA29B /* Pods_DouYuLive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DouYuLive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -208,10 +214,9 @@
 		0419BCDF210ABAAE008661D3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				04DE708421198D230073DE82 /* Home */,
+				04DE708321198BA50073DE82 /* Recommend */,
 				04907E7E2116DC67006B70EC /* CategoryList */,
-				0419BCE5210AF22A008661D3 /* ZJHomeSearchView.swift */,
-				0419BCE0210ABACB008661D3 /* ZJPageTitleView.swift */,
-				0419BCF2210F7FE5008661D3 /* ZJPageContentView.swift */,
 				0419BD02211205FF008661D3 /* ZJCollectionHeaderView.swift */,
 				04907E702113F19E006B70EC /* ZJLiveListItem.swift */,
 			);
@@ -395,6 +400,7 @@
 			children = (
 				04907E782116C328006B70EC /* ZJBaseCollectionCell.swift */,
 				04907E7A2116C33C006B70EC /* ZJBaseTableCell.swift */,
+				04DE70892119967E0073DE82 /* ZJBaseView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -417,6 +423,25 @@
 				04907E742116BEC0006B70EC /* ZJCategoryItem.swift */,
 			);
 			path = CategoryList;
+			sourceTree = "<group>";
+		};
+		04DE708321198BA50073DE82 /* Recommend */ = {
+			isa = PBXGroup;
+			children = (
+				04DE708521198D4E0073DE82 /* ZJRecommendHeadView.swift */,
+				04DE70872119953F0073DE82 /* ZJActivityView.swift */,
+			);
+			path = Recommend;
+			sourceTree = "<group>";
+		};
+		04DE708421198D230073DE82 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				0419BCE5210AF22A008661D3 /* ZJHomeSearchView.swift */,
+				0419BCE0210ABACB008661D3 /* ZJPageTitleView.swift */,
+				0419BCF2210F7FE5008661D3 /* ZJPageContentView.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		1D1F37440CECC817327578EC /* Pods */ = {
@@ -664,12 +689,15 @@
 				048EA3BA210790B700E30720 /* ZJFishBarViewController.swift in Sources */,
 				0419BD012111BFBC008661D3 /* ZJJDQSViewController.swift in Sources */,
 				048EA3B8210790A900E30720 /* ZJFollowViewController.swift in Sources */,
+				04DE70882119953F0073DE82 /* ZJActivityView.swift in Sources */,
 				048EA3B62107909F00E30720 /* ZJRecreationViewController.swift in Sources */,
+				04DE708621198D4E0073DE82 /* ZJRecommendHeadView.swift in Sources */,
 				04907E8C21183EE7006B70EC /* ZJCateOneItem.swift in Sources */,
 				04907E732116BB61006B70EC /* ZJCategroyListCell.swift in Sources */,
 				0419BCED210EC64E008661D3 /* ZJView-Extension.swift in Sources */,
 				0419BD03211205FF008661D3 /* ZJCollectionHeaderView.swift in Sources */,
 				0419BD1421135904008661D3 /* ZJInterfaceURL.swift in Sources */,
+				04DE708A2119967E0073DE82 /* ZJBaseView.swift in Sources */,
 				048EA3B121078F9700E30720 /* ZJHomeViewController.swift in Sources */,
 				0419BCF52111BE24008661D3 /* ZJRecommendViewController.swift in Sources */,
 				0419BCF72111BE62008661D3 /* ZJClassifyViewController.swift in Sources */,

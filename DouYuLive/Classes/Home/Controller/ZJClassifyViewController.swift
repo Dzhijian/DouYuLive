@@ -38,8 +38,6 @@ class ZJClassifyViewController: ZJBaseViewController {
         setUpAllView()
         // 获取分类列表数据
         loadCateListData()
-        // 获取推荐分类列表数据
-        loadRecommendCateItemData()
         
     }
     
@@ -64,6 +62,8 @@ class ZJClassifyViewController: ZJBaseViewController {
 }
 
 
+
+// MARK: - 获取分类页表数据
 extension ZJClassifyViewController {
     
     private func loadCateListData() {
@@ -76,6 +76,7 @@ extension ZJClassifyViewController {
         let semaphoreC = DispatchSemaphore(value: 0)
         let queue = DispatchQueue(label: "com.douyuLive.cate1.queue", qos: .utility, attributes: .concurrent)
         let mainQueue = DispatchQueue.main
+        
         queue.async{
             semaphoreA.signal()
             ZJNetWorking.requestData(type: .GET, URlString: ZJLiveCateURL) { (response) in
@@ -88,8 +89,6 @@ extension ZJClassifyViewController {
                 semaphoreB.signal()
                 print("第一个任务执行完毕")
             }
-            
-            
         }
         
         queue.async{
@@ -104,9 +103,7 @@ extension ZJClassifyViewController {
                 
                 semaphoreC.signal()
                 print("第二个任务执行完毕")
-
             }
-            
         }
         
         queue.async{
@@ -116,15 +113,8 @@ extension ZJClassifyViewController {
                     print("全部任务执行完毕,刷新页面")
                     self.mainTable.reloadData()
                 }
-                
             }
         }
-        
-    }
-    
-    
-    private func loadRecommendCateItemData() {
-        
     }
     
 }
