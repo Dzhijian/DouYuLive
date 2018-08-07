@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import Kingfisher
+import SBCycleScrollView
 
 let kScreenW = UIScreen.main.bounds.size.width
 let kScreenH = UIScreen.main.bounds.size.height

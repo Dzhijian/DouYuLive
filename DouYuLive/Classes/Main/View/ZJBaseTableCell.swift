@@ -13,6 +13,10 @@ class ZJBaseTableCell: UITableViewCell {
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.selectionStyle = .none
+        self.accessoryType =  .none
+        self.contentView.backgroundColor = kWhite
+        
         zj_setUpAllView()
         
     }
@@ -24,9 +28,7 @@ class ZJBaseTableCell: UITableViewCell {
     
     /// 配置子控件
     public func zj_setUpAllView(){
-        self.selectionStyle = .none
-        self.accessoryType =  .none
-        self.contentView.backgroundColor = kWhite
+        
     }
     
     public class func cellHeight() -> CGFloat {

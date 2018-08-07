@@ -8,8 +8,13 @@
 
 import UIKit
 
+private let kScrollViewHeight : CGFloat = kScreenW * 9 / 18
 class ZJLOLViewController: ZJBaseViewController {
-
+    
+    private lazy var headView : ZJHomeCateHeaderView = {
+        let scrollView = ZJHomeCateHeaderView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: kScrollViewHeight))
+        return scrollView
+    }()
     private lazy var mainTable : UITableView = {
         let tableView = UITableView()
         tableView.delegate = self
@@ -40,6 +45,20 @@ extension ZJLOLViewController {
         mainTable.snp.makeConstraints { (make) in
             make.edges.equalTo(0)
         }
+        mainTable.tableHeaderView = headView
+    
+        
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offSetY = scrollView.contentOffset.y
+        if offSetY > 120 {
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: ZJNotiRefreshHomeNavBar), object: nil, userInfo: kNavBarHidden)
+        }else{
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: ZJNotiRefreshHomeNavBar), object: nil, userInfo: kNavBarNotHidden)
+        }
     }
     
 }
@@ -57,11 +76,21 @@ extension ZJLOLViewController :  UITableViewDataSource,UITableViewDelegate  {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell  = tableView.dequeueReusableCell(withIdentifier: ZJLiveListCell.identifier(), for: indexPath)
+//        cell.selectionStyle = .none
         
+       
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 500
+        return 800
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = ZJCateSectionHeaderView()
+        return headerView
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 100
     }
 }
