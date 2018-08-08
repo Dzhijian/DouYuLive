@@ -62,6 +62,7 @@
 		04DE7094211A88D20073DE82 /* ZJBannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE7093211A88D20073DE82 /* ZJBannerModel.swift */; };
 		04DE7096211AA4D70073DE82 /* ZJCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE7095211AA4D70073DE82 /* ZJCollectionViewFlowLayout.swift */; };
 		04DE7098211AC5270073DE82 /* ZJCateCollectionHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE7097211AC5270073DE82 /* ZJCateCollectionHeadView.swift */; };
+		04DE709A211B0E3C0073DE82 /* ZJLiveContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE7099211B0E3C0073DE82 /* ZJLiveContentCell.swift */; };
 		366FC9B6D5DFAAE0CA4E59A1 /* Pods_DouYuLiveUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB779BB5E54804A55579F7C4 /* Pods_DouYuLiveUITests.framework */; };
 		8456442C257792BF58C6C119 /* Pods_DouYuLiveTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A917041522094C4F3A3FD4 /* Pods_DouYuLiveTests.framework */; };
 		8E737CB4577C25D2F3200271 /* Pods_DouYuLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 573FFBD125983AA274BAA29B /* Pods_DouYuLive.framework */; };
@@ -147,6 +148,7 @@
 		04DE7093211A88D20073DE82 /* ZJBannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJBannerModel.swift; sourceTree = "<group>"; };
 		04DE7095211AA4D70073DE82 /* ZJCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		04DE7097211AC5270073DE82 /* ZJCateCollectionHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCateCollectionHeadView.swift; sourceTree = "<group>"; };
+		04DE7099211B0E3C0073DE82 /* ZJLiveContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJLiveContentCell.swift; sourceTree = "<group>"; };
 		453A662B8E021BC466F245AE /* Pods-DouYuLiveUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DouYuLiveUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DouYuLiveUITests/Pods-DouYuLiveUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		53CFB983BF35608199568833 /* Pods-DouYuLive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DouYuLive.release.xcconfig"; path = "Pods/Target Support Files/Pods-DouYuLive/Pods-DouYuLive.release.xcconfig"; sourceTree = "<group>"; };
 		573FFBD125983AA274BAA29B /* Pods_DouYuLive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DouYuLive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -339,8 +341,8 @@
 		048EA3A72107873B00E30720 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				0419BD102112EDA8008661D3 /* ViewModel */,
 				0419BCDE210ABAA8008661D3 /* Controller */,
+				0419BD102112EDA8008661D3 /* ViewModel */,
 				0419BCDF210ABAAE008661D3 /* View */,
 			);
 			path = Home;
@@ -463,6 +465,7 @@
 				04DE7090211A026C0073DE82 /* ZJCateSectionHeaderView.swift */,
 				04DE7095211AA4D70073DE82 /* ZJCollectionViewFlowLayout.swift */,
 				04DE7097211AC5270073DE82 /* ZJCateCollectionHeadView.swift */,
+				04DE7099211B0E3C0073DE82 /* ZJLiveContentCell.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -741,6 +744,7 @@
 				048EA3792106447200E30720 /* AppDelegate.swift in Sources */,
 				0419BCE6210AF22A008661D3 /* ZJHomeSearchView.swift in Sources */,
 				048EA3BC210790E400E30720 /* ZJDiscoverViewController.swift in Sources */,
+				04DE709A211B0E3C0073DE82 /* ZJLiveContentCell.swift in Sources */,
 				04907E712113F19E006B70EC /* ZJLiveListItem.swift in Sources */,
 				04907E752116BEC0006B70EC /* ZJCategoryItem.swift in Sources */,
 				0419BCDD210AB99A008661D3 /* ZJCommon.swift in Sources */,

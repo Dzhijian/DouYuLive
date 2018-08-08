@@ -7,6 +7,7 @@
 //
 
 import UIKit
+let kContentHeight = kScreenH - kStatuHeight - kCateTitleH - kTabBarHeight - Adapt(50)
 
 private let kScrollViewHeight : CGFloat = kScreenW * 9 / 18
 class ZJLOLViewController: ZJBaseViewController {
@@ -26,6 +27,7 @@ class ZJLOLViewController: ZJBaseViewController {
         tableView.bounces = false
         tableView.showsVerticalScrollIndicator = false
         tableView.register(ZJLiveListCell.self, forCellReuseIdentifier: ZJLiveListCell.identifier())
+        tableView.register(ZJLiveContentCell.self, forCellReuseIdentifier: ZJLiveContentCell.identifier())
         return tableView
     }()
     override func viewDidLoad() {
@@ -104,13 +106,15 @@ extension ZJLOLViewController :  UITableViewDataSource,UITableViewDelegate  {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return kScreenH - kStatuHeight - kCateTitleH - kTabBarHeight - Adapt(50)
+        return kContentHeight
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
         let headerView = ZJCateSectionHeaderView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: Adapt(50)))
         headerView.setUpTitles(titles: ["直播","视频"])
         return headerView
+    
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return Adapt(50)

@@ -25,7 +25,7 @@ class ZJCateCollectionHeadView: UICollectionReusableView {
 extension ZJCateCollectionHeadView {
     
     private func setUpAllView() {
-        backgroundColor = kRed
+        backgroundColor = kWhite
     }
     
 }

@@ -7,22 +7,25 @@
 //
 
 import UIKit
-
+private let kItemW = (kScreenW - 10) / 2
+private let kItemH = kItemW * 6 / 7
 private let kCateCollectionHeadView = "ZJCateCollectionHeadView"
 class ZJLiveListCell: ZJBaseTableCell {
 
     lazy var collectionView : UICollectionView = {
         let layout = ZJCollectionViewFlowLayout()
+//        let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 10
-        layout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10)
-        layout.itemSize = CGSize(width: (kScreenW - 30) / 2, height: 100)
+        layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        layout.itemSize = CGSize(width: kItemW, height: kItemH)
         layout.headerReferenceSize = CGSize(width: kScreenW, height: Adapt(45))
-        let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: 900), collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: kContentHeight), collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.backgroundColor = kWhite
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CELL")
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.register(ZJLiveListItem.self, forCellWithReuseIdentifier: ZJLiveListItem.identifier())
         collectionView.register(ZJCateCollectionHeadView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier:kCateCollectionHeadView )
         
         return collectionView
@@ -46,10 +49,11 @@ extension ZJLiveListCell : UICollectionViewDataSource,UICollectionViewDelegate,U
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CELL", for: indexPath)
-        cell.contentView.backgroundColor = kOrange
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ZJLiveListItem.identifier(), for: indexPath)
+        
         return cell
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
@@ -57,6 +61,5 @@ extension ZJLiveListCell : UICollectionViewDataSource,UICollectionViewDelegate,U
         return headerView
         
     }
-    
-    
+ 
 }
