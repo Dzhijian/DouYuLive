@@ -23,13 +23,15 @@ let kNavBarHidden : [String:String] = ["isHidden":"true"]
 
 let kNavBarNotHidden : [String:String] = ["isHidden":"false"]
 
+// 自定义索引值
+let kBaseTarget : Int = 1000
+
 // 宽度比
 let kWidthRatio = kScreenW / 375.0
 // 高度比
 let kHeightRatio = kScreenH / 667.0
 
 // 自适应
-
 func Adapt(_ value : CGFloat) -> CGFloat {
     
     return AdaptW(value)

@@ -76,7 +76,7 @@ extension ZJRecommendViewController {
     // 获取热门推荐数据
     
     private func loadHotRecommendListData() {
-        let dict : [String : NSString] = ["limit":"10","client_sys":"ios","offset":"0"]
+        let dict : [String : String] = ["limit":"10","client_sys":"ios","offset":"0"]
         ZJNetWorking.requestData(type: .POST, URlString:ZJRecommendHotURL , parameters: dict) { (response) in
             print(response)
         }

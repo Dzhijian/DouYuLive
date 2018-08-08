@@ -18,7 +18,7 @@ enum ZJMethod {
 
 class ZJNetWorking {
     
-    class func requestData(type : ZJMethod, URlString: String, parameters : [String : NSString]? = nil,  finishCallBack : @escaping (_ responseCall : Data)->()){
+    class func requestData(type : ZJMethod, URlString: String, parameters : [String : String]? = nil,  finishCallBack : @escaping (_ responseCall : Data)->()){
         
         let type = type == ZJMethod.GET ? HTTPMethod.get : HTTPMethod.post
         let headers: HTTPHeaders = [
@@ -28,6 +28,8 @@ class ZJNetWorking {
         Alamofire.request(URlString, method: type, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
             print("Method:\(type)请求\nURL: \(URlString)\n请求参数: \(String(describing: parameters))")
             if parameters != nil{
+                print(response.request?.url ?? "url")
+                
                 print(parameters ?? String())
             }
             

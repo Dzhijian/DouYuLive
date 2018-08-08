@@ -11,8 +11,10 @@ import UIKit
 private let kScrollViewHeight : CGFloat = kScreenW * 9 / 18
 class ZJLOLViewController: ZJBaseViewController {
     
+    private var cateBanner : ZJCateBanner = ZJCateBanner()
+    
     private lazy var headView : ZJHomeCateHeaderView = {
-        let scrollView = ZJHomeCateHeaderView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: kScrollViewHeight))
+        let scrollView = ZJHomeCateHeaderView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: Adapt(120)))
         return scrollView
     }()
     private lazy var mainTable : UITableView = {
@@ -21,12 +23,14 @@ class ZJLOLViewController: ZJBaseViewController {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.backgroundColor = kWhite
+        tableView.bounces = false
         tableView.register(ZJLiveListCell.self, forCellReuseIdentifier: ZJLiveListCell.identifier())
         return tableView
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpAllView()
+        getBannerListData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,6 +38,23 @@ class ZJLOLViewController: ZJBaseViewController {
         // Dispose of any resources that can be recreated.
     }
 
+}
+
+
+// MARK: - 网络请求
+extension ZJLOLViewController {
+    
+    private func getBannerListData() {
+        ZJNetWorking.requestData(type: .GET, URlString: ZJCateBannerURL) { (response) in
+            
+            let data = try? ZJDecoder.decode(ZJCateBanner.self, data : response)
+            if data != nil {
+                self.cateBanner = data!
+                self.headView.configBnanerList(bannerList: self.cateBanner.slide_list)
+                print(self.cateBanner)
+            }
+        }
+    }
 }
 
 
@@ -76,7 +97,6 @@ extension ZJLOLViewController :  UITableViewDataSource,UITableViewDelegate  {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell  = tableView.dequeueReusableCell(withIdentifier: ZJLiveListCell.identifier(), for: indexPath)
-//        cell.selectionStyle = .none
         
        
         return cell
@@ -87,10 +107,11 @@ extension ZJLOLViewController :  UITableViewDataSource,UITableViewDelegate  {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = ZJCateSectionHeaderView()
+        let headerView = ZJCateSectionHeaderView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: Adapt(50)))
+        headerView.setUpTitles(titles: ["直播","视频"])
         return headerView
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 100
+        return Adapt(50)
     }
 }

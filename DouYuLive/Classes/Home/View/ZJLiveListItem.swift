@@ -43,7 +43,7 @@ extension ZJLiveListItem {
             make.right.equalTo(self.imageV.snp.right).offset(-5)
         })
         
-        self.titleLab = UILabel.zj_createLabel(text: "房间待着太无聊.哈哈哈哈哈哈哈哈哈哈", textColor: kBlack, font: FontSize(15), supView: self.contentView, closure: { (make) in
+        self.titleLab = UILabel.zj_createLabel(text: "房间待着太无聊.哈哈哈哈哈哈哈哈哈哈", textColor: kBlack, font: FontSize(14), supView: self.contentView, closure: { (make) in
             make.top.equalTo(self.imageV.snp.bottom).offset(10)
             make.left.equalTo(self.contentView.snp.left).offset(5)
             make.right.equalTo(self.contentView.snp.right).offset(-5)

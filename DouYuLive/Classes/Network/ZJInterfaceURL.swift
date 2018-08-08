@@ -19,3 +19,19 @@ let ZJSignAppURL : String = "https://rtbapi.douyucdn.cn/japi/sign/app/getinfo?ui
 let ZJRecommendCategoryURL : String = "https://apiv2.douyucdn.cn/live/cate/getLiveRecommendCate2?client_sys=ios"
 
 let ZJLiveCateURL : String = "https://apiv2.douyucdn.cn/live/cate/getLiveCate1List?client_sys=ios"
+
+// banner
+//https://apiv2.douyucdn.cn/live/Slide/getSlideLists?cate_id=1&app_ver=4610000&client_sys=ios get
+let ZJCateBannerURL : String = "https://apiv2.douyucdn.cn/live/Slide/getSlideLists?cate_id=1&app_ver=4610000&client_sys=ios"
+
+// 子类下的直播分类
+//https://capi.douyucdn.cn/api/v1/getThreeCate?client_sys=ios&tag_id=1 get
+
+// 子类下的分类
+//https://apiv2.douyucdn.cn/Live/Customcate2/getAllComponentList?cate2_id=1&client_sys=ios get
+
+// 直播列表
+// https://apiv2.douyucdn.cn/gv2api/rkc/roomlist/2_1/0/20/ios?client_sys=ios get
+
+// 全部列表
+// https://apiv2.douyucdn.cn/gv2api/rkc/roomlist/0_0/0/20/ios?client_sys=ios get

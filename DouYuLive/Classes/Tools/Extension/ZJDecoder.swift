@@ -13,7 +13,17 @@ enum ZJError : Error {
 }
 
 struct ZJDecoder {
+    
+    static func decode<T>(_ type: T.Type, data : Data) throws -> T where T: Decodable{
+        
+        guard let model = try? JSONDecoder().decode(type, from: data) else {
+            throw ZJError.message("转换模型失败")
+        }
+        return model
+    }
+    
     static func decode<T>(_ type: T.Type, param : [String:String]) throws -> T where T: Decodable{
+        
         guard let jsonData = self.getJsonData(with: param) else {
             throw ZJError.message("转换 data 失败")
         }

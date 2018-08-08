@@ -17,11 +17,11 @@ class ZJHomeViewController: ZJBaseViewController {
     
     private lazy var  topView : UIView = {
         let view = UIView()
-        view.backgroundColor = MainOrangeColor;
+        view.backgroundColor = kMainOrangeColor;
         view.frame = CGRect(x: 0, y: 0, width: kScreenW, height: 20)
         // 设置背景渐变
         let gradientLayer: CAGradientLayer = CAGradientLayer()
-        gradientLayer.colors = gradientColors
+        gradientLayer.colors = kGradientColors
         //(这里的起始和终止位置就是按照坐标系,四个角分别是左上(0,0),左下(0,1),右上(1,0),右下(1,1))
         //渲染的起始位置
         gradientLayer.startPoint = CGPoint.init(x: 0, y: 0)
@@ -58,7 +58,7 @@ class ZJHomeViewController: ZJBaseViewController {
         
         // 设置背景渐变
         let gradientLayer: CAGradientLayer = CAGradientLayer()
-        gradientLayer.colors = gradientColors
+        gradientLayer.colors = kGradientColors
         //(这里的起始和终止位置就是按照坐标系,四个角分别是左上(0,0),左下(0,1),右上(1,0),右下(1,1))
         //渲染的起始位置
         gradientLayer.startPoint = CGPoint.init(x: 0, y: 0)
@@ -146,7 +146,7 @@ extension ZJHomeViewController {
     // 配置 NavigationBar
     func setUpNavigation() -> Void {
         // 修改状态栏背景颜色
-        self.navigationController?.navigationBar.barTintColor = MainOrangeColor
+        self.navigationController?.navigationBar.barTintColor = kMainOrangeColor
         self.navigationController?.navigationBar.tintColor = UIColor.white
 
         let size = CGSize(width: 30, height: 30)
@@ -157,7 +157,7 @@ extension ZJHomeViewController {
         
         let searchView  = ZJHomeSearchView()
         searchView.layer.cornerRadius = 5
-        searchView.backgroundColor = SearchBGColor
+        searchView.backgroundColor = kSearchBGColor
         navigationItem.titleView = searchView
         searchView.snp.makeConstraints { (make) in
             make.center.equalTo((navigationItem.titleView?.snp.center)!)

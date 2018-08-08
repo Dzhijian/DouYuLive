@@ -17,16 +17,16 @@ let kGreen       = UIColor.green
 
 
 // 主颜色 MainOrange
-let MainOrangeColor = UIColor(red: colorValue(238.0), green:colorValue(120.0), blue: colorValue(59), alpha: 1.0)
+let kMainOrangeColor = UIColor(red: colorValue(238.0), green:colorValue(120.0), blue: colorValue(59), alpha: 1.0)
 
 // low  r: 239 130 62
 // high r: 237 105 57
-let LowOrangeColor = UIColor(red: colorValue(239), green:colorValue(130), blue: colorValue(62), alpha: 1.0)
-let HighOrangeColor = UIColor(red: colorValue(237), green:colorValue(105), blue: colorValue(57), alpha: 1.0)
+let kLowOrangeColor = UIColor(red: colorValue(239), green:colorValue(130), blue: colorValue(62), alpha: 1.0)
+let kHighOrangeColor = UIColor(red: colorValue(237), green:colorValue(105), blue: colorValue(57), alpha: 1.0)
 // 渐变色色组
-let gradientColors: [CGColor] = [LowOrangeColor.cgColor, HighOrangeColor.cgColor]
+let kGradientColors: [CGColor] = [kLowOrangeColor.cgColor, kHighOrangeColor.cgColor]
 // 搜索框背景颜色 e
-let SearchBGColor = UIColor(red: colorValue(237.0), green:colorValue(143.0), blue: colorValue(90), alpha: 1.0)
+let kSearchBGColor = UIColor(red: colorValue(237.0), green:colorValue(143.0), blue: colorValue(90), alpha: 1.0)
 
 // 分割线的颜色
 let klineColor : UIColor = colorWithRGBA(230, 230, 230, 1.0)
