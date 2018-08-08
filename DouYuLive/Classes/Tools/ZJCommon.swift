@@ -18,6 +18,7 @@ let kStatuHeight : CGFloat = 20
 let kNavigationBarHeight :CGFloat = 44
 let kTabBarHeight : CGFloat = 49
 let CateItemHeight = kScreenW / 4
+let kCateTitleH : CGFloat = 40
 
 let kNavBarHidden : [String:String] = ["isHidden":"true"]
 

@@ -24,6 +24,7 @@ class ZJLOLViewController: ZJBaseViewController {
         tableView.separatorStyle = .none
         tableView.backgroundColor = kWhite
         tableView.bounces = false
+        tableView.showsVerticalScrollIndicator = false
         tableView.register(ZJLiveListCell.self, forCellReuseIdentifier: ZJLiveListCell.identifier())
         return tableView
     }()
@@ -96,14 +97,14 @@ extension ZJLOLViewController :  UITableViewDataSource,UITableViewDelegate  {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell  = tableView.dequeueReusableCell(withIdentifier: ZJLiveListCell.identifier(), for: indexPath)
         
-       
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 800
+        return kScreenH - kStatuHeight - kCateTitleH - kTabBarHeight - Adapt(50)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-let itemWH = kScreenW / 4
+private let itemWH = kScreenW / 4
 
 private let CellID = "CellID"
 

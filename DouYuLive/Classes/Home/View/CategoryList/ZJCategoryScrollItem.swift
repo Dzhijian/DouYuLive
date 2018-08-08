@@ -8,7 +8,7 @@
 
 import UIKit
 
-private let ItemWH : CGFloat = kScreenW / 4
+private let itemWH : CGFloat = kScreenW / 4
 
 class ZJCategoryScrollItem: ZJBaseCollectionCell {
     

@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import SnapKit
 
-private let kTitleH : CGFloat = 40
+
 // 记录导航栏是否隐藏
 private var isNavHidden : Bool = false
 class ZJHomeViewController: ZJBaseViewController {
@@ -35,14 +35,14 @@ class ZJHomeViewController: ZJBaseViewController {
     
     private lazy var titles : [String] = ["分类","推荐","全部","LoL","绝地求生","王者荣耀","QQ飞车"]
     private lazy var pageTitleView : ZJPageTitleView = { [weak self] in
-        let frame = CGRect(x: 0, y: 0, width: kScreenW, height: kTitleH)
+        let frame = CGRect(x: 0, y: 0, width: kScreenW, height: kCateTitleH)
         let pageTitleViw = ZJPageTitleView(frame: frame, titles: titles)
         pageTitleViw.delegate = self
         return pageTitleViw
     }()
     
     private lazy var pageContenView : ZJPageContentView = { [weak self] in
-        let height : CGFloat = kScreenH - kStatuHeight - kNavigationBarHeight - kTitleH - kTabBarHeight
+        let height : CGFloat = kScreenH - kStatuHeight - kNavigationBarHeight - kCateTitleH - kTabBarHeight
         let frame = CGRect(x: 0, y: 40, width: kScreenW, height: height)
         var childVCs : [UIViewController] =  [ZJClassifyViewController(),ZJRecommendViewController(),ZJAllViewController(),ZJLOLViewController(),ZJJDQSViewController(),ZJWZRYViewController(),ZJQQCarViewController()]
         let contentView = ZJPageContentView(frame: frame, childVCs: childVCs, parentViewController:self!)
@@ -76,18 +76,18 @@ class ZJHomeViewController: ZJBaseViewController {
         if isHidden == "true" {
             if isNavHidden { return }
             isNavHidden = true
-            pageTitleView.frame = CGRect(x: 0, y: kStatuHeight, width: kScreenW, height: kTitleH)
-            let height : CGFloat = kScreenH - kStatuHeight - kTitleH - kTabBarHeight
-            let frame = CGRect(x: 0, y: kTitleH+kStatuHeight, width: kScreenW, height: height)
+            pageTitleView.frame = CGRect(x: 0, y: kStatuHeight, width: kScreenW, height: kCateTitleH)
+            let height : CGFloat = kScreenH - kStatuHeight - kCateTitleH - kTabBarHeight
+            let frame = CGRect(x: 0, y: kCateTitleH + kStatuHeight, width: kScreenW, height: height)
             pageContenView.frame = frame
             // 刷新 contentView Frame
             pageContenView.refreshColllectionView(height:pageContenView.frame.size.height)
         }else{
             if !isNavHidden { return }
             isNavHidden = false
-            pageTitleView.frame = CGRect(x: 0, y: 0, width: kScreenW, height: kTitleH)
-            let height : CGFloat = kScreenH - kStatuHeight - kNavigationBarHeight - kTitleH - kTabBarHeight
-            let frame = CGRect(x: 0, y: kTitleH, width: kScreenW, height: height)
+            pageTitleView.frame = CGRect(x: 0, y: 0, width: kScreenW, height: kCateTitleH)
+            let height : CGFloat = kScreenH - kStatuHeight - kNavigationBarHeight - kCateTitleH - kTabBarHeight
+            let frame = CGRect(x: 0, y: kCateTitleH, width: kScreenW, height: height)
             pageContenView.frame = frame
         }
         
