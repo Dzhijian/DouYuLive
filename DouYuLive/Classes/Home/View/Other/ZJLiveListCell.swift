@@ -10,7 +10,18 @@ import UIKit
 private let kItemW = (kScreenW - 10) / 2
 private let kItemH = kItemW * 6 / 7
 private let kCateCollectionHeadView = "ZJCateCollectionHeadView"
+
+protocol ZJChildCateSelectDelegate : class {
+    func childCateSelectAction(cateId: String,index : Int)
+}
+
+// 滚动回调
+typealias ScrollBlock = (Bool) -> ()
 class ZJLiveListCell: ZJBaseTableCell {
+    
+    weak var delegate : ZJChildCateSelectDelegate?
+    
+    var scrollBlock : ScrollBlock?
     
     lazy var collectionView : UICollectionView = {
         let layout = ZJCollectionViewFlowLayout()
@@ -19,7 +30,7 @@ class ZJLiveListCell: ZJBaseTableCell {
         layout.minimumInteritemSpacing = 10
         layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
         layout.itemSize = CGSize(width: kItemW, height: kItemH)
-        layout.headerReferenceSize = CGSize(width: kScreenW, height: Adapt(45))
+        layout.headerReferenceSize = CGSize(width: kScreenW, height: Adapt(40))
         let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: kContentHeight), collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -50,6 +61,20 @@ class ZJLiveListCell: ZJBaseTableCell {
         addSubview(collectionView)
     }
 
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offSetY = scrollView.contentOffset.y
+        
+        if offSetY > 120 {
+            if (scrollBlock != nil) {
+                
+                scrollBlock!(true)
+            }
+        }else{
+            if (scrollBlock != nil) {
+                scrollBlock!(false)
+            }
+        }
+    }
 }
 
 
@@ -77,8 +102,21 @@ extension ZJLiveListCell : UICollectionViewDataSource,UICollectionViewDelegate,U
         
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: kCateCollectionHeadView, for: indexPath) as! ZJCateCollectionHeadView
         headerView.cateList = self.cateListData
+        headerView.delegate = self
         return headerView
         
     }
  
+}
+
+
+
+// MARK: - ZJCateItemSelectedDelegate
+extension ZJLiveListCell : ZJCateItemSelectedDelegate {
+    
+    func cateItemSelected(cateId: String, index: Int) {
+        
+        delegate?.childCateSelectAction(cateId: cateId ,index: index)
+    }
+    
 }

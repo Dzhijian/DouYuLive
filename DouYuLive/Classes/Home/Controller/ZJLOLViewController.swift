@@ -15,7 +15,7 @@ class ZJLOLViewController: ZJBaseViewController {
     private var cateBanner : ZJCateBanner = ZJCateBanner()
     private var childCateData : ZJChildCateData = ZJChildCateData()
     private var lolLiveData : ZJLiveListData = ZJLiveListData()
-    
+    private var childCateId : String = "2_1"
     private lazy var headView : ZJHomeCateHeaderView = {
         let scrollView = ZJHomeCateHeaderView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: Adapt(120)))
         return scrollView
@@ -44,7 +44,8 @@ class ZJLOLViewController: ZJBaseViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+   
 }
 
 
@@ -77,7 +78,10 @@ extension ZJLOLViewController {
     
     private func getLOLLiveData() {
         // 获取全部数据
-        ZJNetWorking.requestData(type: .GET, URlString: ZJLOLLiveListURL) { (response) in
+        // /2_1/0/20/ios?client_sys=ios
+        let urlStr = "\(ZJLOLLiveListURL)/\(self.childCateId)/0/20/ios?client_sys=ios"
+        print(urlStr)
+        ZJNetWorking.requestData(type: .GET, URlString: urlStr) { (response) in
             do {
                 let data = try JSONDecoder().decode(ZJLiveListData.self, from: response)
                 self.lolLiveData = data
@@ -89,7 +93,7 @@ extension ZJLOLViewController {
 }
 
 
-// 配置 UI 视图
+// MARK: 配置 UI 视图
 extension ZJLOLViewController {
     
     private func setUpAllView() {
@@ -99,24 +103,14 @@ extension ZJLOLViewController {
         }
         mainTable.tableHeaderView = headView
     
-        
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offSetY = scrollView.contentOffset.y
-        if offSetY > 120 {
-            self.navigationController?.setNavigationBarHidden(true, animated: true)
-            NotificationCenter.default.post(name: Notification.Name(rawValue: ZJNotiRefreshHomeNavBar), object: nil, userInfo: kNavBarHidden)
-        }else{
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
-            NotificationCenter.default.post(name: Notification.Name(rawValue: ZJNotiRefreshHomeNavBar), object: nil, userInfo: kNavBarNotHidden)
-        }
-    }
+    
     
 }
 
 
-// 遵守协议
+// MARK: 遵守协议
 extension ZJLOLViewController :  UITableViewDataSource,UITableViewDelegate  {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -129,11 +123,23 @@ extension ZJLOLViewController :  UITableViewDataSource,UITableViewDelegate  {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell  = tableView.dequeueReusableCell(withIdentifier: ZJLiveListCell.identifier(), for: indexPath) as! ZJLiveListCell
+        cell.delegate = self
         if self.lolLiveData.list.count > 0 {
             cell.liveRoomList = self.lolLiveData.list
         }
         if self.childCateData.data.count > 0 {
             cell.cateListData = self.childCateData.data
+        }
+        
+        //  MARK: 控制导航栏
+        cell.scrollBlock = { ishidden in
+            if ishidden {
+                self.navigationController?.setNavigationBarHidden(true, animated: true)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: ZJNotiRefreshHomeNavBar), object: nil, userInfo: kNavBarHidden)
+            }else{
+                self.navigationController?.setNavigationBarHidden(false, animated: true)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: ZJNotiRefreshHomeNavBar), object: nil, userInfo: kNavBarNotHidden)
+            }
         }
         return cell
     }
@@ -153,3 +159,21 @@ extension ZJLOLViewController :  UITableViewDataSource,UITableViewDelegate  {
         return Adapt(50)
     }
 }
+
+// MARK: - ZJChildCateSelectDelegate
+extension ZJLOLViewController : ZJChildCateSelectDelegate {
+    
+    func childCateSelectAction(cateId: String,index : Int) {
+        
+        if index == 0 {
+            self.childCateId = "2_\(cateId)"
+        }else{
+            self.childCateId = "3_\(cateId)"
+        }
+        print(self.childCateId)
+        // 加载数据
+        getLOLLiveData()
+    }
+    
+}
+

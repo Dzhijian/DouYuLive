@@ -7,10 +7,18 @@
 //
 
 import UIKit
-// colletionView 一行的高度
+// ColletionView 一行的高度
 private let  kColH : CGFloat = AdaptW(40)
+
+protocol ZJCateItemSelectedDelegate : class {
+    
+    func cateItemSelected(cateId: String, index : Int)
+    
+}
 class ZJCateCollectionHeadView: UICollectionReusableView {
     
+    weak var delegate : ZJCateItemSelectedDelegate?
+    private var selectIndex : Int = 0
     private lazy var collectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
@@ -52,6 +60,9 @@ class ZJCateCollectionHeadView: UICollectionReusableView {
                 self.dataList.append(item)
             }
             self.collectionView.reloadData()
+            if self.moreBtn.isSelected {
+                hiddenChildCateView()
+            }
         }
     }
     
@@ -70,13 +81,11 @@ class ZJCateCollectionHeadView: UICollectionReusableView {
         
         if sender.isSelected {
             
-            sender.isSelected = false
+            
             // 隐藏
             hiddenChildCateView()
             
         }else{
-            
-            sender.isSelected = true
             // 显示
             showChildCateView()
         }
@@ -96,7 +105,7 @@ class ZJCateCollectionHeadView: UICollectionReusableView {
 extension ZJCateCollectionHeadView {
     // 显示子类视图
     private func showChildCateView (){
-        
+        self.moreBtn.isSelected = true
         let frame : CGRect = self.frame
         let colframe : CGRect = self.collectionView.frame
         self.moreBtn.isHidden = true
@@ -130,11 +139,11 @@ extension ZJCateCollectionHeadView {
     
     // 隐藏子类视图
     private func hiddenChildCateView (){
-        let frame : CGRect = self.frame
+        self.moreBtn.isSelected = false
         self.line.isHidden = true
         self.showNum = 5
         UIView.animate(withDuration: 0.25, animations: {
-            self.frame.size.height  = frame.size.height - kColH - Adapt(30)
+            self.frame  = CGRect(x: 0, y: 0, width: kScreenW, height: Adapt(40))
             self.collectionView.frame = CGRect(x: 0, y: 0, width: kScreenW, height: kColH)
             self.moreBtn.isHidden = true
         }) { (isSuccess) in
@@ -161,6 +170,11 @@ extension ZJCateCollectionHeadView : UICollectionViewDelegate,UICollectionViewDa
         let item = collectionView.dequeueReusableCell(withReuseIdentifier: ZJSelectCateItem.identifier(), for: indexPath) as! ZJSelectCateItem
         let model = self.dataList[indexPath.item]
         item.titleLab.text = model.name
+        if selectIndex == indexPath.item {
+            item.titleLab.textColor = kMainOrangeColor
+        }else{
+            item.titleLab.textColor = kGrayTextColor
+        }
         return item
     }
     
@@ -169,7 +183,10 @@ extension ZJCateCollectionHeadView : UICollectionViewDelegate,UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.item)
+        selectIndex = indexPath.item
+        let model = self.dataList[indexPath.item]
+        delegate?.cateItemSelected(cateId: model.id!,index: indexPath.item)
+        self.collectionView.reloadData()
     }
 }
 
