@@ -14,6 +14,7 @@ class ZJLOLViewController: ZJBaseViewController {
     
     private var cateBanner : ZJCateBanner = ZJCateBanner()
     private var childCateData : ZJChildCateData = ZJChildCateData()
+    private var lolLiveData : ZJLiveListData = ZJLiveListData()
     
     private lazy var headView : ZJHomeCateHeaderView = {
         let scrollView = ZJHomeCateHeaderView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: Adapt(120)))
@@ -36,6 +37,7 @@ class ZJLOLViewController: ZJBaseViewController {
         setUpAllView()
         getBannerListData()
         getChildCateListData()
+        getLOLLiveData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -68,6 +70,18 @@ extension ZJLOLViewController {
             guard (data != nil) else { return }
             self.childCateData = data!
             
+            
+        }
+    }
+    
+    private func getLOLLiveData() {
+        
+        ZJNetWorking.requestData(type: .GET, URlString: ZJLOLLiveListURL) { (response) in
+            do {
+                let data = try JSONDecoder().decode(ZJLiveListData.self, from: response)
+                self.lolLiveData = data
+                self.mainTable.reloadData()
+            }catch{}
             
         }
     }
@@ -113,8 +127,10 @@ extension ZJLOLViewController :  UITableViewDataSource,UITableViewDelegate  {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell  = tableView.dequeueReusableCell(withIdentifier: ZJLiveListCell.identifier(), for: indexPath)
-        
+        let cell  = tableView.dequeueReusableCell(withIdentifier: ZJLiveListCell.identifier(), for: indexPath) as! ZJLiveListCell
+        if self.lolLiveData.list.count > 0 {
+            cell.liveRoomList = self.lolLiveData.list
+        }
         return cell
     }
     

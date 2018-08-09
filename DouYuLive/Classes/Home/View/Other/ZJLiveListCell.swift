@@ -30,6 +30,15 @@ class ZJLiveListCell: ZJBaseTableCell {
         
         return collectionView
     }()
+    
+    var liveRoomList : [ZJAllLiveList]? {
+        
+        didSet{
+            
+            self.collectionView.reloadData()
+        }
+    }
+    
     override func zj_setUpAllView() {
         addSubview(collectionView)
     }
@@ -45,11 +54,13 @@ extension ZJLiveListCell : UICollectionViewDataSource,UICollectionViewDelegate,U
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30
+        return self.liveRoomList?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ZJLiveListItem.identifier(), for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ZJLiveListItem.identifier(), for: indexPath) as! ZJLiveListItem
+        
+        cell.allModel = self.liveRoomList?[indexPath.item]
         
         return cell
     }

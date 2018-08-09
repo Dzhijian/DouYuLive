@@ -31,9 +31,10 @@ let ZJChildCateListURL = "https://capi.douyucdn.cn/api/v1/getThreeCate?client_sy
 
 // 子类下的分类
 //https://apiv2.douyucdn.cn/Live/Customcate2/getAllComponentList?cate2_id=1&client_sys=ios get
-
+//let ZJLOLCateListURL = "https://apiv2.douyucdn.cn/Live/Customcate2/getAllComponentList?cate2_id=1&client_sys=ios"
 // 直播列表
 // https://apiv2.douyucdn.cn/gv2api/rkc/roomlist/2_1/0/20/ios?client_sys=ios get
+let ZJLOLLiveListURL = "https://apiv2.douyucdn.cn/gv2api/rkc/roomlist/2_1/0/20/ios?client_sys=ios"
 
 // 全部列表
 // https://apiv2.douyucdn.cn/gv2api/rkc/roomlist/0_0/0/20/ios?client_sys=ios get

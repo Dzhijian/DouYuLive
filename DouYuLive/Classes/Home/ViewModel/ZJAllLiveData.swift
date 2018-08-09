@@ -13,7 +13,7 @@ import UIKit
  "msg":"",
  "list
  */
-struct ZJAllLiveData : Decodable{
+struct ZJLiveListData : Decodable{
     var roomRule : Int32?
     var msg : String?
     var list : [ZJAllLiveList]  = Array<ZJAllLiveList>()
@@ -29,7 +29,7 @@ struct ZJAllLiveList : Decodable {
     var cate2_name : String?
     var room_src : String?
     var is_vertical : Int32?
-    var online_num : Int32?
+    var online_num : Int64?
     var hn : Int32?
     var show_status : Int32?
     var bid_id : Int32?

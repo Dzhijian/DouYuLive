@@ -23,14 +23,12 @@ class ZJAllViewController: ZJBaseViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(ZJLiveListItem.self, forCellWithReuseIdentifier:ZJLiveListItem.identifier())
-        // 分页控制
-        collectionView.isPagingEnabled = true
         collectionView.showsHorizontalScrollIndicator = false
 //        collectionView.bounces = false
         return collectionView
     }()
     
-    private var allLiveData : ZJAllLiveData = ZJAllLiveData()
+    private var allLiveData : ZJLiveListData = ZJLiveListData()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +49,7 @@ extension  ZJAllViewController {
         
         ZJNetWorking.requestData(type: .GET, URlString: ZJAllLiveListURL) { (response) in
             do {
-                let data = try JSONDecoder().decode(ZJAllLiveData.self, from: response)
+                let data = try JSONDecoder().decode(ZJLiveListData.self, from: response)
                 self.allLiveData = data
                 self.collectionView.reloadData()
             }catch{}
