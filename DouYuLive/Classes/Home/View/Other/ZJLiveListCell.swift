@@ -23,6 +23,8 @@ class ZJLiveListCell: ZJBaseTableCell {
     
     var scrollBlock : ScrollBlock?
     
+    
+    // MArk: 直播列表
     lazy var collectionView : UICollectionView = {
         let layout = ZJCollectionViewFlowLayout()
 //        let layout = UICollectionViewFlowLayout()
@@ -38,7 +40,7 @@ class ZJLiveListCell: ZJBaseTableCell {
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(ZJLiveListItem.self, forCellWithReuseIdentifier: ZJLiveListItem.identifier())
         collectionView.register(ZJCateCollectionHeadView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier:kCateCollectionHeadView )
-        
+        collectionView.isHidden = true
         return collectionView
     }()
     
@@ -57,8 +59,20 @@ class ZJLiveListCell: ZJBaseTableCell {
             self.collectionView.reloadData()
         }
     }
+    
+    // MARK: 视频列表
+    lazy var mainTable : UITableView = {
+        let mainTable = UITableView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: kContentHeight), style: .plain)
+        mainTable.delegate = self
+        mainTable.dataSource = self
+        mainTable.register(ZJVideoListCell.self, forCellReuseIdentifier: ZJVideoListCell.identifier())
+        mainTable.rowHeight = ZJVideoListCell.cellHeight()
+        mainTable.backgroundColor = kWhite
+        return mainTable
+    }()
     override func zj_setUpAllView() {
         addSubview(collectionView)
+        addSubview(mainTable)
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -120,3 +134,22 @@ extension ZJLiveListCell : ZJCateItemSelectedDelegate {
     }
     
 }
+
+
+// MARK: - 视频列表
+extension  ZJLiveListCell : UITableViewDelegate,UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 6
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell  = tableView.dequeueReusableCell(withIdentifier: ZJVideoListCell.identifier(), for: indexPath)
+        return cell
+    }
+}
+
