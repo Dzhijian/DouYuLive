@@ -151,9 +151,9 @@ extension ZJHomeViewController {
 
         let size = CGSize(width: 30, height: 30)
         // 左边的按钮
-        navigationItem.leftBarButtonItem = UIBarButtonItem(norImageName: "home_newSaoicon", size: size)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(norImageName: "btn_user_normal", size: size)
         // 右边的按钮
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "search_history"), style:.done, target: self, action: #selector(self.rightItemClick)) //UIBarButtonItem.createBarButton("search_history", "search_history", size)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "viewHistoryIcon"), style:.done, target: self, action: #selector(self.rightItemClick)) //UIBarButtonItem.createBarButton("search_history", "search_history", size)
         
         let searchView  = ZJHomeSearchView()
         searchView.layer.cornerRadius = 5
