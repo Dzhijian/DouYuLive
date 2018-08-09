@@ -11,7 +11,7 @@ private let kItemW = (kScreenW - 10) / 2
 private let kItemH = kItemW * 6 / 7
 private let kCateCollectionHeadView = "ZJCateCollectionHeadView"
 class ZJLiveListCell: ZJBaseTableCell {
-
+    
     lazy var collectionView : UICollectionView = {
         let layout = ZJCollectionViewFlowLayout()
 //        let layout = UICollectionViewFlowLayout()

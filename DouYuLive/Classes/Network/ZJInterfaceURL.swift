@@ -26,6 +26,8 @@ let ZJCateBannerURL : String = "https://apiv2.douyucdn.cn/live/Slide/getSlideLis
 
 // 子类下的直播分类
 //https://capi.douyucdn.cn/api/v1/getThreeCate?client_sys=ios&tag_id=1 get
+let ZJChildCateListURL = "https://capi.douyucdn.cn/api/v1/getThreeCate?client_sys=ios&tag_id=1"
+
 
 // 子类下的分类
 //https://apiv2.douyucdn.cn/Live/Customcate2/getAllComponentList?cate2_id=1&client_sys=ios get
@@ -35,3 +37,4 @@ let ZJCateBannerURL : String = "https://apiv2.douyucdn.cn/live/Slide/getSlideLis
 
 // 全部列表
 // https://apiv2.douyucdn.cn/gv2api/rkc/roomlist/0_0/0/20/ios?client_sys=ios get
+let ZJAllLiveListURL = "https://apiv2.douyucdn.cn/gv2api/rkc/roomlist/0_0/0/20/ios?client_sys=ios"

@@ -8,28 +8,87 @@
 
 import UIKit
 
-class ZJAllViewController: ZJBaseViewController {
+private let kItemW = (kScreenW - 10) / 2
+private let kItemH = kItemW * 4 / 5
 
+class ZJAllViewController: ZJBaseViewController {
+    
+    private lazy var collectionView : UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: kItemW, height: kItemH)
+        layout.minimumLineSpacing = 10
+        layout.minimumInteritemSpacing = 10
+        let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        collectionView.backgroundColor = kWhite
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(ZJLiveListItem.self, forCellWithReuseIdentifier:ZJLiveListItem.identifier())
+        // 分页控制
+        collectionView.isPagingEnabled = true
+        collectionView.showsHorizontalScrollIndicator = false
+//        collectionView.bounces = false
+        return collectionView
+    }()
+    
+    private var allLiveData : ZJAllLiveData = ZJAllLiveData()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setUpAllView()
+        getAllLiveData()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
+
+// MARK: - 网络请求
+extension  ZJAllViewController {
+    
+    private func getAllLiveData() {
+        
+        ZJNetWorking.requestData(type: .GET, URlString: ZJAllLiveListURL) { (response) in
+            do {
+                let data = try JSONDecoder().decode(ZJAllLiveData.self, from: response)
+                self.allLiveData = data
+                self.collectionView.reloadData()
+            }catch{}
+            
+        }
+    }
+}
+
+
+// 配置 UI 视图
+extension ZJAllViewController  {
+    
+    private func setUpAllView() {
+        view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { (make) in
+            make.edges.equalTo(0)
+        }
+    }
+}
+
+
+extension ZJAllViewController : UICollectionViewDelegate,UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return allLiveData.list.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let item = collectionView.dequeueReusableCell(withReuseIdentifier: ZJLiveListItem.identifier(), for: indexPath) as! ZJLiveListItem
+        item.allModel = self.allLiveData.list[indexPath.item]
+        return item
+    }
+}
+
+
+

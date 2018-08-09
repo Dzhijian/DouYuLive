@@ -41,20 +41,36 @@ class ZJNetWorking {
             guard let dict = result as? [String : Any] else {
                 return
             }
-            guard let dataDict = dict["data"] as? [String : Any] else {
-                return
+//            guard let dataDict = ((dict["data"] as? [String : Any]) != nil) || [Any] else {
+//                return
+//
+//            }
+            
+            if let dataDict = dict["data"] as? [String : Any] {
                 
+                let jsonData = try? JSONSerialization.data(withJSONObject: dataDict, options: .prettyPrinted)
+                print(dict)
+                if jsonData != nil {
+                    finishCallBack(jsonData!)
+                    return
+                }
             }
             
+            if ((dict["data"] as? [Any]) != nil) {
             
-            let jsonData = try?JSONSerialization.data(withJSONObject: dataDict, options: .prettyPrinted)
-            
-            print(dict)
-            
-            
-            if jsonData != nil {
-                finishCallBack(jsonData!)
+                let arrData = try? JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
+                print(dict)
+                if arrData != nil {
+                    finishCallBack(arrData!)
+                }
             }
+            
+           
+            
+            
+//            if jsonData != nil {
+//                finishCallBack(jsonData!)
+//            }
             
             
         }

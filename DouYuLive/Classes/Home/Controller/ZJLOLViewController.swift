@@ -13,6 +13,7 @@ private let kScrollViewHeight : CGFloat = kScreenW * 9 / 18
 class ZJLOLViewController: ZJBaseViewController {
     
     private var cateBanner : ZJCateBanner = ZJCateBanner()
+    private var childCateData : ZJChildCateData = ZJChildCateData()
     
     private lazy var headView : ZJHomeCateHeaderView = {
         let scrollView = ZJHomeCateHeaderView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: Adapt(120)))
@@ -34,6 +35,7 @@ class ZJLOLViewController: ZJBaseViewController {
         super.viewDidLoad()
         setUpAllView()
         getBannerListData()
+        getChildCateListData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -54,8 +56,19 @@ extension ZJLOLViewController {
             if data != nil {
                 self.cateBanner = data!
                 self.headView.configBnanerList(bannerList: self.cateBanner.slide_list)
-                print(self.cateBanner)
             }
+        }
+    }
+    
+    private func getChildCateListData(){
+        
+        ZJNetWorking.requestData(type: .GET, URlString: ZJChildCateListURL) { (response) in
+            
+            let data = try? ZJDecoder.decode(ZJChildCateData.self, data : response)
+            guard (data != nil) else { return }
+            self.childCateData = data!
+            
+            
         }
     }
 }

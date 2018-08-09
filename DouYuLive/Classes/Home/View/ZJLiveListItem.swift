@@ -22,8 +22,23 @@ class ZJLiveListItem: ZJBaseCollectionCell {
         setUpAllView()
     }
 
-    
+    var allModel : ZJAllLiveList? {
+        didSet{
+            titleLab.text = allModel?.room_name
+            nameLab.text =  allModel?.nickname
+            hotLab.text = String(format:"%d",(allModel?.online_num)!)
+            descLab.text = allModel?.cate2_name
+            
+            //不能使用强制解包策略
+            if let iconURL = URL(string: allModel?.room_src ?? "") {
+                imageV.kf.setImage(with: iconURL)
+            } else {
+                imageV.image = UIImage(named: "home_column_more")//home_more_btn
+            }
+        }
+    }
 }
+
 
 
 
