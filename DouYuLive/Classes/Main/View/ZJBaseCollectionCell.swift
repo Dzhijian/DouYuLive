@@ -11,6 +11,7 @@ import UIKit
 class ZJBaseCollectionCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.contentView.backgroundColor = kWhite
         zj_setUpAllView()
     }
     
@@ -23,7 +24,7 @@ class ZJBaseCollectionCell: UICollectionViewCell {
     
     public func zj_setUpAllView() {
         
-        self.contentView.backgroundColor = kWhite
+        
     }
     
     public class func itemHeight() -> CGFloat {

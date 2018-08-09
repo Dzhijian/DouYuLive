@@ -24,7 +24,6 @@ class ZJAllViewController: ZJBaseViewController {
         collectionView.delegate = self
         collectionView.register(ZJLiveListItem.self, forCellWithReuseIdentifier:ZJLiveListItem.identifier())
         collectionView.showsHorizontalScrollIndicator = false
-//        collectionView.bounces = false
         return collectionView
     }()
     
@@ -36,6 +35,18 @@ class ZJAllViewController: ZJBaseViewController {
         getAllLiveData()
     }
 
+    // 列表滚动事件
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offSetY = scrollView.contentOffset.y
+        if offSetY > 120 {
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: ZJNotiRefreshHomeNavBar), object: nil, userInfo: kNavBarHidden)
+        }else{
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: ZJNotiRefreshHomeNavBar), object: nil, userInfo: kNavBarNotHidden)
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

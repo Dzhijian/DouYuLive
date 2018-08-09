@@ -39,6 +39,13 @@ class ZJLiveListCell: ZJBaseTableCell {
         }
     }
     
+    var cateListData : [ZJChildCateList]? {
+        
+        didSet{
+            
+            self.collectionView.reloadData()
+        }
+    }
     override func zj_setUpAllView() {
         addSubview(collectionView)
     }
@@ -68,7 +75,8 @@ extension ZJLiveListCell : UICollectionViewDataSource,UICollectionViewDelegate,U
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: kCateCollectionHeadView, for: indexPath)
+        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: kCateCollectionHeadView, for: indexPath) as! ZJCateCollectionHeadView
+        headerView.cateList = self.cateListData
         return headerView
         
     }

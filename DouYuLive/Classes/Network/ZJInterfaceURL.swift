@@ -39,3 +39,6 @@ let ZJLOLLiveListURL = "https://apiv2.douyucdn.cn/gv2api/rkc/roomlist/2_1/0/20/i
 // 全部列表
 // https://apiv2.douyucdn.cn/gv2api/rkc/roomlist/0_0/0/20/ios?client_sys=ios get
 let ZJAllLiveListURL = "https://apiv2.douyucdn.cn/gv2api/rkc/roomlist/0_0/0/20/ios?client_sys=ios"
+
+// 视频列表
+//https://apiv2.douyucdn.cn/video/videoInfo/getDanmu?vid=XqeO74xrVDQ7xywG&client_sys=ios

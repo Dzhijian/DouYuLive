@@ -50,7 +50,7 @@ class ZJLOLViewController: ZJBaseViewController {
 
 // MARK: - 网络请求
 extension ZJLOLViewController {
-    
+    // 获取 banner 轮播图数据
     private func getBannerListData() {
         ZJNetWorking.requestData(type: .GET, URlString: ZJCateBannerURL) { (response) in
             
@@ -64,18 +64,19 @@ extension ZJLOLViewController {
     
     private func getChildCateListData(){
         
+        // 获取子类分类列表
         ZJNetWorking.requestData(type: .GET, URlString: ZJChildCateListURL) { (response) in
             
             let data = try? ZJDecoder.decode(ZJChildCateData.self, data : response)
             guard (data != nil) else { return }
             self.childCateData = data!
-            
+            self.mainTable.reloadData()
             
         }
     }
     
     private func getLOLLiveData() {
-        
+        // 获取全部数据
         ZJNetWorking.requestData(type: .GET, URlString: ZJLOLLiveListURL) { (response) in
             do {
                 let data = try JSONDecoder().decode(ZJLiveListData.self, from: response)
@@ -130,6 +131,9 @@ extension ZJLOLViewController :  UITableViewDataSource,UITableViewDelegate  {
         let cell  = tableView.dequeueReusableCell(withIdentifier: ZJLiveListCell.identifier(), for: indexPath) as! ZJLiveListCell
         if self.lolLiveData.list.count > 0 {
             cell.liveRoomList = self.lolLiveData.list
+        }
+        if self.childCateData.data.count > 0 {
+            cell.cateListData = self.childCateData.data
         }
         return cell
     }
