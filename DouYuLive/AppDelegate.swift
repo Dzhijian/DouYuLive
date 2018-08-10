@@ -21,7 +21,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let root = ZJTabBarController()
         self.window?.rootViewController = root
         UIApplication.shared.statusBarStyle = .lightContent
-
+        
+        if let cookieArray = UserDefaults.standard.array(forKey: ZJ_DOUYU_TOKEN) {
+            for cookieData in cookieArray {
+                if let dict = cookieData as? [HTTPCookiePropertyKey : Any] {
+                    if let cookie = HTTPCookie.init(properties : dict) {
+                        HTTPCookieStorage.shared.setCookie(cookie)
+                    }
+                }
+            }
+        }
+        
         self.window?.makeKeyAndVisible()
         
         return true

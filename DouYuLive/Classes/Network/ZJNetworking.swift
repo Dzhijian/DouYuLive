@@ -25,7 +25,21 @@ class ZJNetWorking {
             "Content-Type": "application/json",
             "charset":"utf-8",
             ]
+   
         Alamofire.request(URlString, method: type, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
+            let headerFields = response.response?.allHeaderFields as! [String: String]
+            let url = response.request?.url
+            let cookies = HTTPCookie.cookies(withResponseHeaderFields: headerFields, for: url!)
+            var cookieArray = [ [HTTPCookiePropertyKey : Any ] ]()
+            for cookie in cookies {
+                cookieArray.append(cookie.properties!)
+            }
+            if !(UserDefaults.standard.object(forKey: ZJ_DOUYU_TOKEN) != nil){
+                
+                UserDefaults.standard.set(cookieArray, forKey: ZJ_DOUYU_TOKEN)
+            }else{
+                print("token\(String(describing: UserDefaults.standard.object(forKey: ZJ_DOUYU_TOKEN)))")
+            }
             print("Method:\(type)请求\nURL: \(URlString)\n请求参数: \(String(describing: parameters))")
             if parameters != nil{
                 print(response.request?.url ?? "url")
@@ -60,14 +74,7 @@ class ZJNetWorking {
                     finishCallBack(arrData!)
                 }
             }
-            
-           
-            
-            
-//            if jsonData != nil {
-//                finishCallBack(jsonData!)
-//            }
-            
+        
             
         }
         

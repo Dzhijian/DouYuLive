@@ -38,6 +38,7 @@ class ZJLOLViewController: ZJBaseViewController {
         getBannerListData()
         getChildCateListData()
         getLOLLiveData()
+        getVideoListData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -88,6 +89,17 @@ extension ZJLOLViewController {
                 self.mainTable.reloadData()
             }catch{}
             
+        }
+    }
+    
+    func getVideoListData() {
+        //当前时间的时间戳
+        let timeInterval:TimeInterval = Date().timeIntervalSince1970
+        let timeStamp = Int(timeInterval)
+        let urlStr = "\(ZJVideoListURL)&time=\(timeStamp)"
+        
+        ZJNetWorking.requestData(type: .GET, URlString: urlStr) { (response) in
+            print("斗鱼直播视频")
         }
     }
 }

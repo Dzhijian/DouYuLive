@@ -11,6 +11,8 @@ import SnapKit
 import Kingfisher
 import SBCycleScrollView
 
+let ZJ_DOUYU_TOKEN : String = "ZJ_DOUYU_TOKEN"
+
 let kScreenW = UIScreen.main.bounds.size.width
 let kScreenH = UIScreen.main.bounds.size.height
 

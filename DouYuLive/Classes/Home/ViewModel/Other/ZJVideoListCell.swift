@@ -54,8 +54,11 @@ extension ZJVideoListCell {
         
         self.likeBtn = UIButton.zj_createButton(title: "100", titleStatu: .normal, imageName: "", imageStatu: .normal, supView: self.contentView, closure: { (make) in
             make.right.equalTo(Adapt(-15))
-            make.centerY.equalTo(self.nameLab.centerY)
+            make.centerY.equalTo(self.nameLab.snp.centerY)
+            make.height.equalTo(Adapt(30))
         })
+        self.likeBtn.titleLabel?.font = FontSize(12)
+        self.likeBtn.setTitleColor(kGrayTextColor, for: .normal)
         
     }
     
