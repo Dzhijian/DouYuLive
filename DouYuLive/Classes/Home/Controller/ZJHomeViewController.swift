@@ -56,16 +56,6 @@ class ZJHomeViewController: ZJBaseViewController {
 //        view.backgroundColor = UIColor.brown
         setUpUI()
         
-        // 设置背景渐变
-        let gradientLayer: CAGradientLayer = CAGradientLayer()
-        gradientLayer.colors = kGradientColors
-        //(这里的起始和终止位置就是按照坐标系,四个角分别是左上(0,0),左下(0,1),右上(1,0),右下(1,1))
-        //渲染的起始位置
-        gradientLayer.startPoint = CGPoint.init(x: 0, y: 0)
-        //渲染的终止位置
-        gradientLayer.endPoint = CGPoint.init(x: 1, y: 0)
-        //设置frame和插入view的layer
-     
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshNavBar), name: NSNotification.Name(rawValue: ZJNotiRefreshHomeNavBar), object: nil)
     }
 

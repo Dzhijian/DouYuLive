@@ -54,6 +54,7 @@ let ZJVideoListURL = "https://apiv2.douyucdn.cn/mgapi/vodnc/front/vodlist/cate2V
 
 // 娱乐 Tab 的子分类
 //https://apiv2.douyucdn.cn/live/cate/getTabCate1List1?client_sys=ios
+let RecreationChildCateURL = "https://apiv2.douyucdn.cn/live/cate/getTabCate1List1?client_sys=ios"
 
 
 // 关注 可能感兴趣列表

@@ -21,18 +21,7 @@ struct ZJCateBanner : Decodable{
     
 }
 
-/*
- "cate_id":1,
- "title":"英雄联盟",
- "level":0,
- "resource":"https://sta-op.douyucdn.cn/dypart/2018/07/31/3118678d87b677bc517ff07e655efc1c.jpg",
- "link_type":0,
- "link":"288016",
- "is_room_show":0,
- "isVertical":0,
- "vertical_src":"https://rpic.douyucdn.cn/asrpic/180808/288016_0055.jpg",
- "nrt":0
- */
+
 struct ZJBannerList : Decodable{
     var cate_id : Int32?
     var level : Int32?

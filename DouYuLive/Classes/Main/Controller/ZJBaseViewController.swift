@@ -14,8 +14,9 @@ class ZJBaseViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = kWhite
         // Do any additional setup after loading the view.
+//        setStatusBarBackgroundColor()
     }
-
+ 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
