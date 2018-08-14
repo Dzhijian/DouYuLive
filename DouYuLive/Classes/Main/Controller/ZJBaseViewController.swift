@@ -13,6 +13,7 @@ class ZJBaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = kWhite
+        automaticallyAdjustsScrollViewInsets = false
         // Do any additional setup after loading the view.
 //        setStatusBarBackgroundColor()
     }

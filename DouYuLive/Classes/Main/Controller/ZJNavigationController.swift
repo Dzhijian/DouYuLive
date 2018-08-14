@@ -13,9 +13,13 @@ class ZJNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationBar.isTranslucent = false
+        
         // 自定义导航栏背景
         self.navigationBar.addSubview(ZJNavigationBar(frame: CGRect(x: 0, y: 0, width: kScreenW, height: 45)))
+        
+
         setStatusBarBackgroundColor()
+//        UIApplication.shared.statusBarStyle = .lightContent
     }
     
     //MARK: 重写跳转
@@ -26,11 +30,10 @@ class ZJNavigationController: UINavigationController {
             viewController.hidesBottomBarWhenPushed = true //跳转之后隐藏
         }
         
-        
         super.pushViewController(viewController, animated: true)
     }
     
-    //定义以下方法：
+    // 修改状态栏背景色为渐变色
     func setStatusBarBackgroundColor() {
         let statusBarWindow : UIView = UIApplication.shared.value(forKey: "statusBarWindow") as! UIView
         let statusBar : UIView = statusBarWindow.value(forKey: "statusBar") as! UIView
@@ -46,7 +49,7 @@ class ZJNavigationController: UINavigationController {
             //设置frame和插入view的layer
             gradientLayer.frame = statusBar.frame
             //            statusBar.backgroundColor = color
-            
+//            statusBar. = kWhite
             statusBar.layer.insertSublayer(gradientLayer, at: 0)
         }
     }

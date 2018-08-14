@@ -13,7 +13,42 @@ private let kItemH = kItemW * 5 / 4
 private let kHeaderViewId = "kHeaderViewId"
 class ZJRecreationViewController: ZJBaseViewController {
 
+    // 分类数据
     private lazy var cateListData : ZJRecreationCateData = ZJRecreationCateData()
+    
+    private lazy var pageView : DNSPageView = {
+        // 创建DNSPageStyle，设置样式
+        let style = DNSPageStyle()
+        style.isTitleScrollEnable = true
+        style.isScaleEnable = true
+        style.titleColor = colorWithRGBA(220, 220, 220, 1.0)
+        style.titleSelectedColor = kWhite //colorWithRGBA(255, 255, 255, 1.0)
+        style.titleFontSize = 14
+        style.isBoldFont = true
+        // 创建对应的DNSPageView，并设置它的frame
+        let pageView = DNSPageView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH), style: style, titles: titles, childViewControllers: controllers)
+        return pageView
+    }()
+    
+    // 标题数组
+    private lazy var titles : [String] = {
+        var titles : [String] = ["推荐"]
+        for (index,item) in cateListData.data.enumerated() {
+            titles.append(item.cate_name!)
+        }
+        return titles
+    }()
+    
+    private lazy var controllers : [UIViewController] = {
+        // 创建每一页对应的controller
+        let childViewControllers: [UIViewController] = titles.map { _ -> UIViewController in
+            let controller = UIViewController()
+            controller.view.backgroundColor = UIColor.orange
+            return controller
+        }
+        return childViewControllers
+    }()
+    
     
     private lazy var layout : UICollectionViewFlowLayout = {
         
@@ -40,7 +75,7 @@ class ZJRecreationViewController: ZJBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = kWhite
-        setUpAllView()
+//        setUpAllView()
         loadChildCateListData()
     }
 
@@ -63,10 +98,24 @@ extension ZJRecreationViewController {
             if data != nil {
                self.cateListData = data!
                 print(self.cateListData)
+                self.setUpAllView()
             }
         }
     }
 }
+
+// MARK: - 配置 UI
+extension ZJRecreationViewController {
+    
+    private func setUpAllView() {
+        
+        
+        view.addSubview(pageView)
+    }
+}
+
+
+
 
 // MARK: - CollectionViewDelegate
 extension ZJRecreationViewController : UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -82,7 +131,7 @@ extension ZJRecreationViewController : UICollectionViewDelegate,UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let item = collectionView.dequeueReusableCell(withReuseIdentifier: ZJRecreationListItem.identifier(), for: indexPath) as! ZJRecreationListItem
-//        item.allModel = self.allLiveData.list[indexPath.item]
+        //        item.allModel = self.allLiveData.list[indexPath.item]
         return item
     }
     
@@ -94,16 +143,4 @@ extension ZJRecreationViewController : UICollectionViewDelegate,UICollectionView
     }
     
     
-}
-
-// MARK: - 配置 UI
-extension ZJRecreationViewController {
-    
-    private func setUpAllView() {
-        
-        view.addSubview(collectionView)
-        collectionView.snp.makeConstraints { (make) in
-            make.edges.equalTo(0)
-        }
-    }
 }

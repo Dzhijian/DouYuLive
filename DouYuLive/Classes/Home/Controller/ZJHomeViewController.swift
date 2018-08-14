@@ -52,8 +52,7 @@ class ZJHomeViewController: ZJBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = ""
-//        view.backgroundColor = UIColor.brown
+        self.navigationItem.title = "首页"
         setUpUI()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshNavBar), name: NSNotification.Name(rawValue: ZJNotiRefreshHomeNavBar), object: nil)
@@ -66,19 +65,24 @@ class ZJHomeViewController: ZJBaseViewController {
         if isHidden == "true" {
             if isNavHidden { return }
             isNavHidden = true
-            pageTitleView.frame = CGRect(x: 0, y: kStatuHeight, width: kScreenW, height: kCateTitleH)
-            let height : CGFloat = kScreenH - kStatuHeight - kCateTitleH - kTabBarHeight
-            let frame = CGRect(x: 0, y: kCateTitleH + kStatuHeight, width: kScreenW, height: height)
-            pageContenView.frame = frame
-            // 刷新 contentView Frame
-            pageContenView.refreshColllectionView(height:pageContenView.frame.size.height)
+            UIView.animate(withDuration: 0.15) {
+                self.pageTitleView.frame = CGRect(x: 0, y: kStatuHeight, width: kScreenW, height: kCateTitleH)
+                let height : CGFloat = kScreenH - kStatuHeight - kCateTitleH - kTabBarHeight
+                let frame = CGRect(x: 0, y: kCateTitleH + kStatuHeight, width: kScreenW, height: height)
+                self.pageContenView.frame = frame
+                // 刷新 contentView Frame
+                self.pageContenView.refreshColllectionView(height:self.pageContenView.frame.size.height)
+            }
         }else{
             if !isNavHidden { return }
             isNavHidden = false
-            pageTitleView.frame = CGRect(x: 0, y: 0, width: kScreenW, height: kCateTitleH)
-            let height : CGFloat = kScreenH - kStatuHeight - kNavigationBarHeight - kCateTitleH - kTabBarHeight
-            let frame = CGRect(x: 0, y: kCateTitleH, width: kScreenW, height: height)
-            pageContenView.frame = frame
+            UIView.animate(withDuration: 0.15) {
+                self.pageTitleView.frame = CGRect(x: 0, y: 0, width: kScreenW, height: kCateTitleH)
+                let height : CGFloat = kScreenH - kStatuHeight - kNavigationBarHeight - kCateTitleH - kTabBarHeight
+                let frame = CGRect(x: 0, y: kCateTitleH, width: kScreenW, height: height)
+                self.pageContenView.frame = frame
+            }
+           
         }
         
         
