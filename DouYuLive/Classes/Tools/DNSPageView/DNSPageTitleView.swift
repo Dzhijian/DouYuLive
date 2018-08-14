@@ -179,6 +179,7 @@ extension DNSPageTitleView {
 
 // MARK: - Layout
 extension DNSPageTitleView {
+    
     private func setupLabelsLayout() {
         
         let labelH = frame.size.height

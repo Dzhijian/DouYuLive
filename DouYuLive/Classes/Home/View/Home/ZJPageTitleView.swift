@@ -20,6 +20,20 @@ private let klabelWidth : CGFloat = 80
 // 定义颜色
 private let kNormalColor : (CGFloat,CGFloat,CGFloat) = (220,220,220)
 private let kSelectColor : (CGFloat,CGFloat,CGFloat) = (255,255,255)
+// label间距
+private let kMarginW : CGFloat = Adapt(20)
+// 是否允许标题滚动
+private let isTitleScrollEnable : Bool = true
+// 底部滚动线的高度
+private let kBotLineHeight : CGFloat = 3
+// 字体的大小
+private let titleFont : UIFont = FontSize(14)
+// 底部滚动线的颜色
+private let kBotLineColor : UIColor = kWhite
+// 是否显示滚动线
+private let isShowBottomLine : Bool = true
+
+
 class ZJPageTitleView: UIView {
     // 代理协议
     weak var delegate : PageTitleViewDelegate?
@@ -36,7 +50,7 @@ class ZJPageTitleView: UIView {
     // 底部滚动条
     private lazy var scrollLine : UIView = {
         let scrollLine = UIView()
-        scrollLine.backgroundColor = kWhite
+        scrollLine.backgroundColor = kBotLineColor
         return scrollLine
     }()
     
@@ -57,6 +71,12 @@ class ZJPageTitleView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        setupLabelsLayout()
+        setupBottomLineLayout()
+    }
 }
 
 
@@ -87,31 +107,23 @@ extension ZJPageTitleView {
     }
     
     private func setUpTitleLabel(){
-        
-        // 确定 lab的一些确定的值
-//        let labW : CGFloat = frame.width / CGFloat(titles.count)
-        let labH : CGFloat = frame.height  - scrollLineH
-        let labY : CGFloat = 0
-        
+    
         for (index,title) in titles.enumerated() {
             // 创建 label
             let lab = UILabel()
             lab.text = title
             lab.tag = index
-            lab.font = FontSize(14)
+            lab.font = titleFont
             lab.textColor = colorWithRGBA(kNormalColor.0, kNormalColor.1, kNormalColor.2, 1.0)
             lab.textAlignment = .center
-            let labX : CGFloat = klabelWidth * CGFloat(index)
-            lab.frame = CGRect(x: labX, y: labY, width: klabelWidth, height: labH)
             // 添加 lab
             scrollerView.addSubview(lab)
             titleLabs.append(lab)
-            
+            // 添加点击事件
             lab.isUserInteractionEnabled = true
             let tap = UITapGestureRecognizer(target: self, action: #selector(self.titleLabelClick(tapGesture:)))
             lab.addGestureRecognizer(tap)
         }
-        scrollerView.contentSize = CGSize(width: klabelWidth * CGFloat(titles.count), height: 40)
     }
     
     private func setBottomMenuAndScrollLine(){
@@ -126,20 +138,85 @@ extension ZJPageTitleView {
         // 如果没有就返回
         guard let firstLab = titleLabs.first else { return }
         firstLab.textColor = colorWithRGBA(kSelectColor.0, kSelectColor.1, kSelectColor.2, 1.0)
-
-        firstLab.font = BoldFontSize(15)
-        // 添加 scrollLine
-        scrollLine.frame = CGRect(x: firstLab.frame.origin.x, y: frame.height-scrollLineH, width: firstLab.frame.width, height: scrollLineH)
-        scrollerView.addSubview(scrollLine)
+        
+        adjustLabelPosition(firstLab)
+       
+        setUpBottomLine()
         
     }
     
+    func setUpBottomLine() {
+        
+        guard isShowBottomLine else { return }
+        // 添加 scrollLine
+        scrollerView.addSubview(scrollLine)
+    }
+    
+    
+}
 
+
+// MARK: - layout
+extension ZJPageTitleView {
+    
+    private func setupLabelsLayout() {
+        
+        let labelH = frame.size.height
+        let labelY: CGFloat = 0
+        var labelW: CGFloat = 0
+        var labelX: CGFloat = 0
+        
+        let count = titleLabs.count
+        for (i, titleLabel) in titleLabs.enumerated() {
+            if isTitleScrollEnable {
+                
+                labelW = (titles[i] as NSString).boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: 0), options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font : titleLabel.font], context: nil).width
+                labelX = i == 0 ? kMarginW * 0.5 : (titleLabs[i-1].frame.maxX + kMarginW)
+                
+            } else {
+                labelW = bounds.width / CGFloat(count)
+                labelX = labelW * CGFloat(i)
+            }
+            
+            titleLabel.frame = CGRect(x: labelX, y: labelY, width: labelW+Adapt(10), height: labelH)
+        }
+        if isTitleScrollEnable {
+            guard let titleLabel = titleLabs.last else { return }
+            scrollerView.contentSize.width = titleLabel.frame.maxX + kMarginW * 0.5
+        }
+    }
+    
+    private func setupBottomLineLayout() {
+        guard titleLabs.count - 1 >= currentIndex  else { return }
+        let label = titleLabs[currentIndex]
+        
+        scrollLine.frame.origin.x = label.frame.origin.x
+        scrollLine.frame.size.width = label.frame.width
+        scrollLine.frame.size.height =  kBotLineHeight
+        scrollLine.frame.origin.y = self.bounds.height - kBotLineHeight - 1
+    }
+    
+    private func adjustLabelPosition(_ targetLabel : UILabel) {
+        guard isTitleScrollEnable else { return }
+        
+        var offsetX = targetLabel.center.x - bounds.width * 0.5
+        
+        if offsetX < 0 {
+            offsetX = 0
+        }
+        if offsetX > scrollerView.contentSize.width - scrollerView.bounds.width {
+            offsetX = scrollerView.contentSize.width - scrollerView.bounds.width
+        }
+        
+        scrollerView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: true)
+        
+    }
 }
 
 
 // MARK: - 对外暴露的方法
 extension ZJPageTitleView {
+    
     func setPageTitleWithProgress(progress: CGFloat,  sourceIndex: Int, targetIndex:Int) {
         // 取得 lab
         let sourceLab = titleLabs[sourceIndex]
@@ -156,15 +233,23 @@ extension ZJPageTitleView {
         
         // 变化 sourceLab 的文字颜色
         sourceLab.textColor = colorWithRGBA(kSelectColor.0 - colorDelta.0 * progress, kSelectColor.1 - colorDelta.1 * progress, kSelectColor.2 - colorDelta.2 * progress, 1.0)
-        sourceLab.font = FontSize(16 - 2 * progress)
+//        sourceLab.font = FontSize(16 - 2 * progress)
         
         // 变化 targetLab 的文字颜色
         targetLab.textColor = colorWithRGBA(kNormalColor.0 + colorDelta.0 * progress, kNormalColor.1 + colorDelta.1 * progress, kNormalColor.2 + colorDelta.2 * progress, 1.0)
-        targetLab.font = BoldFontSize (14 + 2  * progress)
+//        targetLab.font = BoldFontSize (14 + 2  * progress)
         
+        adjustLabelPosition(targetLab)
+        
+        if isShowBottomLine {
+            let deltaX = targetLab.frame.origin.x - sourceLab.frame.origin.x
+            let deltaW = targetLab.frame.width - sourceLab.frame.width
+            scrollLine.frame.origin.x = sourceLab.frame.origin.x + progress * deltaX
+            scrollLine.frame.size.width = sourceLab.frame.width + progress * deltaW
+        }
         // 记录最新的 index
         currentIndex = targetIndex
-     }
+    }
 }
 
 // MARK: - 监听Label 的点击
@@ -184,10 +269,10 @@ extension ZJPageTitleView {
         
         // 切换文字颜色和字体大小
         currentLab?.textColor = colorWithRGBA(kSelectColor.0, kSelectColor.1, kSelectColor.2,  1.0)
-        currentLab?.font = BoldFontSize (15)
+//        currentLab?.font = BoldFontSize (15)
         
         oldLab.textColor = colorWithRGBA(kNormalColor.0, kNormalColor.1, kNormalColor.2, 1.0)
-        oldLab.font = FontSize(14)
+//        oldLab.font = FontSize(14)
         
         // 保存最新 lab 的下标值
         currentIndex = (currentLab?.tag)!
@@ -200,7 +285,16 @@ extension ZJPageTitleView {
         
         // 自动滚动到中间
         if scrollLine.frame.origin.x > kScreenW / 2 {
-            scrollerView.setContentOffset(CGPoint(x: kScreenW / 2 - klabelWidth/2, y: 0), animated: true)
+//            scrollerView.setContentOffset(CGPoint(x: kScreenW / 2 - klabelWidth/2, y: 0), animated: true)
+        }
+        
+        adjustLabelPosition(currentLab!)
+        
+        if isShowBottomLine {
+            UIView.animate(withDuration: 0.25, animations: {
+                self.scrollLine.frame.origin.x = (currentLab?.frame.origin.x)!
+                self.scrollLine.frame.size.width = (currentLab?.frame.width)!
+            })
         }
         
         //通知代理
