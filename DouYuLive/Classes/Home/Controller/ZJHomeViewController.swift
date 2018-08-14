@@ -55,6 +55,7 @@ class ZJHomeViewController: ZJBaseViewController {
                 self.pageContenView.frame = frame
                 // 刷新 contentView Frame
                 self.pageContenView.refreshColllectionView(height:self.pageContenView.frame.size.height)
+                
             }
         }else{
             if !isNavHidden { return }

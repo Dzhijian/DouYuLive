@@ -14,11 +14,11 @@ protocol  PageTitleViewDelegate : class {
     func pageTitleView(titleView : ZJPageTitleView, selectedIndex index: Int)
 }
 
-// 滚动线的高度
-private let scrollLineH : CGFloat = 2
-private let klabelWidth : CGFloat = 80
-// 定义颜色
+// 选项宽度
+private let kItemWidth : CGFloat = 40
+// 定义颜色 默认为选中颜色 (red,green,blue)
 private let kNormalColor : (CGFloat,CGFloat,CGFloat) = (220,220,220)
+// 选中的颜色 (red,green,blue)
 private let kSelectColor : (CGFloat,CGFloat,CGFloat) = (255,255,255)
 // label间距
 private let kMarginW : CGFloat = Adapt(20)
@@ -26,12 +26,16 @@ private let kMarginW : CGFloat = Adapt(20)
 private let isTitleScrollEnable : Bool = true
 // 底部滚动线的高度
 private let kBotLineHeight : CGFloat = 3
-// 字体的大小
-private let titleFont : UIFont = FontSize(14)
+// 默认字体的Font大小
+private let kTitleFontSize : CGFloat = 13
+// 选中的文本Font大小
+private let kTitleSelectFontSize : CGFloat? = 15
 // 底部滚动线的颜色
 private let kBotLineColor : UIColor = kWhite
 // 是否显示滚动线
 private let isShowBottomLine : Bool = true
+// scrollView背景渐变色
+private let kGradColors : [CGColor]? = kGradientColors
 
 
 class ZJPageTitleView: UIView {
@@ -93,17 +97,20 @@ extension ZJPageTitleView {
         // 设置底线滚动的滑块
         setBottomMenuAndScrollLine()
         
-        // 设置背景渐变
-        let gradientLayer: CAGradientLayer = CAGradientLayer()
-        gradientLayer.colors = kGradientColors
-        //(这里的起始和终止位置就是按照坐标系,四个角分别是左上(0,0),左下(0,1),右上(1,0),右下(1,1))
-        //渲染的起始位置
-        gradientLayer.startPoint = CGPoint.init(x: 0, y: 0)
-        //渲染的终止位置
-        gradientLayer.endPoint = CGPoint.init(x: 1, y: 0)
-        //设置frame和插入view的layer
-        gradientLayer.frame = bounds
-        self.layer.insertSublayer(gradientLayer, at: 0)
+        if kGradColors != nil {
+            // 设置背景渐变
+            let gradientLayer: CAGradientLayer = CAGradientLayer()
+            gradientLayer.colors = kGradientColors
+            //(这里的起始和终止位置就是按照坐标系,四个角分别是左上(0,0),左下(0,1),右上(1,0),右下(1,1))
+            //渲染的起始位置
+            gradientLayer.startPoint = CGPoint.init(x: 0, y: 0)
+            //渲染的终止位置
+            gradientLayer.endPoint = CGPoint.init(x: 1, y: 0)
+            //设置frame和插入view的layer
+            gradientLayer.frame = bounds
+            self.layer.insertSublayer(gradientLayer, at: 0)
+        }
+        
     }
     
     private func setUpTitleLabel(){
@@ -113,7 +120,7 @@ extension ZJPageTitleView {
             let lab = UILabel()
             lab.text = title
             lab.tag = index
-            lab.font = titleFont
+            lab.font = FontSize(kTitleFontSize)
             lab.textColor = colorWithRGBA(kNormalColor.0, kNormalColor.1, kNormalColor.2, 1.0)
             lab.textAlignment = .center
             // 添加 lab
@@ -136,12 +143,20 @@ extension ZJPageTitleView {
         addSubview(bottomLine)
         
         // 如果没有就返回
+        setUpBottomLine()
+
         guard let firstLab = titleLabs.first else { return }
         firstLab.textColor = colorWithRGBA(kSelectColor.0, kSelectColor.1, kSelectColor.2, 1.0)
+        if kTitleSelectFontSize != nil {
+            firstLab.font = BoldFontSize(kTitleSelectFontSize!)
+        }
         
-        adjustLabelPosition(firstLab)
+        
+        if isShowBottomLine {
+            
+            adjustLabelPosition(firstLab)
+        }
        
-        setUpBottomLine()
         
     }
     
@@ -173,6 +188,10 @@ extension ZJPageTitleView {
                 labelW = (titles[i] as NSString).boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: 0), options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font : titleLabel.font], context: nil).width
                 labelX = i == 0 ? kMarginW * 0.5 : (titleLabs[i-1].frame.maxX + kMarginW)
                 
+            } else if kItemWidth != 0 {
+                
+                labelW = kItemWidth
+                labelX = labelW * CGFloat(i)
             } else {
                 labelW = bounds.width / CGFloat(count)
                 labelX = labelW * CGFloat(i)
@@ -193,7 +212,7 @@ extension ZJPageTitleView {
         scrollLine.frame.origin.x = label.frame.origin.x
         scrollLine.frame.size.width = label.frame.width
         scrollLine.frame.size.height =  kBotLineHeight
-        scrollLine.frame.origin.y = self.bounds.height - kBotLineHeight - 1
+        scrollLine.frame.origin.y = self.bounds.height - kBotLineHeight
     }
     
     private func adjustLabelPosition(_ targetLabel : UILabel) {
@@ -233,13 +252,20 @@ extension ZJPageTitleView {
         
         // 变化 sourceLab 的文字颜色
         sourceLab.textColor = colorWithRGBA(kSelectColor.0 - colorDelta.0 * progress, kSelectColor.1 - colorDelta.1 * progress, kSelectColor.2 - colorDelta.2 * progress, 1.0)
-//        sourceLab.font = FontSize(16 - 2 * progress)
+        
         
         // 变化 targetLab 的文字颜色
         targetLab.textColor = colorWithRGBA(kNormalColor.0 + colorDelta.0 * progress, kNormalColor.1 + colorDelta.1 * progress, kNormalColor.2 + colorDelta.2 * progress, 1.0)
-//        targetLab.font = BoldFontSize (14 + 2  * progress)
+        if kTitleSelectFontSize != nil{
+            sourceLab.font = FontSize(kTitleSelectFontSize! - (kTitleSelectFontSize! - kTitleFontSize) * progress)
+            targetLab.font = BoldFontSize (kTitleSelectFontSize! + (kTitleSelectFontSize! - kTitleFontSize)  * progress)
+            setupLabelsLayout()
+        }
         
-        adjustLabelPosition(targetLab)
+        // 底部滚动条滚动
+        if isShowBottomLine {
+            adjustLabelPosition(targetLab)
+        }
         
         if isShowBottomLine {
             let deltaX = targetLab.frame.origin.x - sourceLab.frame.origin.x
@@ -269,10 +295,15 @@ extension ZJPageTitleView {
         
         // 切换文字颜色和字体大小
         currentLab?.textColor = colorWithRGBA(kSelectColor.0, kSelectColor.1, kSelectColor.2,  1.0)
-//        currentLab?.font = BoldFontSize (15)
-        
+    
         oldLab.textColor = colorWithRGBA(kNormalColor.0, kNormalColor.1, kNormalColor.2, 1.0)
-//        oldLab.font = FontSize(14)
+        
+        // 修改字体大小
+        if kTitleSelectFontSize != nil{
+            currentLab?.font = BoldFontSize (kTitleSelectFontSize!)
+            oldLab.font = FontSize(kTitleFontSize)
+            setupLabelsLayout()
+        }
         
         // 保存最新 lab 的下标值
         currentIndex = (currentLab?.tag)!
@@ -283,12 +314,9 @@ extension ZJPageTitleView {
             self.scrollLine.frame.origin.x = scrollLineX
         }
         
-        // 自动滚动到中间
-        if scrollLine.frame.origin.x > kScreenW / 2 {
-//            scrollerView.setContentOffset(CGPoint(x: kScreenW / 2 - klabelWidth/2, y: 0), animated: true)
+        if isShowBottomLine {
+            adjustLabelPosition(currentLab!)
         }
-        
-        adjustLabelPosition(currentLab!)
         
         if isShowBottomLine {
             UIView.animate(withDuration: 0.25, animations: {
