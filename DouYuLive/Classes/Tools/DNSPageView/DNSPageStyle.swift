@@ -40,6 +40,9 @@ public class DNSPageStyle {
     public var titleViewBackgroundColor: UIColor = UIColor.white
     public var titleMargin: CGFloat = 30
     public var isBoldFont : Bool = false
+    
+    // 背景渐变色
+    public var titleViewBgGradientColor : [CGColor] = kGradientColors
     /// 是否显示滚动条
     public var isShowBottomLine: Bool = false
     public var bottomLineColor: UIColor = UIColor.blue

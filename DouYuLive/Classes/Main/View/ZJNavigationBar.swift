@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ZJNavigationBar: UINavigationBar {
+class ZJNavigationBar: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)

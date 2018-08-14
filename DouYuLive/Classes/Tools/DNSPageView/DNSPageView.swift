@@ -64,7 +64,7 @@ extension DNSPageView {
         
         // 设置背景渐变
         let gradientLayer: CAGradientLayer = CAGradientLayer()
-        gradientLayer.colors = kGradientColors
+        gradientLayer.colors = style.titleViewBgGradientColor
         //(这里的起始和终止位置就是按照坐标系,四个角分别是左上(0,0),左下(0,1),右上(1,0),右下(1,1))
         //渲染的起始位置
         gradientLayer.startPoint = CGPoint.init(x: 0, y: 0)
