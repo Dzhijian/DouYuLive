@@ -39,10 +39,8 @@ class ZJAllViewController: ZJBaseViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offSetY = scrollView.contentOffset.y
         if offSetY > 120 {
-            self.navigationController?.setNavigationBarHidden(true, animated: true)
             NotificationCenter.default.post(name: Notification.Name(rawValue: ZJNotiRefreshHomeNavBar), object: nil, userInfo: kNavBarHidden)
         }else{
-            self.navigationController?.setNavigationBarHidden(false, animated: true)
             NotificationCenter.default.post(name: Notification.Name(rawValue: ZJNotiRefreshHomeNavBar), object: nil, userInfo: kNavBarNotHidden)
         }
     }
