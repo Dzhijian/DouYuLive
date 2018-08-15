@@ -28,6 +28,7 @@ class ZJLiveListCell: ZJBaseTableCell {
     weak var delegate : ZJChildCateSelectDelegate?
     
     var scrollBlock : ScrollBlock?
+    var allId : Int? = 1
     
     var cellType : ZJCellType = .ZJCellHomeLOL
     // MArk: 直播列表
@@ -165,6 +166,7 @@ extension ZJLiveListCell : UICollectionViewDataSource,UICollectionViewDelegate,U
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: kCateCollectionHeadView, for: indexPath) as! ZJCateCollectionHeadView
+        headerView.allID = self.allId
         headerView.cateList = self.cateListData
         headerView.delegate = self
         return headerView

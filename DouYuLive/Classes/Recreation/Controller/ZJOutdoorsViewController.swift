@@ -13,7 +13,8 @@ import UIKit
 class ZJOutdoorsViewController: ZJBaseViewController {
     
     var faceScoreHotData : ZJFaceScoreHotData = ZJFaceScoreHotData()
-    
+    private let childAllId : Int = 124
+    private var childCateId : String = "2_124"
     private var childCateData : ZJChildCateData = ZJChildCateData()
     private lazy var showIndex : Int = 0
     private lazy var headView : ZJHomeCateHeaderView = {
@@ -65,8 +66,8 @@ extension ZJOutdoorsViewController {
     }
     
     private func getOutDoorsLiveListData() {
-        
-        ZJNetWorking.requestData(type: .GET, URlString: ZJOutDoorsListURL) { (response) in
+        let URLStr : String = "\(ZJOutDoorsListURL)\(self.childCateId)/0/20/ios?client_sys=ios"
+        ZJNetWorking.requestData(type: .GET, URlString: URLStr) { (response) in
             let data = try? ZJDecoder.decode(ZJFaceScoreHotData.self, data : response)
             if data != nil {
                 self.faceScoreHotData = data!
@@ -95,11 +96,12 @@ extension ZJOutdoorsViewController : ZJChildCateSelectDelegate {
     func childCateSelectAction(cateId: String,index : Int) {
         
         if index == 0 {
-//            self.childCateId = "2_\(cateId)"
+            self.childCateId = "2_\(cateId)"
         }else{
-//            self.childCateId = "3_\(cateId)"
+            self.childCateId = "3_\(cateId)"
         }
-    
+        
+        getOutDoorsLiveListData()
     }
   
 }
@@ -120,6 +122,7 @@ extension  ZJOutdoorsViewController : UITableViewDelegate,UITableViewDataSource 
         
         let cell  = tableView.dequeueReusableCell(withIdentifier: ZJLiveListCell.identifier(), for: indexPath) as! ZJLiveListCell
         cell.cellType = .ZJCellRecreationOutDoor
+        cell.allId = self.childAllId
         cell.delegate = self
         // 显示视图
         cell.configShowView(index: showIndex)

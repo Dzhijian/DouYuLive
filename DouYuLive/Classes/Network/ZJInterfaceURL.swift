@@ -75,7 +75,7 @@ let ZJOutDoorsChildCateURL : String = "https://capi.douyucdn.cn/api/v1/getThreeC
 // 节目秀 https://apiv2.douyucdn.cn/gv2api/rkc/roomlist/3_776/0/20/ios?client_sys=ios
 // .....
 
-let ZJOutDoorsListURL : String = "https://apiv2.douyucdn.cn/gv2api/rkc/roomlist/2_124/0/20/ios?client_sys=ios"
+let ZJOutDoorsListURL : String = "https://apiv2.douyucdn.cn/gv2api/rkc/roomlist/"
 
 
 // 关注 可能感兴趣列表

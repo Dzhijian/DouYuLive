@@ -17,6 +17,8 @@ protocol ZJCateItemSelectedDelegate : class {
 }
 class ZJCateCollectionHeadView: UICollectionReusableView {
     
+    var allID : Int? = 1
+    
     weak var delegate : ZJCateItemSelectedDelegate?
     private var selectIndex : Int = 0
     private lazy var collectionView : UICollectionView = {
@@ -50,7 +52,7 @@ class ZJCateCollectionHeadView: UICollectionReusableView {
         didSet{
             self.dataList.removeAll()
             var cateItem = ZJChildCateList()
-            cateItem.id = "1"
+            cateItem.id = "\(allID!)"
             cateItem.name = "全部"
             self.dataList.append(cateItem)
             guard ((cateList?.count) != nil) else {
@@ -211,6 +213,11 @@ extension ZJCateCollectionHeadView {
             make.height.equalTo(0.8)
         })
         self.line.isHidden = true
+        
+        _ = UIView.zj_createView(bgClor: klineColor, supView: self.collectionView, closure: { (make) in
+            make.left.right.bottom.equalTo(0)
+            make.height.equalTo(0.5)
+        })
     }
     
     

@@ -11,7 +11,7 @@ let kContentHeight = kScreenH - kStatuHeight - kCateTitleH - kTabBarHeight - Ada
 
 private let kScrollViewHeight : CGFloat = kScreenW * 9 / 18
 class ZJLOLViewController: ZJBaseViewController {
-    
+    private let childAllId : Int = 1
     private var cateBanner : ZJCateBanner = ZJCateBanner()
     private var childCateData : ZJChildCateData = ZJChildCateData()
     private var lolLiveData : ZJLiveListData = ZJLiveListData()
@@ -134,7 +134,8 @@ extension ZJLOLViewController :  UITableViewDataSource,UITableViewDelegate  {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell  = tableView.dequeueReusableCell(withIdentifier: ZJLiveListCell.identifier(), for: indexPath) as! ZJLiveListCell
-        
+        cell.cellType = .ZJCellHomeLOL
+        cell.allId = self.childAllId
         cell.delegate = self
         // 显示视图
         cell.configShowView(index: showIndex)
