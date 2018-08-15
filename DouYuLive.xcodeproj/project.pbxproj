@@ -68,6 +68,11 @@
 		04A4739E2122E93600D37F33 /* LZViewPagerContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A4739B2122E93500D37F33 /* LZViewPagerContent.swift */; };
 		04A4739F2122E93600D37F33 /* LZViewPagerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A4739C2122E93500D37F33 /* LZViewPagerHeader.swift */; };
 		04A473A12123479200D37F33 /* ZJPageOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A473A02123479200D37F33 /* ZJPageOptions.swift */; };
+		04A473A32124026100D37F33 /* ZJRecreationRecommendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A473A22124026100D37F33 /* ZJRecreationRecommendViewController.swift */; };
+		04A473A521240DA700D37F33 /* ZJFaceScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A473A421240DA700D37F33 /* ZJFaceScoreViewController.swift */; };
+		04A473A721240F5100D37F33 /* ZJOutdoorsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A473A621240F5100D37F33 /* ZJOutdoorsViewController.swift */; };
+		04A473A921240F7C00D37F33 /* ZJQuadraticElementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A473A821240F7C00D37F33 /* ZJQuadraticElementViewController.swift */; };
+		04A473AB21240FA300D37F33 /* ZJMusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A473AA21240FA300D37F33 /* ZJMusicViewController.swift */; };
 		04DE708621198D4E0073DE82 /* ZJRecommendHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE708521198D4E0073DE82 /* ZJRecommendHeadView.swift */; };
 		04DE70882119953F0073DE82 /* ZJActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE70872119953F0073DE82 /* ZJActivityView.swift */; };
 		04DE708A2119967E0073DE82 /* ZJBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE70892119967E0073DE82 /* ZJBaseView.swift */; };
@@ -174,6 +179,11 @@
 		04A4739B2122E93500D37F33 /* LZViewPagerContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZViewPagerContent.swift; sourceTree = "<group>"; };
 		04A4739C2122E93500D37F33 /* LZViewPagerHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZViewPagerHeader.swift; sourceTree = "<group>"; };
 		04A473A02123479200D37F33 /* ZJPageOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJPageOptions.swift; sourceTree = "<group>"; };
+		04A473A22124026100D37F33 /* ZJRecreationRecommendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJRecreationRecommendViewController.swift; sourceTree = "<group>"; };
+		04A473A421240DA700D37F33 /* ZJFaceScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFaceScoreViewController.swift; sourceTree = "<group>"; };
+		04A473A621240F5100D37F33 /* ZJOutdoorsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJOutdoorsViewController.swift; sourceTree = "<group>"; };
+		04A473A821240F7C00D37F33 /* ZJQuadraticElementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJQuadraticElementViewController.swift; sourceTree = "<group>"; };
+		04A473AA21240FA300D37F33 /* ZJMusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJMusicViewController.swift; sourceTree = "<group>"; };
 		04DE708521198D4E0073DE82 /* ZJRecommendHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJRecommendHeadView.swift; sourceTree = "<group>"; };
 		04DE70872119953F0073DE82 /* ZJActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJActivityView.swift; sourceTree = "<group>"; };
 		04DE70892119967E0073DE82 /* ZJBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJBaseView.swift; sourceTree = "<group>"; };
@@ -313,6 +323,11 @@
 			isa = PBXGroup;
 			children = (
 				048EA3B52107909F00E30720 /* ZJRecreationViewController.swift */,
+				04A473A22124026100D37F33 /* ZJRecreationRecommendViewController.swift */,
+				04A473A421240DA700D37F33 /* ZJFaceScoreViewController.swift */,
+				04A473A621240F5100D37F33 /* ZJOutdoorsViewController.swift */,
+				04A473A821240F7C00D37F33 /* ZJQuadraticElementViewController.swift */,
+				04A473AA21240FA300D37F33 /* ZJMusicViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -817,6 +832,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04A473A521240DA700D37F33 /* ZJFaceScoreViewController.swift in Sources */,
 				04A4739F2122E93600D37F33 /* LZViewPagerHeader.swift in Sources */,
 				04DE708F2119F2F30073DE82 /* ZJHomeCateHeaderView.swift in Sources */,
 				04907E792116C328006B70EC /* ZJBaseCollectionCell.swift in Sources */,
@@ -835,7 +851,9 @@
 				04907E8C21183EE7006B70EC /* ZJCateOneItem.swift in Sources */,
 				04907E732116BB61006B70EC /* ZJCategroyListCell.swift in Sources */,
 				0419BCED210EC64E008661D3 /* ZJView-Extension.swift in Sources */,
+				04A473AB21240FA300D37F33 /* ZJMusicViewController.swift in Sources */,
 				04DE708D2119C55C0073DE82 /* ZJLiveListCell.swift in Sources */,
+				04A473A921240F7C00D37F33 /* ZJQuadraticElementViewController.swift in Sources */,
 				043512F32122B1AF001D928A /* DNSPageHelper.swift in Sources */,
 				04DE709E211BE2140073DE82 /* ZJAllLiveData.swift in Sources */,
 				04DE7098211AC5270073DE82 /* ZJCateCollectionHeadView.swift in Sources */,
@@ -857,6 +875,7 @@
 				04DE709C211B39F40073DE82 /* ZJChildCateList.swift in Sources */,
 				043512F52122B1AF001D928A /* DNSPageTitleView.swift in Sources */,
 				04A4739E2122E93600D37F33 /* LZViewPagerContent.swift in Sources */,
+				04A473A32124026100D37F33 /* ZJRecreationRecommendViewController.swift in Sources */,
 				048EA3BC210790E400E30720 /* ZJDiscoverViewController.swift in Sources */,
 				04DE709A211B0E3C0073DE82 /* ZJLiveContentCell.swift in Sources */,
 				04907E712113F19E006B70EC /* ZJLiveListItem.swift in Sources */,
@@ -866,6 +885,7 @@
 				04907E8621174246006B70EC /* ZJCategoryList.swift in Sources */,
 				048EA3C22107974800E30720 /* ZJBaseViewController.swift in Sources */,
 				043512F62122B1AF001D928A /* DNSPageViewManager.swift in Sources */,
+				04A473A721240F5100D37F33 /* ZJOutdoorsViewController.swift in Sources */,
 				04DE70A0211C22300073DE82 /* ZJSelectCateItem.swift in Sources */,
 				04907E7B2116C33C006B70EC /* ZJBaseTableCell.swift in Sources */,
 				04907E8A21183D7D006B70EC /* ZJCateOneList.swift in Sources */,

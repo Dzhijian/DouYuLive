@@ -14,6 +14,7 @@ let kRed         = UIColor.red
 let kOrange      = UIColor.orange
 let kBlack       = UIColor.black
 let kGreen       = UIColor.green
+let kPurple      = UIColor.purple
 
 
 // 主颜色 MainOrange

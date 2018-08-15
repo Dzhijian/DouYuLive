@@ -8,27 +8,10 @@
 
 import UIKit
 
-private let kItemW = (kScreenW - 10) / 2
-private let kItemH = kItemW * 5 / 4
-private let kHeaderViewId = "kHeaderViewId"
 class ZJRecreationViewController: ZJBaseViewController {
 
     // 分类数据
     private lazy var cateListData : ZJRecreationCateData = ZJRecreationCateData()
-    
-    private lazy var pageView : DNSPageView = {
-        // 创建DNSPageStyle，设置样式
-        let style = DNSPageStyle()
-        style.isTitleScrollEnable = true
-        style.isScaleEnable = true
-        style.titleColor = colorWithRGBA(220, 220, 220, 1.0)
-        style.titleSelectedColor = kWhite //colorWithRGBA(255, 255, 255, 1.0)
-        style.titleFontSize = 14
-        style.isBoldFont = true
-        // 创建对应的DNSPageView，并设置它的frame
-        let pageView = DNSPageView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH), style: style, titles: titles, childViewControllers: controllers)
-        return pageView
-    }()
     
     // 标题数组
     private lazy var titles : [String] = {
@@ -39,53 +22,64 @@ class ZJRecreationViewController: ZJBaseViewController {
         return titles
     }()
     
+    // 控制器数组
     private lazy var controllers : [UIViewController] = {
-        // 创建每一页对应的controller
-        let childViewControllers: [UIViewController] = titles.map { _ -> UIViewController in
-            let controller = UIViewController()
-            controller.view.backgroundColor = UIColor.orange
-            return controller
-        }
-        return childViewControllers
+        let controllers = [ZJRecreationRecommendViewController(),ZJFaceScoreViewController(),ZJOutdoorsViewController(),ZJQQCarViewController(),ZJMusicViewController()]
+        return controllers
     }()
-    
-    
-    private lazy var layout : UICollectionViewFlowLayout = {
+    // 标题View
+    private lazy var pageTitleView : ZJPageTitleView = { [weak self] in
+        let frame = CGRect(x: 0, y: 0, width: kScreenW, height: kCateTitleH)
+        let option = ZJPageOptions()
+        option.kGradColors = kGradientColors
+        option.kBotLineColor = kWhite
+        option.kNormalColor = (220,220,220)
+        option.kSelectColor = (250,250,250)
+        option.kTitleSelectFontSize = 14
+        option.isShowBottomLine = false
         
-        let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: kItemW, height: kItemH)
-        layout.minimumLineSpacing = 10
-        layout.minimumInteritemSpacing = 10
-        layout.headerReferenceSize = CGSize(width: kScreenW, height: Adapt(50))
-        return layout
-    }()
-    
-    private lazy var collectionView : UICollectionView = {
+        let pageTitleViw = ZJPageTitleView(frame: frame, titles: titles ,options:option)
+        pageTitleViw.delegate = self
+        return pageTitleViw
+        }()
+    // 内容 View
+    private lazy var pageContenView : ZJPageContentView = { [weak self] in
+        let height : CGFloat = kScreenH - kStatuHeight - kNavigationBarHeight - kCateTitleH - kTabBarHeight
+        let frame = CGRect(x: 0, y: 40, width: kScreenW, height: height)
         
-        let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = kWhite
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.register(ZJRecreationListItem.self, forCellWithReuseIdentifier:ZJRecreationListItem.identifier())
-        collectionView.register(ZJRecreationHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: kHeaderViewId)
-        collectionView.showsHorizontalScrollIndicator = false
-        return collectionView
-    }()
+        let contentView = ZJPageContentView(frame: frame, childVCs: controllers, parentViewController:self!)
+        contentView.delegate = self
+        return contentView
+        }()
     
+    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.shadowImage = UIImage()
         self.view.backgroundColor = kWhite
-//        setUpAllView()
         loadChildCateListData()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
     }
 
 }
 
+// MARK: - 遵守PageTitleViewDelegate,PageContentViewDelegate协议
+extension ZJRecreationViewController : PageTitleViewDelegate,PageContentViewDelegate {
+    
+    func pageTitleView(titleView: ZJPageTitleView, selectedIndex index: Int) {
+        pageContenView.setCurrentIndex(currentIndex: index)
+    }
+    
+    func pageContentView(contentView: ZJPageContentView, progress: CGFloat, sourceIndex: Int, targetIndex: Int) {
+        pageTitleView.setPageTitleWithProgress(progress: progress, sourceIndex: sourceIndex, targetIndex: targetIndex)
+    }
+    
+}
 
 // MARK: - 网络请求
 extension ZJRecreationViewController {
@@ -109,38 +103,14 @@ extension ZJRecreationViewController {
     
     private func setUpAllView() {
         
-        
-        view.addSubview(pageView)
+        // 添加 pageTitleView
+        view.addSubview(pageTitleView)
+        // 添加 ContentView
+        view.addSubview(pageContenView)
     }
 }
 
 
 
 
-// MARK: - CollectionViewDelegate
-extension ZJRecreationViewController : UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let item = collectionView.dequeueReusableCell(withReuseIdentifier: ZJRecreationListItem.identifier(), for: indexPath) as! ZJRecreationListItem
-        //        item.allModel = self.allLiveData.list[indexPath.item]
-        return item
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: kHeaderViewId, for: indexPath)
-        
-        return header;
-    }
-    
-    
-}
+

@@ -37,17 +37,17 @@ class ZJPageTitleView: UIView {
     
     private lazy var option : ZJPageOptions = {
         let option = ZJPageOptions()
-        option.kItemWidth = 80
-        option.kNormalColor = (220,220,220)
-        option.kSelectColor = (255,255,255)
-        option.kMarginW = Adapt(20)
-        option.isTitleScrollEnable = true
-        option.kBotLineHeight = 3
-        option.kTitleFontSize = 13
-        option.kTitleSelectFontSize = 14
-        option.kBotLineColor = kWhite
-        option.isShowBottomLine = true
-        option.kGradColors = kGradientColors
+//        option.kItemWidth = 80
+//        option.kNormalColor = (220,220,220)
+//        option.kSelectColor = (255,255,255)
+//        option.kMarginW = Adapt(20)
+//        option.isTitleScrollEnable = true
+//        option.kBotLineHeight = 3
+//        option.kTitleFontSize = 13
+//        option.kTitleSelectFontSize = 14
+//        option.kBotLineColor = kWhite
+//        option.isShowBottomLine = true
+//        option.kGradColors = kGradientColors
         return option
     }()
     // 创建一个 label 数组
@@ -76,7 +76,6 @@ class ZJPageTitleView: UIView {
         
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -112,7 +111,7 @@ extension ZJPageTitleView {
             gradientLayer.frame = bounds
             self.layer.insertSublayer(gradientLayer, at: 0)
         }else{
-            scrollView.backgroundColor = kWhite
+            scrollView.backgroundColor = option.kscrollViewBGColor
         }
         
     }
@@ -156,10 +155,8 @@ extension ZJPageTitleView {
         }
         
         
-        if option.isShowBottomLine {
-            
             adjustLabelPosition(firstLab)
-        }
+
        
         
     }
@@ -267,9 +264,9 @@ extension ZJPageTitleView {
         }
         
         // 底部滚动条滚动
-        if option.isShowBottomLine {
+//        if option.isShowBottomLine {
             adjustLabelPosition(targetLab)
-        }
+//        }
         
         if option.isShowBottomLine {
             let deltaX = targetLab.frame.origin.x - sourceLab.frame.origin.x
@@ -318,9 +315,9 @@ extension ZJPageTitleView {
             self.scrollLine.frame.origin.x = scrollLineX
         }
         
-        if option.isShowBottomLine {
+//        if option.isShowBottomLine {
             adjustLabelPosition(currentLab!)
-        }
+//        }
         
         if option.isShowBottomLine {
             UIView.animate(withDuration: 0.25, animations: {

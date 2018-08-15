@@ -29,7 +29,7 @@ class ZJCateSectionHeaderView: ZJBaseView {
             return
         }
         
-        let btnW : CGFloat = Adapt(55)
+        let btnW : CGFloat = Adapt(60)
         let btnH : CGFloat = 50
         let btnY : CGFloat = (self.frame.size.height - btnH) / 2
         let margin : CGFloat = Adapt(15)
@@ -73,6 +73,8 @@ extension  ZJCateSectionHeaderView {
     }
 }
 
+
+
 // 配置 UI 视图
 extension ZJCateSectionHeaderView {
     
@@ -81,5 +83,10 @@ extension ZJCateSectionHeaderView {
             make.left.right.bottom.equalTo(0)
             make.height.equalTo(0.8)
         })
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
     }
 }

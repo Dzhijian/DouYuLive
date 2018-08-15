@@ -15,34 +15,49 @@ import SnapKit
 private var isNavHidden : Bool = false
 class ZJHomeViewController: ZJBaseViewController {
     
+    // 标题数组
     private lazy var titles : [String] = ["分类","推荐","全部","LoL","绝地求生","王者荣耀","QQ飞车"]
+    // 控制器数组
+    private lazy var controllers : [UIViewController] = {
+        let controllers = [ZJClassifyViewController(),ZJRecommendViewController(),ZJAllViewController(),ZJLOLViewController(),ZJJDQSViewController(),ZJWZRYViewController(),ZJQQCarViewController()]
+        return controllers
+    }()
+    // 标题View
     private lazy var pageTitleView : ZJPageTitleView = { [weak self] in
         let frame = CGRect(x: 0, y: 0, width: kScreenW, height: kCateTitleH)
         let option = ZJPageOptions()
+        option.kGradColors = kGradientColors
+        option.kBotLineColor = kWhite
+        option.kNormalColor = (220,220,220)
+        option.kSelectColor = (250,250,250)
+        option.kTitleSelectFontSize = 14
+        option.isShowBottomLine = false
+        
         let pageTitleViw = ZJPageTitleView(frame: frame, titles: titles ,options:option)
         pageTitleViw.delegate = self
         return pageTitleViw
     }()
-    
+    // 内容 View
     private lazy var pageContenView : ZJPageContentView = { [weak self] in
         let height : CGFloat = kScreenH - kStatuHeight - kNavigationBarHeight - kCateTitleH - kTabBarHeight
         let frame = CGRect(x: 0, y: 40, width: kScreenW, height: height)
-        var childVCs : [UIViewController] =  [ZJClassifyViewController(),ZJRecommendViewController(),ZJAllViewController(),ZJLOLViewController(),ZJJDQSViewController(),ZJWZRYViewController(),ZJQQCarViewController()]
-        let contentView = ZJPageContentView(frame: frame, childVCs: childVCs, parentViewController:self!)
+        
+        let contentView = ZJPageContentView(frame: frame, childVCs: controllers, parentViewController:self!)
         contentView.delegate = self
         return contentView
     }()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "首页"
+        
         setUpUI()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshNavBar), name: NSNotification.Name(rawValue: ZJNotiRefreshHomeNavBar), object: nil)
     }
 
+    // MARK: 导航栏隐藏与显示
     @objc func refreshNavBar(noti:Notification) {
-        
         
         let isHidden : String = noti.userInfo!["isHidden"] as! String
         if isHidden == "true" {
@@ -54,7 +69,6 @@ class ZJHomeViewController: ZJBaseViewController {
                 let height : CGFloat = kScreenH - kStatuHeight - kCateTitleH - kTabBarHeight
                 let frame = CGRect(x: 0, y: kCateTitleH + kStatuHeight, width: kScreenW, height: height)
                 self.pageContenView.frame = frame
-                // 刷新 contentView Frame
                 self.pageContenView.refreshColllectionView(height:self.pageContenView.frame.size.height)
                 
             }
@@ -118,7 +132,6 @@ extension ZJHomeViewController {
         // 添加标题栏
         setUpPageTitleView()
         
-        
         // 添加 ContentView
         view.addSubview(pageContenView)
     }
@@ -148,7 +161,7 @@ extension ZJHomeViewController {
     
     func setUpPageTitleView() {
         
-        self.view.addSubview(pageTitleView)
+        view.addSubview(pageTitleView)
         
     }
     

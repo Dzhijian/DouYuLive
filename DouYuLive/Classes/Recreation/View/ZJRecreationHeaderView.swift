@@ -17,6 +17,11 @@ class ZJRecreationHeaderView: UICollectionReusableView {
         setUpAllView()
     }
     
+    // MARK: 配置标题
+    func configWithTitle(title : String)  {
+        self.titleLab.text = title
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -26,7 +31,7 @@ class ZJRecreationHeaderView: UICollectionReusableView {
 
 extension ZJRecreationHeaderView {
     private func setUpAllView (){
-        self.titleLab = UILabel.zj_createLabel(text: "标题", textColor: kMainTextColor, font: BoldFontSize(18), supView: self, closure: { (make) in
+        self.titleLab = UILabel.zj_createLabel(text: "标题", textColor: kMainTextColor, font: BoldFontSize(17), supView: self, closure: { (make) in
             make.centerY.equalTo(self.snp.centerY)
             make.left.equalTo(Adapt(15))
         })
