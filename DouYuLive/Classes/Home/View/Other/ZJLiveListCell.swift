@@ -15,6 +15,11 @@ protocol ZJChildCateSelectDelegate : class {
     func childCateSelectAction(cateId: String,index : Int)
 }
 
+enum ZJCellType {
+    case ZJCellHomeLOL  // lol
+    case ZJCellRecreationOutDoor    // 户外
+}
+
 // 滚动回调
 typealias ScrollBlock = (Bool) -> ()
 
@@ -24,7 +29,7 @@ class ZJLiveListCell: ZJBaseTableCell {
     
     var scrollBlock : ScrollBlock?
     
-    
+    var cellType : ZJCellType = .ZJCellHomeLOL
     // MArk: 直播列表
     lazy var collectionView : UICollectionView = {
         let layout = ZJCollectionViewFlowLayout()
@@ -46,6 +51,14 @@ class ZJLiveListCell: ZJBaseTableCell {
     }()
     
     var liveRoomList : [ZJAllLiveList]? {
+        
+        didSet{
+            
+            self.collectionView.reloadData()
+        }
+    }
+    
+    var outDoorsList : [ZJFaceScoreHotList]? {
         
         didSet{
             
@@ -119,7 +132,14 @@ extension ZJLiveListCell : UICollectionViewDataSource,UICollectionViewDelegate,U
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.liveRoomList?.count ?? 0
+        
+        if self.cellType == .ZJCellHomeLOL{
+            return self.liveRoomList?.count ?? 0
+        }else if self.cellType == .ZJCellRecreationOutDoor {
+            return self.outDoorsList?.count ?? 0
+        }else{
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

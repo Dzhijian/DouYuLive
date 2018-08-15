@@ -67,12 +67,16 @@ let ZJFaceScoreListNearURL = "https://capi.douyucdn.cn/api/applivecompanion/getN
 // 户外
 // 福利推荐 https://apiv2.douyucdn.cn/live/anchorrecom/anchors?offset=0&client_sys=ios&cate2_id=124&limit=10
 // 直播下的分类 https://capi.douyucdn.cn/api/v1/getThreeCate?client_sys=ios&tag_id=124
+let ZJOutDoorsChildCateURL : String = "https://capi.douyucdn.cn/api/v1/getThreeCate?client_sys=ios&tag_id=124"
 
 // 列表数据
 // 全部 https://apiv2.douyucdn.cn/gv2api/rkc/roomlist/2_124/0/20/ios?client_sys=ios
 // 生活秀 https://apiv2.douyucdn.cn/gv2api/rkc/roomlist/3_252/0/20/ios?client_sys=ios
 // 节目秀 https://apiv2.douyucdn.cn/gv2api/rkc/roomlist/3_776/0/20/ios?client_sys=ios
 // .....
+
+let ZJOutDoorsListURL : String = "https://apiv2.douyucdn.cn/gv2api/rkc/roomlist/2_124/0/20/ios?client_sys=ios"
+
 
 // 关注 可能感兴趣列表
 // https://apiv2.douyucdn.cn/live/recom/getFwRecRoomList?client_sys=ios
