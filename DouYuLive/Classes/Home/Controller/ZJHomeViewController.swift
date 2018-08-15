@@ -18,7 +18,8 @@ class ZJHomeViewController: ZJBaseViewController {
     private lazy var titles : [String] = ["分类","推荐","全部","LoL","绝地求生","王者荣耀","QQ飞车"]
     private lazy var pageTitleView : ZJPageTitleView = { [weak self] in
         let frame = CGRect(x: 0, y: 0, width: kScreenW, height: kCateTitleH)
-        let pageTitleViw = ZJPageTitleView(frame: frame, titles: titles)
+        let option = ZJPageOptions()
+        let pageTitleViw = ZJPageTitleView(frame: frame, titles: titles ,options:option)
         pageTitleViw.delegate = self
         return pageTitleViw
     }()
