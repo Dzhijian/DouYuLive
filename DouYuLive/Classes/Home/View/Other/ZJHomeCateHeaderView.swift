@@ -48,7 +48,6 @@ class ZJHomeCateHeaderView: ZJBaseView {
 // MARK: - CycleScrollViewDelegate 代理方法
 extension ZJHomeCateHeaderView : CycleScrollViewDelegate {
     
-    
     func didSelectedCycleScrollView(_ cycleScrollView: CycleScrollView, _ Index: NSInteger) {
         print("点击了第\(Index)张图片")
     

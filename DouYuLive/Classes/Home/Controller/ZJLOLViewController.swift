@@ -16,6 +16,8 @@ class ZJLOLViewController: ZJBaseViewController {
     private var childCateData : ZJChildCateData = ZJChildCateData()
     private var lolLiveData : ZJLiveListData = ZJLiveListData()
     private var childCateId : String = "2_1"
+    // 显示视图索引
+    private var showIndex : Int = 0
     private lazy var headView : ZJHomeCateHeaderView = {
         let scrollView = ZJHomeCateHeaderView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: Adapt(120)))
         return scrollView
@@ -116,9 +118,6 @@ extension ZJLOLViewController {
         mainTable.tableHeaderView = headView
     
     }
-    
-    
-    
 }
 
 
@@ -135,7 +134,11 @@ extension ZJLOLViewController :  UITableViewDataSource,UITableViewDelegate  {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell  = tableView.dequeueReusableCell(withIdentifier: ZJLiveListCell.identifier(), for: indexPath) as! ZJLiveListCell
+        
         cell.delegate = self
+        // 显示视图
+        cell.configShowView(index: showIndex)
+        
         if self.lolLiveData.list.count > 0 {
             cell.liveRoomList = self.lolLiveData.list
         }
@@ -146,10 +149,8 @@ extension ZJLOLViewController :  UITableViewDataSource,UITableViewDelegate  {
         //  MARK: 控制导航栏
         cell.scrollBlock = { ishidden in
             if ishidden {
-                self.navigationController?.setNavigationBarHidden(true, animated: true)
                 NotificationCenter.default.post(name: Notification.Name(rawValue: ZJNotiRefreshHomeNavBar), object: nil, userInfo: kNavBarHidden)
             }else{
-                self.navigationController?.setNavigationBarHidden(false, animated: true)
                 NotificationCenter.default.post(name: Notification.Name(rawValue: ZJNotiRefreshHomeNavBar), object: nil, userInfo: kNavBarNotHidden)
             }
         }
@@ -163,7 +164,13 @@ extension ZJLOLViewController :  UITableViewDataSource,UITableViewDelegate  {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let headerView = ZJCateSectionHeaderView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: Adapt(50)))
-        headerView.setUpTitles(titles: ["直播","视频"])
+        headerView.setUpTitles(titles: ["直播","视频"],margin: Adapt(40),selectIndex: self.showIndex)
+        
+        headerView.btnClickBlock = {[weak self] index in
+            self?.showIndex = index
+            self?.mainTable.reloadData()
+        }
+        
         return headerView
     
     }

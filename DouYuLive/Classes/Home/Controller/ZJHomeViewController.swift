@@ -84,8 +84,6 @@ class ZJHomeViewController: ZJBaseViewController {
             }
            
         }
-        
-        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

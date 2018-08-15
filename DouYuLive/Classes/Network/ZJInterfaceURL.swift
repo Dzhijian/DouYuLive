@@ -58,7 +58,12 @@ let RecreationChildCateURL = "https://apiv2.douyucdn.cn/live/cate/getTabCate1Lis
 
 // 颜值
 // 列表数据 https://apiv2.douyucdn.cn/gv2api/rkc/roomlist/1_8/0/20/ios?client_sys=ios
+let ZJFaceScoreListHotURL = "https://apiv2.douyucdn.cn/gv2api/rkc/roomlist/1_8/0/20/ios?client_sys=ios"
+
 // 看附近 https://capi.douyucdn.cn/api/applivecompanion/getNearbyAnchorNew?aid=ios&cate1_id=0&cate2_id=0&cate3_id=0&client_sys=ios&latitude=22.547960&limit=20&longitude=113.956170&offset=0&time=1534317783&auth=a641e9783ca81e2c954e0deb383416e9
+let ZJFaceScoreListNearURL = "https://capi.douyucdn.cn/api/applivecompanion/getNearbyAnchorNew?aid=ios&cate1_id=0&cate2_id=0&cate3_id=0&client_sys=ios&latitude=22.547960&limit=20&longitude=113.956170&offset=0&time=1534317783&auth=a641e9783ca81e2c954e0deb383416e9"
+
+
 // 户外
 // 福利推荐 https://apiv2.douyucdn.cn/live/anchorrecom/anchors?offset=0&client_sys=ios&cate2_id=124&limit=10
 // 直播下的分类 https://capi.douyucdn.cn/api/v1/getThreeCate?client_sys=ios&tag_id=124

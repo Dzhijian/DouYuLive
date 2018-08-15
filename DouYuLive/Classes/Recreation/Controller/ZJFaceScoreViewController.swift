@@ -11,6 +11,9 @@ import UIKit
 // MARK: 颜值
 class ZJFaceScoreViewController: ZJBaseViewController {
 
+    var faceScoreHotData : ZJFaceScoreHotData = ZJFaceScoreHotData()
+    
+    private lazy var showIndex : Int = 0
     private lazy var mainTable : UITableView = {
         let mainTable = UITableView(frame: CGRect.zero, style: .plain)
         mainTable.delegate = self
@@ -18,7 +21,9 @@ class ZJFaceScoreViewController: ZJBaseViewController {
         mainTable.backgroundColor = kWhite
         mainTable.separatorStyle = .none
         mainTable.bounces = false
-        mainTable.register(ZJBaseTableCell.self, forCellReuseIdentifier: ZJBaseTableCell.identifier())
+        mainTable.showsHorizontalScrollIndicator = false
+        mainTable.showsVerticalScrollIndicator = false
+        mainTable.register(ZJFaceScoreCell.self, forCellReuseIdentifier: ZJFaceScoreCell.identifier())
         return mainTable
     }()
     
@@ -26,6 +31,8 @@ class ZJFaceScoreViewController: ZJBaseViewController {
         super.viewDidLoad()
         
         setUpAllView()
+        
+        getFaceScoreListData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,6 +40,23 @@ class ZJFaceScoreViewController: ZJBaseViewController {
         
     }
     
+}
+
+// MARK: - 网络请求,加载数据
+extension ZJFaceScoreViewController {
+    
+    private func getFaceScoreListData() {
+        
+        ZJNetWorking.requestData(type: .GET, URlString: ZJFaceScoreListHotURL) { (response) in
+            
+            let data = try? ZJDecoder.decode(ZJFaceScoreHotData.self, data : response)
+            if data != nil {
+                self.faceScoreHotData = data!
+                self.mainTable.reloadData()
+//                print(self.faceScoreHotData)
+            }
+        }
+    }
 }
 
 // MARK: - 遵守协议
@@ -47,14 +71,25 @@ extension ZJFaceScoreViewController : UITableViewDelegate,UITableViewDataSource{
  
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: ZJBaseTableCell.identifier(), for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: ZJFaceScoreCell.identifier(), for: indexPath) as! ZJFaceScoreCell
+        
+        if self.faceScoreHotData.list.count > 0 {
+            cell.faceScoreDataList = self.faceScoreHotData.list
+        }
+        
         cell.contentView.backgroundColor = kPurple
         return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = ZJCateSectionHeaderView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: Adapt(50)))
-        headerView.setUpTitles(titles: ["看热门","看附近"])
+        headerView.setUpTitles(titles: ["看热门","看附近"],margin: Adapt(40),selectIndex: self.showIndex)
+        
+        headerView.btnClickBlock = {[weak self] index in
+            self?.showIndex = index
+            self?.mainTable.reloadData()
+        }
+        
         return headerView
     }
     

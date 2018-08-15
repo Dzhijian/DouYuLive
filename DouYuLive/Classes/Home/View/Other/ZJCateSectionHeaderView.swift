@@ -9,10 +9,19 @@
 import UIKit
 
 class ZJCateSectionHeaderView: ZJBaseView {
+    // 定义按钮点击的返回闭包
+    var btnClickBlock:((_ index : Int)-> ())?
+    
+    private var kMargin : CGFloat = Adapt(30)
+    
+    private var btnArr : [UIButton] = {
+        let btnArr = [UIButton]()
+        return btnArr
+    }()
+    
+    private var selectedIndex : Int = 0
     
     var titles : [String] = [String]()
-    var btnArr : [UIButton] = [UIButton]()
-    
     
     override func zj_initWithAllView() {
 
@@ -22,17 +31,20 @@ class ZJCateSectionHeaderView: ZJBaseView {
     }
     
     
-    func setUpTitles(titles: [String]) {
+    func setUpTitles(titles: [String] , margin : CGFloat? = nil , selectIndex : Int? = nil) {
+        self.titles = titles
         
-        guard btnArr.count == 0  else {
+        if selectIndex != nil {
+            self.selectedIndex = selectIndex!
+        }
+        
+        if margin != nil {
+            kMargin = margin!
+        }
+        guard self.btnArr.count == 0  else {
             // 如果存在则返回不再走下面的代码
             return
         }
-        
-        let btnW : CGFloat = Adapt(60)
-        let btnH : CGFloat = 50
-        let btnY : CGFloat = (self.frame.size.height - btnH) / 2
-        let margin : CGFloat = Adapt(15)
         
         for (index,title) in titles.enumerated() {
             let btn : UIButton = UIButton()
@@ -40,17 +52,15 @@ class ZJCateSectionHeaderView: ZJBaseView {
             btn.setTitleColor(kMainTextColor, for: .normal)
             btn.titleLabel?.font = BoldFontSize(18)
             btn.titleLabel?.backgroundColor = kWhite
-            let btnX = margin + CGFloat(index) * btnW + margin * CGFloat(index)
-            btn.frame = CGRect(x: btnX, y: btnY, width: btnW, height: btnH)
             btn.tag = index + kBaseTarget
+            
             btn.addTarget(self, action: #selector(self.btnClickAction(btn:)), for: UIControlEvents.touchUpInside)
             addSubview(btn)
             btnArr.append(btn)
         }
-        
+    
         if btnArr.count > 0 {
-            
-            btnClickAction(btn: btnArr.first!)
+            btnClickAction(btn: btnArr[self.selectedIndex])
         }
     }
 
@@ -60,16 +70,22 @@ class ZJCateSectionHeaderView: ZJBaseView {
 extension  ZJCateSectionHeaderView {
     
     @objc private func btnClickAction(btn: UIButton) {
+     
+        self.selectedIndex = btn.tag - kBaseTarget
         
-        let index = btn.tag
-        for btn in btnArr {
-            
-            if btn.tag == index {
-                btn.setTitleColor(kMainOrangeColor, for: .normal)
+        for (_,item) in btnArr.enumerated() {
+            if ((item.tag - kBaseTarget) == self.selectedIndex) {
+                item.setTitleColor(kMainOrangeColor, for: .normal)
             }else{
-                btn.setTitleColor(kMainTextColor, for: .normal)
+                item.setTitleColor(kMainTextColor, for: .normal)
             }
         }
+        
+        
+        if btnClickBlock != nil {
+            btnClickBlock!(self.selectedIndex)
+        }
+        
     }
 }
 
@@ -87,6 +103,18 @@ extension ZJCateSectionHeaderView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        let btnH = frame.size.height
+        let btnY: CGFloat = 0
+        var btnW: CGFloat = 0
+        var btnX: CGFloat = 0
+        
+        for (index,btn) in self.btnArr.enumerated() {
+            
+            btnW = (titles[index] as NSString).boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: 0), options: .usesLineFragmentOrigin, attributes: [NSAttributedStringKey.font : btn.titleLabel?.font ?? UIFont.systemFont(ofSize: 14)], context: nil).width
+            btnX = index == 0 ? kMargin * 0.5 : (btnArr[index-1].frame.maxX + kMargin)
+            
+            btn.frame = CGRect(x: btnX, y: btnY, width: btnW, height: btnH)
+        }
         
     }
 }

@@ -8,7 +8,8 @@
 
 import UIKit
 
-private let kItemH = (kScreenW - 10) / 2
+private let kItemH = (kScreenW - 5) / 2
+
 class ZJRecreationListItem: ZJBaseCollectionCell {
     
     private lazy var imgV = UIImageView()
@@ -17,6 +18,25 @@ class ZJRecreationListItem: ZJBaseCollectionCell {
     private lazy var nameLab = UILabel()
     private lazy var addressLab = UILabel()
     private lazy var descLab = UILabel()
+    
+    var faceHotModel : ZJFaceScoreHotList? {
+        
+        didSet{
+            //不能使用强制解包策略
+            if let iconURL = URL(string: faceHotModel?.room_src ?? "") {
+                imgV.kf.setImage(with: iconURL)
+            } else {
+                imgV.image = UIImage(named: "video_default_cover")
+            }
+            
+            nameLab.text = faceHotModel?.nickname
+            addressLab.text = faceHotModel?.anchor_city
+            descLab.text = faceHotModel?.room_name
+            hotLab.text = faceHotModel?.online_num?.description
+        }
+    }
+    
+    
     override func zj_setUpAllView() {
         setUpAllView()
     }
@@ -31,6 +51,8 @@ extension ZJRecreationListItem {
             make.left.right.top.equalTo(0)
             make.height.equalTo(kItemH)
         })
+        self.imgV.contentMode = .scaleToFill
+        
         self.imgV.backgroundColor = kOrange
         
         self.markImgV = UIImageView.zj_createImageView(imageName: "", supView: self.imgV, closure: { (make) in
@@ -40,9 +62,9 @@ extension ZJRecreationListItem {
             make.height.equalTo(Adapt(20))
         })
         
-        self.markImgV.backgroundColor = kGreen
+//        self.markImgV.backgroundColor = kGreen
         
-        self.hotLab = UILabel.zj_createLabel(text: "1.5W", textColor:  kMainTextColor, font: FontSize(12), textAlignment: .left, supView: self.contentView, closure: { (make) in
+        self.hotLab = UILabel.zj_createLabel(text: "1.5W", textColor:  kWhite, font: FontSize(10), textAlignment: .left, supView: self.contentView, closure: { (make) in
             make.centerY.equalTo(self.markImgV.snp.centerY)
             make.right.equalTo(Adapt(-10))
         })

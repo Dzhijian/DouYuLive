@@ -17,6 +17,7 @@ protocol ZJChildCateSelectDelegate : class {
 
 // 滚动回调
 typealias ScrollBlock = (Bool) -> ()
+
 class ZJLiveListCell: ZJBaseTableCell {
     
     weak var delegate : ZJChildCateSelectDelegate?
@@ -40,7 +41,7 @@ class ZJLiveListCell: ZJBaseTableCell {
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(ZJLiveListItem.self, forCellWithReuseIdentifier: ZJLiveListItem.identifier())
         collectionView.register(ZJCateCollectionHeadView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier:kCateCollectionHeadView )
-        collectionView.isHidden = true
+//        collectionView.isHidden = true
         return collectionView
     }()
     
@@ -73,6 +74,12 @@ class ZJLiveListCell: ZJBaseTableCell {
     override func zj_setUpAllView() {
         addSubview(collectionView)
         addSubview(mainTable)
+        collectionView.snp.makeConstraints { (make) in
+            make.edges.equalTo(0)
+        }
+        mainTable.snp.makeConstraints { (make) in
+            make.edges.equalTo(0)
+        }
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -80,7 +87,6 @@ class ZJLiveListCell: ZJBaseTableCell {
         
         if offSetY > 120 {
             if (scrollBlock != nil) {
-                
                 scrollBlock!(true)
             }
         }else{
@@ -89,6 +95,19 @@ class ZJLiveListCell: ZJBaseTableCell {
             }
         }
     }
+    
+    
+    func configShowView(index : Int) {
+        if index == 0 {
+            self.collectionView.isHidden = false
+            self.mainTable.isHidden = true
+        }else if index == 1{
+            self.collectionView.isHidden = true
+            self.mainTable.isHidden = false
+        }
+    }
+    
+    
 }
 
 
