@@ -32,7 +32,8 @@ class ZJFaceScoreViewController: ZJBaseViewController {
         
         setUpAllView()
         
-        getFaceScoreListData()
+        getFaceScoreHostListData()
+        getFaceScoreNearlybyListData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,7 +46,8 @@ class ZJFaceScoreViewController: ZJBaseViewController {
 // MARK: - 网络请求,加载数据
 extension ZJFaceScoreViewController {
     
-    private func getFaceScoreListData() {
+    // 获取热门数据列表
+    private func getFaceScoreHostListData() {
         
         ZJNetWorking.requestData(type: .GET, URlString: ZJFaceScoreListHotURL) { (response) in
             
@@ -53,7 +55,24 @@ extension ZJFaceScoreViewController {
             if data != nil {
                 self.faceScoreHotData = data!
                 self.mainTable.reloadData()
-//                print(self.faceScoreHotData)
+            }
+        }
+    }
+    
+    // 获取热门数据列表
+    private func getFaceScoreNearlybyListData() {
+        
+        let time:Int = Int(NSDate().timeIntervalSince1970)
+        
+        
+        let urlStr = "\(ZJFaceScoreListNearURL)" + "&latitude=22.547960&limit=20&longitude=113.956170&offset=0&time=\(time)&auth=a641e9783ca81e2c954e0deb383416e9"
+        
+        ZJNetWorking.requestData(type: .GET, URlString: urlStr) { (response) in
+
+            let data = try? ZJDecoder.decode(ZJFaceScoreHotData.self, data : response)
+            if data != nil {
+                self.faceScoreHotData = data!
+                self.mainTable.reloadData()
             }
         }
     }

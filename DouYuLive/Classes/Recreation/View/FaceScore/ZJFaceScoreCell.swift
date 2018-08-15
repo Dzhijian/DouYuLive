@@ -8,7 +8,7 @@
 
 import UIKit
 private let kItemW = (kScreenW - 5) / 2
-private let kItemH = kItemW * 5 / 4
+private let kItemH = kItemW * 5 / 4 - Adapt(30)
 
 class ZJFaceScoreCell: ZJBaseTableCell {
     

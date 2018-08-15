@@ -69,13 +69,12 @@ class ZJNetWorking {
             if ((dict["data"] as? [Any]) != nil) {
             
                 let arrData = try? JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
-//                print(dict)
+                print(dict)
                 if arrData != nil {
                     finishCallBack(arrData!)
                 }
             }
         
-            
         }
         
     }

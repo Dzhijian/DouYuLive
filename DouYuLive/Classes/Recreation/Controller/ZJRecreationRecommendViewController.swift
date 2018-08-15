@@ -9,7 +9,8 @@
 import UIKit
 
 private let kItemW = (kScreenW - 10) / 2
-private let kItemH = kItemW * 5 / 4
+private let kItemH = kItemW * 5 / 4 - Adapt(30)
+
 private let kHeaderViewId = "kHeaderViewId"
 
 // MARK: 推荐
