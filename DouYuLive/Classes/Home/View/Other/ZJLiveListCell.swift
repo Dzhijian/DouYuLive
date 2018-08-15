@@ -145,7 +145,18 @@ extension ZJLiveListCell : UICollectionViewDataSource,UICollectionViewDelegate,U
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ZJLiveListItem.identifier(), for: indexPath) as! ZJLiveListItem
         
-        cell.allModel = self.liveRoomList?[indexPath.item]
+        switch self.cellType {
+            
+        case .ZJCellHomeLOL:
+            
+            cell.allModel = self.liveRoomList?[indexPath.item]
+            
+        case .ZJCellRecreationOutDoor:
+            
+            cell.outDoorModel = self.outDoorsList?[indexPath.item]
+            
+        }
+        
         
         return cell
     }

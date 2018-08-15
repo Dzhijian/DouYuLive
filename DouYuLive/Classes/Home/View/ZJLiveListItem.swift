@@ -21,6 +21,22 @@ class ZJLiveListItem: ZJBaseCollectionCell {
     override func zj_setUpAllView() {
         setUpAllView()
     }
+    
+    var outDoorModel : ZJFaceScoreHotList? {
+        didSet{
+            titleLab.text = outDoorModel?.room_name
+            nameLab.text =  outDoorModel?.nickname
+            hotLab.text = outDoorModel?.online_num?.description //String(format:"%d",(allModel?.online_num)!)
+            descLab.text = outDoorModel?.cate2_name
+            
+            //不能使用强制解包策略
+            if let iconURL = URL(string: outDoorModel?.room_src ?? "") {
+                imageV.kf.setImage(with: iconURL)
+            } else {
+                imageV.image = UIImage(named: "video_default_cover")//home_more_btn
+            }
+        }
+    }
 
     var allModel : ZJAllLiveList? {
         didSet{
