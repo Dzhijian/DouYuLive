@@ -9,6 +9,11 @@
 import UIKit
 
 class ZJFollowLiveViewController: ZJBaseViewController {
+    private lazy var headView : ZJFollowLiveHeadView = {
+        let headView = ZJFollowLiveHeadView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: Adapt(200)))
+        headView.backgroundColor = kWhite
+        return headView
+    }()
     private lazy var mainTable : UITableView = {
         let mainTable = UITableView(frame: CGRect.zero, style: .grouped)
         mainTable.delegate = self
@@ -73,5 +78,6 @@ extension ZJFollowLiveViewController {
         mainTable.snp.makeConstraints { (make) in
             make.edges.equalTo(0)
         }
+        mainTable.tableHeaderView = headView
     }
 }
