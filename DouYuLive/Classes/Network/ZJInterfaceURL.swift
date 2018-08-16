@@ -80,3 +80,17 @@ let ZJOutDoorsListURL : String = "https://apiv2.douyucdn.cn/gv2api/rkc/roomlist/
 
 // 关注 可能感兴趣列表
 // https://apiv2.douyucdn.cn/live/recom/getFwRecRoomList?client_sys=ios
+let ZJFollowInterestURL = "https://apiv2.douyucdn.cn/live/recom/getFwRecRoomList?client_sys=ios"
+// 超级主播排行榜
+//https://apiv2.douyucdn.cn/live/recom/getFwRecAnchorList?client_sys=ios
+
+let ZJFollowRankURL : String = "https://apiv2.douyucdn.cn/live/recom/getFwRecAnchorList?client_sys=ios"
+
+
+
+
+
+
+
+
+

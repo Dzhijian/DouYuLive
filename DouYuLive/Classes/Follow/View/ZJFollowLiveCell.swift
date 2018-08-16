@@ -12,7 +12,13 @@ private let kItemW = (kScreenW - 5) / 2
 private let kItemH = kItemW * 9 / 16 + Adapt(30)
 
 class ZJFollowLiveCell: ZJBaseTableCell {
-
+    
+    var dataSource : [ZJFollowInterseList]?{
+        didSet{
+            self.collectionView.reloadData()
+        }
+    }
+    
     private lazy var collectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 10
@@ -28,11 +34,24 @@ class ZJFollowLiveCell: ZJBaseTableCell {
         return collectionView
     }()
     
+    
     override func zj_setUpAllView() {
+        
         setUpAllView()
     }
     
+    // MARK: 计算返回高度
+    override class func cellHeightWithModel(model : Any) -> CGFloat{
+        
+        let data : [ZJFollowInterseList] = model as! [ZJFollowInterseList]
+        // 计算多少行
+        let colum : Int = data.count / 2 + (data.count % 2 == 0  ?  0 : 1 )
+        
+        return CGFloat(colum) * kItemH
+    }
+    
 }
+
 
 // MARK: - 遵守协议
 extension ZJFollowLiveCell : UICollectionViewDelegate,UICollectionViewDataSource {
@@ -42,16 +61,20 @@ extension ZJFollowLiveCell : UICollectionViewDelegate,UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return self.dataSource?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let item = collectionView.dequeueReusableCell(withReuseIdentifier: ZJLiveListItem.identifier(), for: indexPath) as! ZJLiveListItem
         item.descLab.isHidden = true
+        
+        item.interesModel = self.dataSource?[indexPath.item]
         return item
     }
 }
+
+
 
 // MARK: - 配置 UI
 extension ZJFollowLiveCell {
@@ -62,4 +85,5 @@ extension ZJFollowLiveCell {
             make.edges.equalTo(0)
         }
     }
+    
 }

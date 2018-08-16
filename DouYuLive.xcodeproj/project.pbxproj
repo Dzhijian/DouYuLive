@@ -37,6 +37,7 @@
 		043512F62122B1AF001D928A /* DNSPageViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043512EE2122B1AF001D928A /* DNSPageViewManager.swift */; };
 		043512F72122B1AF001D928A /* DNSPageCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043512EF2122B1AF001D928A /* DNSPageCollectionViewFlowLayout.swift */; };
 		043512F82122B1AF001D928A /* DNSPageStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043512F02122B1AF001D928A /* DNSPageStyle.swift */; };
+		045DE3902125C75C004718E8 /* ZJFollowInteresData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045DE38F2125C75C004718E8 /* ZJFollowInteresData.swift */; };
 		048EA3792106447200E30720 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EA3782106447200E30720 /* AppDelegate.swift */; };
 		048EA37E2106447200E30720 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 048EA37C2106447200E30720 /* Main.storyboard */; };
 		048EA3802106447300E30720 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 048EA37F2106447300E30720 /* Assets.xcassets */; };
@@ -148,6 +149,7 @@
 		043512EE2122B1AF001D928A /* DNSPageViewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSPageViewManager.swift; sourceTree = "<group>"; };
 		043512EF2122B1AF001D928A /* DNSPageCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSPageCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		043512F02122B1AF001D928A /* DNSPageStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSPageStyle.swift; sourceTree = "<group>"; };
+		045DE38F2125C75C004718E8 /* ZJFollowInteresData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFollowInteresData.swift; sourceTree = "<group>"; };
 		048EA3752106447200E30720 /* DouYuLive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DouYuLive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		048EA3782106447200E30720 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		048EA37D2106447200E30720 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -377,6 +379,14 @@
 			path = DNSPageView;
 			sourceTree = "<group>";
 		};
+		045DE38E2125C72E004718E8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				045DE38F2125C75C004718E8 /* ZJFollowInteresData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		048EA36C2106447200E30720 = {
 			isa = PBXGroup;
 			children = (
@@ -473,6 +483,7 @@
 		048EA3A92107873B00E30720 /* Follow */ = {
 			isa = PBXGroup;
 			children = (
+				045DE38E2125C72E004718E8 /* Model */,
 				048EA3B7210790A900E30720 /* ZJFollowViewController.swift */,
 				04A473B721252C0600D37F33 /* Controller */,
 				04A473B9212533CE00D37F33 /* View */,
@@ -883,6 +894,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04A473A521240DA700D37F33 /* ZJFaceScoreViewController.swift in Sources */,
+				045DE3902125C75C004718E8 /* ZJFollowInteresData.swift in Sources */,
 				04A4739F2122E93600D37F33 /* LZViewPagerHeader.swift in Sources */,
 				04DE708F2119F2F30073DE82 /* ZJHomeCateHeaderView.swift in Sources */,
 				04907E792116C328006B70EC /* ZJBaseCollectionCell.swift in Sources */,

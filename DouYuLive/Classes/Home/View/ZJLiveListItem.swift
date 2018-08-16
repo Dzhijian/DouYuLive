@@ -22,6 +22,34 @@ class ZJLiveListItem: ZJBaseCollectionCell {
         setUpAllView()
     }
     
+    var interesModel : ZJFollowInterseList? {
+        didSet{
+            titleLab.text = interesModel?.roomName
+            nameLab.text =  interesModel?.nickname
+            
+            var numStr : String = ""
+            if (interesModel?.followNum)! > 9999 {
+                let integer =  (interesModel?.followNum)! / 10000
+                let remainder : Int =  Int((interesModel?.followNum)! % 10000)
+                let numString = "\(integer).\(remainder)"
+                let numFloat = Float(numString)
+                numStr = "\(String(format: "%.2f", numFloat!))W"
+            }else{
+                numStr = (interesModel?.followNum?.description)!
+            }
+            
+            hotLab.text = numStr
+            descLab.text = interesModel?.cate2Name
+            
+            //不能使用强制解包策略
+            if let iconURL = URL(string: interesModel?.roomSrc ?? "") {
+                imageV.kf.setImage(with: iconURL)
+            } else {
+                imageV.image = UIImage(named: "video_default_cover")
+            }
+        }
+    }
+    
 
     var liveModel : ZJLiveItemModel? {
         didSet{

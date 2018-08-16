@@ -9,6 +9,7 @@
 import UIKit
 
 class ZJFollowLiveHeadView : UIView {
+    
     private lazy var iconArr : [UIImageView] = {
         let iconArr = [UIImageView]()
         return iconArr
@@ -33,10 +34,23 @@ class ZJFollowLiveHeadView : UIView {
         lab.font = FontSize(17)
         return lab
     }()
+    var imgUrlArr : [String] = [String]()
+    
+    var rankList : [ZJFollowRankList]?{
+        didSet{
+            
+            for (_,item) in (rankList?.enumerated())! {
+                imgUrlArr.append(item.avatar!)
+            }
+            
+            setUpRankIconView(imgUrl: imgUrlArr)
+        }
+    }
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpAllView()
-        setUpRankIconView(imgUrl: ["haha","hehe","lala"])
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -112,10 +126,19 @@ extension ZJFollowLiveHeadView {
             icon.contentMode = .scaleAspectFill
             icon.tag = index
             icon.image = UIImage(named: "liveImage")
+            
+            if let imgUrl = URL(string: urlStr) {
+                icon.kf.setImage(with: imgUrl)
+            } else {
+                icon.image = UIImage(named: "liveImage")
+            }
+
 //            icon.kf.setImage(with: URL(string: urlStr))
             anchorRankView.addSubview(icon)
             iconArr.append(icon)
         }
+        
+        self.layoutSubviews()
     }
     
     func zj_setUpGradientLayer(view : UIView , frame : CGRect , color : [CGColor], corneradiu : CGFloat? = 0){

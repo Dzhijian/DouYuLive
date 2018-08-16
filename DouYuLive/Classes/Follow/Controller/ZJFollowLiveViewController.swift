@@ -9,11 +9,17 @@
 import UIKit
 
 class ZJFollowLiveViewController: ZJBaseViewController {
+    
+    private lazy var interesList : [ZJFollowInterseList] = [ZJFollowInterseList]()
+    
+    private lazy var rankList : [ZJFollowRankList] = [ZJFollowRankList]()
+    
     private lazy var headView : ZJFollowLiveHeadView = {
         let headView = ZJFollowLiveHeadView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: Adapt(200)))
         headView.backgroundColor = kWhite
         return headView
     }()
+    private var CellHeight : CGFloat = Adapt(0)
     private lazy var mainTable : UITableView = {
         let mainTable = UITableView(frame: CGRect.zero, style: .grouped)
         mainTable.delegate = self
@@ -29,13 +35,43 @@ class ZJFollowLiveViewController: ZJBaseViewController {
         super.viewDidLoad()
         view.backgroundColor = kWhite
         setUpAllview()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        getInterestListData()
+        getRankListData()
     }
     
+}
+
+// MARK: - 网络请求
+extension ZJFollowLiveViewController {
+    
+    private func getInterestListData() {
+        
+        // 获取可能感兴趣列表
+        ZJNetWorking.requestData(type: .GET, URlString: ZJFollowInterestURL) { (response) in
+            
+            let data = try? ZJDecoder.decode(ZJFollowInterseData.self, data: response)
+            if data != nil{
+                self.interesList = (data?.data)!
+                self.mainTable.reloadData()
+            }
+        }
+    }
+    
+    private func getRankListData() {
+        
+        // 获取排行榜列表
+        ZJNetWorking.requestData(type: .GET, URlString: ZJFollowRankURL) { (response) in
+            
+            let data = try? ZJDecoder.decode(ZJFollowRankData.self, data: response)
+            if data != nil {
+                self.rankList = (data?.data)!
+                self.headView.rankList = self.rankList
+//                self.mainTable.reloadData()
+//                print(data!)
+            }
+            
+        }
+    }
 }
 
 // MARK: - 遵守UITableViewDelegate,UITableViewDataSource协议
@@ -50,11 +86,12 @@ extension ZJFollowLiveViewController : UITableViewDelegate,UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell  = tableView.dequeueReusableCell(withIdentifier: ZJFollowLiveCell.identifier(), for: indexPath) as! ZJFollowLiveCell
+        cell.dataSource = self.interesList
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return kScreenH
+        return ZJFollowLiveCell.cellHeightWithModel(model: self.interesList)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
