@@ -12,7 +12,7 @@ private let kFollowCateH : CGFloat = Adapt(50)
 class ZJFollowViewController: ZJBaseViewController {
 
     // 标题数组
-    private lazy var titles : [String] = ["直播","视频","分类"]
+    private lazy var titles : [String] = ["直播","视频","动态"]
     // 控制器数组
     private lazy var controllers : [UIViewController] = {
         let controllers = [ZJFollowLiveViewController(),ZJFollowVideoViewController(),ZJFollowStateViewController()]

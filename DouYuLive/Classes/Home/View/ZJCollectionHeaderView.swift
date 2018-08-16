@@ -9,7 +9,7 @@
 import UIKit
 
 class ZJCollectionHeaderView: UICollectionReusableView {
-    private var titleLab = UILabel()
+    lazy var titleLab = UILabel()
     lazy var topLine : UIView = UIView()
     lazy var botLine : UIView = UIView()
     override init(frame: CGRect) {

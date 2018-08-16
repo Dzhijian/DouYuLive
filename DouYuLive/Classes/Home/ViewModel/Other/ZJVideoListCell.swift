@@ -14,7 +14,31 @@ class ZJVideoListCell: ZJBaseTableCell {
     private lazy var imageV = UIImageView()
     private lazy var nameLab = UILabel()
     private lazy var likeBtn = UIButton()
-    
+    private lazy var avatar : UIImageView = {
+        let avatar = UIImageView()
+        avatar.layer.cornerRadius = Adapt(15)
+        avatar.layer.masksToBounds = true
+        avatar.image = UIImage(named: "micLink_seatAreaPlaceholder")
+        return avatar
+    }()
+    var videoModel : ZJFollowVideoList?{
+        didSet{
+            if let imgUrl = URL(string:videoModel?.video_cover ?? "")  {
+                self.imageV.kf.setImage(with: imgUrl)
+            }else{
+                self.imageV.image = UIImage(named: "anchorImage_placeHolder")
+            }
+            
+            if let avatarUrl = URL(string:videoModel?.owner_avatar ?? "")  {
+                self.avatar.kf.setImage(with: avatarUrl)
+            }else{
+                self.avatar.image = UIImage(named: "anchorImage_placeHolder")
+            }
+            
+            nameLab.text = videoModel?.nickname
+            likeBtn.setTitle(videoModel?.video_collect_num?.description, for: .normal)
+        }
+    }
     
     override func zj_setUpAllView() {
         setUpAllView()
@@ -41,6 +65,7 @@ class ZJVideoListCell: ZJBaseTableCell {
 extension ZJVideoListCell {
     
     private func setUpAllView() {
+        
         self.imageV = UIImageView.zj_createImageView(imageName: "", supView: self.contentView, closure: { (make) in
             make.top.left.right.equalTo(0)
             make.height.equalTo(kVideoH)
@@ -60,6 +85,12 @@ extension ZJVideoListCell {
         self.likeBtn.titleLabel?.font = FontSize(12)
         self.likeBtn.setTitleColor(kGrayTextColor, for: .normal)
         
+        self.imageV.addSubview(avatar)
+        avatar.snp.makeConstraints { (make) in
+            make.left.equalTo(Adapt(15))
+            make.width.height.equalTo(Adapt(30))
+            make.bottom.equalTo(imageV.snp.bottom).offset(Adapt(5))
+        }
     }
     
 

@@ -65,6 +65,7 @@
 		04907E8C21183EE7006B70EC /* ZJCateOneItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04907E8B21183EE7006B70EC /* ZJCateOneItem.swift */; };
 		04907E8E21185E94006B70EC /* ZJNotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04907E8D21185E94006B70EC /* ZJNotificationName.swift */; };
 		04907E90211954A8006B70EC /* ZJDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04907E8F211954A8006B70EC /* ZJDecoder.swift */; };
+		049705D32125DC8800E12562 /* ZJFollowVideoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049705D22125DC8800E12562 /* ZJFollowVideoData.swift */; };
 		04A4739D2122E93600D37F33 /* LZViewPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A4739A2122E93500D37F33 /* LZViewPager.swift */; };
 		04A4739E2122E93600D37F33 /* LZViewPagerContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A4739B2122E93500D37F33 /* LZViewPagerContent.swift */; };
 		04A4739F2122E93600D37F33 /* LZViewPagerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A4739C2122E93500D37F33 /* LZViewPagerHeader.swift */; };
@@ -183,6 +184,7 @@
 		04907E8B21183EE7006B70EC /* ZJCateOneItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCateOneItem.swift; sourceTree = "<group>"; };
 		04907E8D21185E94006B70EC /* ZJNotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJNotificationName.swift; sourceTree = "<group>"; };
 		04907E8F211954A8006B70EC /* ZJDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJDecoder.swift; sourceTree = "<group>"; };
+		049705D22125DC8800E12562 /* ZJFollowVideoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFollowVideoData.swift; sourceTree = "<group>"; };
 		04A4739A2122E93500D37F33 /* LZViewPager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZViewPager.swift; sourceTree = "<group>"; };
 		04A4739B2122E93500D37F33 /* LZViewPagerContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZViewPagerContent.swift; sourceTree = "<group>"; };
 		04A4739C2122E93500D37F33 /* LZViewPagerHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZViewPagerHeader.swift; sourceTree = "<group>"; };
@@ -383,6 +385,7 @@
 			isa = PBXGroup;
 			children = (
 				045DE38F2125C75C004718E8 /* ZJFollowInteresData.swift */,
+				049705D22125DC8800E12562 /* ZJFollowVideoData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -483,9 +486,9 @@
 		048EA3A92107873B00E30720 /* Follow */ = {
 			isa = PBXGroup;
 			children = (
-				045DE38E2125C72E004718E8 /* Model */,
 				048EA3B7210790A900E30720 /* ZJFollowViewController.swift */,
 				04A473B721252C0600D37F33 /* Controller */,
+				045DE38E2125C72E004718E8 /* Model */,
 				04A473B9212533CE00D37F33 /* View */,
 			);
 			path = Follow;
@@ -971,6 +974,7 @@
 				04907E8E21185E94006B70EC /* ZJNotificationName.swift in Sources */,
 				043512E321219372001D928A /* ZJRecreationHeaderView.swift in Sources */,
 				0419BCF3210F7FE5008661D3 /* ZJPageContentView.swift in Sources */,
+				049705D32125DC8800E12562 /* ZJFollowVideoData.swift in Sources */,
 				048EA3C02107911D00E30720 /* ZJNavigationController.swift in Sources */,
 				0419BCFB2111BE8F008661D3 /* ZJLOLViewController.swift in Sources */,
 				0419BD122112EDCA008661D3 /* ZJRecommendViewModel.swift in Sources */,
