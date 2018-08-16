@@ -35,19 +35,17 @@ class ZJPageTitleView: UIView {
         return scrollLine
     }()
     
+    // 底部的分割线
+    private lazy var bottomLine : UIView = {
+        let botLine = UIView()
+        let botH : CGFloat = 0.5
+        botLine.backgroundColor = option.kBottomLineColor
+        botLine.frame = CGRect(x: 0, y: frame.height-botH, width: frame.width, height: botH)
+        return botLine
+    }()
+    
     private lazy var option : ZJPageOptions = {
         let option = ZJPageOptions()
-//        option.kItemWidth = 80
-//        option.kNormalColor = (220,220,220)
-//        option.kSelectColor = (255,255,255)
-//        option.kMarginW = Adapt(20)
-//        option.isTitleScrollEnable = true
-//        option.kBotLineHeight = 3
-//        option.kTitleFontSize = 13
-//        option.kTitleSelectFontSize = 14
-//        option.kBotLineColor = kWhite
-//        option.isShowBottomLine = true
-//        option.kGradColors = kGradientColors
         return option
     }()
     // 创建一个 label 数组
@@ -123,7 +121,9 @@ extension ZJPageTitleView {
             let lab = UILabel()
             lab.text = title
             lab.tag = index
-            lab.font = FontSize(option.kTitleFontSize)
+            
+            
+            lab.font = option.kIsNormalFontBold ? BoldFontSize(option.kTitleFontSize) : FontSize(option.kTitleFontSize)
             lab.textColor = colorWithRGBA(option.kNormalColor.0, option.kNormalColor.1, option.kNormalColor.2, 1.0)
             lab.textAlignment = .center
             // 添加 lab
@@ -139,11 +139,9 @@ extension ZJPageTitleView {
     private func setBottomMenuAndScrollLine(){
         
         // 添加底部分割线 和 滚动线
-        let bottomLine = UIView()
-        bottomLine.backgroundColor = UIColor.lightGray
-        let botH : CGFloat = 0.5
-        bottomLine.frame = CGRect(x: 0, y: frame.height-botH, width: frame.width, height: botH)
-        addSubview(bottomLine)
+        if option.kIsShowBottomBorderLine {
+            addSubview(bottomLine)
+        }
         
         // 如果没有就返回
         setUpBottomLine()
@@ -154,11 +152,8 @@ extension ZJPageTitleView {
             firstLab.font = BoldFontSize(option.kTitleSelectFontSize!)
         }
         
-        
             adjustLabelPosition(firstLab)
 
-       
-        
     }
     
     func setUpBottomLine() {
@@ -258,7 +253,7 @@ extension ZJPageTitleView {
         // 变化 targetLab 的文字颜色
         targetLab.textColor = colorWithRGBA(option.kNormalColor.0 + colorDelta.0 * progress, option.kNormalColor.1 + colorDelta.1 * progress, option.kNormalColor.2 + colorDelta.2 * progress, 1.0)
         if option.kTitleSelectFontSize != nil{
-            sourceLab.font = FontSize(option.kTitleSelectFontSize! - (option.kTitleSelectFontSize! - option.kTitleFontSize) * progress)
+            sourceLab.font = option.kIsNormalFontBold ? BoldFontSize(option.kTitleSelectFontSize! - (option.kTitleSelectFontSize! - option.kTitleFontSize) * progress) : FontSize(option.kTitleSelectFontSize! - (option.kTitleSelectFontSize! - option.kTitleFontSize) * progress)
             targetLab.font = BoldFontSize (option.kTitleSelectFontSize! + (option.kTitleSelectFontSize! - option.kTitleFontSize)  * progress)
             setupLabelsLayout()
         }
@@ -302,7 +297,7 @@ extension ZJPageTitleView {
         // 修改字体大小
         if option.kTitleSelectFontSize != nil{
             currentLab?.font = BoldFontSize (option.kTitleSelectFontSize!)
-            oldLab.font = FontSize(option.kTitleFontSize)
+            oldLab.font = option.kIsNormalFontBold ? BoldFontSize(option.kTitleFontSize) : FontSize(option.kTitleFontSize)
             setupLabelsLayout()
         }
         

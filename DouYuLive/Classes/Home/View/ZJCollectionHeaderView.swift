@@ -10,7 +10,8 @@ import UIKit
 
 class ZJCollectionHeaderView: UICollectionReusableView {
     private var titleLab = UILabel()
-    
+    lazy var topLine : UIView = UIView()
+    lazy var botLine : UIView = UIView()
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpView()
@@ -31,7 +32,7 @@ extension ZJCollectionHeaderView {
     
     private func setUpView(){
         
-        _ = UIView.zj_createView(bgClor: klineColor, supView: self, closure: { (make) in
+        topLine = UIView.zj_createView(bgClor: klineColor, supView: self, closure: { (make) in
             make.left.right.top.equalTo(0)
             make.height.equalTo(0.6)
         })
@@ -41,7 +42,7 @@ extension ZJCollectionHeaderView {
             make.left.equalTo(AdaptW(15))
         })
         
-        _ = UIView.zj_createView(bgClor: klineColor, supView: self, closure: { (make) in
+        botLine = UIView.zj_createView(bgClor: klineColor, supView: self, closure: { (make) in
             make.left.right.bottom.equalTo(0)
             make.height.equalTo(0.6)
         })

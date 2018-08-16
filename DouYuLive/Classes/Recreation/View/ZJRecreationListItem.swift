@@ -79,7 +79,7 @@ extension ZJRecreationListItem {
         })
         self.imgV.contentMode = .scaleToFill
         
-        self.imgV.backgroundColor = kOrange
+        self.imgV.backgroundColor = klineColor
         
         self.markImgV = UIImageView.zj_createImageView(imageName: "", supView: self.imgV, closure: { (make) in
             make.top.equalTo(Adapt(10))

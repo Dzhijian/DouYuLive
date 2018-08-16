@@ -74,6 +74,11 @@
 		04A473A921240F7C00D37F33 /* ZJQuadraticElementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A473A821240F7C00D37F33 /* ZJQuadraticElementViewController.swift */; };
 		04A473AB21240FA300D37F33 /* ZJMusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A473AA21240FA300D37F33 /* ZJMusicViewController.swift */; };
 		04A473AE21242A8000D37F33 /* ZJFaceScoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A473AD21242A8000D37F33 /* ZJFaceScoreCell.swift */; };
+		04A473B221252BD000D37F33 /* ZJFollowLiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A473B121252BD000D37F33 /* ZJFollowLiveViewController.swift */; };
+		04A473B421252BE200D37F33 /* ZJFollowVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A473B321252BE200D37F33 /* ZJFollowVideoViewController.swift */; };
+		04A473B621252C0300D37F33 /* ZJFollowStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A473B521252C0300D37F33 /* ZJFollowStateViewController.swift */; };
+		04A473BB212533FC00D37F33 /* ZJFollowLiveHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A473BA212533FC00D37F33 /* ZJFollowLiveHeadView.swift */; };
+		04A473BD2125353000D37F33 /* ZJFollowLiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A473BC2125353000D37F33 /* ZJFollowLiveCell.swift */; };
 		04DE708621198D4E0073DE82 /* ZJRecommendHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE708521198D4E0073DE82 /* ZJRecommendHeadView.swift */; };
 		04DE70882119953F0073DE82 /* ZJActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE70872119953F0073DE82 /* ZJActivityView.swift */; };
 		04DE708A2119967E0073DE82 /* ZJBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE70892119967E0073DE82 /* ZJBaseView.swift */; };
@@ -186,6 +191,11 @@
 		04A473A821240F7C00D37F33 /* ZJQuadraticElementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJQuadraticElementViewController.swift; sourceTree = "<group>"; };
 		04A473AA21240FA300D37F33 /* ZJMusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJMusicViewController.swift; sourceTree = "<group>"; };
 		04A473AD21242A8000D37F33 /* ZJFaceScoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFaceScoreCell.swift; sourceTree = "<group>"; };
+		04A473B121252BD000D37F33 /* ZJFollowLiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFollowLiveViewController.swift; sourceTree = "<group>"; };
+		04A473B321252BE200D37F33 /* ZJFollowVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFollowVideoViewController.swift; sourceTree = "<group>"; };
+		04A473B521252C0300D37F33 /* ZJFollowStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFollowStateViewController.swift; sourceTree = "<group>"; };
+		04A473BA212533FC00D37F33 /* ZJFollowLiveHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFollowLiveHeadView.swift; sourceTree = "<group>"; };
+		04A473BC2125353000D37F33 /* ZJFollowLiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFollowLiveCell.swift; sourceTree = "<group>"; };
 		04DE708521198D4E0073DE82 /* ZJRecommendHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJRecommendHeadView.swift; sourceTree = "<group>"; };
 		04DE70872119953F0073DE82 /* ZJActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJActivityView.swift; sourceTree = "<group>"; };
 		04DE70892119967E0073DE82 /* ZJBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJBaseView.swift; sourceTree = "<group>"; };
@@ -449,6 +459,7 @@
 		048EA3A82107873B00E30720 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				04A473B8212530B600D37F33 /* ZJPageView */,
 				04A473992122E93500D37F33 /* LZViewPager */,
 				043512E82122B1AF001D928A /* DNSPageView */,
 				0419BCE9210EB514008661D3 /* Marco */,
@@ -463,6 +474,8 @@
 			isa = PBXGroup;
 			children = (
 				048EA3B7210790A900E30720 /* ZJFollowViewController.swift */,
+				04A473B721252C0600D37F33 /* Controller */,
+				04A473B9212533CE00D37F33 /* View */,
 			);
 			path = Follow;
 			sourceTree = "<group>";
@@ -559,6 +572,35 @@
 			path = FaceScore;
 			sourceTree = "<group>";
 		};
+		04A473B721252C0600D37F33 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				04A473B121252BD000D37F33 /* ZJFollowLiveViewController.swift */,
+				04A473B321252BE200D37F33 /* ZJFollowVideoViewController.swift */,
+				04A473B521252C0300D37F33 /* ZJFollowStateViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		04A473B8212530B600D37F33 /* ZJPageView */ = {
+			isa = PBXGroup;
+			children = (
+				0419BCE0210ABACB008661D3 /* ZJPageTitleView.swift */,
+				0419BCF2210F7FE5008661D3 /* ZJPageContentView.swift */,
+				04A473A02123479200D37F33 /* ZJPageOptions.swift */,
+			);
+			path = ZJPageView;
+			sourceTree = "<group>";
+		};
+		04A473B9212533CE00D37F33 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				04A473BA212533FC00D37F33 /* ZJFollowLiveHeadView.swift */,
+				04A473BC2125353000D37F33 /* ZJFollowLiveCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		04DE708321198BA50073DE82 /* Recommend */ = {
 			isa = PBXGroup;
 			children = (
@@ -572,9 +614,6 @@
 			isa = PBXGroup;
 			children = (
 				0419BCE5210AF22A008661D3 /* ZJHomeSearchView.swift */,
-				0419BCE0210ABACB008661D3 /* ZJPageTitleView.swift */,
-				0419BCF2210F7FE5008661D3 /* ZJPageContentView.swift */,
-				04A473A02123479200D37F33 /* ZJPageOptions.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -868,6 +907,7 @@
 				043512F32122B1AF001D928A /* DNSPageHelper.swift in Sources */,
 				04DE709E211BE2140073DE82 /* ZJAllLiveData.swift in Sources */,
 				04DE7098211AC5270073DE82 /* ZJCateCollectionHeadView.swift in Sources */,
+				04A473BB212533FC00D37F33 /* ZJFollowLiveHeadView.swift in Sources */,
 				0419BD03211205FF008661D3 /* ZJCollectionHeaderView.swift in Sources */,
 				043512F42122B1AF001D928A /* DNSPageView.swift in Sources */,
 				0419BD1421135904008661D3 /* ZJInterfaceURL.swift in Sources */,
@@ -876,11 +916,13 @@
 				048EA3B121078F9700E30720 /* ZJHomeViewController.swift in Sources */,
 				043512F22122B1AF001D928A /* DNSPageContentView.swift in Sources */,
 				043512F72122B1AF001D928A /* DNSPageCollectionViewFlowLayout.swift in Sources */,
+				04A473B221252BD000D37F33 /* ZJFollowLiveViewController.swift in Sources */,
 				04DE7096211AA4D70073DE82 /* ZJCollectionViewFlowLayout.swift in Sources */,
 				043512E72121AD5F001D928A /* ZJNavigationBar.swift in Sources */,
 				0419BCF52111BE24008661D3 /* ZJRecommendViewController.swift in Sources */,
 				0419BCF72111BE62008661D3 /* ZJClassifyViewController.swift in Sources */,
 				048EA3792106447200E30720 /* AppDelegate.swift in Sources */,
+				04A473BD2125353000D37F33 /* ZJFollowLiveCell.swift in Sources */,
 				0419BCE6210AF22A008661D3 /* ZJHomeSearchView.swift in Sources */,
 				04DE70A2211C95F70073DE82 /* ZJVideoListCell.swift in Sources */,
 				04DE709C211B39F40073DE82 /* ZJChildCateList.swift in Sources */,
@@ -903,8 +945,10 @@
 				04DE7094211A88D20073DE82 /* ZJBannerModel.swift in Sources */,
 				04907E8821174B70006B70EC /* ZJRecommendCate.swift in Sources */,
 				0419BCFF2111BEBE008661D3 /* ZJQQCarViewController.swift in Sources */,
+				04A473B421252BE200D37F33 /* ZJFollowVideoViewController.swift in Sources */,
 				0419BD0F2112E920008661D3 /* ZJNetworking.swift in Sources */,
 				04907E90211954A8006B70EC /* ZJDecoder.swift in Sources */,
+				04A473B621252C0300D37F33 /* ZJFollowStateViewController.swift in Sources */,
 				0419BCFD2111BEB1008661D3 /* ZJWZRYViewController.swift in Sources */,
 				048EA3AF21078F8400E30720 /* ZJTabBarController.swift in Sources */,
 				04A473A12123479200D37F33 /* ZJPageOptions.swift in Sources */,

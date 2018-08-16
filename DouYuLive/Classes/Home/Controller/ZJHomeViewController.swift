@@ -32,7 +32,7 @@ class ZJHomeViewController: ZJBaseViewController {
         option.kSelectColor = (250,250,250)
         option.kTitleSelectFontSize = 14
         option.isShowBottomLine = false
-        
+        option.kIsShowBottomBorderLine = false
         let pageTitleViw = ZJPageTitleView(frame: frame, titles: titles ,options:option)
         pageTitleViw.delegate = self
         return pageTitleViw
@@ -40,7 +40,7 @@ class ZJHomeViewController: ZJBaseViewController {
     // 内容 View
     private lazy var pageContenView : ZJPageContentView = { [weak self] in
         let height : CGFloat = kScreenH - kStatuHeight - kNavigationBarHeight - kCateTitleH - kTabBarHeight
-        let frame = CGRect(x: 0, y: 40, width: kScreenW, height: height)
+        let frame = CGRect(x: 0, y: kCateTitleH, width: kScreenW, height: height)
         
         let contentView = ZJPageContentView(frame: frame, childVCs: controllers, parentViewController:self!)
         contentView.delegate = self
@@ -95,23 +95,16 @@ class ZJHomeViewController: ZJBaseViewController {
 
 
 
-// MARK: - 遵守PageTitleViewDelegate协议
-extension ZJHomeViewController : PageTitleViewDelegate {
+// MARK: - 遵守PageTitleViewDelegate,PageContentViewDelegate协议
+extension ZJHomeViewController : PageTitleViewDelegate,PageContentViewDelegate {
     
     func pageTitleView(titleView: ZJPageTitleView, selectedIndex index: Int) {
         pageContenView.setCurrentIndex(currentIndex: index)
     }
-}
-
-
-// MARK: - 遵守PageContentViewDelegate协议
-extension ZJHomeViewController : PageContentViewDelegate{
     
     func pageContentView(contentView: ZJPageContentView, progress: CGFloat, sourceIndex: Int, targetIndex: Int) {
         pageTitleView.setPageTitleWithProgress(progress: progress, sourceIndex: sourceIndex, targetIndex: targetIndex)
     }
-    
-    
 }
 
 
@@ -128,10 +121,9 @@ extension ZJHomeViewController {
         // 添加导航栏
         setUpNavigation()
         // 添加标题栏
-        setUpPageTitleView()
+        setUpPageTitleAndContentView()
         
-        // 添加 ContentView
-        view.addSubview(pageContenView)
+        
     }
     
     // 配置 NavigationBar
@@ -157,9 +149,11 @@ extension ZJHomeViewController {
         }
     }
     
-    func setUpPageTitleView() {
-        
+    func setUpPageTitleAndContentView() {
+        // 添加 TitleView
         view.addSubview(pageTitleView)
+        // 添加 ContentView
+        view.addSubview(pageContenView)
         
     }
     

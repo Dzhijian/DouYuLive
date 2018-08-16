@@ -23,6 +23,8 @@ public class ZJPageOptions{
     public var kBotLineHeight : CGFloat = 3
     // 默认字体的Font大小
     public var kTitleFontSize : CGFloat = 13
+    // 默认字体是否加粗
+    public var kIsNormalFontBold : Bool = false
     // 选中的文本Font大小
     public var kTitleSelectFontSize : CGFloat? = nil
     // 底部滚动线的颜色
@@ -33,5 +35,9 @@ public class ZJPageOptions{
     public var kscrollViewBGColor : UIColor = kWhite
     // scrollView背景渐变色
     public var kGradColors : [CGColor]? = nil
+    // 是否显示底部的分割线
+    public var kIsShowBottomBorderLine : Bool = true
+    // 底部分割线的颜色
+    public var kBottomLineColor : UIColor = UIColor.gray
     
 }

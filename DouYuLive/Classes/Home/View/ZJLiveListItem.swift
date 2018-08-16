@@ -8,7 +8,7 @@
 
 import UIKit
 
-let ItemH : CGFloat = (kScreenW - 30) / 2 * 9 / 16
+let ItemH : CGFloat = (kScreenW - 10) / 2 * 9 / 16
 
 class ZJLiveListItem: ZJBaseCollectionCell {
     var imageV = UIImageView()
