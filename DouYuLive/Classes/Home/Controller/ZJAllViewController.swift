@@ -56,7 +56,7 @@ extension  ZJAllViewController {
     
     private func getAllLiveData() {
         
-        ZJNetWorking.requestData(type: .GET, URlString: ZJAllLiveListURL) { (response) in
+        ZJNetWorking.requestData(type: .GET, URlString: ZJLiveItemModelURL) { (response) in
             do {
                 let data = try JSONDecoder().decode(ZJLiveListData.self, from: response)
                 self.allLiveData = data
@@ -92,7 +92,7 @@ extension ZJAllViewController : UICollectionViewDelegate,UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let item = collectionView.dequeueReusableCell(withReuseIdentifier: ZJLiveListItem.identifier(), for: indexPath) as! ZJLiveListItem
-        item.allModel = self.allLiveData.list[indexPath.item]
+        item.liveModel = self.allLiveData.list[indexPath.item]
         return item
     }
 }

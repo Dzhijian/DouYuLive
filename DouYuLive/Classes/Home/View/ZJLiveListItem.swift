@@ -22,34 +22,31 @@ class ZJLiveListItem: ZJBaseCollectionCell {
         setUpAllView()
     }
     
-    var outDoorModel : ZJFaceScoreHotList? {
-        didSet{
-            titleLab.text = outDoorModel?.room_name
-            nameLab.text =  outDoorModel?.nickname
-            hotLab.text = outDoorModel?.online_num?.description //String(format:"%d",(allModel?.online_num)!)
-            descLab.text = outDoorModel?.cate2_name
-            
-            //不能使用强制解包策略
-            if let iconURL = URL(string: outDoorModel?.room_src ?? "") {
-                imageV.kf.setImage(with: iconURL)
-            } else {
-                imageV.image = UIImage(named: "video_default_cover")//home_more_btn
-            }
-        }
-    }
 
-    var allModel : ZJAllLiveList? {
+    var liveModel : ZJLiveItemModel? {
         didSet{
-            titleLab.text = allModel?.room_name
-            nameLab.text =  allModel?.nickname
-            hotLab.text = allModel?.online_num?.description //String(format:"%d",(allModel?.online_num)!)
-            descLab.text = allModel?.cate2_name
+            titleLab.text = liveModel?.room_name
+            nameLab.text =  liveModel?.nickname
+            
+            var numStr : String = ""
+            if (liveModel?.online_num)! > 9999 {
+                let integer =  (liveModel?.online_num)! / 10000
+                let remainder : Int =  Int((liveModel?.online_num)! % 10000)
+                let numString = "\(integer).\(remainder)"
+                let numFloat = Float(numString)
+                numStr = "\(String(format: "%.2f", numFloat!))W"
+            }else{
+                numStr = (liveModel?.online_num?.description)!
+            }
+            
+            hotLab.text = numStr
+            descLab.text = liveModel?.cate2_name
             
             //不能使用强制解包策略
-            if let iconURL = URL(string: allModel?.room_src ?? "") {
+            if let iconURL = URL(string: liveModel?.room_src ?? "") {
                 imageV.kf.setImage(with: iconURL)
             } else {
-                imageV.image = UIImage(named: "video_default_cover")//home_more_btn
+                imageV.image = UIImage(named: "video_default_cover")
             }
         }
     }

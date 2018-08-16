@@ -11,7 +11,7 @@ import UIKit
 // MARK: 颜值
 class ZJFaceScoreViewController: ZJBaseViewController {
 
-    var faceScoreHotData : ZJFaceScoreHotData = ZJFaceScoreHotData()
+    var faceScoreHotData : ZJLiveListData = ZJLiveListData()
     
     private lazy var showIndex : Int = 0
     private lazy var mainTable : UITableView = {
@@ -51,7 +51,7 @@ extension ZJFaceScoreViewController {
         
         ZJNetWorking.requestData(type: .GET, URlString: ZJFaceScoreListHotURL) { (response) in
             
-            let data = try? ZJDecoder.decode(ZJFaceScoreHotData.self, data : response)
+            let data = try? ZJDecoder.decode(ZJLiveListData.self, data : response)
             if data != nil {
                 self.faceScoreHotData = data!
                 self.mainTable.reloadData()
@@ -69,7 +69,7 @@ extension ZJFaceScoreViewController {
         
         ZJNetWorking.requestData(type: .GET, URlString: urlStr) { (response) in
 
-            let data = try? ZJDecoder.decode(ZJFaceScoreHotData.self, data : response)
+            let data = try? ZJDecoder.decode(ZJLiveListData.self, data : response)
             if data != nil {
                 self.faceScoreHotData = data!
                 self.mainTable.reloadData()

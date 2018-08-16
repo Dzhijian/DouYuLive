@@ -12,7 +12,7 @@ import UIKit
 /// 户外
 class ZJOutdoorsViewController: ZJBaseViewController {
     
-    var faceScoreHotData : ZJFaceScoreHotData = ZJFaceScoreHotData()
+    var faceScoreHotData : ZJLiveListData = ZJLiveListData()
     private let childAllId : Int = 124
     private var childCateId : String = "2_124"
     private var childCateData : ZJChildCateData = ZJChildCateData()
@@ -68,7 +68,7 @@ extension ZJOutdoorsViewController {
     private func getOutDoorsLiveListData() {
         let URLStr : String = "\(ZJOutDoorsListURL)\(self.childCateId)/0/20/ios?client_sys=ios"
         ZJNetWorking.requestData(type: .GET, URlString: URLStr) { (response) in
-            let data = try? ZJDecoder.decode(ZJFaceScoreHotData.self, data : response)
+            let data = try? ZJDecoder.decode(ZJLiveListData.self, data : response)
             if data != nil {
                 self.faceScoreHotData = data!
                 self.mainTable.reloadData()

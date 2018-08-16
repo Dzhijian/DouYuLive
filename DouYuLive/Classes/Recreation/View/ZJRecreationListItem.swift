@@ -32,7 +32,7 @@ class ZJRecreationListItem: ZJBaseCollectionCell {
         imgV.image = UIImage(named: "home_header_hot")
         return imgV
     }()
-    var faceHotModel : ZJFaceScoreHotList? {
+    var faceHotModel : ZJLiveItemModel? {
         
         didSet{
             //不能使用强制解包策略
@@ -53,7 +53,6 @@ class ZJRecreationListItem: ZJBaseCollectionCell {
                 let remainder : Int =  Int((faceHotModel?.online_num)! % 10000)
                 let numString = "\(integer).\(remainder)"
                 let numFloat = Float(numString)
-                
                 numStr = "\(String(format: "%.2f", numFloat!))W"
             }else{
                 numStr = (faceHotModel?.online_num?.description)!
@@ -89,7 +88,6 @@ extension ZJRecreationListItem {
             make.height.equalTo(Adapt(20))
         })
         
-//        self.markImgV.backgroundColor = kGreen
         
       
         self.nameLab = UILabel.zj_createLabel(text: "哈哈哈", textColor:  kMainTextColor, font: FontSize(14), textAlignment: .left, supView: self.contentView, closure: { (make) in

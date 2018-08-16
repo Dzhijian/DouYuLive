@@ -24,34 +24,42 @@ enum ZJCellType {
 typealias ScrollBlock = (Bool) -> ()
 
 class ZJLiveListCell: ZJBaseTableCell {
-    
+    // 子分类的代理方法
     weak var delegate : ZJChildCateSelectDelegate?
     
+    // 滚动回调
     var scrollBlock : ScrollBlock?
+    // 全部 id
     var allId : Int? = 1
-    
+    // cell 类型
     var cellType : ZJCellType = .ZJCellHomeLOL
     // MArk: 直播列表
+    
+    private lazy var headView : ZJCateCollectionHeadView = {
+        let headView = ZJCateCollectionHeadView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: Adapt(40)))
+        headView.backgroundColor = kWhite
+        headView.allID = self.allId
+        headView.delegate = self
+        return headView
+    }()
+    
     lazy var collectionView : UICollectionView = {
-        let layout = ZJCollectionViewFlowLayout()
-//        let layout = UICollectionViewFlowLayout()
+        let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 10
         layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
         layout.itemSize = CGSize(width: kItemW, height: kItemH)
-        layout.headerReferenceSize = CGSize(width: kScreenW, height: Adapt(40))
-        let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: kContentHeight), collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame: CGRect(x: 0, y: Adapt(40), width: kScreenW, height: kContentHeight), collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.backgroundColor = kWhite
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(ZJLiveListItem.self, forCellWithReuseIdentifier: ZJLiveListItem.identifier())
         collectionView.register(ZJCateCollectionHeadView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier:kCateCollectionHeadView )
-//        collectionView.isHidden = true
         return collectionView
     }()
     
-    var liveRoomList : [ZJAllLiveList]? {
+    var liveRoomList : [ZJLiveItemModel]? {
         
         didSet{
             
@@ -59,7 +67,7 @@ class ZJLiveListCell: ZJBaseTableCell {
         }
     }
     
-    var outDoorsList : [ZJFaceScoreHotList]? {
+    var outDoorsList : [ZJLiveItemModel]? {
         
         didSet{
             
@@ -70,8 +78,7 @@ class ZJLiveListCell: ZJBaseTableCell {
     var cateListData : [ZJChildCateList]? {
         
         didSet{
-            
-            self.collectionView.reloadData()
+            headView.cateList = self.cateListData
         }
     }
     
@@ -88,9 +95,13 @@ class ZJLiveListCell: ZJBaseTableCell {
     override func zj_setUpAllView() {
         addSubview(collectionView)
         addSubview(mainTable)
+        addSubview(headView)
+
         collectionView.snp.makeConstraints { (make) in
-            make.edges.equalTo(0)
+            make.left.right.bottom.equalTo(0)
+            make.top.equalTo(Adapt(40))
         }
+        
         mainTable.snp.makeConstraints { (make) in
             make.edges.equalTo(0)
         }
@@ -150,11 +161,11 @@ extension ZJLiveListCell : UICollectionViewDataSource,UICollectionViewDelegate,U
             
         case .ZJCellHomeLOL:
             
-            cell.allModel = self.liveRoomList?[indexPath.item]
+            cell.liveModel = self.liveRoomList?[indexPath.item]
             
         case .ZJCellRecreationOutDoor:
             
-            cell.outDoorModel = self.outDoorsList?[indexPath.item]
+            cell.liveModel = self.outDoorsList?[indexPath.item]
             
         }
         
@@ -163,15 +174,15 @@ extension ZJLiveListCell : UICollectionViewDataSource,UICollectionViewDelegate,U
     }
     
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: kCateCollectionHeadView, for: indexPath) as! ZJCateCollectionHeadView
-        headerView.allID = self.allId
-        headerView.cateList = self.cateListData
-        headerView.delegate = self
-        return headerView
-        
-    }
+//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+//
+//        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: kCateCollectionHeadView, for: indexPath) as! ZJCateCollectionHeadView
+//        headerView.allID = self.allId
+//        headerView.cateList = self.cateListData
+//        headerView.delegate = self
+//        return headerView
+//
+//    }
  
 }
 

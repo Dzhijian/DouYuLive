@@ -15,7 +15,7 @@ protocol ZJCateItemSelectedDelegate : class {
     func cateItemSelected(cateId: String, index : Int)
     
 }
-class ZJCateCollectionHeadView: UICollectionReusableView {
+class ZJCateCollectionHeadView: UIView {
     
     var allID : Int? = 1
     
@@ -38,6 +38,7 @@ class ZJCateCollectionHeadView: UICollectionReusableView {
     }()
     
     private lazy var line = UIView()
+    private lazy var botLine = UIView()
     private lazy var moreBtn : UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(named: "btn_video_arrow_down"), for: .normal)
@@ -126,13 +127,14 @@ extension ZJCateCollectionHeadView {
         }
         
         UIView.animate(withDuration: 0.25, animations: {
-            self.frame.size.height  = frame.size.height + kColH * CGFloat(column!) + Adapt(30)
+            self.frame.size.height  = frame.size.height + kColH * CGFloat(column!) + Adapt(40)
             self.collectionView.frame.size.height = colframe.size.height + kColH * CGFloat(column!)
         }) { (isSuccess) in
             if isSuccess {
                 self.moreBtn.isHidden = false
                 self.moreBtn.setImage(UIImage(named: "btn_video_arrow_up"), for: .normal)
                 self.line.isHidden = false
+                self.botLine.isHidden = false
                 self.collectionView.reloadData()
             }
         }
@@ -143,6 +145,7 @@ extension ZJCateCollectionHeadView {
     private func hiddenChildCateView (){
         self.moreBtn.isSelected = false
         self.line.isHidden = true
+        self.botLine.isHidden = true
         self.showNum = 5
         UIView.animate(withDuration: 0.25, animations: {
             self.frame  = CGRect(x: 0, y: 0, width: kScreenW, height: Adapt(40))
@@ -214,10 +217,11 @@ extension ZJCateCollectionHeadView {
         })
         self.line.isHidden = true
         
-        _ = UIView.zj_createView(bgClor: klineColor, supView: self.collectionView, closure: { (make) in
+        self.botLine = UIView.zj_createView(bgClor: klineColor, supView: self, closure: { (make) in
             make.left.right.bottom.equalTo(0)
-            make.height.equalTo(0.5)
+            make.height.equalTo(1)
         })
+        self.botLine.isHidden = true
     }
     
     

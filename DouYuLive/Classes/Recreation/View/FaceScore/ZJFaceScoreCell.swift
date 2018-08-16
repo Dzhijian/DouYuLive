@@ -12,7 +12,7 @@ private let kItemH = kItemW * 5 / 4 - Adapt(30)
 
 class ZJFaceScoreCell: ZJBaseTableCell {
     
-    var faceScoreDataList : [ZJFaceScoreHotList]? {
+    var faceScoreDataList : [ZJLiveItemModel]? {
         
         didSet{
             self.collectionView.reloadData()
@@ -26,7 +26,6 @@ class ZJFaceScoreCell: ZJBaseTableCell {
         layout.itemSize = CGSize(width: kItemW, height: kItemH)
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 5
-//        layout.headerReferenceSize = CGSize(width: kScreenW, height: Adapt(45))
         return layout
     }()
     
