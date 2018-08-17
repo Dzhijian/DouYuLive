@@ -22,6 +22,38 @@ class ZJLiveListItem: ZJBaseCollectionCell {
         setUpAllView()
     }
     
+    // 热门视频
+    var hotVideoModel : ZJFollowVideoList? {
+        didSet{
+            titleLab.text = hotVideoModel?.video_title
+            var numStr : String = ""
+            if (hotVideoModel?.view_num)! > 9999 {
+                let integer =  (hotVideoModel?.view_num)! / 10000
+                let remainder : Int =  Int((hotVideoModel?.view_num)! % 10000)
+                let numString = "\(integer).\(remainder)"
+                let numFloat = Float(numString)
+                numStr = "\(String(format: "%.2f", numFloat!))W"
+            }else{
+                numStr = (hotVideoModel?.view_num?.description)!
+            }
+            nameLab.font = FontSize(10)
+            nameLab.text = numStr
+            
+            
+            let time : Int = Int(hotVideoModel?.video_duration ?? 0)
+            let timeS = time % 60
+            let timeM = (time - timeS) / 60 % 60
+            hotLab.text = "\(timeM):\(timeS)"
+            //不能使用强制解包策略
+            if let iconURL = URL(string: hotVideoModel?.video_cover ?? "") {
+                imageV.kf.setImage(with: iconURL)
+            } else {
+                imageV.image = UIImage(named: "video_default_cover")
+            }
+        }
+    }
+    
+    // 感兴趣
     var interesModel : ZJFollowInterseList? {
         didSet{
             titleLab.text = interesModel?.roomName
@@ -51,6 +83,7 @@ class ZJLiveListItem: ZJBaseCollectionCell {
     }
     
 
+    // 直播列表
     var liveModel : ZJLiveItemModel? {
         didSet{
             titleLab.text = liveModel?.room_name
@@ -99,7 +132,7 @@ extension ZJLiveListItem {
             make.right.equalTo(self.imageV.snp.right).offset(-5)
         })
         
-        self.titleLab = UILabel.zj_createLabel(text: "房间待着太无聊.哈哈哈哈哈哈哈哈哈哈", textColor: kBlack, font: FontSize(14), supView: self.contentView, closure: { (make) in
+        self.titleLab = UILabel.zj_createLabel(text: "房间待着太无聊.哈哈哈哈哈哈哈哈哈哈", textColor: kBlack, font: FontSize(13), supView: self.contentView, closure: { (make) in
             make.top.equalTo(self.imageV.snp.bottom).offset(10)
             make.left.equalTo(self.contentView.snp.left).offset(5)
             make.right.equalTo(self.contentView.snp.right).offset(-5)

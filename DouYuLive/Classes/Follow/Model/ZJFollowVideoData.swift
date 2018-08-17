@@ -66,6 +66,8 @@ struct ZJFollowVideoList : Decodable {
     var view_num : Int?
     var owner_auth_type : Int?
     var cid2 : Int?
+    var cid1 : Int?
+    var uid : Int?
     var cate2_name : String?
     var video_collect_num : Int?
     

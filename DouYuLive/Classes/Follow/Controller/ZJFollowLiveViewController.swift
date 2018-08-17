@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class ZJFollowLiveViewController: ZJBaseViewController {
     
     private lazy var interesList : [ZJFollowInterseList] = [ZJFollowInterseList]()

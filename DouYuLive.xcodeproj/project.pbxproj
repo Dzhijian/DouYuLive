@@ -69,6 +69,10 @@
 		049705D9212670B600E12562 /* ZJFishBarRecommendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049705D8212670B600E12562 /* ZJFishBarRecommendViewController.swift */; };
 		049705DB212670D700E12562 /* ZJFishBarMineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049705DA212670D700E12562 /* ZJFishBarMineViewController.swift */; };
 		049705DD212670E400E12562 /* ZJFishBarHotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049705DC212670E400E12562 /* ZJFishBarHotViewController.swift */; };
+		049705E22126B9AE00E12562 /* ZJDiscoverHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049705E12126B9AE00E12562 /* ZJDiscoverHeadView.swift */; };
+		049705E42126C0CD00E12562 /* ZJDiscoverCateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049705E32126C0CD00E12562 /* ZJDiscoverCateItem.swift */; };
+		049705E62126CA4A00E12562 /* ZJDiscoverSectionHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049705E52126CA4A00E12562 /* ZJDiscoverSectionHeadView.swift */; };
+		049705E82127397000E12562 /* ZJDiscoverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049705E72127397000E12562 /* ZJDiscoverModel.swift */; };
 		04A4739D2122E93600D37F33 /* LZViewPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A4739A2122E93500D37F33 /* LZViewPager.swift */; };
 		04A4739E2122E93600D37F33 /* LZViewPagerContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A4739B2122E93500D37F33 /* LZViewPagerContent.swift */; };
 		04A4739F2122E93600D37F33 /* LZViewPagerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A4739C2122E93500D37F33 /* LZViewPagerHeader.swift */; };
@@ -191,6 +195,10 @@
 		049705D8212670B600E12562 /* ZJFishBarRecommendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFishBarRecommendViewController.swift; sourceTree = "<group>"; };
 		049705DA212670D700E12562 /* ZJFishBarMineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFishBarMineViewController.swift; sourceTree = "<group>"; };
 		049705DC212670E400E12562 /* ZJFishBarHotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFishBarHotViewController.swift; sourceTree = "<group>"; };
+		049705E12126B9AE00E12562 /* ZJDiscoverHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJDiscoverHeadView.swift; sourceTree = "<group>"; };
+		049705E32126C0CD00E12562 /* ZJDiscoverCateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJDiscoverCateItem.swift; sourceTree = "<group>"; };
+		049705E52126CA4A00E12562 /* ZJDiscoverSectionHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJDiscoverSectionHeadView.swift; sourceTree = "<group>"; };
+		049705E72127397000E12562 /* ZJDiscoverModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJDiscoverModel.swift; sourceTree = "<group>"; };
 		04A4739A2122E93500D37F33 /* LZViewPager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZViewPager.swift; sourceTree = "<group>"; };
 		04A4739B2122E93500D37F33 /* LZViewPagerContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZViewPagerContent.swift; sourceTree = "<group>"; };
 		04A4739C2122E93500D37F33 /* LZViewPagerHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZViewPagerHeader.swift; sourceTree = "<group>"; };
@@ -614,6 +622,9 @@
 		049705DF2126B2F100E12562 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				049705E12126B9AE00E12562 /* ZJDiscoverHeadView.swift */,
+				049705E32126C0CD00E12562 /* ZJDiscoverCateItem.swift */,
+				049705E52126CA4A00E12562 /* ZJDiscoverSectionHeadView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -621,6 +632,7 @@
 		049705E02126B2F500E12562 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				049705E72127397000E12562 /* ZJDiscoverModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -975,6 +987,7 @@
 				043512E52121994B001D928A /* ZJRecreationCateList.swift in Sources */,
 				048EA3B62107909F00E30720 /* ZJRecreationViewController.swift in Sources */,
 				04DE708621198D4E0073DE82 /* ZJRecommendHeadView.swift in Sources */,
+				049705E42126C0CD00E12562 /* ZJDiscoverCateItem.swift in Sources */,
 				049705D9212670B600E12562 /* ZJFishBarRecommendViewController.swift in Sources */,
 				04907E8C21183EE7006B70EC /* ZJCateOneItem.swift in Sources */,
 				04907E732116BB61006B70EC /* ZJCategroyListCell.swift in Sources */,
@@ -984,6 +997,7 @@
 				04A473A921240F7C00D37F33 /* ZJQuadraticElementViewController.swift in Sources */,
 				043512F32122B1AF001D928A /* DNSPageHelper.swift in Sources */,
 				04DE709E211BE2140073DE82 /* ZJAllLiveData.swift in Sources */,
+				049705E82127397000E12562 /* ZJDiscoverModel.swift in Sources */,
 				04DE7098211AC5270073DE82 /* ZJCateCollectionHeadView.swift in Sources */,
 				04A473BB212533FC00D37F33 /* ZJFollowLiveHeadView.swift in Sources */,
 				0419BD03211205FF008661D3 /* ZJCollectionHeaderView.swift in Sources */,
@@ -1007,6 +1021,7 @@
 				043512F52122B1AF001D928A /* DNSPageTitleView.swift in Sources */,
 				04A4739E2122E93600D37F33 /* LZViewPagerContent.swift in Sources */,
 				04A473A32124026100D37F33 /* ZJRecreationRecommendViewController.swift in Sources */,
+				049705E62126CA4A00E12562 /* ZJDiscoverSectionHeadView.swift in Sources */,
 				048EA3BC210790E400E30720 /* ZJDiscoverViewController.swift in Sources */,
 				04DE709A211B0E3C0073DE82 /* ZJLiveContentCell.swift in Sources */,
 				04907E712113F19E006B70EC /* ZJLiveListItem.swift in Sources */,
@@ -1023,6 +1038,7 @@
 				04907E8A21183D7D006B70EC /* ZJCateOneList.swift in Sources */,
 				04DE7094211A88D20073DE82 /* ZJBannerModel.swift in Sources */,
 				04907E8821174B70006B70EC /* ZJRecommendCate.swift in Sources */,
+				049705E22126B9AE00E12562 /* ZJDiscoverHeadView.swift in Sources */,
 				0419BCFF2111BEBE008661D3 /* ZJQQCarViewController.swift in Sources */,
 				04A473B421252BE200D37F33 /* ZJFollowVideoViewController.swift in Sources */,
 				0419BD0F2112E920008661D3 /* ZJNetworking.swift in Sources */,
