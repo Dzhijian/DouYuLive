@@ -27,6 +27,11 @@ class ZJDiscoverViewController: ZJBaseViewController {
     private lazy var voiceList : [ZJLiveItemModel] = [ZJLiveItemModel]()
     private lazy var hotVideoList : [ZJFollowVideoList] = [ZJFollowVideoList]()
     
+    private lazy var anchorRankList : [ZJAnchorRankList] = [ZJAnchorRankList]()
+    private lazy var sectionTitles : [String] = {
+        let titles : [String] = ["语音直播","附近的颜值","热门视频","主播榜","","活动"]
+        return titles
+    }()
     private lazy var collectionView : UICollectionView = {
        let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 10
@@ -38,6 +43,7 @@ class ZJDiscoverViewController: ZJBaseViewController {
         collectionView.register(ZJBaseCollectionCell.self, forCellWithReuseIdentifier: ZJBaseCollectionCell.identifier())
         collectionView.register(ZJLiveListItem.self, forCellWithReuseIdentifier: ZJLiveListItem.identifier())
         collectionView.register(ZJRecreationListItem.self, forCellWithReuseIdentifier: ZJRecreationListItem.identifier())
+        collectionView.register(ZJDiscoverRankItem.self, forCellWithReuseIdentifier: ZJDiscoverRankItem.identifier())
         collectionView.register(ZJDiscoverHeadView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: kCollectionHeadView)
         collectionView.register(ZJDiscoverSectionHeadView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: kCollectionSectionHeadView)
         return collectionView
@@ -51,6 +57,7 @@ class ZJDiscoverViewController: ZJBaseViewController {
         getVoiceListData()
         getHotLiveListData()
         getFaceScoreListData()
+        getAnchorListData()
     }
     
 }
@@ -77,7 +84,6 @@ extension ZJDiscoverViewController {
         ZJNetWorking.requestData(type: .GET, URlString: urlStr) { (response) in
             let data = try? ZJDecoder.decode(ZJNearFaceScoreData.self, data: response)
             if data != nil {
-                print(data!)
             }
             
         }
@@ -89,6 +95,17 @@ extension ZJDiscoverViewController {
             let data = try? ZJDecoder.decode(ZJFollowVideoData.self, data: response)
             if data != nil {
                 self.hotVideoList = (data?.data)!
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    
+    // 获取主播排行列表
+    private func getAnchorListData() {
+        ZJNetWorking.requestData(type: .GET, URlString: ZJAnchorRankListURL) { (response) in
+            let data = try? ZJDecoder.decode(ZJAnchorRankData.self, data: response)
+            if data != nil {
+                self.anchorRankList = (data?.data)!
                 self.collectionView.reloadData()
                 print(data!)
             }
@@ -107,7 +124,7 @@ extension ZJDiscoverViewController : UICollectionViewDelegate,UICollectionViewDa
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -118,6 +135,8 @@ extension ZJDiscoverViewController : UICollectionViewDelegate,UICollectionViewDa
             return 4
         case 2:
             return self.hotVideoList.count
+        case 3:
+            return 1
         default:
             return 0
         }
@@ -141,7 +160,10 @@ extension ZJDiscoverViewController : UICollectionViewDelegate,UICollectionViewDa
             item.descLab.isHidden = true
             item.hotVideoModel = self.hotVideoList[indexPath.item]
             return item
-            
+        case 3:
+            let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: ZJDiscoverRankItem.identifier(), for: indexPath) as! ZJDiscoverRankItem
+            cell.rankData = self.anchorRankList
+            return cell
         default:
             let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: ZJBaseCollectionCell.identifier(), for: indexPath)
             return cell
@@ -156,6 +178,8 @@ extension ZJDiscoverViewController : UICollectionViewDelegate,UICollectionViewDa
             return CGSize(width: kFaceItemW, height: kFaceItemH)
         case 2:
             return CGSize(width: kLiveItemW, height: kLiveItemH)
+        case 3:
+            return CGSize(width: kScreenW, height: Adapt(150))
         default:
             return CGSize(width: kItemW, height: kLiveItemH)
         }
@@ -170,18 +194,15 @@ extension ZJDiscoverViewController : UICollectionViewDelegate,UICollectionViewDa
         }
         
         let sectionHeadView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: kCollectionSectionHeadView, for: indexPath) as! ZJDiscoverSectionHeadView
-        if indexPath.section == 1 {
-            sectionHeadView.configTitle(title: "附近的颜值")
-        }else if indexPath.section == 2{
-            sectionHeadView.configTitle(title: "热门视频")
-        }
+
+            sectionHeadView.configTitle(title:self.sectionTitles[indexPath.section])
         
         return sectionHeadView
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
-        return section == 0 ? CGSize(width: kScreenW, height: Adapt(130)+kCateItemWH*2) : CGSize(width: kScreenW, height: Adapt(60))
+        return section == 0 ? CGSize(width: kScreenW, height: Adapt(130)+kCateItemWH*2) : CGSize(width: kScreenW, height: Adapt(50))
     }
     
 }

@@ -8,49 +8,6 @@
 
 import UIKit
 
-/*
- {
- "error": 0,
- "data": [{
- "room_id": "5281681",
- "distance": "3972.3",
- "subject": "",
- "vertical_src": "https:\/\/rpic.douyucdn.cn\/live-cover\/appCovers\/2018\/07\/08\/5281681_20180708204954_big.jpg",
- "push_ios": "1",
- "last_close_time": "-1",
- "game_name": "\u989c\u503c",
- "vod_quality": "0",
- "owner_uid": "210936567",
- "rpos": "61",
- "nickname": "\u4f60\u7684\u51cc\u7199\u554a",
- "show_status": "1",
- "avatar_mid": "https:\/\/apic.douyucdn.cn\/upload\/avatar_v3\/201807\/d6b797636c0d03f07a7d0e30609c1f7b_middle.jpg",
- "recomType": "0",
- "cate_id": "201",
- "avatar": "https:\/\/apic.douyucdn.cn\/upload\/avatar_v3\/201807\/d6b797636c0d03f07a7d0e30609c1f7b_big.jpg",
- "avatar_small": "https:\/\/apic.douyucdn.cn\/upload\/avatar_v3\/201807\/d6b797636c0d03f07a7d0e30609c1f7b_small.jpg",
- "specific_status": "0",
- "room_src": "https:\/\/rpic.douyucdn.cn\/live-cover\/appCovers\/2018\/07\/08\/5281681_20180708204954_small.jpg",
- "room_name": "\u4e00\u500b\u4eba\u7684\u591c\u6211\u7684\u5fc3\u61c9\u8a72\u653e\u5728\u54ea\u88e1",
- "game_url": "\/directory\/game\/yz",
- "child_id": "0",
- "isVertical": 1,
- "ranktype": "61",
- "online": 6000,
- "specific_catalog": "",
- "anchor_city": "\u6df1\u5733\u5e02",
- "jumpUrl": "",
- "url": "\/5281681",
- "nrt": 0,
- "is_noble_rec": 0,
- "rmf1": 0,
- "rmf2": 0,
- "rmf3": 0,
- "rmf4": 0,
- "rmf5": 0
- }
- */
-
 struct ZJNearFaceScoreData : Decodable {
     var error : Int?
     var data : [ZJNearFaceScoreList] = [ZJNearFaceScoreList]()
@@ -88,6 +45,52 @@ struct ZJNearFaceScoreList : Decodable {
     var url : String?
     var nrt : Int?
     var is_noble_rec : String?
-    
-    
+
 }
+
+
+struct ZJAnchorRankData : Decodable {
+    
+    var error : Int?
+    var data : [ZJAnchorRankList] = [ZJAnchorRankList]()
+}
+/*
+ "statu": 2,
+ "ttl": 1372,
+ "title": "\u4e4b\u524d\u672a\u4e0a\u699c",
+ "uid": "204389",
+ "avatar": "https:\/\/apic.douyucdn.cn\/upload\/avanew\/face\/201803\/23\/17\/faa711e232041d7525a1bd695bf8fa8e_middle.jpg?rltime",
+ "nickname": "yyfyyf",
+ "is_live": true,
+ "id": 1,
+ "room_id": "9999",
+ "catagory": "DOTA2",
+ "sc": 1128446,
+ "anchorLevelInfo": {
+ "level": "100"
+ },
+ "diff": 0,
+ "isVertical": 0,
+ "vertical_src": "",
+ "nrt": 0
+ */
+struct ZJAnchorRankList : Decodable {
+    var statu : Int?
+    var ttl : Int?
+    var title : String?
+    var uid : String?
+    var avatar : String?
+    var nickname : String?
+    var is_live : String?
+    var id : Int?
+    var room_id : String?
+    var catagory : String?
+    var sc : Int?
+    var diff : Int?
+    var isVertical : Int?
+    var nrt : Int?
+    var vertical_src : String?
+
+}
+
+

@@ -116,3 +116,8 @@ let ZJDiscoverFaceListURL : String = "https://capi.douyucdn.cn/api/applivecompan
 // https://apiv2.douyucdn.cn/gv2api/rkc/roomlist/1_18/0/4/ios?client_sys=ios
 let ZJVoiceListURL : String = "https://apiv2.douyucdn.cn/gv2api/rkc/roomlist/1_18/0/4/ios?client_sys=ios"
 
+// 排行榜
+//https://apiv2.douyucdn.cn/live/Rank/getHomeAnchorRank?client_sys=ios&cid2=375
+//https://apiv2.douyucdn.cn/live/Rank/getHomeAnchorRank?client_sys=ios&cid2=375
+let ZJAnchorRankListURL = "https://apiv2.douyucdn.cn/live/Rank/getHomeAnchorRank?client_sys=ios&cid2=375"
+

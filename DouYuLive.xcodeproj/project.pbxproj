@@ -73,6 +73,8 @@
 		049705E42126C0CD00E12562 /* ZJDiscoverCateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049705E32126C0CD00E12562 /* ZJDiscoverCateItem.swift */; };
 		049705E62126CA4A00E12562 /* ZJDiscoverSectionHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049705E52126CA4A00E12562 /* ZJDiscoverSectionHeadView.swift */; };
 		049705E82127397000E12562 /* ZJDiscoverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049705E72127397000E12562 /* ZJDiscoverModel.swift */; };
+		049705EA21274FD800E12562 /* ZJDiscoverRankItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049705E921274FD800E12562 /* ZJDiscoverRankItem.swift */; };
+		049705EC2127526E00E12562 /* ZJRankCellItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049705EB2127526E00E12562 /* ZJRankCellItem.swift */; };
 		04A4739D2122E93600D37F33 /* LZViewPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A4739A2122E93500D37F33 /* LZViewPager.swift */; };
 		04A4739E2122E93600D37F33 /* LZViewPagerContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A4739B2122E93500D37F33 /* LZViewPagerContent.swift */; };
 		04A4739F2122E93600D37F33 /* LZViewPagerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A4739C2122E93500D37F33 /* LZViewPagerHeader.swift */; };
@@ -199,6 +201,8 @@
 		049705E32126C0CD00E12562 /* ZJDiscoverCateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJDiscoverCateItem.swift; sourceTree = "<group>"; };
 		049705E52126CA4A00E12562 /* ZJDiscoverSectionHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJDiscoverSectionHeadView.swift; sourceTree = "<group>"; };
 		049705E72127397000E12562 /* ZJDiscoverModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJDiscoverModel.swift; sourceTree = "<group>"; };
+		049705E921274FD800E12562 /* ZJDiscoverRankItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJDiscoverRankItem.swift; sourceTree = "<group>"; };
+		049705EB2127526E00E12562 /* ZJRankCellItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJRankCellItem.swift; sourceTree = "<group>"; };
 		04A4739A2122E93500D37F33 /* LZViewPager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZViewPager.swift; sourceTree = "<group>"; };
 		04A4739B2122E93500D37F33 /* LZViewPagerContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZViewPagerContent.swift; sourceTree = "<group>"; };
 		04A4739C2122E93500D37F33 /* LZViewPagerHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZViewPagerHeader.swift; sourceTree = "<group>"; };
@@ -625,6 +629,8 @@
 				049705E12126B9AE00E12562 /* ZJDiscoverHeadView.swift */,
 				049705E32126C0CD00E12562 /* ZJDiscoverCateItem.swift */,
 				049705E52126CA4A00E12562 /* ZJDiscoverSectionHeadView.swift */,
+				049705E921274FD800E12562 /* ZJDiscoverRankItem.swift */,
+				049705EB2127526E00E12562 /* ZJRankCellItem.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1007,6 +1013,7 @@
 				043512F82122B1AF001D928A /* DNSPageStyle.swift in Sources */,
 				048EA3B121078F9700E30720 /* ZJHomeViewController.swift in Sources */,
 				043512F22122B1AF001D928A /* DNSPageContentView.swift in Sources */,
+				049705EC2127526E00E12562 /* ZJRankCellItem.swift in Sources */,
 				043512F72122B1AF001D928A /* DNSPageCollectionViewFlowLayout.swift in Sources */,
 				04A473B221252BD000D37F33 /* ZJFollowLiveViewController.swift in Sources */,
 				04DE7096211AA4D70073DE82 /* ZJCollectionViewFlowLayout.swift in Sources */,
@@ -1024,6 +1031,7 @@
 				049705E62126CA4A00E12562 /* ZJDiscoverSectionHeadView.swift in Sources */,
 				048EA3BC210790E400E30720 /* ZJDiscoverViewController.swift in Sources */,
 				04DE709A211B0E3C0073DE82 /* ZJLiveContentCell.swift in Sources */,
+				049705EA21274FD800E12562 /* ZJDiscoverRankItem.swift in Sources */,
 				04907E712113F19E006B70EC /* ZJLiveListItem.swift in Sources */,
 				04907E752116BEC0006B70EC /* ZJCategoryItem.swift in Sources */,
 				0419BCDD210AB99A008661D3 /* ZJCommon.swift in Sources */,

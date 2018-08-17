@@ -36,9 +36,10 @@ class ZJDiscoverHeadView: UICollectionReusableView {
     
     private lazy var activityImgV : UIImageView = {
         let imgV = UIImageView()
-        imgV.backgroundColor = kOrange
+        imgV.backgroundColor = kGrayTextColor
         imgV.layer.cornerRadius = 4
         imgV.layer.masksToBounds = true
+        imgV.kf.setImage(with: URL(string: "https://sta-op.douyucdn.cn/nggsys/2018/08/01/728c92e272029a37920bcd525333459a.jpg"))
         return imgV
     }()
     
