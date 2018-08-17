@@ -10,6 +10,9 @@ import UIKit
 import SnapKit
 import Kingfisher
 import SBCycleScrollView
+import RxSwift
+import RxCocoa
+
 
 let ZJ_DOUYU_TOKEN : String = "ZJ_DOUYU_TOKEN"
 

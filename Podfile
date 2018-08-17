@@ -15,7 +15,9 @@ target 'DouYuLive' do
 #  pod 'ZJKitTool'
   # 轮播图
   pod 'SBCycleScrollView','~> 0.0.8'
-
+  
+  pod 'RxSwift'
+  pod 'RxCocoa'
   target 'DouYuLiveTests' do
     inherit! :search_paths
     # Pods for testing

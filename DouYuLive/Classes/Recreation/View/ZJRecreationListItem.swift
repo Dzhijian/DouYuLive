@@ -29,7 +29,7 @@ class ZJRecreationListItem: ZJBaseCollectionCell {
     }()
     private lazy var hotImgV : UIImageView = {
         let imgV = UIImageView()
-        imgV.image = UIImage(named: "home_header_hot")
+        imgV.image = UIImage(named: "ico_rec_hot")
         return imgV
     }()
     var faceHotModel : ZJLiveItemModel? {

@@ -11,6 +11,7 @@ import Foundation
 // 热门推荐
 let ZJRecommendHotURL : String = "https://apiv2.douyucdn.cn/mgapi/livenc/home/getRecList1"
 
+// 活动列表
 let ZJActivityListURL : String = "https://apiv2.douyucdn.cn/Live/Subactivity/getActivityList?client_sys=ios&cid2=0"
 
 let ZJSignAppURL : String = "https://rtbapi.douyucdn.cn/japi/sign/app/getinfo?uid=&client_sys=ios&mdid=iphone"
@@ -95,6 +96,17 @@ let ZJFollowVideoURL : String = "https://apiv2.douyucdn.cn/video/recom/getFwReco
 
 
 
+// 发现
+// 热门视频列表
+//https://apiv2.douyucdn.cn/video/home/getRecVideoList1?limit=4&client_sys=ios
+let ZJFindVideoListURL : String = "https://apiv2.douyucdn.cn/video/home/getRecVideoList1?limit=4&client_sys=ios"
+// 赛事
+//https://apiv2.douyucdn.cn/live/gameschedule/getContestList?gcid=0&first=1&gid=0&offset=0&client_sys=ios&limit=2
+let ZJFindCompetitionURL : String = "https://apiv2.douyucdn.cn/live/gameschedule/getContestList?gcid=0&first=1&gid=0&offset=0&client_sys=ios&limit=2"
+
+// 活动
+//https://apiv2.douyucdn.cn/live/Home/getHomeActive?limit=15&client_sys=ios&offset=0
+let ZJFindActivityURL : String = "https://apiv2.douyucdn.cn/live/Home/getHomeActive?limit=15&client_sys=ios&offset=0"
 
 
 

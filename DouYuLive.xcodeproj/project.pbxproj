@@ -66,6 +66,9 @@
 		04907E8E21185E94006B70EC /* ZJNotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04907E8D21185E94006B70EC /* ZJNotificationName.swift */; };
 		04907E90211954A8006B70EC /* ZJDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04907E8F211954A8006B70EC /* ZJDecoder.swift */; };
 		049705D32125DC8800E12562 /* ZJFollowVideoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049705D22125DC8800E12562 /* ZJFollowVideoData.swift */; };
+		049705D9212670B600E12562 /* ZJFishBarRecommendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049705D8212670B600E12562 /* ZJFishBarRecommendViewController.swift */; };
+		049705DB212670D700E12562 /* ZJFishBarMineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049705DA212670D700E12562 /* ZJFishBarMineViewController.swift */; };
+		049705DD212670E400E12562 /* ZJFishBarHotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049705DC212670E400E12562 /* ZJFishBarHotViewController.swift */; };
 		04A4739D2122E93600D37F33 /* LZViewPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A4739A2122E93500D37F33 /* LZViewPager.swift */; };
 		04A4739E2122E93600D37F33 /* LZViewPagerContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A4739B2122E93500D37F33 /* LZViewPagerContent.swift */; };
 		04A4739F2122E93600D37F33 /* LZViewPagerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A4739C2122E93500D37F33 /* LZViewPagerHeader.swift */; };
@@ -185,6 +188,9 @@
 		04907E8D21185E94006B70EC /* ZJNotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJNotificationName.swift; sourceTree = "<group>"; };
 		04907E8F211954A8006B70EC /* ZJDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJDecoder.swift; sourceTree = "<group>"; };
 		049705D22125DC8800E12562 /* ZJFollowVideoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFollowVideoData.swift; sourceTree = "<group>"; };
+		049705D8212670B600E12562 /* ZJFishBarRecommendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFishBarRecommendViewController.swift; sourceTree = "<group>"; };
+		049705DA212670D700E12562 /* ZJFishBarMineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFishBarMineViewController.swift; sourceTree = "<group>"; };
+		049705DC212670E400E12562 /* ZJFishBarHotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFishBarHotViewController.swift; sourceTree = "<group>"; };
 		04A4739A2122E93500D37F33 /* LZViewPager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZViewPager.swift; sourceTree = "<group>"; };
 		04A4739B2122E93500D37F33 /* LZViewPagerContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZViewPagerContent.swift; sourceTree = "<group>"; };
 		04A4739C2122E93500D37F33 /* LZViewPagerHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZViewPagerHeader.swift; sourceTree = "<group>"; };
@@ -515,6 +521,9 @@
 			isa = PBXGroup;
 			children = (
 				048EA3BB210790E400E30720 /* ZJDiscoverViewController.swift */,
+				049705DE2126B2EA00E12562 /* Controller */,
+				049705DF2126B2F100E12562 /* View */,
+				049705E02126B2F500E12562 /* Model */,
 			);
 			path = discover;
 			sourceTree = "<group>";
@@ -532,6 +541,9 @@
 			isa = PBXGroup;
 			children = (
 				048EA3B9210790B700E30720 /* ZJFishBarViewController.swift */,
+				049705D52126704B00E12562 /* Controller */,
+				049705D62126705600E12562 /* View */,
+				049705D72126705A00E12562 /* Model */,
 			);
 			name = FishBar;
 			path = DouYuLive/Classes/FishBar;
@@ -566,6 +578,51 @@
 				04907E742116BEC0006B70EC /* ZJCategoryItem.swift */,
 			);
 			path = CategoryList;
+			sourceTree = "<group>";
+		};
+		049705D52126704B00E12562 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				049705D8212670B600E12562 /* ZJFishBarRecommendViewController.swift */,
+				049705DA212670D700E12562 /* ZJFishBarMineViewController.swift */,
+				049705DC212670E400E12562 /* ZJFishBarHotViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		049705D62126705600E12562 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		049705D72126705A00E12562 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		049705DE2126B2EA00E12562 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		049705DF2126B2F100E12562 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		049705E02126B2F500E12562 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		04A473992122E93500D37F33 /* LZViewPager */ = {
@@ -868,6 +925,8 @@
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya-SwiftyJSONMapper/Moya_SwiftyJSONMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SBCycleScrollView/SBCycleScrollView.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -880,6 +939,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya_SwiftyJSONMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SBCycleScrollView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -908,11 +969,13 @@
 				048EA3BA210790B700E30720 /* ZJFishBarViewController.swift in Sources */,
 				0419BD012111BFBC008661D3 /* ZJJDQSViewController.swift in Sources */,
 				048EA3B8210790A900E30720 /* ZJFollowViewController.swift in Sources */,
+				049705DB212670D700E12562 /* ZJFishBarMineViewController.swift in Sources */,
 				043512E1211DDDD3001D928A /* ZJRecreationListItem.swift in Sources */,
 				04DE70882119953F0073DE82 /* ZJActivityView.swift in Sources */,
 				043512E52121994B001D928A /* ZJRecreationCateList.swift in Sources */,
 				048EA3B62107909F00E30720 /* ZJRecreationViewController.swift in Sources */,
 				04DE708621198D4E0073DE82 /* ZJRecommendHeadView.swift in Sources */,
+				049705D9212670B600E12562 /* ZJFishBarRecommendViewController.swift in Sources */,
 				04907E8C21183EE7006B70EC /* ZJCateOneItem.swift in Sources */,
 				04907E732116BB61006B70EC /* ZJCategroyListCell.swift in Sources */,
 				0419BCED210EC64E008661D3 /* ZJView-Extension.swift in Sources */,
@@ -956,6 +1019,7 @@
 				04A473A721240F5100D37F33 /* ZJOutdoorsViewController.swift in Sources */,
 				04DE70A0211C22300073DE82 /* ZJSelectCateItem.swift in Sources */,
 				04907E7B2116C33C006B70EC /* ZJBaseTableCell.swift in Sources */,
+				049705DD212670E400E12562 /* ZJFishBarHotViewController.swift in Sources */,
 				04907E8A21183D7D006B70EC /* ZJCateOneList.swift in Sources */,
 				04DE7094211A88D20073DE82 /* ZJBannerModel.swift in Sources */,
 				04907E8821174B70006B70EC /* ZJRecommendCate.swift in Sources */,

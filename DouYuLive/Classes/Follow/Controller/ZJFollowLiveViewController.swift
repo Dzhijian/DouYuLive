@@ -66,8 +66,6 @@ extension ZJFollowLiveViewController {
             if data != nil {
                 self.rankList = (data?.data)!
                 self.headView.rankList = self.rankList
-//                self.mainTable.reloadData()
-//                print(data!)
             }
             
         }
