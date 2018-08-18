@@ -75,6 +75,9 @@
 		049705E82127397000E12562 /* ZJDiscoverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049705E72127397000E12562 /* ZJDiscoverModel.swift */; };
 		049705EA21274FD800E12562 /* ZJDiscoverRankItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049705E921274FD800E12562 /* ZJDiscoverRankItem.swift */; };
 		049705EC2127526E00E12562 /* ZJRankCellItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049705EB2127526E00E12562 /* ZJRankCellItem.swift */; };
+		049705EE2127E47F00E12562 /* ZJDiscoverGameItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049705ED2127E47F00E12562 /* ZJDiscoverGameItem.swift */; };
+		049705F02127E4A000E12562 /* ZJDiscoverActivityItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049705EF2127E4A000E12562 /* ZJDiscoverActivityItem.swift */; };
+		049705F22127E86C00E12562 /* ZJGameItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049705F12127E86C00E12562 /* ZJGameItemCell.swift */; };
 		04A4739D2122E93600D37F33 /* LZViewPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A4739A2122E93500D37F33 /* LZViewPager.swift */; };
 		04A4739E2122E93600D37F33 /* LZViewPagerContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A4739B2122E93500D37F33 /* LZViewPagerContent.swift */; };
 		04A4739F2122E93600D37F33 /* LZViewPagerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A4739C2122E93500D37F33 /* LZViewPagerHeader.swift */; };
@@ -203,6 +206,9 @@
 		049705E72127397000E12562 /* ZJDiscoverModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJDiscoverModel.swift; sourceTree = "<group>"; };
 		049705E921274FD800E12562 /* ZJDiscoverRankItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJDiscoverRankItem.swift; sourceTree = "<group>"; };
 		049705EB2127526E00E12562 /* ZJRankCellItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJRankCellItem.swift; sourceTree = "<group>"; };
+		049705ED2127E47F00E12562 /* ZJDiscoverGameItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJDiscoverGameItem.swift; sourceTree = "<group>"; };
+		049705EF2127E4A000E12562 /* ZJDiscoverActivityItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJDiscoverActivityItem.swift; sourceTree = "<group>"; };
+		049705F12127E86C00E12562 /* ZJGameItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJGameItemCell.swift; sourceTree = "<group>"; };
 		04A4739A2122E93500D37F33 /* LZViewPager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZViewPager.swift; sourceTree = "<group>"; };
 		04A4739B2122E93500D37F33 /* LZViewPagerContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZViewPagerContent.swift; sourceTree = "<group>"; };
 		04A4739C2122E93500D37F33 /* LZViewPagerHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZViewPagerHeader.swift; sourceTree = "<group>"; };
@@ -631,6 +637,9 @@
 				049705E52126CA4A00E12562 /* ZJDiscoverSectionHeadView.swift */,
 				049705E921274FD800E12562 /* ZJDiscoverRankItem.swift */,
 				049705EB2127526E00E12562 /* ZJRankCellItem.swift */,
+				049705ED2127E47F00E12562 /* ZJDiscoverGameItem.swift */,
+				049705EF2127E4A000E12562 /* ZJDiscoverActivityItem.swift */,
+				049705F12127E86C00E12562 /* ZJGameItemCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -982,6 +991,7 @@
 				04907E792116C328006B70EC /* ZJBaseCollectionCell.swift in Sources */,
 				04DE7091211A026C0073DE82 /* ZJCateSectionHeaderView.swift in Sources */,
 				04A4739D2122E93600D37F33 /* LZViewPager.swift in Sources */,
+				049705EE2127E47F00E12562 /* ZJDiscoverGameItem.swift in Sources */,
 				04907E822117304A006B70EC /* ZJHomeAPI.swift in Sources */,
 				0419BCF92111BE82008661D3 /* ZJAllViewController.swift in Sources */,
 				048EA3BA210790B700E30720 /* ZJFishBarViewController.swift in Sources */,
@@ -990,6 +1000,7 @@
 				049705DB212670D700E12562 /* ZJFishBarMineViewController.swift in Sources */,
 				043512E1211DDDD3001D928A /* ZJRecreationListItem.swift in Sources */,
 				04DE70882119953F0073DE82 /* ZJActivityView.swift in Sources */,
+				049705F02127E4A000E12562 /* ZJDiscoverActivityItem.swift in Sources */,
 				043512E52121994B001D928A /* ZJRecreationCateList.swift in Sources */,
 				048EA3B62107909F00E30720 /* ZJRecreationViewController.swift in Sources */,
 				04DE708621198D4E0073DE82 /* ZJRecommendHeadView.swift in Sources */,
@@ -1039,6 +1050,7 @@
 				04907E8621174246006B70EC /* ZJCategoryList.swift in Sources */,
 				048EA3C22107974800E30720 /* ZJBaseViewController.swift in Sources */,
 				043512F62122B1AF001D928A /* DNSPageViewManager.swift in Sources */,
+				049705F22127E86C00E12562 /* ZJGameItemCell.swift in Sources */,
 				04A473A721240F5100D37F33 /* ZJOutdoorsViewController.swift in Sources */,
 				04DE70A0211C22300073DE82 /* ZJSelectCateItem.swift in Sources */,
 				04907E7B2116C33C006B70EC /* ZJBaseTableCell.swift in Sources */,

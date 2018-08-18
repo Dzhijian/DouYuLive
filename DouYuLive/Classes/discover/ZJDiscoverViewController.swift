@@ -26,12 +26,15 @@ class ZJDiscoverViewController: ZJBaseViewController {
 
     private lazy var voiceList : [ZJLiveItemModel] = [ZJLiveItemModel]()
     private lazy var hotVideoList : [ZJFollowVideoList] = [ZJFollowVideoList]()
-    
     private lazy var anchorRankList : [ZJAnchorRankList] = [ZJAnchorRankList]()
+    private lazy var gameList : [ZJDiscoverGameList] = [ZJDiscoverGameList]()
+    private lazy var activityList : [ZJDiscoverActivityList] = [ZJDiscoverActivityList]()
+    
     private lazy var sectionTitles : [String] = {
         let titles : [String] = ["语音直播","附近的颜值","热门视频","主播榜","","活动"]
         return titles
     }()
+    
     private lazy var collectionView : UICollectionView = {
        let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 10
@@ -44,6 +47,8 @@ class ZJDiscoverViewController: ZJBaseViewController {
         collectionView.register(ZJLiveListItem.self, forCellWithReuseIdentifier: ZJLiveListItem.identifier())
         collectionView.register(ZJRecreationListItem.self, forCellWithReuseIdentifier: ZJRecreationListItem.identifier())
         collectionView.register(ZJDiscoverRankItem.self, forCellWithReuseIdentifier: ZJDiscoverRankItem.identifier())
+        collectionView.register(ZJDiscoverGameItem.self, forCellWithReuseIdentifier: ZJDiscoverGameItem.identifier())
+        collectionView.register(ZJDiscoverActivityItem.self, forCellWithReuseIdentifier: ZJDiscoverActivityItem.identifier())
         collectionView.register(ZJDiscoverHeadView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: kCollectionHeadView)
         collectionView.register(ZJDiscoverSectionHeadView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: kCollectionSectionHeadView)
         return collectionView
@@ -58,6 +63,8 @@ class ZJDiscoverViewController: ZJBaseViewController {
         getHotLiveListData()
         getFaceScoreListData()
         getAnchorListData()
+        getGameListData()
+        getActivityData()
     }
     
 }
@@ -107,7 +114,30 @@ extension ZJDiscoverViewController {
             if data != nil {
                 self.anchorRankList = (data?.data)!
                 self.collectionView.reloadData()
-                print(data!)
+//                print(data!)
+            }
+        }
+    }
+    
+    // 获取赛事直播列表
+    private func getGameListData() {
+        ZJNetWorking.requestData(type: .GET, URlString: ZJDiscoverCompetitionURL) { (response) in
+            let data = try? ZJDecoder.decode(ZJDiscoverGameData.self, data: response)
+            if data != nil {
+                self.gameList = (data?.list)!
+                self.collectionView.reloadData()
+//                print(data!)
+            }
+        }
+    }
+    
+    private func getActivityData(){
+        ZJNetWorking.requestData(type: .GET, URlString: ZJDiscoverActivityURL) { (response) in
+            let data = try? ZJDecoder.decode(ZJDiscoverActivityData.self, data: response)
+            if data != nil {
+//                print(data!)
+                self.activityList = (data?.list)!
+                self.collectionView.reloadData()
             }
         }
     }
@@ -124,7 +154,7 @@ extension ZJDiscoverViewController : UICollectionViewDelegate,UICollectionViewDa
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 4
+        return 6
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -135,7 +165,7 @@ extension ZJDiscoverViewController : UICollectionViewDelegate,UICollectionViewDa
             return 4
         case 2:
             return self.hotVideoList.count
-        case 3:
+        case 3,4,5:
             return 1
         default:
             return 0
@@ -164,6 +194,16 @@ extension ZJDiscoverViewController : UICollectionViewDelegate,UICollectionViewDa
             let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: ZJDiscoverRankItem.identifier(), for: indexPath) as! ZJDiscoverRankItem
             cell.rankData = self.anchorRankList
             return cell
+        case 4:
+            let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: ZJDiscoverGameItem.identifier(), for: indexPath) as! ZJDiscoverGameItem
+            cell.contentView.backgroundColor = kPurple
+            cell.gameList = self.gameList
+            return cell
+        case 5:
+            let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: ZJDiscoverActivityItem.identifier(), for: indexPath) as! ZJDiscoverActivityItem
+            let imgUrlStr = self.activityList[indexPath.item].act_pic
+            cell.configImgUrlStr(imgUrlStr: imgUrlStr ?? "")
+            return cell
         default:
             let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: ZJBaseCollectionCell.identifier(), for: indexPath)
             return cell
@@ -180,8 +220,12 @@ extension ZJDiscoverViewController : UICollectionViewDelegate,UICollectionViewDa
             return CGSize(width: kLiveItemW, height: kLiveItemH)
         case 3:
             return CGSize(width: kScreenW, height: Adapt(150))
+        case 4:
+            return ZJDiscoverGameItem.itemHeightWithModel(model: "")
+        case 5:
+            return CGSize(width: kScreenW, height:Adapt(250*9/16)+Adapt(20))
         default:
-            return CGSize(width: kItemW, height: kLiveItemH)
+            return CGSize(width: kItemW, height: 0)
         }
     }
     

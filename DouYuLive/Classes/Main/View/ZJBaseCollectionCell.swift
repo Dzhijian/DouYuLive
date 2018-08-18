@@ -27,12 +27,12 @@ class ZJBaseCollectionCell: UICollectionViewCell {
         
     }
     
-    public class func itemHeight() -> CGFloat {
-        return UITableViewAutomaticDimension
+    public class func itemHeight() -> CGSize {
+        return CGSize(width: 0.0, height: 0.0)
     }
     
-    public class func itemHeightWithModel(model : Any) -> CGFloat {
-        return UITableViewAutomaticDimension
+    public class func itemHeightWithModel(model : Any) -> CGSize {
+        return CGSize(width: 0.0, height: 0.0)
     }
     
     public class func identifier() -> String {

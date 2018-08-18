@@ -35,6 +35,9 @@ let klineColor : UIColor = colorWithRGBA(230, 230, 230, 1.0)
 let kMainTextColor : UIColor = colorWithRGBA(33, 33, 33, 1.0)
 // 文字颜色
 let kGrayTextColor : UIColor = colorWithRGBA(99, 99, 99, 1.0)
+// 文字颜色
+let kLowGrayColor : UIColor = colorWithRGBA(150, 150, 150, 1.0)
+
 // function
 // 背景灰色
 let kBGGrayColor : UIColor = colorWithRGBA(247, 247, 247, 1.0)

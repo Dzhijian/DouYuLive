@@ -102,11 +102,11 @@ let ZJFollowVideoURL : String = "https://apiv2.douyucdn.cn/video/recom/getFwReco
 let ZJDiscoverVideoListURL : String = "https://apiv2.douyucdn.cn/video/home/getRecVideoList1?limit=4&client_sys=ios"
 // 赛事
 //https://apiv2.douyucdn.cn/live/gameschedule/getContestList?gcid=0&first=1&gid=0&offset=0&client_sys=ios&limit=2
-let ZJFindCompetitionURL : String = "https://apiv2.douyucdn.cn/live/gameschedule/getContestList?gcid=0&first=1&gid=0&offset=0&client_sys=ios&limit=2"
+let ZJDiscoverCompetitionURL : String = "https://apiv2.douyucdn.cn/live/gameschedule/getContestList?gcid=0&first=1&gid=0&offset=0&client_sys=ios&limit=2"
 
 // 活动
 //https://apiv2.douyucdn.cn/live/Home/getHomeActive?limit=15&client_sys=ios&offset=0
-let ZJFindActivityURL : String = "https://apiv2.douyucdn.cn/live/Home/getHomeActive?limit=15&client_sys=ios&offset=0"
+let ZJDiscoverActivityURL : String = "https://apiv2.douyucdn.cn/live/Home/getHomeActive?limit=15&client_sys=ios&offset=0"
 
 // 颜值
 // https://capi.douyucdn.cn/api/applivecompanion/getNearbyAnchorNew?aid=ios&cate1_id=0&cate2_id=201&cate3_id=0&client_sys=ios&latitude=22.639390&limit=4&longitude=113.843980&offset=0&time=1534525413&auth=78b5edde09476a10f789ff8d56564d7a

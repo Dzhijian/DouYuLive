@@ -54,26 +54,7 @@ struct ZJAnchorRankData : Decodable {
     var error : Int?
     var data : [ZJAnchorRankList] = [ZJAnchorRankList]()
 }
-/*
- "statu": 2,
- "ttl": 1372,
- "title": "\u4e4b\u524d\u672a\u4e0a\u699c",
- "uid": "204389",
- "avatar": "https:\/\/apic.douyucdn.cn\/upload\/avanew\/face\/201803\/23\/17\/faa711e232041d7525a1bd695bf8fa8e_middle.jpg?rltime",
- "nickname": "yyfyyf",
- "is_live": true,
- "id": 1,
- "room_id": "9999",
- "catagory": "DOTA2",
- "sc": 1128446,
- "anchorLevelInfo": {
- "level": "100"
- },
- "diff": 0,
- "isVertical": 0,
- "vertical_src": "",
- "nrt": 0
- */
+
 struct ZJAnchorRankList : Decodable {
     var statu : Int?
     var ttl : Int?
@@ -90,7 +71,50 @@ struct ZJAnchorRankList : Decodable {
     var isVertical : Int?
     var nrt : Int?
     var vertical_src : String?
+}
 
+struct ZJDiscoverGameData : Decodable{
+    var offset : Int?
+    var list : [ZJDiscoverGameList] = [ZJDiscoverGameList]()
+}
+
+struct ZJDiscoverGameList : Decodable{
+    var id : Int?
+    var gcid : Int?
+    var gid : Int?
+    var start_time : Int?
+    var match_status : Int?
+    var game_name : String?
+    var room_show_status : Int?
+    var end_flag : Int?
+    var player1_id : Int?
+    var player2_id : Int?
+    var player1_name : String?
+    var player2_name : String?
+    var player1_icon : String?
+    var player2_icon : String?
+    var player1_score : Int?
+    var player2_score : Int?
+    var round : Int?
+    var rela_room_id : Int?
+    
+}
+
+struct ZJDiscoverActivityData : Decodable{
+    var total : Int?
+    var list : [ZJDiscoverActivityList] = [ZJDiscoverActivityList]()
+    
+}
+
+struct ZJDiscoverActivityList : Decodable{
+    var id : String?
+    var act_name : String?
+    var act_pic : String?
+    var type : String?
+    var act_link : String?
+    var isVertical : Int?
+    var vertical_src : String?
+    var nrt : Int?
 }
 
 
