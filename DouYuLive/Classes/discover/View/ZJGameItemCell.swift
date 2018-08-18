@@ -50,19 +50,7 @@ class ZJGameItemCell: ZJBaseTableCell {
 extension ZJGameItemCell {
     
     
-    private func timeStampToString(timeStamp:String,format:String)->String {
-        
-        let string = NSString(string: timeStamp)
-        
-        let timeSta:TimeInterval = string.doubleValue
-        let dfmatter = DateFormatter()
-        dfmatter.dateFormat = format
-        
-        let date = NSDate(timeIntervalSince1970: timeSta)
-        
-        print(dfmatter.string(from: date as Date))
-        return dfmatter.string(from: date as Date)
-    }
+   
 }
 
 

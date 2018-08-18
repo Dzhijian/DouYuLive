@@ -49,9 +49,22 @@ func AdaptW(_ value : CGFloat) -> CGFloat {
     return ceil(value) * kWidthRatio
 }
 
-
 // 自适应高度
 func AdaptH(_ value : CGFloat) -> CGFloat {
     
     return ceil(value) * kHeightRatio
+}
+
+// 时间戳转日期
+func timeStampToString(timeStamp:String,format:String)->String {
+    
+    let string = NSString(string: timeStamp)
+    
+    let timeSta:TimeInterval = string.doubleValue
+    let dfmatter = DateFormatter()
+    dfmatter.dateFormat = format
+    
+    let date = NSDate(timeIntervalSince1970: timeSta)
+    
+    return dfmatter.string(from: date as Date)
 }

@@ -114,7 +114,6 @@ extension ZJDiscoverViewController {
             if data != nil {
                 self.anchorRankList = (data?.data)!
                 self.collectionView.reloadData()
-//                print(data!)
             }
         }
     }
@@ -126,16 +125,15 @@ extension ZJDiscoverViewController {
             if data != nil {
                 self.gameList = (data?.list)!
                 self.collectionView.reloadData()
-//                print(data!)
             }
         }
     }
     
+    // 获取活动列表数据
     private func getActivityData(){
         ZJNetWorking.requestData(type: .GET, URlString: ZJDiscoverActivityURL) { (response) in
             let data = try? ZJDecoder.decode(ZJDiscoverActivityData.self, data: response)
             if data != nil {
-//                print(data!)
                 self.activityList = (data?.list)!
                 self.collectionView.reloadData()
             }
@@ -196,7 +194,7 @@ extension ZJDiscoverViewController : UICollectionViewDelegate,UICollectionViewDa
             return cell
         case 4:
             let cell  = collectionView.dequeueReusableCell(withReuseIdentifier: ZJDiscoverGameItem.identifier(), for: indexPath) as! ZJDiscoverGameItem
-            cell.contentView.backgroundColor = kPurple
+            cell.contentView.backgroundColor = colorWithRGBA(173, 143, 177, 1.0)
             cell.gameList = self.gameList
             return cell
         case 5:

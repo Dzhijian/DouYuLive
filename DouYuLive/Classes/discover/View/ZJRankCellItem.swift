@@ -25,7 +25,7 @@ class ZJRankCellItem: ZJBaseCollectionCell {
             self.nameLab.text = model?.nickname
             self.descLab.text = model?.catagory
             
-            
+//            self.liveImgV.isHidden = Int((model?.is_live)!)! == 0 ? true : false
         }
     }
     
@@ -53,7 +53,7 @@ extension ZJRankCellItem {
         self.avatar.layer.cornerRadius = Adapt(30)
         self.avatar.layer.masksToBounds = true
 //
-        self.liveImgV = UIImageView.zj_createImageView(imageName: "home_live_vertical_icon", supView: self.bgView, closure: { (make) in
+        self.liveImgV = UIImageView.zj_createImageView(imageName: "video_slay_live", supView: self.bgView, closure: { (make) in
             make.top.equalTo(self.avatar.snp.top)
             make.left.equalTo(self.avatar.snp.right).offset(Adapt(-18))
             make.width.equalTo(Adapt(35))
