@@ -7,10 +7,16 @@
 //
 
 import UIKit
-private let ItemMargin : CGFloat = 10
+private let ItemMargin : CGFloat = Adapt(10)
 private let ItemWidth : CGFloat = (kScreenW - ItemMargin * 2) / 4
 private let ItemHeight :CGFloat = ItemWidth
 class ZJRecommendHeadView: UICollectionReusableView {
+    
+    var activityList : [ZJRecommendActivityList]?{
+        didSet{
+            activityView.activityList = activityList
+        }
+    }
     
     private lazy var layout : UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
@@ -22,7 +28,6 @@ class ZJRecommendHeadView: UICollectionReusableView {
     
     private lazy var activityView : ZJActivityView = {
         let activityView = ZJActivityView()
-        
         return activityView
     }()
     

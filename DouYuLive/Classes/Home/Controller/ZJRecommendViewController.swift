@@ -19,6 +19,7 @@ private let kRecommendHeaderViewID = "kRecommendHeaderViewID"
 
 class ZJRecommendViewController: ZJBaseViewController ,UIScrollViewDelegate{
     
+    private lazy var activityList : [ZJRecommendActivityList] = [ZJRecommendActivityList]()
     private lazy var collectionView : UICollectionView = {
         
         let layout = UICollectionViewFlowLayout()
@@ -31,6 +32,7 @@ class ZJRecommendViewController: ZJBaseViewController ,UIScrollViewDelegate{
         collectionView.backgroundColor = kWhite
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.showsVerticalScrollIndicator = false
         collectionView.register(ZJLiveListItem.self, forCellWithReuseIdentifier: kNormalCellID)
         collectionView.register(ZJCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: kHeaderViewID)
         collectionView.register(ZJRecommendHeadView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: kRecommendHeaderViewID)
@@ -82,7 +84,12 @@ extension ZJRecommendViewController {
     
     private func getActivityList() {
         ZJNetWorking.requestData(type: .GET, URlString: ZJActivityListURL, parameters: nil) { (response) in
-            print(response)
+            let data = try? ZJDecoder.decode(ZJRecommendActivityData.self, data: response)
+            if data != nil {
+                self.activityList = (data?.list)!
+                self.collectionView.reloadData()
+            }
+            
         }
     }
 }
@@ -107,8 +114,8 @@ extension ZJRecommendViewController : UICollectionViewDataSource,UICollectionVie
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         if indexPath.section == 0 {
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: kRecommendHeaderViewID, for: indexPath)
-            
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: kRecommendHeaderViewID, for: indexPath) as! ZJRecommendHeadView
+            headerView.activityList = self.activityList
             return headerView
             
         }else{

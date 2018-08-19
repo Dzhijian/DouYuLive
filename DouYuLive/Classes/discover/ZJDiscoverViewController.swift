@@ -35,6 +35,15 @@ class ZJDiscoverViewController: ZJBaseViewController {
         return titles
     }()
     
+    //初始化信号量为1
+    let semaphoreA = DispatchSemaphore(value: 1)
+    //第二个信号量为0
+    let semaphoreB = DispatchSemaphore(value: 0)
+    let semaphoreC = DispatchSemaphore(value: 0)
+    let semaphoreD = DispatchSemaphore(value: 0)
+    let semaphoreE = DispatchSemaphore(value: 0)
+    let semaphoreF = DispatchSemaphore(value: 0)
+    let semaphoreLast = DispatchSemaphore(value: 0)
     private lazy var collectionView : UICollectionView = {
        let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 10
@@ -59,12 +68,7 @@ class ZJDiscoverViewController: ZJBaseViewController {
         self.view.backgroundColor = UIColor.white
         setUpAllView()
         
-        getVoiceListData()
-        getHotLiveListData()
-        getFaceScoreListData()
-        getAnchorListData()
-        getGameListData()
-        getActivityData()
+        loadData()
     }
     
 }
@@ -72,23 +76,66 @@ class ZJDiscoverViewController: ZJBaseViewController {
 // MARK: - 网络请求
 extension ZJDiscoverViewController {
     
+    func loadData() {
+        
+        
+        let queue = DispatchQueue(label: "com.douyuLive.discover.queue", qos: .utility, attributes: .concurrent)
+        let mainQueue = DispatchQueue.main
+        
+        queue.async {
+            self.semaphoreA.signal()
+            self.getVoiceListData()
+        }
+        queue.async {
+            self.semaphoreB.wait()
+            self.getFaceScoreListData()
+        }
+        queue.async {
+            self.semaphoreC.wait()
+            self.getHotLiveListData()
+        }
+        queue.async {
+            self.semaphoreD.wait()
+            self.getAnchorListData()
+        }
+        queue.async {
+            self.semaphoreE.wait()
+            self.getGameListData()
+        }
+        queue.async {
+            self.semaphoreF.wait()
+            self.getActivityData()
+        }
+        
+        queue.async{
+            if self.semaphoreLast.wait(wallTimeout: .distantFuture) == .success{
+                mainQueue.async {
+                    print("全部任务执行完毕,刷新页面" + "\(Thread.current)")
+                    self.collectionView.reloadData()
+                }
+            }
+        }
+
+    }
+    
     // 获取语音直播列表
     private func getVoiceListData() {
         ZJNetWorking.requestData(type: .GET, URlString: ZJVoiceListURL) { (response) in
             let data = try? ZJDecoder.decode(ZJLiveListData.self, data: response)
             if data != nil {
                 self.voiceList = (data?.list)!
-                self.collectionView.reloadData()
             }
+            self.semaphoreB.signal()
         }
     }
     
     // 获取颜值列表
     private func getFaceScoreListData() {
         let time : Int = Int(NSDate().timeIntervalSince1970)
-        
         let urlStr : String = "\(ZJDiscoverFaceListURL)&time=\(time)&auth=78b5edde09476a10f789ff8d56564d7a"
+        self.semaphoreC.signal()
         ZJNetWorking.requestData(type: .GET, URlString: urlStr) { (response) in
+            
             let data = try? ZJDecoder.decode(ZJNearFaceScoreData.self, data: response)
             if data != nil {
             }
@@ -102,8 +149,10 @@ extension ZJDiscoverViewController {
             let data = try? ZJDecoder.decode(ZJFollowVideoData.self, data: response)
             if data != nil {
                 self.hotVideoList = (data?.data)!
-                self.collectionView.reloadData()
+//                self.collectionView.reloadData()
             }
+            
+            self.semaphoreD.signal()
         }
     }
     
@@ -113,8 +162,10 @@ extension ZJDiscoverViewController {
             let data = try? ZJDecoder.decode(ZJAnchorRankData.self, data: response)
             if data != nil {
                 self.anchorRankList = (data?.data)!
-                self.collectionView.reloadData()
+//                self.collectionView.reloadData()
             }
+            
+            self.semaphoreE.signal()
         }
     }
     
@@ -124,8 +175,10 @@ extension ZJDiscoverViewController {
             let data = try? ZJDecoder.decode(ZJDiscoverGameData.self, data: response)
             if data != nil {
                 self.gameList = (data?.list)!
-                self.collectionView.reloadData()
+//                self.collectionView.reloadData()
             }
+            
+            self.semaphoreF.signal()
         }
     }
     
@@ -135,8 +188,9 @@ extension ZJDiscoverViewController {
             let data = try? ZJDecoder.decode(ZJDiscoverActivityData.self, data: response)
             if data != nil {
                 self.activityList = (data?.list)!
-                self.collectionView.reloadData()
+//                self.collectionView.reloadData()
             }
+            self.semaphoreLast.signal()
         }
     }
 }
@@ -163,8 +217,12 @@ extension ZJDiscoverViewController : UICollectionViewDelegate,UICollectionViewDa
             return 4
         case 2:
             return self.hotVideoList.count
-        case 3,4,5:
+        case 3:
             return 1
+        case 4:
+            return 1
+        case 5:
+            return self.activityList.count
         default:
             return 0
         }

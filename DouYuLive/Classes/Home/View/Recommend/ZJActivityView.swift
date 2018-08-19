@@ -10,68 +10,87 @@ import UIKit
 
 class ZJActivityView: ZJBaseView {
     
-    var icon = UIImageView()
-    var markLab = UILabel()
-    var titleLab = UILabel()
-    var descLab = UILabel()
-    var btn = UIButton()
+    var activityList : [ZJRecommendActivityList]? {
+        didSet{
+            self.collectionView.reloadData()
+        }
+    }
     
     
-    
-    
+    private var autoTimer : Timer?
+    private var index : Int = 0
+    private lazy var collectionView : UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        layout.itemSize = CGSize(width: kScreenW - Adapt(20), height: Adapt(65))
+        layout.scrollDirection = .vertical
+        let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.isPagingEnabled = true
+        collectionView.backgroundColor = kBGGrayColor
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.register(ZJActivityItem.self, forCellWithReuseIdentifier: ZJActivityItem.identifier())
+        return collectionView
+    }()
     override func zj_initWithAllView() {
         
         self.backgroundColor = kBGGrayColor
         setUpAllView()
+        startTimer()
     }
+    
+    func startTimer() {
+        //设置一个定时器，每三秒钟滚动一次
+        autoTimer = Timer.scheduledTimer(timeInterval: 3, target: self,
+                                               selector: #selector(self.scrollAction),
+                                               userInfo: nil, repeats: true)
+    }
+    
+    @objc private func scrollAction() {
+        // 如果到达最后一个,则变成第四个
+        if collectionView.contentOffset.y == CGFloat(CGFloat((self.activityList?.count)! - 1) * self.collectionView.bounds.height) {
+            UIView.animate(withDuration: 0.5) {
+                self.collectionView.contentOffset.y = 0
+            }
+        }else {
+            // 每过一秒,contentOffset.x增加一个cell的宽度
+            UIView.animate(withDuration: 0.3) {
+                self.collectionView.contentOffset.y += self.collectionView.bounds.size.height
+            }
+        }
+    }
+    
+    
     
 }
 
 
+// MARK: - 遵守协议
+extension ZJActivityView : UICollectionViewDelegate,UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.activityList?.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let item  = collectionView.dequeueReusableCell(withReuseIdentifier: ZJActivityItem.identifier(), for: indexPath) as! ZJActivityItem
+        item.contentView.backgroundColor = kBGGrayColor
+        item.model = self.activityList?[indexPath.item]
+        return item
+    }
+    
+    
+}
 
 // 配置 UI 视图
 extension ZJActivityView {
     
     private func setUpAllView() {
-        
-        icon = UIImageView.zj_createImageView(imageName: "home_header_hot", supView: self, closure: { (make) in
-            make.centerY.equalTo(self.snp.centerY)
-            make.left.equalTo(Adapt(10))
-            make.width.height.equalTo(Adapt(24))
-        })
-        
-        markLab = UILabel.zj_createLabel(text: "活动", textColor:  kMainTextColor, font: BoldFontSize(18), supView: self, closure: { (make) in
-            make.centerY.equalTo(icon.snp.centerY)
-            make.left.equalTo(icon.snp.right).offset(Adapt(5))
-            make.width.equalTo(45)
-        })
-        
-        let line = UIView.zj_createView(bgClor: klineColor, supView: self, closure: { (make) in
-            make.centerY.equalTo(icon.snp.centerY)
-            make.width.equalTo(0.8)
-            make.height.equalTo(25)
-            make.left.equalTo(markLab.snp.right).offset(Adapt(10))
-        })
-        
-        btn = UIButton.zj_createButton(title: "预定", titleStatu: . normal, imageName: "", imageStatu: nil, supView: self, closure: { (make) in
-            make.centerY.equalTo(self.snp.centerY)
-            make.right.equalTo(Adapt(-10))
-            make.width.equalTo(Adapt(55))
-            make.height.equalTo(Adapt(25))
-        })
-        btn.titleLabel?.font = FontSize(14)
-        btn.setBackgroundImage(UIImage(named: "free_flow_background_1_1"), for: .normal)
-        
-        titleLab = UILabel.zj_createLabel(text: "小苏菲 《空心》MV首发", textColor:  kMainTextColor, font: FontSize(14), supView: self, closure: { (make) in
-            make.top.equalTo(Adapt(13))
-            make.left.equalTo(line.snp.right).offset(Adapt(10))
-            make.right.equalTo(btn.snp.left).offset(Adapt(-10))
-        })
-        
-         descLab = UILabel.zj_createLabel(text: "8月31日 20:00开始 1888人预定", textColor:  kGrayTextColor, font: FontSize(12), supView: self, closure: { (make) in
-            make.bottom.equalTo(Adapt(-13))
-            make.left.equalTo(line.snp.right).offset(Adapt(10))
-            make.right.equalTo(btn.snp.left).offset(Adapt(-10))
-        })
+        addSubview(collectionView)
+        collectionView.snp.makeConstraints { (make) in
+            make.edges.equalTo(0)
+        }
     }
 }

@@ -71,6 +71,7 @@ extension ZJClassifyViewController {
         let semaphoreB = DispatchSemaphore(value: 0)
         //第三个信号量为0
         let semaphoreC = DispatchSemaphore(value: 0)
+        
         let queue = DispatchQueue(label: "com.douyuLive.cate1.queue", qos: .utility, attributes: .concurrent)
         let mainQueue = DispatchQueue.main
         
@@ -78,13 +79,13 @@ extension ZJClassifyViewController {
             semaphoreA.signal()
             ZJNetWorking.requestData(type: .GET, URlString: ZJLiveCateURL) { (response) in
                 
-                do {
-                    let data = try JSONDecoder().decode(ZJCateOneList.self, from: response)
-                    self.cateListData = data
+                let data = try? ZJDecoder.decode(ZJCateOneList.self, data: response)
+                if data != nil {
+                    self.cateListData = data!
                     
-                }catch{}
+                }
                 semaphoreB.signal()
-                print("第一个任务执行完毕")
+                print("第一个任务执行完毕" + "\(Thread.current)")
             }
         }
         
@@ -92,22 +93,20 @@ extension ZJClassifyViewController {
             semaphoreB.wait()
             ZJNetWorking.requestData(type: .GET, URlString: ZJRecommendCategoryURL) { (response) in
                 
-                do {
-                    let data = try JSONDecoder().decode(ZJRecommendCate.self, from: response)
-                    self.recommenCateData = data
+                let data = try? ZJDecoder.decode(ZJRecommendCate.self, data: response)
+                if data != nil {
+                    self.recommenCateData = data!
                     
-                }catch{}
-                
-                semaphoreC.signal()
-                print("第二个任务执行完毕")
+                    semaphoreC.signal()
+                }
+                print("第二个任务执行完毕" + "\(Thread.current)" )
             }
         }
         
         queue.async{
-            
             if semaphoreC.wait(wallTimeout: .distantFuture) == .success{
                 mainQueue.async {
-                    print("全部任务执行完毕,刷新页面")
+                    print("全部任务执行完毕,刷新页面" + "\(Thread.current)")
                     self.mainTable.reloadData()
                 }
             }
