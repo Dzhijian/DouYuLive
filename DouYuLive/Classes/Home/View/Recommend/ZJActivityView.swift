@@ -46,13 +46,15 @@ class ZJActivityView: ZJBaseView {
         autoTimer = Timer.scheduledTimer(timeInterval: 3, target: self,
                                                selector: #selector(self.scrollAction),
                                                userInfo: nil, repeats: true)
+        RunLoop.main.add(autoTimer!, forMode: RunLoopMode.commonModes)
     }
     
     @objc private func scrollAction() {
         // 如果到达最后一个,则变成第四个
         if collectionView.contentOffset.y == CGFloat(CGFloat((self.activityList?.count)! - 1) * self.collectionView.bounds.height) {
             UIView.animate(withDuration: 0.5) {
-                self.collectionView.contentOffset.y = 0
+//                self.collectionView.contentOffset.y = 0
+                self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: UICollectionViewScrollPosition.bottom, animated: false)
             }
         }else {
             // 每过一秒,contentOffset.x增加一个cell的宽度

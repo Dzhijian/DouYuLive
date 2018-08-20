@@ -10,8 +10,14 @@ import UIKit
 
 class ZJFishBarRecommendViewController: ZJBaseViewController {
    
+    private lazy var headView : ZJFishBarRecommendHeadView = {
+        let headView = ZJFishBarRecommendHeadView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: Adapt(250)))
+        headView.backgroundColor = kRed
+        return headView
+    }()
+    
     private lazy var mainTable : UITableView = {
-        let mainTable = UITableView(frame: CGRect.zero, style: .grouped)
+        let mainTable = UITableView(frame: CGRect.zero, style: .plain)
         mainTable.delegate = self
         mainTable.dataSource = self
         mainTable.backgroundColor = kWhite
@@ -54,7 +60,7 @@ extension ZJFishBarRecommendViewController {
         mainTable.snp.makeConstraints { (make) in
             make.edges.equalTo(0)
         }
-        
+        mainTable.tableHeaderView = headView
     }
     
 }
