@@ -34,6 +34,5 @@ class ZJCycleCardItem: ZJBaseCollectionCell {
         //设置图形样子
         maskLayer.path = maskPath.cgPath
         imgView.layer.mask = maskLayer
-        
     }
 }

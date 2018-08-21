@@ -55,6 +55,20 @@ func AdaptH(_ value : CGFloat) -> CGFloat {
     return ceil(value) * kHeightRatio
 }
 
+func zj_setUpGradientLayer(view : UIView , frame : CGRect , color : [CGColor], corneradiu : CGFloat? = 0){
+    let gradientLayer: CAGradientLayer = CAGradientLayer()
+    gradientLayer.colors = color
+    //(这里的起始和终止位置就是按照坐标系,四个角分别是左上(0,0),左下(0,1),右上(1,0),右下(1,1))
+    //渲染的起始位置
+    gradientLayer.startPoint = CGPoint.init(x: 0, y: 0)
+    //渲染的终止位置
+    gradientLayer.endPoint = CGPoint.init(x: 1, y: 0)
+    //设置frame和插入view的layer
+    gradientLayer.frame = frame
+    gradientLayer.cornerRadius = corneradiu!
+    view.layer.insertSublayer(gradientLayer, at: 0)
+}
+
 // 时间戳转日期
 func timeStampToString(timeStamp:String,format:String)->String {
     

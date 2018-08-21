@@ -24,7 +24,7 @@ class ZJCycleCardView: ZJBaseView {
     
     // 图片数组
     private lazy var imgArray : [String] = {
-        let imgArr = [String]()
+        let imgArr  = [String]()
         return imgArr
     }()
     
@@ -36,12 +36,12 @@ class ZJCycleCardView: ZJBaseView {
     private var autoTimer : Timer?
     // 记录左滑或者右滑
     private var _dragDirection : Int? = 0
-    
+    // 当前页
+    private var currentpage : Int? = 0
     private lazy var layout : ZJCycleCardViewFlowLayout = {
         let layout = ZJCycleCardViewFlowLayout()
         layout.isScale = self.style.kIsScaleView
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 0
         return layout
     }()
     private lazy var collectionView : UICollectionView = {
@@ -66,8 +66,52 @@ class ZJCycleCardView: ZJBaseView {
         super.init(frame: frame)
         self.style = style
         self.imgArray = imageArray
+        addSubview(collectionView)
+        setUpImgArr()
         
+    }
+    
+    func setUpImgArr() {
+        itemCount = self.style.kIsInfiniteLoop! ? imgArray.count * 10 : imgArray.count
+        if imgArray.count > 1 {
+            self.collectionView.isScrollEnabled = true
+            self.setAutoScroll(autoScroll: self.style.kIsAutoScroll!)
+        }else{
+            self.collectionView.isScrollEnabled = false
+            self.invalidateTimer()
+        }
         
+        self.collectionView.reloadData()
+    }
+    func setAutoScroll(autoScroll : Bool) {
+        if self.style.kIsInfiniteLoop! {
+            self.style.kIsAutoScroll = autoScroll
+            
+            self.invalidateTimer()
+            if self.style.kIsAutoScroll!{
+                self.setUpTimer()
+            }
+        }
+    }
+    
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.collectionView.frame = self.bounds
+        self.layout.itemSize = CGSize(width: self.style.kItemWidth!, height: self.bounds.size.height)
+        self.layout.minimumLineSpacing = self.style.kItemMargin!
+        self.layout.isScale = self.style.kIsScaleView!
+        if self.collectionView.contentOffset.x == 0 && self.itemCount! > 0{
+            var targetIndex : Int = 0
+            targetIndex = self.style.kIsInfiniteLoop! ? itemCount! / 2 : 0
+            
+            self.collectionView.scrollToItem(at: IndexPath(item: targetIndex, section: 0), at: .centeredHorizontally, animated: false)
+                
+            self.oldPointX = self.collectionView.contentOffset.x
+            
+            self.collectionView.isUserInteractionEnabled = true
+            
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -81,7 +125,7 @@ extension ZJCycleCardView {
     
     private func setUpTimer() {
         //设置一个定时器，每三秒钟滚动一次
-        autoTimer = Timer.scheduledTimer(timeInterval: 3, target: self,
+        autoTimer = Timer.scheduledTimer(timeInterval: TimeInterval(self.style.autoScrollTimeInterval!), target: self,
                                          selector: #selector(self.autoScrollAction),
                                          userInfo: nil, repeats: true)
         RunLoop.main.add(autoTimer!, forMode: RunLoopMode.commonModes)
@@ -120,7 +164,6 @@ extension ZJCycleCardView {
                 let index = Int(itemCount! / 2)
                 self.collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .centeredHorizontally, animated: false)
             }
-            
             return
         }
         self.collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .centeredHorizontally, animated: true)
@@ -143,6 +186,7 @@ extension ZJCycleCardView : UICollectionViewDelegate,UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let item = collectionView.dequeueReusableCell(withReuseIdentifier: ZJCycleCardItem.identifier(), for: indexPath) as! ZJCycleCardItem
         item.imgView.contentMode = self.style.ImageContentMode!
+        item.imgView.image = UIImage(named: "liveImage");
         item.cornerRadius = self.style.imgCornerRadius!
         return item
     }
@@ -186,7 +230,7 @@ extension ZJCycleCardView : UICollectionViewDelegate,UICollectionViewDataSource,
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         
         self.collectionView.isUserInteractionEnabled = true;
-//        if (!self.imgArr.count) return; // 解决清除timer时偶尔会出现的问题
+        
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -206,6 +250,7 @@ extension ZJCycleCardView : UICollectionViewDelegate,UICollectionViewDataSource,
         self.collectionView.isUserInteractionEnabled = false;
         //
         let currentIndex : Int = Int((self.oldPointX! + (self.style.kItemWidth! + self.style.kItemMargin!) * 0.5) / (self.style.kItemMargin! + self.style.kItemWidth!))
+        
         self.collectionView.scrollToItem(at: IndexPath(item: currentIndex + _dragDirection!, section: 0), at: .centeredHorizontally, animated: true)
         
     }
@@ -222,8 +267,8 @@ extension ZJCycleCardView {
 
     private func setUpAllView() {
         addSubview(collectionView)
-        collectionView.snp.makeConstraints { (make) in
-            make.edges.equalTo(0)
-        }
+//        collectionView.snp.makeConstraints { (make) in
+//            make.edges.equalTo(0)
+//        }
     }
 }

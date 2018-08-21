@@ -9,7 +9,7 @@
 import UIKit
 
 private let kItemW = (kScreenW - 5) / 2
-private let kItemH = kItemW * 9 / 16 + Adapt(30)
+private let kItemH = kItemW * 9 / 16 + Adapt(35)
 
 class ZJFollowLiveCell: ZJBaseTableCell {
     
@@ -47,7 +47,7 @@ class ZJFollowLiveCell: ZJBaseTableCell {
         // 计算多少行
         let colum : Int = data.count / 2 + (data.count % 2 == 0  ?  0 : 1 )
         
-        return CGFloat(colum) * kItemH
+        return colum > 0 ? CGFloat(colum) * kItemH + CGFloat((colum - 1) * 10) : CGFloat(colum) * kItemH
     }
     
 }

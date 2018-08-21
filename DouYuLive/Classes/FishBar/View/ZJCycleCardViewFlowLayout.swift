@@ -19,13 +19,13 @@ class ZJCycleCardViewFlowLayout: UICollectionViewFlowLayout {
         }
         
         // 2.计算整体的中心点的x值
-        let centerX : CGFloat = self.collectionView?.contentOffset.x ?? 0 + (self.collectionView?.bounds.size.width ?? 0) * 0.5
+        let centerX : CGFloat = (self.collectionView?.contentOffset.x)!  + (self.collectionView?.bounds.size.width)!  * 0.5
         
         // 3.修改一下attributes对象
         for (_, attr) in (attrs?.enumerated())! {
             // 3.1 计算每个cell的中心点距离
             let  distance = abs(attr.center.x - centerX)
-            
+//            print(distance)
             // 3.2 距离越大，缩放比越小，距离越小，缩放比越大
             let factor : CGFloat = 0.001;
             let scale : CGFloat = 1 / (1 + distance * factor);

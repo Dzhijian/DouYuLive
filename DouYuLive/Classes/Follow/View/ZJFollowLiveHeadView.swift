@@ -17,6 +17,7 @@ class ZJFollowLiveHeadView : UIView {
     private lazy var loginBtn : UIButton = UIButton()
     private lazy var descLab : UILabel = UILabel()
     private lazy var bgImgV : UIImageView = UIImageView()
+    // 排行榜
     private lazy var anchorRankView : UIView = {
         let rankView = UIView()
         return rankView
@@ -74,7 +75,7 @@ extension ZJFollowLiveHeadView {
         self.loginBtn.layer.cornerRadius = 3
         
 
-        self.zj_setUpGradientLayer(view: self.loginBtn, frame: CGRect(x: 0, y: 0, width: Adapt(120), height: Adapt(30)), color: kGradientColors, corneradiu: 3)
+        zj_setUpGradientLayer(view: self.loginBtn, frame: CGRect(x: 0, y: 0, width: Adapt(120), height: Adapt(30)), color: kGradientColors, corneradiu: 3)
         
         self.descLab = UILabel.zj_createLabel(text: "登录可关注你最喜欢的主播", textColor: colorWithRGBA(180, 180, 180, 1), font: FontSize(10), supView: self, closure: { (make) in
             make.centerX.equalTo(self.loginBtn.snp.centerX)
@@ -141,19 +142,7 @@ extension ZJFollowLiveHeadView {
         self.layoutSubviews()
     }
     
-    func zj_setUpGradientLayer(view : UIView , frame : CGRect , color : [CGColor], corneradiu : CGFloat? = 0){
-        let gradientLayer: CAGradientLayer = CAGradientLayer()
-        gradientLayer.colors = color
-        //(这里的起始和终止位置就是按照坐标系,四个角分别是左上(0,0),左下(0,1),右上(1,0),右下(1,1))
-        //渲染的起始位置
-        gradientLayer.startPoint = CGPoint.init(x: 0, y: 0)
-        //渲染的终止位置
-        gradientLayer.endPoint = CGPoint.init(x: 1, y: 0)
-        //设置frame和插入view的layer
-        gradientLayer.frame = frame
-        gradientLayer.cornerRadius = corneradiu!
-        view.layer.insertSublayer(gradientLayer, at: 0)
-    }
+ 
     
     override func layoutSubviews() {
         super.layoutSubviews()

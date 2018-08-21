@@ -18,13 +18,13 @@ class ZJCycleViewStyle {
     // 自动滚动时间间隔
     var autoScrollTimeInterval : CGFloat? = 2
     // cell 宽度
-    var kItemWidth : CGFloat? = 0.0
+    var kItemWidth : CGFloat? = kScreenW - 100
     // cell 的间距
-    var kItemMargin : CGFloat? = 10
+    var kItemMargin : CGFloat? = 0
     // 占位图
     var placeholderImage : UIImage?
     // 图片圆角
-    var imgCornerRadius : CGFloat? = 0
+    var imgCornerRadius : CGFloat? = 3
     // 分页控制器
     var pageControl : UIPageControl?
     // 是否显示分页控制器
