@@ -12,7 +12,7 @@ class ZJFishBarRecommendViewController: ZJBaseViewController {
    
     private lazy var headView : ZJFishBarRecommendHeadView = {
         let headView = ZJFishBarRecommendHeadView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: Adapt(250)))
-        headView.backgroundColor = kRed
+        headView.backgroundColor = kWhite
         return headView
     }()
     

@@ -19,14 +19,39 @@ class ZJFishBarRecommendHeadView: ZJBaseView {
     }()
     
     
-    private lazy var rankView : UIView = {
-        let view = UIView()
+    private lazy var rankView : ZJRankView = {
+        let view = ZJRankView()
+        view.layer.masksToBounds = false
+        view.layer.cornerRadius = 3
+        view.layer.shadowColor = colorWithRGBA(99, 99, 99, 1).cgColor
+        view.layer.shadowOpacity = 0.2
+        view.layer.shadowRadius = 5
+        view.layer.shadowOffset = CGSize(width: 0, height: 0)
         return view
     }()
     
     
     override func zj_initWithAllView() {
         addSubview(cycleView)
+        addSubview(rankView)
+        
+        rankView.snp.makeConstraints { (make) in
+            make.top.equalTo(cycleView.snp.bottom).offset(Adapt(15))
+            make.left.equalTo(Adapt(15))
+            make.right.equalTo(Adapt(-15))
+            make.height.equalTo(Adapt(65))
+        }
+        
+        
+//        let maskPath : UIBezierPath = UIBezierPath(roundedRect: self.rankView.bounds, cornerRadius: 4)
+//        let maskLayer: CAShapeLayer = CAShapeLayer()
+//        //设置大小
+//        maskLayer.frame = self.rankView.bounds
+//        //设置图形样子
+//        maskLayer.path = maskPath.cgPath
+//        self.rankView.layer.mask = maskLayer
+//
+        
     }
     
     

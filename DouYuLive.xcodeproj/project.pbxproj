@@ -84,6 +84,7 @@
 		049705FC212AE95A00E12562 /* ZJCycleViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049705FB212AE95A00E12562 /* ZJCycleViewStyle.swift */; };
 		049705FE212B0C4900E12562 /* ZJCycleCardViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049705FD212B0C4900E12562 /* ZJCycleCardViewFlowLayout.swift */; };
 		04970600212BB76F00E12562 /* ZJCycleCardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049705FF212BB76F00E12562 /* ZJCycleCardItem.swift */; };
+		04970603212BF38C00E12562 /* ZJRankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04970602212BF38C00E12562 /* ZJRankView.swift */; };
 		04A4739D2122E93600D37F33 /* LZViewPager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A4739A2122E93500D37F33 /* LZViewPager.swift */; };
 		04A4739E2122E93600D37F33 /* LZViewPagerContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A4739B2122E93500D37F33 /* LZViewPagerContent.swift */; };
 		04A4739F2122E93600D37F33 /* LZViewPagerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A4739C2122E93500D37F33 /* LZViewPagerHeader.swift */; };
@@ -221,6 +222,7 @@
 		049705FB212AE95A00E12562 /* ZJCycleViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCycleViewStyle.swift; sourceTree = "<group>"; };
 		049705FD212B0C4900E12562 /* ZJCycleCardViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCycleCardViewFlowLayout.swift; sourceTree = "<group>"; };
 		049705FF212BB76F00E12562 /* ZJCycleCardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCycleCardItem.swift; sourceTree = "<group>"; };
+		04970602212BF38C00E12562 /* ZJRankView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJRankView.swift; sourceTree = "<group>"; };
 		04A4739A2122E93500D37F33 /* LZViewPager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZViewPager.swift; sourceTree = "<group>"; };
 		04A4739B2122E93500D37F33 /* LZViewPagerContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZViewPagerContent.swift; sourceTree = "<group>"; };
 		04A4739C2122E93500D37F33 /* LZViewPagerHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LZViewPagerHeader.swift; sourceTree = "<group>"; };
@@ -623,11 +625,9 @@
 		049705D62126705600E12562 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				04970601212BF36300E12562 /* CycleView */,
 				049705F72129AC9900E12562 /* ZJFishBarRecommendHeadView.swift */,
-				049705F9212AE6D500E12562 /* ZJCycleCardView.swift */,
-				049705FB212AE95A00E12562 /* ZJCycleViewStyle.swift */,
-				049705FD212B0C4900E12562 /* ZJCycleCardViewFlowLayout.swift */,
-				049705FF212BB76F00E12562 /* ZJCycleCardItem.swift */,
+				04970602212BF38C00E12562 /* ZJRankView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -667,6 +667,17 @@
 				049705E72127397000E12562 /* ZJDiscoverModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		04970601212BF36300E12562 /* CycleView */ = {
+			isa = PBXGroup;
+			children = (
+				049705F9212AE6D500E12562 /* ZJCycleCardView.swift */,
+				049705FB212AE95A00E12562 /* ZJCycleViewStyle.swift */,
+				049705FD212B0C4900E12562 /* ZJCycleCardViewFlowLayout.swift */,
+				049705FF212BB76F00E12562 /* ZJCycleCardItem.swift */,
+			);
+			path = CycleView;
 			sourceTree = "<group>";
 		};
 		04A473992122E93500D37F33 /* LZViewPager */ = {
@@ -1082,6 +1093,7 @@
 				04907E8A21183D7D006B70EC /* ZJCateOneList.swift in Sources */,
 				04DE7094211A88D20073DE82 /* ZJBannerModel.swift in Sources */,
 				04907E8821174B70006B70EC /* ZJRecommendCate.swift in Sources */,
+				04970603212BF38C00E12562 /* ZJRankView.swift in Sources */,
 				049705E22126B9AE00E12562 /* ZJDiscoverHeadView.swift in Sources */,
 				0419BCFF2111BEBE008661D3 /* ZJQQCarViewController.swift in Sources */,
 				049705F82129AC9900E12562 /* ZJFishBarRecommendHeadView.swift in Sources */,
