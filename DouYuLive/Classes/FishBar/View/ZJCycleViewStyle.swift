@@ -30,5 +30,5 @@ class ZJCycleViewStyle {
     // 是否显示分页控制器
     var kIsShowPageControl : Bool? = true
     // 图片的填充模式
-    var  ImageContentMode : UIViewContentMode?
+    var  ImageContentMode : UIViewContentMode? = .scaleAspectFill
 }
