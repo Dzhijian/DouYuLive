@@ -9,13 +9,12 @@
 import UIKit
 
 struct ZJCategoryList : Decodable {
-    var cate2_id : Int32?
+    var cate2_id : Int?
     var cate2_name : String?
     var cate2_short_name : String?
     var icon_url : String?
-    var is_vertical : Int32?
-    var push_nearby : Int32?
+    var is_vertical : Int?
+    var push_nearby : Int?
     var square_icon_url : String?
     var small_icon_url : String?
-    
 }

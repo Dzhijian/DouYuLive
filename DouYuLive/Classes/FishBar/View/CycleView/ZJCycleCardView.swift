@@ -72,7 +72,7 @@ class ZJCycleCardView: ZJBaseView {
     }
     
     func setUpImgArr() {
-        itemCount = self.style.kIsInfiniteLoop! ? imgArray.count * 10 : imgArray.count
+        itemCount = self.style.kIsInfiniteLoop! ? imgArray.count * 100 : imgArray.count
         if imgArray.count > 1 {
             self.collectionView.isScrollEnabled = true
             self.setAutoScroll(autoScroll: self.style.kIsAutoScroll!)

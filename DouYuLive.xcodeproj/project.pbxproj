@@ -100,6 +100,8 @@
 		04A473B621252C0300D37F33 /* ZJFollowStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A473B521252C0300D37F33 /* ZJFollowStateViewController.swift */; };
 		04A473BB212533FC00D37F33 /* ZJFollowLiveHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A473BA212533FC00D37F33 /* ZJFollowLiveHeadView.swift */; };
 		04A473BD2125353000D37F33 /* ZJFollowLiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A473BC2125353000D37F33 /* ZJFollowLiveCell.swift */; };
+		04ADE69A212D3E5900B64951 /* ZJProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ADE699212D3E5900B64951 /* ZJProfileViewController.swift */; };
+		04ADE69C212D43AB00B64951 /* ZJProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ADE69B212D43AB00B64951 /* ZJProfileCell.swift */; };
 		04DE708621198D4E0073DE82 /* ZJRecommendHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE708521198D4E0073DE82 /* ZJRecommendHeadView.swift */; };
 		04DE70882119953F0073DE82 /* ZJActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE70872119953F0073DE82 /* ZJActivityView.swift */; };
 		04DE708A2119967E0073DE82 /* ZJBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE70892119967E0073DE82 /* ZJBaseView.swift */; };
@@ -238,6 +240,8 @@
 		04A473B521252C0300D37F33 /* ZJFollowStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFollowStateViewController.swift; sourceTree = "<group>"; };
 		04A473BA212533FC00D37F33 /* ZJFollowLiveHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFollowLiveHeadView.swift; sourceTree = "<group>"; };
 		04A473BC2125353000D37F33 /* ZJFollowLiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFollowLiveCell.swift; sourceTree = "<group>"; };
+		04ADE699212D3E5900B64951 /* ZJProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJProfileViewController.swift; sourceTree = "<group>"; };
+		04ADE69B212D43AB00B64951 /* ZJProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJProfileCell.swift; sourceTree = "<group>"; };
 		04DE708521198D4E0073DE82 /* ZJRecommendHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJRecommendHeadView.swift; sourceTree = "<group>"; };
 		04DE70872119953F0073DE82 /* ZJActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJActivityView.swift; sourceTree = "<group>"; };
 		04DE70892119967E0073DE82 /* ZJBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJBaseView.swift; sourceTree = "<group>"; };
@@ -490,6 +494,7 @@
 				048EA3A92107873B00E30720 /* Follow */,
 				048EA3B42107904E00E30720 /* FishBar */,
 				048EA3AC2107873B00E30720 /* discover */,
+				04970606212D3DAB00E12562 /* Profile */,
 				048EA3AA2107873B00E30720 /* Other */,
 				048EA3A82107873B00E30720 /* Tools */,
 			);
@@ -678,6 +683,31 @@
 				049705FF212BB76F00E12562 /* ZJCycleCardItem.swift */,
 			);
 			path = CycleView;
+			sourceTree = "<group>";
+		};
+		04970606212D3DAB00E12562 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				04ADE699212D3E5900B64951 /* ZJProfileViewController.swift */,
+				04970608212D3DD600E12562 /* View */,
+				04970607212D3DBE00E12562 /* Controller */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		04970607212D3DBE00E12562 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		04970608212D3DD600E12562 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				04ADE69B212D43AB00B64951 /* ZJProfileCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		04A473992122E93500D37F33 /* LZViewPager */ = {
@@ -1040,6 +1070,7 @@
 				04907E732116BB61006B70EC /* ZJCategroyListCell.swift in Sources */,
 				0419BCED210EC64E008661D3 /* ZJView-Extension.swift in Sources */,
 				04A473AB21240FA300D37F33 /* ZJMusicViewController.swift in Sources */,
+				04ADE69C212D43AB00B64951 /* ZJProfileCell.swift in Sources */,
 				049705F42128745800E12562 /* ZJRecommendActivityData.swift in Sources */,
 				04DE708D2119C55C0073DE82 /* ZJLiveListCell.swift in Sources */,
 				04A473A921240F7C00D37F33 /* ZJQuadraticElementViewController.swift in Sources */,
@@ -1089,6 +1120,7 @@
 				049705FC212AE95A00E12562 /* ZJCycleViewStyle.swift in Sources */,
 				04DE70A0211C22300073DE82 /* ZJSelectCateItem.swift in Sources */,
 				04907E7B2116C33C006B70EC /* ZJBaseTableCell.swift in Sources */,
+				04ADE69A212D3E5900B64951 /* ZJProfileViewController.swift in Sources */,
 				049705DD212670E400E12562 /* ZJFishBarHotViewController.swift in Sources */,
 				04907E8A21183D7D006B70EC /* ZJCateOneList.swift in Sources */,
 				04DE7094211A88D20073DE82 /* ZJBannerModel.swift in Sources */,
@@ -1299,7 +1331,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = codeDeng.DouYuLive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/dzj/Desktop/DouYuLive/DouYuLive/Classes/Tools/Header-Swift.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "DouYuLive/Classes/Tools/Header-Swift.h";
 				SWIFT_VERSION = 4.0;
 				SYSTEM_HEADER_SEARCH_PATHS = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1323,7 +1355,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = codeDeng.DouYuLive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/dzj/Desktop/DouYuLive/DouYuLive/Classes/Tools/Header-Swift.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "DouYuLive/Classes/Tools/Header-Swift.h";
 				SWIFT_VERSION = 4.0;
 				SYSTEM_HEADER_SEARCH_PATHS = "";
 				TARGETED_DEVICE_FAMILY = "1,2";

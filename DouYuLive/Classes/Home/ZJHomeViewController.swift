@@ -132,9 +132,8 @@ extension ZJHomeViewController {
         self.navigationController?.navigationBar.barTintColor = kMainOrangeColor
         self.navigationController?.navigationBar.tintColor = UIColor.white
 
-        let size = CGSize(width: 30, height: 30)
         // 左边的按钮
-        navigationItem.leftBarButtonItem = UIBarButtonItem(norImageName: "btn_user_normal", size: size)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "btn_user_normal"), style:.done ,target: self, action: #selector(self.leftItemClick))
         // 右边的按钮
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "viewHistoryIcon"), style:.done, target: self, action: #selector(self.rightItemClick)) //UIBarButtonItem.createBarButton("search_history", "search_history", size)
         
@@ -158,9 +157,13 @@ extension ZJHomeViewController {
     }
     
     @objc func rightItemClick() {
-        print("rightItem cLick")
+        print("rightItem click")
     }
     
+    @objc func leftItemClick() {
+        self.navigationController?.pushViewController(ZJProfileViewController(), animated: true)
+        print("leftItem Click")
+    }
     
 }
 
