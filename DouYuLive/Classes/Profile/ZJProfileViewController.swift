@@ -22,7 +22,10 @@ class ZJProfileViewController: ZJBaseViewController {
                                        ["icon_my_video","icon_video_income","icon_collection"],
                                        ["icon_account","icon_free"],
                                        ["icon_focus","icon_remind"]]
-    
+    private lazy var headerView : ZJProfileHeadView = {
+        let headView  = ZJProfileHeadView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: Adapt(240)))
+        return headView
+    }()
     private lazy var mainTable : UITableView = {
         let mainTable = UITableView(frame: CGRect.zero, style: .grouped)
         mainTable.delegate = self
@@ -50,11 +53,11 @@ class ZJProfileViewController: ZJBaseViewController {
 extension ZJProfileViewController : UITableViewDelegate,UITableViewDataSource{
     
     private func setUpAllView() {
-//        self.automaticallyAdjustsScrollViewInsets = false
         view.addSubview(mainTable)
         mainTable.snp.makeConstraints { (make) in
             make.edges.equalTo(0)
         }
+        mainTable.tableHeaderView = headerView
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -76,7 +79,7 @@ extension ZJProfileViewController : UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return Adapt(45)
+        return Adapt(50)
     }
     
     
