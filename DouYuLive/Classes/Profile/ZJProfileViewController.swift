@@ -48,17 +48,22 @@ class ZJProfileViewController: ZJBaseViewController {
 
 }
 
-
-// 配置 UI 视图
-extension ZJProfileViewController : UITableViewDelegate,UITableViewDataSource{
+// MARK: -
+extension ZJProfileViewController {
     
-    private func setUpAllView() {
-        view.addSubview(mainTable)
-        mainTable.snp.makeConstraints { (make) in
-            make.edges.equalTo(0)
-        }
-        mainTable.tableHeaderView = headerView
+    @objc private func leftItemClick() {
+        self.navigationController?.popViewController(animated: true)
     }
+    @objc private func activityAction() {
+        print("activityAction")
+    }
+    @objc private func settingAction() {
+        print("settingAction")
+    }
+}
+
+// 遵守协议
+extension ZJProfileViewController : UITableViewDelegate,UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.titles.count
@@ -74,6 +79,7 @@ extension ZJProfileViewController : UITableViewDelegate,UITableViewDataSource{
         
         cell.icon.image = UIImage(named:self.icons[indexPath.section][indexPath.row])
         cell.titleLab.text = self.titles[indexPath.section][indexPath.row]
+        cell.selectionStyle = .default
         return cell
         
     }
@@ -89,6 +95,10 @@ extension ZJProfileViewController : UITableViewDelegate,UITableViewDataSource{
         return view
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.mainTable.deselectRow(at: indexPath, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return Adapt(10)
     }
@@ -99,5 +109,34 @@ extension ZJProfileViewController : UITableViewDelegate,UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.001
+    }
+}
+
+
+// 配置 UI 视图
+extension ZJProfileViewController {
+    
+    private func setUpAllView() {
+        view.addSubview(mainTable)
+        mainTable.snp.makeConstraints { (make) in
+            make.edges.equalTo(0)
+        }
+        mainTable.tableHeaderView = headerView
+        
+        let navView = self.navigationController?.navigationBar.subviews.first
+        guard navView != nil else {return}
+        zj_setUpGradientLayer(view: navView!, frame: CGRect(x: 0, y: 0, width: kScreenW, height: kStatuHeight+kNavigationBarHeight), color: kWhiteColors)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "btn_nav_back"), landscapeImagePhone: nil, style: .done, target: self, action: #selector(self.leftItemClick))
+        let activity = UIImageView.init(image: UIImage(named: "icon_dycard"))
+        activity.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
+        activity.contentMode = .scaleAspectFit
+        let activityItem = UIBarButtonItem(customView: activity)
+        activityItem.width = 30
+        let spaceItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: self, action: nil)
+        spaceItem.width = Adapt(-55)
+        
+        let setItem = UIBarButtonItem(image: UIImage(named: "icon_setting"), landscapeImagePhone: nil, style: .plain, target: self, action: #selector(self.settingAction))
+        setItem.width = 25
+        navigationItem.rightBarButtonItems = [setItem,spaceItem,activityItem]
     }
 }

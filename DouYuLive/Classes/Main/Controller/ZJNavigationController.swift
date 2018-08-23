@@ -16,19 +16,21 @@ class ZJNavigationController: UINavigationController {
         
         // 自定义导航栏背景颜色
 
-        let view = self.navigationBar.subviews.first
-        let gradientLayer: CAGradientLayer = CAGradientLayer()
-        gradientLayer.colors = kGradientColors
-        //(这里的起始和终止位置就是按照坐标系,四个角分别是左上(0,0),左下(0,1),右上(1,0),右下(1,1))
-        //渲染的起始位置
-        gradientLayer.startPoint = CGPoint.init(x: 0, y: 0)
-        //渲染的终止位置
-        gradientLayer.endPoint = CGPoint.init(x: 1, y: 0)
-        //设置frame和插入view的layer
-        gradientLayer.frame = CGRect(x: 0, y: 0, width: kScreenW, height: kStatuHeight+kNavigationBarHeight)
-        view?.layer.insertSublayer(gradientLayer, at: 1)
+        let navView = self.navigationBar.subviews.first
+        guard navView != nil else {return}
+        zj_setUpGradientLayer(view: navView!, frame: CGRect(x: 0, y: 0, width: kScreenW, height: kStatuHeight+kNavigationBarHeight), color: kGradientColors)
+        
+//        let gradientLayer: CAGradientLayer = CAGradientLayer()
+//        gradientLayer.colors = kGradientColors
+//        //(这里的起始和终止位置就是按照坐标系,四个角分别是左上(0,0),左下(0,1),右上(1,0),右下(1,1))
+//        //渲染的起始位置
+//        gradientLayer.startPoint = CGPoint.init(x: 0, y: 0)
+//        //渲染的终止位置
+//        gradientLayer.endPoint = CGPoint.init(x: 1, y: 0)
+//        //设置frame和插入view的layer
+//        gradientLayer.frame = CGRect(x: 0, y: 0, width: kScreenW, height: kStatuHeight+kNavigationBarHeight)
+//        view?.layer.insertSublayer(gradientLayer, at: 1)
 
-//        setStatusBarBackgroundColor()
     }
     
     //MARK: 重写跳转
@@ -48,16 +50,18 @@ class ZJNavigationController: UINavigationController {
         let statusBar : UIView = statusBarWindow.value(forKey: "statusBar") as! UIView
         if statusBar.responds(to:#selector(setter: UIView.backgroundColor)) {
             // 设置背景渐变
-            let gradientLayer: CAGradientLayer = CAGradientLayer()
-            gradientLayer.colors = kGradientColors
-            //(这里的起始和终止位置就是按照坐标系,四个角分别是左上(0,0),左下(0,1),右上(1,0),右下(1,1))
-            //渲染的起始位置
-            gradientLayer.startPoint = CGPoint.init(x: 0, y: 0)
-            //渲染的终止位置
-            gradientLayer.endPoint = CGPoint.init(x: 1, y: 0)
-            //设置frame和插入view的layer
-            gradientLayer.frame = statusBar.frame
-            statusBar.layer.insertSublayer(gradientLayer, at: 0)
+//            zj_setUpGradientLayer(view: statusBar, frame: statusBar.frame, color: kGradientColors)
+            
+//            let gradientLayer: CAGradientLayer = CAGradientLayer()
+//            gradientLayer.colors = kGradientColors
+//            //(这里的起始和终止位置就是按照坐标系,四个角分别是左上(0,0),左下(0,1),右上(1,0),右下(1,1))
+//            //渲染的起始位置
+//            gradientLayer.startPoint = CGPoint.init(x: 0, y: 0)
+//            //渲染的终止位置
+//            gradientLayer.endPoint = CGPoint.init(x: 1, y: 0)
+//            //设置frame和插入view的layer
+//            gradientLayer.frame = statusBar.frame
+//            statusBar.layer.insertSublayer(gradientLayer, at: 0)
         }
     }
 
