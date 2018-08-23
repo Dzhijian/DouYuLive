@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ESPullToRefresh
 
 private let kItemMargin : CGFloat = 10
 private let kItemW = (kScreenW - kItemMargin * 3) / 2
@@ -44,17 +45,15 @@ class ZJRecommendViewController: ZJBaseViewController ,UIScrollViewDelegate{
         
         setUpUI()
         
+        loadData()
+        
+    }
+    
+    func loadData() {
         // 获取热门推荐列表数据
         loadHotRecommendListData()
         
         getActivityList()
-    }
-    
-    
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // 列表滚动事件
@@ -78,7 +77,6 @@ extension ZJRecommendViewController {
     private func loadHotRecommendListData() {
         let dict : [String : String] = ["limit":"10","client_sys":"ios","offset":"0"]
         ZJNetWorking.requestData(type: .POST, URlString:ZJRecommendHotURL , parameters: dict) { (response) in
-            print(response)
         }
     }
     
@@ -87,6 +85,7 @@ extension ZJRecommendViewController {
             let data = try? ZJDecoder.decode(ZJRecommendActivityData.self, data: response)
             if data != nil {
                 self.activityList = (data?.list)!
+                self.collectionView.es.stopPullToRefresh()
                 self.collectionView.reloadData()
             }
             
@@ -146,6 +145,13 @@ extension ZJRecommendViewController {
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { (make) in
             make.edges.equalTo(0)
+        }
+        
+        var header: ESRefreshProtocol & ESRefreshAnimatorProtocol
+        header = ZJRefreshView(frame: CGRect.zero)
+        
+        self.collectionView.es.addPullToRefresh(animator: header) { [weak self] in
+            self?.loadData()
         }
     }
 }

@@ -42,7 +42,7 @@ class ZJRefreshView: ZJBaseView , ESRefreshProtocol,ESRefreshAnimatorProtocol {
                     images.append(aImage)
                 }
             }
-            self.imageView.animationDuration = 0.5
+            self.imageView.animationDuration = 0.6
             self.imageView.animationRepeatCount = 0
             self.imageView.animationImages = images
             self.imageView.startAnimating()
@@ -82,7 +82,7 @@ class ZJRefreshView: ZJBaseView , ESRefreshProtocol,ESRefreshAnimatorProtocol {
                     images.append(aImage)
                 }
             }
-            imageView.animationDuration = 0.5
+            imageView.animationDuration = 0.6
             imageView.animationRepeatCount = 1
             imageView.animationImages = images
             imageView.image = UIImage.init(named: "img_mj_statePulling")
@@ -96,7 +96,7 @@ class ZJRefreshView: ZJBaseView , ESRefreshProtocol,ESRefreshAnimatorProtocol {
                     images.append(aImage)
                 }
             }
-            imageView.animationDuration = 0.5
+            imageView.animationDuration = 0.6
             imageView.animationRepeatCount = 1
             imageView.animationImages = images
             imageView.image = UIImage.init(named: "img_mj_statePulling")

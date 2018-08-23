@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import ESPullToRefresh
+
 // headView size
 private let kCateItemWH = (kScreenW - Adapt(20)) / 4
 private let kItemW = (kScreenW - 10) / 2
@@ -112,6 +114,7 @@ extension ZJDiscoverViewController {
                 mainQueue.async {
                     print("全部任务执行完毕,刷新页面" + "\(Thread.current)")
                     self.collectionView.reloadData()
+                    self.collectionView.es.stopPullToRefresh()
                 }
             }
         }
@@ -149,7 +152,6 @@ extension ZJDiscoverViewController {
             let data = try? ZJDecoder.decode(ZJFollowVideoData.self, data: response)
             if data != nil {
                 self.hotVideoList = (data?.data)!
-//                self.collectionView.reloadData()
             }
             
             self.semaphoreD.signal()
@@ -162,7 +164,6 @@ extension ZJDiscoverViewController {
             let data = try? ZJDecoder.decode(ZJAnchorRankData.self, data: response)
             if data != nil {
                 self.anchorRankList = (data?.data)!
-//                self.collectionView.reloadData()
             }
             
             self.semaphoreE.signal()
@@ -175,7 +176,6 @@ extension ZJDiscoverViewController {
             let data = try? ZJDecoder.decode(ZJDiscoverGameData.self, data: response)
             if data != nil {
                 self.gameList = (data?.list)!
-//                self.collectionView.reloadData()
             }
             
             self.semaphoreF.signal()
@@ -188,7 +188,6 @@ extension ZJDiscoverViewController {
             let data = try? ZJDecoder.decode(ZJDiscoverActivityData.self, data: response)
             if data != nil {
                 self.activityList = (data?.list)!
-//                self.collectionView.reloadData()
             }
             self.semaphoreLast.signal()
         }
@@ -203,6 +202,14 @@ extension ZJDiscoverViewController : UICollectionViewDelegate,UICollectionViewDa
         collectionView.snp.makeConstraints { (make) in
             make.edges.equalTo(0)
         }
+        
+        var header: ESRefreshProtocol & ESRefreshAnimatorProtocol
+        header = ZJRefreshView(frame: CGRect.zero)
+        
+        self.collectionView.es.addPullToRefresh(animator: header) { [weak self] in
+            self?.loadData()
+        }
+        
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {

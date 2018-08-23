@@ -96,9 +96,8 @@ extension ZJClassifyViewController {
                 let data = try? ZJDecoder.decode(ZJRecommendCate.self, data: response)
                 if data != nil {
                     self.recommenCateData = data!
-                    
-                    semaphoreC.signal()
                 }
+                semaphoreC.signal()
                 print("第二个任务执行完毕" + "\(Thread.current)" )
             }
         }
@@ -128,15 +127,8 @@ extension ZJClassifyViewController {
         header = ZJRefreshView(frame: CGRect.zero)
         
         self.mainTable.es.addPullToRefresh(animator: header) { [weak self] in
-            self?.refresh()
+            self?.loadCateListData()
         }
-    }
-    
-    
-    private func refresh() {
-//        DispatchQueue.main.asyncAfter(deadline: .now()) {
-            self.loadCateListData()
-//        }
     }
     
     

@@ -100,19 +100,25 @@ struct ZJDiscoverGameList : Decodable{
     
 }
 
+//struct ZJDiscoverActivityData : Decodable{
+//    
+//    var data : ZJDiscoverActivityTotal = ZJDiscoverActivityTotal()
+//    var error : Int?
+//    
+//}
 struct ZJDiscoverActivityData : Decodable{
+    
     var total : Int?
     var list : [ZJDiscoverActivityList] = [ZJDiscoverActivityList]()
     
 }
-
 struct ZJDiscoverActivityList : Decodable{
     var id : String?
     var act_name : String?
     var act_pic : String?
-    var type : String?
+//    var type : Int?
     var act_link : String?
-    var isVertical : Int?
+//    var isVertical : String?
     var vertical_src : String?
     var nrt : Int?
 }

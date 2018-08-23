@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import ESPullToRefresh
 
 private let kItemW = (kScreenW - 10) / 2
 private let kItemH = kItemW * 4 / 5
 
 class ZJAllViewController: ZJBaseViewController {
-    
+    private var formValue : Int = 0
+    private var toValue : Int = 20
     private lazy var collectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: kItemW, height: kItemH)
@@ -27,7 +29,7 @@ class ZJAllViewController: ZJBaseViewController {
         return collectionView
     }()
     
-    private var allLiveData : ZJLiveListData = ZJLiveListData()
+    private var allLiveList : [ZJLiveItemModel] = [ZJLiveItemModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,13 +58,27 @@ extension  ZJAllViewController {
     
     private func getAllLiveData() {
         
-        ZJNetWorking.requestData(type: .GET, URlString: ZJLiveItemModelURL) { (response) in
-            do {
-                let data = try JSONDecoder().decode(ZJLiveListData.self, from: response)
-                self.allLiveData = data
-                self.collectionView.reloadData()
-            }catch{}
-            
+        let urlStr : String = ZJLiveItemModelURL + "roomlist/0_0/\(formValue)/\(toValue)/ios?client_sys=ios"
+        
+        ZJNetWorking.requestData(type: .GET, URlString: urlStr) { (response) in
+                let data = try? ZJDecoder.decode(ZJLiveListData.self, data: response)
+                if data != nil {
+                    if self.formValue == 0 {
+                        self.allLiveList = data!.list
+                    }else{
+                        for (_,item) in (data?.list.enumerated())!{
+                            self.allLiveList.append(item)
+                        }
+                        
+                    }
+                        
+                    self.collectionView.reloadData()
+                }
+                self.collectionView.es.stopPullToRefresh()
+                /// 如果你的加载更多事件成功，调用es_stopLoadingMore()重置footer状态
+                self.collectionView.es.stopLoadingMore()
+                /// 通过es_noticeNoMoreData()设置footer暂无数据状态
+//                self.collectionView.es.noticeNoMoreData()
         }
     }
 }
@@ -76,6 +92,19 @@ extension ZJAllViewController  {
         collectionView.snp.makeConstraints { (make) in
             make.edges.equalTo(0)
         }
+        
+        var header: ESRefreshProtocol & ESRefreshAnimatorProtocol
+        header = ZJRefreshView(frame: CGRect.zero)
+        
+        self.collectionView.es.addPullToRefresh(animator: header) { [weak self] in
+            self?.getAllLiveData()
+        }
+        
+//        self.collectionView.es.addInfiniteScrolling {
+//            [unowned self] in
+//
+//            self.getAllLiveData()
+//        }
     }
 }
 
@@ -86,13 +115,13 @@ extension ZJAllViewController : UICollectionViewDelegate,UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return allLiveData.list.count
+        return allLiveList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let item = collectionView.dequeueReusableCell(withReuseIdentifier: ZJLiveListItem.identifier(), for: indexPath) as! ZJLiveListItem
-        item.liveModel = self.allLiveData.list[indexPath.item]
+        item.liveModel = self.allLiveList[indexPath.item]
         return item
     }
 }
