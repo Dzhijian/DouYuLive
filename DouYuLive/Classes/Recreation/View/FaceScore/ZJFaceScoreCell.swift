@@ -42,7 +42,7 @@ class ZJFaceScoreCell: ZJBaseTableCell {
         
     }()
     
-    override func zj_setUpAllView() {
+    override func zj_initWithView() {
         self.contentView.addSubview(collectionView)
         collectionView.snp.makeConstraints { (make) in
             make.edges.equalTo(0)

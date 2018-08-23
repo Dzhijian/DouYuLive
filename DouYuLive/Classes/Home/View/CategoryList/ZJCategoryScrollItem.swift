@@ -35,7 +35,7 @@ class ZJCategoryScrollItem: ZJBaseCollectionCell {
         return collectionView
     }()
     
-    override func zj_setUpAllView() {
+    override func zj_initWithView() {
         addSubview(collectionView)
     }
     

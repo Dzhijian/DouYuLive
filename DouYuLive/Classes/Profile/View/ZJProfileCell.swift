@@ -15,7 +15,7 @@ class ZJProfileCell: ZJBaseTableCell {
     private lazy var arrowIcon : UIImageView = UIImageView()
     private lazy var detailLab : UILabel = UILabel()
     
-    override func zj_setUpAllView() {
+    override func zj_initWithView() {
         setUpAllView()
     }
     

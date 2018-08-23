@@ -34,7 +34,7 @@ class ZJDiscoverRankItem: ZJBaseCollectionCell {
         }
     }
     
-    override func zj_setUpAllView() {
+    override func zj_initWithView() {
         setUpAllView()
        
     }

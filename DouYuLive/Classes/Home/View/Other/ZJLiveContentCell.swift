@@ -19,7 +19,7 @@ class ZJLiveContentCell: ZJBaseTableCell {
         return tableView
     }()
     
-    override func zj_setUpAllView() {
+    override func zj_initWithView() {
         addSubview(mainTable)
         mainTable.snp.makeConstraints { (make) in
             make.edges.equalTo(0)

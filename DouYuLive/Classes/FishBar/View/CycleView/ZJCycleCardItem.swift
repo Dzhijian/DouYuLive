@@ -19,7 +19,7 @@ class ZJCycleCardItem: ZJBaseCollectionCell {
         return imgV
     }()
     
-    override func zj_setUpAllView() {
+    override func zj_initWithView() {
         contentView.addSubview(imgView)
     }
     

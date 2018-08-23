@@ -48,7 +48,7 @@ class ZJCategroyListCell: ZJBaseTableCell {
         return collectionView
     }()
     
-    override func zj_setUpAllView() {
+    override func zj_initWithView() {
         setUpAllView()
         layout.itemSize = CGSize(width: kScreenW, height: CateItemHeight * 2.0)
         pageControl.numberOfPages = 8

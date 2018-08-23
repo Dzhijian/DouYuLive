@@ -24,7 +24,7 @@ class ZJActivityItem: ZJBaseCollectionCell {
     }
     
     
-    override func zj_setUpAllView() {
+    override func zj_initWithView() {
         
         icon = UIImageView.zj_createImageView(imageName: "home_header_hot", supView: self.contentView, closure: { (make) in
             make.centerY.equalTo(self.snp.centerY)

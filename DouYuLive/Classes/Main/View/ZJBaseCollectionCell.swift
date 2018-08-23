@@ -12,7 +12,7 @@ class ZJBaseCollectionCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.contentView.backgroundColor = kWhite
-        zj_setUpAllView()
+        zj_initWithView()
     }
     
     
@@ -22,7 +22,7 @@ class ZJBaseCollectionCell: UICollectionViewCell {
     }
     
     
-    public func zj_setUpAllView() {
+    public func zj_initWithView() {
         
         
     }

@@ -18,7 +18,7 @@ class ZJLiveListItem: ZJBaseCollectionCell {
     var hotLab = UILabel()
     
 
-    override func zj_setUpAllView() {
+    override func zj_initWithView() {
         setUpAllView()
     }
     

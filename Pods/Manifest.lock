@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.7.3)
+  - ESPullToRefresh (2.7)
   - IQKeyboardManagerSwift (6.1.1)
   - Kingfisher (4.8.0)
   - Moya (10.0.2):
@@ -23,6 +24,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - ESPullToRefresh
   - IQKeyboardManagerSwift
   - Kingfisher
   - Moya
@@ -35,6 +37,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
+    - ESPullToRefresh
     - IQKeyboardManagerSwift
     - Kingfisher
     - Moya
@@ -48,6 +51,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  ESPullToRefresh: 119e2710b82b75536aab2bbe4883ba119fca35c8
   IQKeyboardManagerSwift: 977affaeb4d6e971975c7790a6850f31d38f1207
   Kingfisher: 976d828df2b24834c6a3f2fc4d82cdbd26552be1
   Moya: 2b0531a9fef318e0bc484030c3db1e6f279ccb66
@@ -59,6 +63,6 @@ SPEC CHECKSUMS:
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: 5590ccc4277dd074c4057f0c04acd7895bada895
+PODFILE CHECKSUM: 0a30636ff441442357f3241e2a317a454517f21e
 
 COCOAPODS: 1.5.0

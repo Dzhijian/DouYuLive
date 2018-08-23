@@ -92,7 +92,7 @@ class ZJLiveListCell: ZJBaseTableCell {
         mainTable.backgroundColor = kWhite
         return mainTable
     }()
-    override func zj_setUpAllView() {
+    override func zj_initWithView() {
         addSubview(collectionView)
         addSubview(mainTable)
         addSubview(headView)

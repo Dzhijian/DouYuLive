@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import ESPullToRefresh
 
 private let itemWH = kScreenW / 4
 
@@ -18,7 +19,6 @@ class ZJClassifyViewController: ZJBaseViewController {
     
     private var recommenCateData : ZJRecommendCate = ZJRecommendCate()
     private var cateListData : ZJCateOneList = ZJCateOneList()
-    
     
     private lazy var mainTable : UITableView = {
         let tableView = UITableView(frame: CGRect.zero, style: .grouped)
@@ -106,6 +106,7 @@ extension ZJClassifyViewController {
         queue.async{
             if semaphoreC.wait(wallTimeout: .distantFuture) == .success{
                 mainQueue.async {
+                    self.mainTable.es.stopPullToRefresh()
                     print("全部任务执行完毕,刷新页面" + "\(Thread.current)")
                     self.mainTable.reloadData()
                 }
@@ -122,7 +123,23 @@ extension ZJClassifyViewController {
         mainTable.snp.makeConstraints { (make) in
             make.edges.equalTo(0)
         }
+        
+        var header: ESRefreshProtocol & ESRefreshAnimatorProtocol
+        header = ZJRefreshView(frame: CGRect.zero)
+        
+        self.mainTable.es.addPullToRefresh(animator: header) { [weak self] in
+            self?.refresh()
+        }
     }
+    
+    
+    private func refresh() {
+//        DispatchQueue.main.asyncAfter(deadline: .now()) {
+            self.loadCateListData()
+//        }
+    }
+    
+    
 }
 
 extension ZJClassifyViewController : UITableViewDelegate,UITableViewDataSource {

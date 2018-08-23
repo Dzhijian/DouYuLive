@@ -21,7 +21,7 @@ class ZJGameItemCell: ZJBaseTableCell {
     private lazy var statuBtn : UIButton = UIButton()
     lazy var botLine : UIView = UIView()
     
-    override func zj_setUpAllView() {
+    override func zj_initWithView() {
         setUpAllView()
     
     }

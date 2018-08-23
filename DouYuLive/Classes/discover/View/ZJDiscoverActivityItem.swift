@@ -13,7 +13,7 @@ class ZJDiscoverActivityItem: ZJBaseCollectionCell {
     func configImgUrlStr(imgUrlStr : String){
         self.imgV.kf.setImage(with: URL(string: imgUrlStr))
     }
-    override func zj_setUpAllView() {
+    override func zj_initWithView() {
         self.imgV = UIImageView.zj_createImageView(imageName: "", supView: self.contentView, closure: { (make) in
             make.left.equalTo(Adapt(10))
             make.top.equalTo(Adapt(0))

@@ -17,7 +17,7 @@ class ZJBaseTableCell: UITableViewCell {
         self.accessoryType =  .none
         self.contentView.backgroundColor = kWhite
         
-        zj_setUpAllView()
+        zj_initWithView()
         
     }
     
@@ -27,7 +27,7 @@ class ZJBaseTableCell: UITableViewCell {
     
     
     /// 配置子控件
-    public func zj_setUpAllView(){
+    public func zj_initWithView(){
         
     }
     

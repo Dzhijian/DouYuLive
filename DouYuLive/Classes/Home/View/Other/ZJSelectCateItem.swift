@@ -19,7 +19,7 @@ class ZJSelectCateItem: ZJBaseCollectionCell {
         return label
     }()
     
-    override func zj_setUpAllView() {
+    override func zj_initWithView() {
         self.contentView.addSubview(titleLab)
         titleLab.snp.makeConstraints { (make) in
             make.edges.equalTo(0)

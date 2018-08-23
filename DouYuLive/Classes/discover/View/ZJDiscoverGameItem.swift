@@ -26,7 +26,7 @@ class ZJDiscoverGameItem: ZJBaseCollectionCell {
     }()
     
     
-    override func zj_setUpAllView() {
+    override func zj_initWithView() {
         backgroundColor = kPurple
         addSubview(mainTable)
         mainTable.snp.makeConstraints { (make) in
