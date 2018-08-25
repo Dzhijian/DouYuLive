@@ -13,6 +13,7 @@ import SBCycleScrollView
 import RxSwift
 import RxCocoa
 import ESPullToRefresh
+//import SwiftProgressHUD
 
 let ZJ_DOUYU_TOKEN : String = "ZJ_DOUYU_TOKEN"
 

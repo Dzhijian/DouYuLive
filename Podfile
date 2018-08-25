@@ -16,7 +16,7 @@ target 'DouYuLive' do
 #  pod 'ZJKitTool'
   # 轮播图
   pod 'SBCycleScrollView','~> 0.0.8'
-  pod 'SwiftProgressHUD'
+#  pod 'SwiftProgressHUD'
   pod 'RxSwift'
   pod 'RxCocoa'
   target 'DouYuLiveTests' do

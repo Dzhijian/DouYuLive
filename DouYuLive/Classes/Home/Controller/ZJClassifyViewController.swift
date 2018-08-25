@@ -64,6 +64,17 @@ class ZJClassifyViewController: ZJBaseViewController {
 extension ZJClassifyViewController {
     
     private func loadCateListData() {
+        let animationDuration = 3 // 动画时间 单位毫秒Int
+        
+        var loadingImages = [UIImage]()
+        for index in 0...16 {
+            let loadImageName = String(format: "dyla_img_loading_%03d", index)
+            if let loadImage = UIImage(named: loadImageName) {
+                loadingImages.append(loadImage)
+            }
+        }
+        
+        SwiftProgressHUD.showAnimationImages(loadingImages, timeMilliseconds: animationDuration, backgroundColor: UIColor.white.withAlphaComponent(1.0), scale: 1.0)
         
         //初始化信号量为1
         let semaphoreA = DispatchSemaphore(value: 1)
@@ -106,6 +117,7 @@ extension ZJClassifyViewController {
             if semaphoreC.wait(wallTimeout: .distantFuture) == .success{
                 mainQueue.async {
                     self.mainTable.es.stopPullToRefresh()
+                    SwiftProgressHUD.hideAllHUD()
                     print("全部任务执行完毕,刷新页面" + "\(Thread.current)")
                     self.mainTable.reloadData()
                 }
