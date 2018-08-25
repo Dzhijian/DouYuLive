@@ -213,7 +213,7 @@ class SwiftProgress: NSObject {
     
     @discardableResult
     static func wait(_ imageNames: Array<UIImage> = Array<UIImage>(), timeMilliseconds: Int = 0, backgroundColor: UIColor = yj_showHUDBackColor, scale: Double = 1.0) -> UIWindow {
-        let frame = CGRect(x: 0, y: 0, width: 78, height: 78)
+        let frame = CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH)
         let window = UIWindow()
         window.backgroundColor = hudBackgroundColor
         window.rootViewController = UIViewController.currentViewController()

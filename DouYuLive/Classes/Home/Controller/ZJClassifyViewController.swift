@@ -39,6 +39,18 @@ class ZJClassifyViewController: ZJBaseViewController {
         // 获取分类列表数据
         loadCateListData()
         
+        let animationDuration = 70 // 动画时间 单位毫秒Int
+        
+        var loadingImages = [UIImage]()
+        for index in 0...14 {
+            let loadImageName = String(format: "dyla_img_loading_%03d", index)
+            if let loadImage = UIImage(named: loadImageName) {
+                loadingImages.append(loadImage)
+            }
+        }
+        
+        SwiftProgressHUD.showAnimationImages(loadingImages, timeMilliseconds: animationDuration, backgroundColor: UIColor.white.withAlphaComponent(1.0), scale: 1.0)
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -64,17 +76,7 @@ class ZJClassifyViewController: ZJBaseViewController {
 extension ZJClassifyViewController {
     
     private func loadCateListData() {
-        let animationDuration = 3 // 动画时间 单位毫秒Int
         
-        var loadingImages = [UIImage]()
-        for index in 0...16 {
-            let loadImageName = String(format: "dyla_img_loading_%03d", index)
-            if let loadImage = UIImage(named: loadImageName) {
-                loadingImages.append(loadImage)
-            }
-        }
-        
-        SwiftProgressHUD.showAnimationImages(loadingImages, timeMilliseconds: animationDuration, backgroundColor: UIColor.white.withAlphaComponent(1.0), scale: 1.0)
         
         //初始化信号量为1
         let semaphoreA = DispatchSemaphore(value: 1)
