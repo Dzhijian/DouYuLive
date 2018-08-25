@@ -20,6 +20,7 @@ PODS:
   - SBCycleScrollView (0.0.8):
     - Kingfisher (~> 4.8.0)
   - SnapKit (4.0.0)
+  - SwiftProgressHUD (0.0.6)
   - SwiftyJSON (4.1.0)
 
 DEPENDENCIES:
@@ -33,6 +34,7 @@ DEPENDENCIES:
   - RxSwift
   - SBCycleScrollView (~> 0.0.8)
   - SnapKit
+  - SwiftProgressHUD
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -47,6 +49,7 @@ SPEC REPOS:
     - RxSwift
     - SBCycleScrollView
     - SnapKit
+    - SwiftProgressHUD
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -61,8 +64,9 @@ SPEC CHECKSUMS:
   RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
   SBCycleScrollView: 7bd5afc001dfe8579b21e98582d2b3cf58abfb9a
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
+  SwiftProgressHUD: bc419879ddd61c3bca8c89d6a1ede894ee05fa05
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: 0a30636ff441442357f3241e2a317a454517f21e
+PODFILE CHECKSUM: 73eadc6ec247676a2c5d5725ab488d433db6e6fc
 
 COCOAPODS: 1.5.0
