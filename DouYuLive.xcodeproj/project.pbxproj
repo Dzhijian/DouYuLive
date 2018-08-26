@@ -37,6 +37,7 @@
 		043512F72122B1AF001D928A /* DNSPageCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043512EF2122B1AF001D928A /* DNSPageCollectionViewFlowLayout.swift */; };
 		043512F82122B1AF001D928A /* DNSPageStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043512F02122B1AF001D928A /* DNSPageStyle.swift */; };
 		044735FB213195C80086D470 /* SwiftProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044735FA213195C80086D470 /* SwiftProgressHUD.swift */; };
+		04473600213283DC0086D470 /* ZJProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044735FF213283DC0086D470 /* ZJProgressHUD.swift */; };
 		045DE3902125C75C004718E8 /* ZJFollowInteresData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045DE38F2125C75C004718E8 /* ZJFollowInteresData.swift */; };
 		048EA3792106447200E30720 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EA3782106447200E30720 /* AppDelegate.swift */; };
 		048EA37E2106447200E30720 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 048EA37C2106447200E30720 /* Main.storyboard */; };
@@ -174,6 +175,7 @@
 		043512EF2122B1AF001D928A /* DNSPageCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSPageCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		043512F02122B1AF001D928A /* DNSPageStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSPageStyle.swift; sourceTree = "<group>"; };
 		044735FA213195C80086D470 /* SwiftProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftProgressHUD.swift; sourceTree = "<group>"; };
+		044735FF213283DC0086D470 /* ZJProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJProgressHUD.swift; sourceTree = "<group>"; };
 		045DE38F2125C75C004718E8 /* ZJFollowInteresData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFollowInteresData.swift; sourceTree = "<group>"; };
 		048EA3752106447200E30720 /* DouYuLive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DouYuLive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		048EA3782106447200E30720 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 		0419BCD9210AB934008661D3 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				044735FF213283DC0086D470 /* ZJProgressHUD.swift */,
 				044735FA213195C80086D470 /* SwiftProgressHUD.swift */,
 				0419BCD7210A2245008661D3 /* ZJBarButtonItem_Extension.swift */,
 				0419BCEC210EC64E008661D3 /* ZJView-Extension.swift */,
@@ -1118,6 +1121,7 @@
 				049705E62126CA4A00E12562 /* ZJDiscoverSectionHeadView.swift in Sources */,
 				048EA3BC210790E400E30720 /* ZJDiscoverViewController.swift in Sources */,
 				04ADE6A0212E67F500B64951 /* ZJRefreshView.swift in Sources */,
+				04473600213283DC0086D470 /* ZJProgressHUD.swift in Sources */,
 				04DE709A211B0E3C0073DE82 /* ZJLiveContentCell.swift in Sources */,
 				049705EA21274FD800E12562 /* ZJDiscoverRankItem.swift in Sources */,
 				04907E712113F19E006B70EC /* ZJLiveListItem.swift in Sources */,
