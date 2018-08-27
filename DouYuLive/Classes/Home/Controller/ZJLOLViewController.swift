@@ -41,11 +41,12 @@ class ZJLOLViewController: ZJBaseViewController {
         getChildCateListData()
         getLOLLiveData()
         getVideoListData()
+        
+        ZJProgressHUD.showProgress(supView: self.mainTable, imgFrame: CGRect.zero,imgArr: getloadingImages(), timeMilliseconds: 90, bgColor: kWhite, scale: 0.8)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
    
@@ -54,6 +55,7 @@ class ZJLOLViewController: ZJBaseViewController {
 
 // MARK: - 网络请求
 extension ZJLOLViewController {
+    
     // 获取 banner 轮播图数据
     private func getBannerListData() {
         ZJNetWorking.requestData(type: .GET, URlString: ZJCateBannerURL) { (response) in
@@ -99,7 +101,6 @@ extension ZJLOLViewController {
         let timeInterval:TimeInterval = Date().timeIntervalSince1970
         let timeStamp = Int(timeInterval)
         let urlStr = "\(ZJVideoListURL)&time=\(timeStamp)"
-        
         ZJNetWorking.requestData(type: .GET, URlString: urlStr) { (response) in
             print("斗鱼直播视频")
         }

@@ -12,27 +12,22 @@ class ZJProgressHUD: NSObject {
     static var timerTimes = 0
     static var timer: DispatchSource!
     static let rv = UIApplication.shared.keyWindow?.subviews.first as UIView?
-    static var windows = Array<UIWindow??>()
+    static var showViews = Array<UIView>()
     static var hudBackgroundColor: UIColor = UIColor.clear
     
-    @discardableResult
-    public class func showAnimationImages(supView : UIView,imgFrame: CGRect,_ imgArr : [UIImage] = [UIImage](),timeMilliseconds: Int = 0,bgColor : UIColor? = UIColor.white, scale : Double = 1.0) -> UIWindow? {
-        if let _ = UIApplication.shared.keyWindow {
-            return self.showProgress(supView:supView,imgFrame:imgFrame,_:imgArr,timeMilliseconds:timeMilliseconds,bgColor:bgColor,scale:scale)
-        }
-        return nil
+    
+    public class func showAnimationImages(supView : UIView,imgFrame: CGRect, imgArr : [UIImage] = [UIImage](),timeMilliseconds: Int = 0,bgColor : UIColor? = UIColor.white, scale : Double = 1.0) {
+        
+        self.showProgress(supView:supView,imgFrame:imgFrame,imgArr:imgArr,timeMilliseconds:timeMilliseconds,bgColor:bgColor,scale:scale)
+        
     }
     
-    @discardableResult
-    static func showProgress(supView : UIView,imgFrame: CGRect,_ imgArr : [UIImage] = [UIImage](),timeMilliseconds: Int = 0,bgColor : UIColor? = UIColor.white, scale : Double = 1.0) -> UIWindow{
+    static func showProgress(supView : UIView,imgFrame: CGRect,imgArr : [UIImage] = [UIImage](),timeMilliseconds: Int = 0,bgColor : UIColor? = UIColor.white, scale : Double = 1.0){
         
         let supFrame = supView.frame
-        
-        let window = UIWindow()
-        window.backgroundColor = hudBackgroundColor
-        window.rootViewController = UIViewController.zj_currentViewController()
-        
+ 
         let bgView = UIView()
+        bgView.isHidden = false
         bgView.backgroundColor = bgColor
         
         let imgViewFrame = CGRect(x: Double(supFrame.size.width) * (1 - scale) * 0.5, y: Double(supFrame.size.height) * (1 - scale) * 0.5, width: Double(supFrame.size.width) * scale, height: Double(supFrame.size.height) * scale)
@@ -54,21 +49,15 @@ class ZJProgressHUD: NSObject {
             }
         }
         
-        window.frame = rv!.bounds
         bgView.frame = supFrame
         bgView.center = rv!.center
-        
-        window.windowLevel = UIWindowLevelAlert
-        window.isHidden = false
-        window.addSubview(bgView)
-        
-        windows.append(window)
+        supView.superview?.addSubview(bgView)
+        showViews.append(bgView)
         
         bgView.alpha = 0.0
         UIView.animate(withDuration: 0.2, animations: {
             bgView.alpha = 1
         })
-        return window
     }
     
     static func clear() {
@@ -78,7 +67,7 @@ class ZJProgressHUD: NSObject {
             timer = nil
             timerTimes = 0
         }
-        windows.removeAll(keepingCapacity: false)
+        showViews.removeAll()
     }
     
     /// Clear all
@@ -92,7 +81,10 @@ class ZJProgressHUD: NSObject {
             timer = nil
             timerTimes = 0
         }
-        windows.removeAll(keepingCapacity: false)
+        for (_,view) in showViews.enumerated() {
+            view.isHidden = true
+//            view.removeFromSuperview()
+        }
     }
 }
 

@@ -35,6 +35,9 @@ class ZJAllViewController: ZJBaseViewController {
         super.viewDidLoad()
         setUpAllView()
         getAllLiveData()
+        
+        ZJProgressHUD.showProgress(supView: self.collectionView, imgFrame: CGRect.zero,imgArr: getloadingImages(), timeMilliseconds: 90, bgColor: kWhite, scale: 0.8)
+        
     }
 
     // 列表滚动事件

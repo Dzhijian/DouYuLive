@@ -70,6 +70,8 @@ class ZJDiscoverViewController: ZJBaseViewController {
         self.view.backgroundColor = UIColor.white
         setUpAllView()
         
+        ZJProgressHUD.showProgress(supView: self.collectionView, imgFrame: CGRect.zero,imgArr: getloadingImages(), timeMilliseconds: 90, bgColor: kWhite, scale: 0.8)
+        
         loadData()
     }
     
