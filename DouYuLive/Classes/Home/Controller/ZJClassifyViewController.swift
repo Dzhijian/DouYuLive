@@ -21,7 +21,7 @@ class ZJClassifyViewController: ZJBaseViewController {
     private var cateListData : ZJCateOneList = ZJCateOneList()
     
     private lazy var mainTable : UITableView = {
-        let tableView = UITableView(frame: CGRect.zero, style: .grouped)
+        let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH - kStatuHeight-kTabBarHeight-kNavigationBarHeight-kCateTitleH), style: .grouped)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
@@ -39,7 +39,7 @@ class ZJClassifyViewController: ZJBaseViewController {
         // 获取分类列表数据
         loadCateListData()
         
-        let animationDuration = 70 // 动画时间 单位毫秒Int
+        let animationDuration = 90 // 动画时间 单位毫秒Int
         
         var loadingImages = [UIImage]()
         for index in 0...14 {
@@ -49,8 +49,9 @@ class ZJClassifyViewController: ZJBaseViewController {
             }
         }
         
-        SwiftProgressHUD.showAnimationImages(loadingImages, timeMilliseconds: animationDuration, backgroundColor: UIColor.white.withAlphaComponent(1.0), scale: 1.0)
+//        SwiftProgressHUD.showAnimationImages(loadingImages, timeMilliseconds: animationDuration, backgroundColor: UIColor.white.withAlphaComponent(1.0), scale: 1.0)
         
+        ZJProgressHUD.showProgress(supView: self.mainTable, imgFrame: CGRect.zero, loadingImages, timeMilliseconds: animationDuration, bgColor: kWhite, scale: 0.8)
     }
     
     override func didReceiveMemoryWarning() {
@@ -119,7 +120,8 @@ extension ZJClassifyViewController {
             if semaphoreC.wait(wallTimeout: .distantFuture) == .success{
                 mainQueue.async {
                     self.mainTable.es.stopPullToRefresh()
-                    SwiftProgressHUD.hideAllHUD()
+//                    SwiftProgressHUD.hideAllHUD()
+                    ZJProgressHUD.hideAllHUD()
                     print("全部任务执行完毕,刷新页面" + "\(Thread.current)")
                     self.mainTable.reloadData()
                 }

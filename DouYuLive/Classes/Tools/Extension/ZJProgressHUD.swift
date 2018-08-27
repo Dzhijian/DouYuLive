@@ -15,12 +15,22 @@ class ZJProgressHUD: NSObject {
     static var windows = Array<UIWindow??>()
     static var hudBackgroundColor: UIColor = UIColor.clear
     
+    @discardableResult
+    public class func showAnimationImages(supView : UIView,imgFrame: CGRect,_ imgArr : [UIImage] = [UIImage](),timeMilliseconds: Int = 0,bgColor : UIColor? = UIColor.white, scale : Double = 1.0) -> UIWindow? {
+        if let _ = UIApplication.shared.keyWindow {
+            return self.showProgress(supView:supView,imgFrame:imgFrame,_:imgArr,timeMilliseconds:timeMilliseconds,bgColor:bgColor,scale:scale)
+        }
+        return nil
+    }
+    
+    @discardableResult
     static func showProgress(supView : UIView,imgFrame: CGRect,_ imgArr : [UIImage] = [UIImage](),timeMilliseconds: Int = 0,bgColor : UIColor? = UIColor.white, scale : Double = 1.0) -> UIWindow{
         
         let supFrame = supView.frame
+        
         let window = UIWindow()
         window.backgroundColor = hudBackgroundColor
-        window.rootViewController = UIViewController.currentViewController
+        window.rootViewController = UIViewController.zj_currentViewController()
         
         let bgView = UIView()
         bgView.backgroundColor = bgColor
@@ -47,6 +57,11 @@ class ZJProgressHUD: NSObject {
         window.frame = rv!.bounds
         bgView.frame = supFrame
         bgView.center = rv!.center
+        
+        window.windowLevel = UIWindowLevelAlert
+        window.isHidden = false
+        window.addSubview(bgView)
+        
         windows.append(window)
         
         bgView.alpha = 0.0
@@ -65,19 +80,33 @@ class ZJProgressHUD: NSObject {
         }
         windows.removeAll(keepingCapacity: false)
     }
+    
+    /// Clear all
+    public class func hideAllHUD() {
+        self.closePUB()
+    }
+    static func closePUB() {
+        self.cancelPreviousPerformRequests(withTarget: self)
+        if let _ = timer {
+            timer.cancel()
+            timer = nil
+            timerTimes = 0
+        }
+        windows.removeAll(keepingCapacity: false)
+    }
 }
 
 
 extension UIViewController {
-    class func currentViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+    class func zj_currentViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
         if let nav = base as? UINavigationController {
-            return currentViewController(base: nav.visibleViewController)
+            return zj_currentViewController(base: nav.visibleViewController)
         }
         if let tab = base as? UITabBarController {
-            return currentViewController(base: tab.selectedViewController)
+            return zj_currentViewController(base: tab.selectedViewController)
         }
         if let presented = base?.presentedViewController {
-            return currentViewController(base: presented)
+            return zj_currentViewController(base: presented)
         }
         return base
     }
