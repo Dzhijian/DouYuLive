@@ -8,20 +8,20 @@
 
 import Foundation
 
+// 首页
 // 热门推荐
 let ZJRecommendHotURL : String = "https://apiv2.douyucdn.cn/mgapi/livenc/home/getRecList1"
 
 // 活动列表
 let ZJActivityListURL : String = "https://apiv2.douyucdn.cn/Live/Subactivity/getActivityList?client_sys=ios&cid2=0"
+// 分类
+// https://apiv2.douyucdn.cn/live/Cate/getTabCate1List?client_sys=ios
+let ZJLiveCateURL : String = "https://apiv2.douyucdn.cn/live/cate/getLiveCate1List?client_sys=ios"
 
 let ZJSignAppURL : String = "https://rtbapi.douyucdn.cn/japi/sign/app/getinfo?uid=&client_sys=ios&mdid=iphone"
-// 首页推荐分类
-// https://apiv2.douyucdn.cn/live/Cate/getTabCate1List?client_sys=ios
 
 // 分类推荐列表
 let ZJRecommendCategoryURL : String = "https://apiv2.douyucdn.cn/live/cate/getLiveRecommendCate2?client_sys=ios"
-
-let ZJLiveCateURL : String = "https://apiv2.douyucdn.cn/live/cate/getLiveCate1List?client_sys=ios"
 
 // banner
 //https://apiv2.douyucdn.cn/live/Slide/getSlideLists?cate_id=1&app_ver=4610000&client_sys=ios get

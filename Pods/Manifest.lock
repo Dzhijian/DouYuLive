@@ -13,6 +13,7 @@ PODS:
   - Moya/Core (10.0.2):
     - Alamofire (~> 4.1)
     - Result (~> 3.0)
+  - ObjectMapper (3.3.0)
   - Result (3.2.4)
   - RxCocoa (4.2.0):
     - RxSwift (~> 4.0)
@@ -29,6 +30,7 @@ DEPENDENCIES:
   - Kingfisher
   - Moya
   - Moya-SwiftyJSONMapper
+  - ObjectMapper (~> 3.3)
   - RxCocoa
   - RxSwift
   - SBCycleScrollView (~> 0.0.8)
@@ -42,6 +44,7 @@ SPEC REPOS:
     - Kingfisher
     - Moya
     - Moya-SwiftyJSONMapper
+    - ObjectMapper
     - Result
     - RxCocoa
     - RxSwift
@@ -56,6 +59,7 @@ SPEC CHECKSUMS:
   Kingfisher: 976d828df2b24834c6a3f2fc4d82cdbd26552be1
   Moya: 2b0531a9fef318e0bc484030c3db1e6f279ccb66
   Moya-SwiftyJSONMapper: ceecd41a96b31ae4d17cd80a271a544563fe2c57
+  ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   RxCocoa: 0b54909c902e1e581212a03e690bbd94032d8baa
   RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
@@ -63,6 +67,6 @@ SPEC CHECKSUMS:
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: 730e27ede657a1b487aa8e89de89da5583481d21
+PODFILE CHECKSUM: 01da8b924bee0d5d76e91262fc732971ccbaad91
 
 COCOAPODS: 1.5.0

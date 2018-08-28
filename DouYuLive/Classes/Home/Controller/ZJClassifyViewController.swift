@@ -64,6 +64,14 @@ class ZJClassifyViewController: ZJBaseViewController {
 extension ZJClassifyViewController {
     
     private func loadCateListData() {
+
+        ZJNetworkProvider.shared.requestDataWithTargetJSON(target:HomeAPI.recommendCategoryList,  successClosure: {(response) in
+            print("ZJNetworkProvider:%@",response)
+            
+        }, failClosure: {_ in
+            
+        })
+        
         //初始化信号量为1
         let semaphoreA = DispatchSemaphore(value: 1)
         //第二个信号量为0

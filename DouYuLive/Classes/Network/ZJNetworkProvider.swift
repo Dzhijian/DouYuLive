@@ -20,20 +20,21 @@ typealias SuccessJSONClosure = (_ result:JSON) -> Void
 /// 失败
 typealias FailClosure = (_ errorMsg: String?) -> Void
 
-public class ZJHomeProvider{
+public class ZJNetworkProvider{
     /// 共享实例
-    static let shared = ZJHomeProvider()
+    static let shared = ZJNetworkProvider()
     private init(){}
-    private let failInfo="数据解析失败"
+    private let failInfo = "数据解析失败"
+    
     /// 请求JSON数据
-    func requestDataWithTargetJSON<T:TargetType>(target:T,successClosure:@escaping SuccessJSONClosure,failClosure: @escaping FailClosure) {
+    func requestDataWithTargetJSON<T:TargetType>(target : T, successClosure: @escaping SuccessJSONClosure, failClosure: @escaping FailClosure) {
         let requestProvider = MoyaProvider<T>(requestClosure:requestTimeoutClosure(target: target))
-        let _=requestProvider.request(target) { (result) -> () in
+        let _ = requestProvider.request(target) { (result) -> () in
             switch result{
             case let .success(response):
                 do {
                     let mapjson = try response.mapJSON()
-                    let json=JSON(mapjson)
+                    let json = JSON(mapjson)
                     successClosure(json)
                 } catch {
                     failClosure(self.failInfo)
@@ -44,6 +45,61 @@ public class ZJHomeProvider{
         }
     }
     
+    /// 请求数组对象JSON数据
+    func requestDataWithTargetArrModelJSON<T:TargetType,M:Mappable>(target:T,model:M,successClosure:@escaping SuccessArrModelClosure,failClosure: @escaping FailClosure) {
+        let requestProvider = MoyaProvider<T>(requestClosure:requestTimeoutClosure(target: target))
+        let _=requestProvider.request(target) { (result) -> () in
+            switch result{
+            case let .success(response):
+                do {
+                    let json = try response.mapJSON()
+                    let arr=Mapper<M>().mapArray(JSONObject:JSON(json).object)
+                    successClosure(arr)
+                } catch {
+                    failClosure(self.failInfo)
+                }
+            case let .failure(error):
+                failClosure(error.errorDescription)
+            }
+        }
+    }
+    
+    /// 请求对象JSON数据
+    func requestDataWithTargetModelJSON<T:TargetType,M:Mappable>(target:T,model:M,successClosure:@escaping SuccessModelClosure,failClosure: @escaping FailClosure) {
+        let requestProvider = MoyaProvider<T>(requestClosure:requestTimeoutClosure(target: target))
+        let _=requestProvider.request(target) { (result) -> () in
+            switch result{
+            case let .success(response):
+                do {
+                    let json = try response.mapJSON()
+                    let model=Mapper<M>().map(JSONObject:JSON(json).object)
+                    successClosure(model)
+                } catch {
+                    failClosure(self.failInfo)
+                }
+            case let .failure(error):
+                failClosure(error.errorDescription)
+            }
+        }
+    }
+    ///请求String数据
+    func requestDataWithTargetString<T:TargetType>(target:T,successClosure:@escaping SuccessStringClosure,failClosure: @escaping FailClosure) {
+        let requestProvider = MoyaProvider<T>(requestClosure:requestTimeoutClosure(target: target))
+        let _=requestProvider.request(target) { (result) -> () in
+            switch result{
+            case let .success(response):
+                do {
+                    let str = try response.mapString()
+                    successClosure(str)
+                } catch {
+                    failClosure(self.failInfo)
+                }
+            case let .failure(error):
+                failClosure(error.errorDescription)
+            }
+            
+        }
+    }
     //设置一个公共请求超时时间
     private func requestTimeoutClosure<T:TargetType>(target:T) -> MoyaProvider<T>.RequestClosure{
         let requestTimeoutClosure = { (endpoint:Endpoint<T>, done: @escaping MoyaProvider<T>.RequestResultClosure) in

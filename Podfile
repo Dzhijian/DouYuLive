@@ -13,6 +13,7 @@ target 'DouYuLive' do
   pod 'Moya-SwiftyJSONMapper'
   pod 'IQKeyboardManagerSwift'
   pod 'ESPullToRefresh'
+  pod 'ObjectMapper', '~> 3.3'
 #  pod 'ZJKitTool'
   # 轮播图
   pod 'SBCycleScrollView','~> 0.0.8'

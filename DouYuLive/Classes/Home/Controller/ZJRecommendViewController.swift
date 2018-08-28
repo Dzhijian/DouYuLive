@@ -54,6 +54,8 @@ class ZJRecommendViewController: ZJBaseViewController ,UIScrollViewDelegate{
         loadHotRecommendListData()
         
         getActivityList()
+        
+        getRecommendCateList()
     }
     
     // 列表滚动事件
@@ -88,6 +90,15 @@ extension ZJRecommendViewController {
                 self.collectionView.es.stopPullToRefresh()
                 self.collectionView.reloadData()
             }
+            
+        }
+    }
+    
+    private func getRecommendCateList(){
+        
+        ZJNetworkProvider.shared.requestDataWithTargetJSON(target: HomeAPI.recommendCategoryList, successClosure: { (response) in
+            print(response)
+        }) { (_) in
             
         }
     }

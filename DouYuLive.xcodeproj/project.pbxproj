@@ -38,6 +38,8 @@
 		043512F82122B1AF001D928A /* DNSPageStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043512F02122B1AF001D928A /* DNSPageStyle.swift */; };
 		044735FB213195C80086D470 /* SwiftProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044735FA213195C80086D470 /* SwiftProgressHUD.swift */; };
 		04473600213283DC0086D470 /* ZJProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044735FF213283DC0086D470 /* ZJProgressHUD.swift */; };
+		044736022134530F0086D470 /* ZJNetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044736012134530F0086D470 /* ZJNetworkProvider.swift */; };
+		045DC67321353ADE009902BC /* ZJRecomCateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045DC67221353ADE009902BC /* ZJRecomCateData.swift */; };
 		045DE3902125C75C004718E8 /* ZJFollowInteresData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045DE38F2125C75C004718E8 /* ZJFollowInteresData.swift */; };
 		048EA3792106447200E30720 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EA3782106447200E30720 /* AppDelegate.swift */; };
 		048EA37E2106447200E30720 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 048EA37C2106447200E30720 /* Main.storyboard */; };
@@ -176,6 +178,8 @@
 		043512F02122B1AF001D928A /* DNSPageStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSPageStyle.swift; sourceTree = "<group>"; };
 		044735FA213195C80086D470 /* SwiftProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftProgressHUD.swift; sourceTree = "<group>"; };
 		044735FF213283DC0086D470 /* ZJProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJProgressHUD.swift; sourceTree = "<group>"; };
+		044736012134530F0086D470 /* ZJNetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJNetworkProvider.swift; sourceTree = "<group>"; };
+		045DC67221353ADE009902BC /* ZJRecomCateData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJRecomCateData.swift; sourceTree = "<group>"; };
 		045DE38F2125C75C004718E8 /* ZJFollowInteresData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFollowInteresData.swift; sourceTree = "<group>"; };
 		048EA3752106447200E30720 /* DouYuLive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DouYuLive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		048EA3782106447200E30720 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -365,9 +369,10 @@
 		0419BD0D2112E90B008661D3 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				045DC67121352673009902BC /* Home */,
 				0419BD0E2112E920008661D3 /* ZJNetworking.swift */,
 				0419BD1321135904008661D3 /* ZJInterfaceURL.swift */,
-				04907E812117304A006B70EC /* ZJHomeAPI.swift */,
+				044736012134530F0086D470 /* ZJNetworkProvider.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -382,6 +387,7 @@
 				04907E8B21183EE7006B70EC /* ZJCateOneItem.swift */,
 				04DE709D211BE2140073DE82 /* ZJAllLiveData.swift */,
 				049705F32128745800E12562 /* ZJRecommendActivityData.swift */,
+				045DC67221353ADE009902BC /* ZJRecomCateData.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -430,6 +436,14 @@
 				043512F02122B1AF001D928A /* DNSPageStyle.swift */,
 			);
 			path = DNSPageView;
+			sourceTree = "<group>";
+		};
+		045DC67121352673009902BC /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				04907E812117304A006B70EC /* ZJHomeAPI.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		045DE38E2125C72E004718E8 /* Model */ = {
@@ -1023,6 +1037,7 @@
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya-SwiftyJSONMapper/Moya_SwiftyJSONMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
@@ -1038,6 +1053,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya_SwiftyJSONMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
@@ -1066,6 +1082,7 @@
 				04DE7091211A026C0073DE82 /* ZJCateSectionHeaderView.swift in Sources */,
 				04A4739D2122E93600D37F33 /* LZViewPager.swift in Sources */,
 				049705EE2127E47F00E12562 /* ZJDiscoverGameItem.swift in Sources */,
+				044736022134530F0086D470 /* ZJNetworkProvider.swift in Sources */,
 				04907E822117304A006B70EC /* ZJHomeAPI.swift in Sources */,
 				0419BCF92111BE82008661D3 /* ZJAllViewController.swift in Sources */,
 				048EA3BA210790B700E30720 /* ZJFishBarViewController.swift in Sources */,
@@ -1107,6 +1124,7 @@
 				043512F72122B1AF001D928A /* DNSPageCollectionViewFlowLayout.swift in Sources */,
 				04A473B221252BD000D37F33 /* ZJFollowLiveViewController.swift in Sources */,
 				04DE7096211AA4D70073DE82 /* ZJCollectionViewFlowLayout.swift in Sources */,
+				045DC67321353ADE009902BC /* ZJRecomCateData.swift in Sources */,
 				043512E72121AD5F001D928A /* ZJNavigationBar.swift in Sources */,
 				0419BCF52111BE24008661D3 /* ZJRecommendViewController.swift in Sources */,
 				0419BCF72111BE62008661D3 /* ZJClassifyViewController.swift in Sources */,
