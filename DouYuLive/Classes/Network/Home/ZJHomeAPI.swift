@@ -7,15 +7,6 @@
 //
 import UIKit
 import Moya
-
-/*
- 
- // 分类推荐列表
- let ZJRecommendCategoryURL : String = "https://apiv2.douyucdn.cn/live/cate/getLiveRecommendCate2?client_sys=ios"
- // 分类列表
- let ZJLiveCateURL : String = "https://apiv2.douyucdn.cn/live/cate/getLiveCate1List?client_sys=ios"
- 
- */
 let HomeProvider = MoyaProvider<HomeAPI>()
 
 public enum HomeAPI {
@@ -74,7 +65,7 @@ extension HomeAPI : TargetType {
         }
         
     }
-    
+
     //是否执行Alamofire验证
     public var validate: Bool {
         return false
