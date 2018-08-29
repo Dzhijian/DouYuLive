@@ -66,7 +66,11 @@ extension ZJClassifyViewController {
     private func loadCateListData() {
 
         ZJNetworkProvider.shared.requestDataWithTargetJSON(target:HomeAPI.recommendCategoryList,  successClosure: {(response) in
-            print("ZJNetworkProvider:%@",response)
+            // json 转字典
+            let jsonStr = response["data"].dictionaryObject
+            // 字典转模型
+            let cate : ZJRecomCateData = ZJRecomCateData(JSON: jsonStr!)!
+            print("cate2_list.count=====>:%d",cate.cate2_list.count)
             
         }, failClosure: {_ in
             

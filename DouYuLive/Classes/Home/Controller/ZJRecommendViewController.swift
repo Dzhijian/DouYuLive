@@ -97,7 +97,11 @@ extension ZJRecommendViewController {
     private func getRecommendCateList(){
         
         ZJNetworkProvider.shared.requestDataWithTargetJSON(target: HomeAPI.recommendCategoryList, successClosure: { (response) in
-            print(response)
+            // json 转字典
+            let jsonStr = response["data"].dictionaryObject
+            // 字典转模型
+            let cate : ZJRecomCateData = ZJRecomCateData(JSON: jsonStr!)!
+            print("cate2_list.count=====>:%d",cate.cate2_list.count)
         }) { (_) in
             
         }

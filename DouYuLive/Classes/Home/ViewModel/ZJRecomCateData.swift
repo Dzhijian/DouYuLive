@@ -10,14 +10,12 @@ import UIKit
 import ObjectMapper
 
 class ZJRecomCateData: Mappable {
-    
-//    "total" : 20,
-//    "cate2_list"
 
     var total : Int?
     var cate2_list : [ZJRecomCateList] = [ZJRecomCateList]()
     var error : Int?
-    
+//    init(){
+//    }
     required init?(map: Map) {
 
     }
@@ -25,6 +23,7 @@ class ZJRecomCateData: Mappable {
     func mapping(map: Map) {
         total  <- map["total"]
         error  <- map["error"]
+        cate2_list <- map["cate2_list"]
     }
     
     
@@ -50,6 +49,8 @@ class ZJRecomCateList: Mappable {
     var push_nearby : Int?
     var square_icon_url : String?
     
+//    init(){
+//    }
     required init?(map: Map) {
         
     }
