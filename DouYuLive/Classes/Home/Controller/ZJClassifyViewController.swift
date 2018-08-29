@@ -121,7 +121,9 @@ extension ZJClassifyViewController {
             
             // Moya + ObjectMapper + Alamofire 实现网络请求
             ZJNetworkProvider.shared.requestDataWithTargetJSON(target:HomeAPI.recommendCategoryList,  successClosure: {(response) in
+            
                 let jsonDict = response.dictionaryObject
+                
                 // response.dictionaryObject json 转字典
                 // 字典转模型
                 let cate : ZJRecomCateData = ZJRecomCateData(JSON: jsonDict!)!

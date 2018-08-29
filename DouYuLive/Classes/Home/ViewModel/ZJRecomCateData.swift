@@ -14,8 +14,8 @@ class ZJRecomCateData: Mappable {
     var total : Int?
     var cate2_list : [ZJRecomCateList] = [ZJRecomCateList]()
     var error : Int?
-//    init(){
-//    }
+    init(){
+    }
     required init?(map: Map) {
 
     }

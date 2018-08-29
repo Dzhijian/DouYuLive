@@ -98,7 +98,7 @@ extension ZJRecommendViewController {
         
         ZJNetworkProvider.shared.requestDataWithTargetJSON(target: HomeAPI.recommendCategoryList, successClosure: { (response) in
             // json 转字典
-            let jsonStr = response["data"].dictionaryObject
+            let jsonStr = response.dictionaryObject
             // 字典转模型
             let cate : ZJRecomCateData = ZJRecomCateData(JSON: jsonStr!)!
             print("cate2_list.count=====>:%d",cate.cate2_list.count)
