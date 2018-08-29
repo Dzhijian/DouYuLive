@@ -35,7 +35,7 @@ public class ZJNetworkProvider{
                 do {
                     let mapjson = try response.mapJSON()
                     let json = JSON(mapjson)
-                    successClosure(json)
+                    successClosure(json["data"])
                 } catch {
                     failClosure(self.failInfo)
                 }

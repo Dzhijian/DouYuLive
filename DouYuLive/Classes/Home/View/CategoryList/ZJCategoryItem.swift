@@ -11,7 +11,7 @@ import UIKit
 class ZJCategoryItem: ZJBaseCollectionCell {
     
     
-    var model : ZJCategoryList? {
+    var model : ZJRecomCateList? {
         didSet{
             titleLab.text = model?.cate2_name
             //不能使用强制解包策略

@@ -13,7 +13,7 @@ import UIKit
 
 class ZJCategroyListCell: ZJBaseTableCell {
     
-    var cateTwoList : [ZJCategoryList]? {
+    var cateTwoList : [ZJRecomCateList]? {
         didSet {
             collectionView.reloadData()
         }

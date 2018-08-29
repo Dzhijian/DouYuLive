@@ -17,8 +17,9 @@ private let CellID = "CellID"
 class ZJClassifyViewController: ZJBaseViewController {
     var cateOneList : Array<JSON> = []
     
-    private var recommenCateData : ZJRecommendCate = ZJRecommendCate()
-    private var cateListData : ZJCateOneList = ZJCateOneList()
+    private var recommenCateData : ZJRecomCateData?
+//    private var recommenCateData : ZJRecommendCate = ZJRecommendCate()
+    private var cateListData : [ZJCateOneData] = [ZJCateOneData]()
     
     private lazy var mainTable : UITableView = {
         let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH - kStatuHeight-kTabBarHeight-kNavigationBarHeight), style: .grouped)
@@ -64,17 +65,6 @@ class ZJClassifyViewController: ZJBaseViewController {
 extension ZJClassifyViewController {
     
     private func loadCateListData() {
-
-        ZJNetworkProvider.shared.requestDataWithTargetJSON(target:HomeAPI.recommendCategoryList,  successClosure: {(response) in
-            // json 转字典
-            let jsonStr = response["data"].dictionaryObject
-            // 字典转模型
-            let cate : ZJRecomCateData = ZJRecomCateData(JSON: jsonStr!)!
-            print("cate2_list.count=====>:%d",cate.cate2_list.count)
-            
-        }, failClosure: {_ in
-            
-        })
         
         //初始化信号量为1
         let semaphoreA = DispatchSemaphore(value: 1)
@@ -88,22 +78,38 @@ extension ZJClassifyViewController {
         
         queue.async{
             semaphoreA.signal()
+            /*
             ZJNetWorking.requestData(type: .GET, URlString: ZJLiveCateURL) { (response) in
-                
+
                 let data = try? ZJDecoder.decode(ZJCateOneList.self, data: response)
                 if data != nil {
                     self.cateListData = data!
-                    
+
                 }
                 semaphoreB.signal()
                 print("第一个任务执行完毕" + "\(Thread.current)")
             }
+            */
+            ZJNetworkProvider.shared.requestDataWithTargetJSON(target:HomeAPI.liveCateList,  successClosure: {(response) in
+                
+                let jsonDict = response.dictionaryObject
+                // 字典转模型
+                let allData : ZJCateAllData = ZJCateAllData(JSON: jsonDict!)!
+                self.cateListData = allData.cate1_list
+//                print(allData)
+                semaphoreB.signal()
+                print("第一个任务执行完毕" + "\(Thread.current)")
+                
+            }, failClosure: {_ in
+                
+            })
         }
         
         queue.async{
             semaphoreB.wait()
+            /*
             ZJNetWorking.requestData(type: .GET, URlString: ZJRecommendCategoryURL) { (response) in
-                
+
                 let data = try? ZJDecoder.decode(ZJRecommendCate.self, data: response)
                 if data != nil {
                     self.recommenCateData = data!
@@ -111,6 +117,20 @@ extension ZJClassifyViewController {
                 semaphoreC.signal()
                 print("第二个任务执行完毕" + "\(Thread.current)" )
             }
+            */
+            
+            // Moya + ObjectMapper + Alamofire 实现网络请求
+            ZJNetworkProvider.shared.requestDataWithTargetJSON(target:HomeAPI.recommendCategoryList,  successClosure: {(response) in
+                let jsonDict = response.dictionaryObject
+                // response.dictionaryObject json 转字典
+                // 字典转模型
+                let cate : ZJRecomCateData = ZJRecomCateData(JSON: jsonDict!)!
+                print(cate.cate2_list.count)
+                self.recommenCateData = cate
+                semaphoreC.signal()
+            }, failClosure: {_ in
+                
+            })
         }
         
         queue.async{
@@ -149,7 +169,7 @@ extension ZJClassifyViewController {
 extension ZJClassifyViewController : UITableViewDelegate,UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         
-        return 1 + (self.cateListData.cate1_list.count)
+        return 1 + (self.cateListData.count)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -162,10 +182,10 @@ extension ZJClassifyViewController : UITableViewDelegate,UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellID, for: indexPath) as! ZJCategroyListCell
         cell.selectionStyle = .none
         if indexPath.section == 0 {
-            cell.cateTwoList = self.recommenCateData.cate2_list
+            cell.cateTwoList = self.recommenCateData?.cate2_list
         }else{
-            if self.cateListData.cate1_list.count != 0 {
-                let item : ZJCateOneItem = self.cateListData.cate1_list[indexPath.section - 1]
+            if self.cateListData.count != 0 {
+                let item : ZJCateOneData = self.cateListData[indexPath.section - 1]
                 cell.cateTwoList = item.cate2_list
             }
         }
@@ -183,8 +203,8 @@ extension ZJClassifyViewController : UITableViewDelegate,UITableViewDataSource {
         if section == 0 {
             header.configTitle(title: "推荐分类")
         }else{
-            if self.cateListData.cate1_list.count != 0 {
-                let item : ZJCateOneItem = self.cateListData.cate1_list[section - 1]
+            if self.cateListData.count != 0 {
+                let item : ZJCateOneData = self.cateListData[section - 1]
                 header.configTitle(title:item.cate_name!)
             }
         }

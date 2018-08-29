@@ -12,7 +12,7 @@ private let itemWH : CGFloat = kScreenW / 4
 
 class ZJCategoryScrollItem: ZJBaseCollectionCell {
     
-    var dataArr : [ZJCategoryList]? {
+    var dataArr : [ZJRecomCateList]? {
         didSet {
             collectionView.reloadData()
         }

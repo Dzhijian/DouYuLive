@@ -49,8 +49,8 @@ class ZJRecomCateList: Mappable {
     var push_nearby : Int?
     var square_icon_url : String?
     
-//    init(){
-//    }
+    init(){
+    }
     required init?(map: Map) {
         
     }
@@ -65,6 +65,39 @@ class ZJRecomCateList: Mappable {
         push_nearby <- map["push_nearby"]
         square_icon_url <- map["square_icon_url"]
     }
+}
+
+
+class ZJCateAllData: Mappable {
     
+    var cate1_list : [ZJCateOneData] = [ZJCateOneData]()
+    init(){
+    }
+    required init?(map: Map) {
+        
+    }
     
+    func mapping(map: Map) {
+        cate1_list  <- map["cate1_list"]
+    }
+}
+
+class ZJCateOneData: Mappable {
+    
+    var cate1_id : Int?
+    var cate_name : String?
+    var cate2_count : Int?
+    var cate2_list : [ZJRecomCateList] = [ZJRecomCateList]()
+    init(){
+    }
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        cate1_id  <- map["cate1_id"]
+        cate_name  <- map["cate_name"]
+        cate2_count  <- map["cate2_count"]
+        cate2_list <- map["cate2_list"]
+    }
 }
