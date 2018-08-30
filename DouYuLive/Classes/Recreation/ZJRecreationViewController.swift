@@ -56,9 +56,14 @@ class ZJRecreationViewController: ZJBaseViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
+         setUpNavigation()
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.view.backgroundColor = kWhite
+        
+        ZJProgressHUD.showProgress(supView: self.view, bgFrame: nil,imgArr: getloadingImages(), timeMilliseconds: 90, bgColor: kWhite, scale: 0.8)
+        
         loadChildCateListData()
+        
     }
     
     
@@ -93,7 +98,7 @@ extension ZJRecreationViewController {
             let data = try? ZJDecoder.decode(ZJRecreationCateData.self, data : response)
             if data != nil {
                self.cateListData = data!
-                print(self.cateListData)
+                ZJProgressHUD.hideAllHUD()
                 self.setUpAllView()
             }
         }
@@ -110,7 +115,7 @@ extension ZJRecreationViewController {
         // 添加 ContentView
         view.addSubview(pageContenView)
         
-        setUpNavigation()
+       
     }
     
     

@@ -16,16 +16,20 @@ class ZJProgressHUD: NSObject {
     static var hudBackgroundColor: UIColor = UIColor.clear
     
     
-    public class func showAnimationImages(supView : UIView,imgFrame: CGRect, imgArr : [UIImage] = [UIImage](),timeMilliseconds: Int = 0,bgColor : UIColor? = UIColor.white, scale : Double = 1.0) {
+    public class func showAnimationImages(supView : UIView, bgFrame: CGRect, imgArr : [UIImage] = [UIImage](),timeMilliseconds: Int = 0,bgColor : UIColor? = UIColor.white, scale : Double = 1.0) {
         
-        self.showProgress(supView:supView,imgFrame:imgFrame,imgArr:imgArr,timeMilliseconds:timeMilliseconds,bgColor:bgColor,scale:scale)
+        self.showProgress(supView:supView,bgFrame:bgFrame,imgArr:imgArr,timeMilliseconds:timeMilliseconds,bgColor:bgColor,scale:scale)
         
     }
     
-    static func showProgress(supView : UIView,imgFrame: CGRect,imgArr : [UIImage] = [UIImage](),timeMilliseconds: Int = 0,bgColor : UIColor? = UIColor.white, scale : Double = 1.0){
+    static func showProgress(supView : UIView,bgFrame: CGRect? = nil,imgArr : [UIImage] = [UIImage](),timeMilliseconds: Int = 0,bgColor : UIColor? = UIColor.white, scale : Double = 1.0){
         
-        let supFrame = supView.frame
- 
+        var supFrame = supView.frame
+        if bgFrame != nil {
+            supFrame = bgFrame!
+        }
+        
+        print(supFrame)
         let bgView = UIView()
         bgView.isHidden = false
         bgView.backgroundColor = bgColor
@@ -50,8 +54,8 @@ class ZJProgressHUD: NSObject {
         }
         
         bgView.frame = supFrame
-        bgView.center = rv!.center
-        supView.superview?.addSubview(bgView)
+//        bgView.center = rv!.center
+        supView.addSubview(bgView)
         showViews.append(bgView)
         
         bgView.alpha = 0.0

@@ -15,7 +15,13 @@ class ZJHomeSearchView : UIView {
         textField.backgroundColor = UIColor.clear
         textField.borderStyle = .none
         textField.font = FontSize(14)
+        textField.textColor = kWhite
         textField.placeholder = "请输入搜索内容"
+        //字体大小
+        textField.setValue(FontSize(14),forKeyPath: "_placeholderLabel.font")
+        //字体颜色
+        textField.setValue(colorWithRGBA(100, 100, 100, 0.5), forKeyPath: "_placeholderLabel.textColor")
+        
         return textField
     }()
     var searchIcon : UIImageView = { () -> UIImageView in
@@ -49,7 +55,7 @@ class ZJHomeSearchView : UIView {
             make.left.equalTo(self).offset(AdaptW(35))
             make.right.equalTo(self).offset(AdaptW(-35))
             make.height.equalTo(30)
-            make.center.equalTo(self)
+            make.center.equalTo(self.snp.center)
         }
         searchIcon.snp.makeConstraints { (make) in
             make.centerY.equalTo(self)

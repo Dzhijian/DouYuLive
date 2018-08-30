@@ -40,7 +40,7 @@ class ZJClassifyViewController: ZJBaseViewController {
         // 获取分类列表数据
         loadCateListData()
         
-        ZJProgressHUD.showProgress(supView: self.mainTable, imgFrame: CGRect.zero,imgArr: getloadingImages(), timeMilliseconds: 90, bgColor: kWhite, scale: 0.8)
+        ZJProgressHUD.showProgress(supView: self.mainTable, bgFrame: nil,imgArr: getloadingImages(), timeMilliseconds: 90, bgColor: kWhite, scale: 0.8)
     }
     
     override func didReceiveMemoryWarning() {
@@ -79,7 +79,6 @@ extension ZJClassifyViewController {
             semaphoreA.signal()
 
             ZJNetworkProvider.shared.requestDataWithTargetJSON(target:HomeAPI.liveCateList,  successClosure: {(response) in
-                
                 guard let jsonDict = response.dictionaryObject else {
                     semaphoreB.signal()
                     return
@@ -88,7 +87,6 @@ extension ZJClassifyViewController {
                 let allData : ZJCateAllData = ZJCateAllData(JSON: jsonDict)!
                 self.cateListData = allData.cate1_list
                 semaphoreB.signal()
-                print("第一个任务执行完毕" + "\(Thread.current)")
                 
             }, failClosure: {_ in
                  semaphoreB.signal()
@@ -106,9 +104,7 @@ extension ZJClassifyViewController {
                 }
                 // 字典转模型
                 let cate : ZJRecomCateData = ZJRecomCateData(JSON: jsonDict)!
-                print(cate.cate2_list.count)
                 self.recommenCateData = cate
-                print("第二个任务执行完毕" + "\(Thread.current)" )
                 semaphoreC.signal()
             }, failClosure: {_ in
                 semaphoreC.signal()

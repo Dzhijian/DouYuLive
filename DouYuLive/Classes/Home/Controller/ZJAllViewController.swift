@@ -34,9 +34,10 @@ class ZJAllViewController: ZJBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpAllView()
-        getAllLiveData()
         
-        ZJProgressHUD.showProgress(supView: self.collectionView, imgFrame: CGRect.zero,imgArr: getloadingImages(), timeMilliseconds: 90, bgColor: kWhite, scale: 0.8)
+        ZJProgressHUD.showProgress(supView: self.view, bgFrame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH - kStatuHeight-kTabBarHeight-kNavigationBarHeight),imgArr: getloadingImages(), timeMilliseconds: 90, bgColor: kWhite, scale: 0.8)
+        
+        getAllLiveData()
         
     }
 
@@ -72,9 +73,8 @@ extension  ZJAllViewController {
                         for (_,item) in (data?.list.enumerated())!{
                             self.allLiveList.append(item)
                         }
-                        
                     }
-                        
+                    ZJProgressHUD.hideAllHUD()
                     self.collectionView.reloadData()
                 }
                 self.collectionView.es.stopPullToRefresh()

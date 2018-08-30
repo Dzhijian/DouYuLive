@@ -53,6 +53,7 @@ class ZJDiscoverViewController: ZJBaseViewController {
         let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.isHidden = true
         collectionView.backgroundColor = kWhite
         collectionView.register(ZJBaseCollectionCell.self, forCellWithReuseIdentifier: ZJBaseCollectionCell.identifier())
         collectionView.register(ZJLiveListItem.self, forCellWithReuseIdentifier: ZJLiveListItem.identifier())
@@ -62,6 +63,7 @@ class ZJDiscoverViewController: ZJBaseViewController {
         collectionView.register(ZJDiscoverActivityItem.self, forCellWithReuseIdentifier: ZJDiscoverActivityItem.identifier())
         collectionView.register(ZJDiscoverHeadView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: kCollectionHeadView)
         collectionView.register(ZJDiscoverSectionHeadView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: kCollectionSectionHeadView)
+        
         return collectionView
     }()
     
@@ -69,9 +71,11 @@ class ZJDiscoverViewController: ZJBaseViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         
+        
         setUpAllView()
         
-        ZJProgressHUD.showProgress(supView: self.collectionView, imgFrame: CGRect.zero,imgArr: getloadingImages(), timeMilliseconds: 90, bgColor: kWhite, scale: 0.8)
+        // 显示加载动画
+        ZJProgressHUD.showProgress(supView: self.view, bgFrame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH - kStatuHeight-kTabBarHeight-kNavigationBarHeight),imgArr: getloadingImages(), timeMilliseconds: 90, bgColor: kWhite, scale: 0.8)
         
         loadData()
     }
@@ -115,9 +119,13 @@ extension ZJDiscoverViewController {
         queue.async{
             if self.semaphoreLast.wait(wallTimeout: .distantFuture) == .success{
                 mainQueue.async {
+                   
                     print("全部任务执行完毕,刷新页面" + "\(Thread.current)")
                     self.collectionView.reloadData()
+                    self.collectionView.isHidden = false
                     self.collectionView.es.stopPullToRefresh()
+                    ZJProgressHUD.hideAllHUD()
+                    
                 }
             }
         }

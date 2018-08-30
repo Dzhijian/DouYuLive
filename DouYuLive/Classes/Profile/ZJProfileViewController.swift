@@ -43,6 +43,15 @@ class ZJProfileViewController: ZJBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpAllView()
+        
+        // 显示加载动画
+        ZJProgressHUD.showProgress(supView: UIApplication.shared.keyWindow!, bgFrame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH),imgArr: getloadingImages(), timeMilliseconds: 90, bgColor: kWhite, scale: 0.8)
+        
+        // 延迟加载
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            ZJProgressHUD.hideAllHUD()
+        }
+
     }
 
 
@@ -123,6 +132,8 @@ extension ZJProfileViewController {
         }
         mainTable.tableHeaderView = headerView
         
+        self.navigationController?.navigationBar.tintColor = kWhite
+        
         let navView = self.navigationController?.navigationBar.subviews.first
         guard navView != nil else {return}
         zj_setUpGradientLayer(view: navView!, frame: CGRect(x: 0, y: 0, width: kScreenW, height: kStatuHeight+kNavigationBarHeight), color: kWhiteColors)
@@ -138,5 +149,16 @@ extension ZJProfileViewController {
         let setItem = UIBarButtonItem(image: UIImage(named: "icon_setting"), landscapeImagePhone: nil, style: .plain, target: self, action: #selector(self.settingAction))
         setItem.width = 25
         navigationItem.rightBarButtonItems = [setItem,spaceItem,activityItem]
+        
+        //修改导航栏背景色
+        self.navigationController?.navigationBar.barTintColor =
+            UIColor(red: 55/255, green: 186/255, blue: 89/255, alpha: 1)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated)
+
+    }
+    
 }

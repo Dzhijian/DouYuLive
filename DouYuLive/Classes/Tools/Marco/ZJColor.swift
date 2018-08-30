@@ -29,7 +29,7 @@ let kGradientColors: [CGColor] = [kLowOrangeColor.cgColor, kHighOrangeColor.cgCo
 // 搜索框背景颜色 e
 let kSearchBGColor = UIColor(red: colorValue(237.0), green:colorValue(143.0), blue: colorValue(90), alpha: 1.0)
 // 渐变色色组
-let kWhiteColors: [CGColor] = [kWhite.cgColor, kWhite.cgColor]
+let kWhiteColors: [CGColor] = [kWhite.cgColor, kRed.cgColor]
 
 // 分割线的颜色
 let klineColor : UIColor = colorWithRGBA(230, 230, 230, 1.0)

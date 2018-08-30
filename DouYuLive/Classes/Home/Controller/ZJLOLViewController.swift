@@ -18,6 +18,12 @@ class ZJLOLViewController: ZJBaseViewController {
     private var childCateId : String = "2_1"
     // 显示视图索引
     private var showIndex : Int = 0
+    //初始化信号量为1
+    let semaphoreA = DispatchSemaphore(value: 1)
+    //第二个信号量为0
+    let semaphoreB = DispatchSemaphore(value: 0)
+    let semaphoreC = DispatchSemaphore(value: 0)
+    let semaphoreLast = DispatchSemaphore(value: 0)
     private lazy var headView : ZJHomeCateHeaderView = {
         let scrollView = ZJHomeCateHeaderView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: Adapt(120)))
         return scrollView
@@ -37,12 +43,13 @@ class ZJLOLViewController: ZJBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpAllView()
-        getBannerListData()
-        getChildCateListData()
-        getLOLLiveData()
-        getVideoListData()
         
-        ZJProgressHUD.showProgress(supView: self.mainTable, imgFrame: CGRect.zero,imgArr: getloadingImages(), timeMilliseconds: 90, bgColor: kWhite, scale: 0.8)
+        loadData()
+        
+        // 显示加载动画
+        ZJProgressHUD.showProgress(supView: self.view, bgFrame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH - kStatuHeight-kTabBarHeight-kNavigationBarHeight),imgArr: getloadingImages(), timeMilliseconds: 90, bgColor: kWhite, scale: 0.8)
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,10 +63,38 @@ class ZJLOLViewController: ZJBaseViewController {
 // MARK: - 网络请求
 extension ZJLOLViewController {
     
+    // 按顺序加载数据
+    func loadData() {
+        let queue = DispatchQueue(label: "com.douyuLive.discover.queue", qos: .utility, attributes: .concurrent)
+        let mainQueue = DispatchQueue.main
+        
+        queue.async {
+            self.semaphoreA.signal()
+            self.getBannerListData()
+        }
+        queue.async {
+            self.semaphoreB.wait()
+            self.getChildCateListData()
+        }
+        queue.async {
+            self.semaphoreC.wait()
+            self.getLOLLiveData()
+        }
+        queue.async{
+            if self.semaphoreLast.wait(wallTimeout: .distantFuture) == .success{
+                mainQueue.async {
+                    self.mainTable.reloadData()
+                    ZJProgressHUD.hideAllHUD()
+                    
+                }
+            }
+        }
+    }
+    
     // 获取 banner 轮播图数据
     private func getBannerListData() {
         ZJNetWorking.requestData(type: .GET, URlString: ZJCateBannerURL) { (response) in
-            
+            self.semaphoreB.signal()
             let data = try? ZJDecoder.decode(ZJCateBanner.self, data : response)
             if data != nil {
                 self.cateBanner = data!
@@ -72,26 +107,22 @@ extension ZJLOLViewController {
         
         // 获取子类分类列表
         ZJNetWorking.requestData(type: .GET, URlString: ZJChildCateListURL) { (response) in
-            
+            self.semaphoreC.signal()
             let data = try? ZJDecoder.decode(ZJChildCateData.self, data : response)
             guard (data != nil) else { return }
             self.childCateData = data!
-            self.mainTable.reloadData()
             
         }
     }
     
     private func getLOLLiveData() {
         // 获取全部数据
-        // /2_1/0/20/ios?client_sys=ios
         let urlStr = "\(ZJLOLLiveListURL)/\(self.childCateId)/0/20/ios?client_sys=ios"
-        print(urlStr)
         ZJNetWorking.requestData(type: .GET, URlString: urlStr) { (response) in
-            do {
-                let data = try JSONDecoder().decode(ZJLiveListData.self, from: response)
-                self.lolLiveData = data
-                self.mainTable.reloadData()
-            }catch{}
+            self.semaphoreLast.signal()
+            let data = try? ZJDecoder.decode(ZJLiveListData.self, data : response)
+            guard (data != nil) else { return }
+            self.lolLiveData = data!
             
         }
     }
@@ -103,6 +134,21 @@ extension ZJLOLViewController {
         let urlStr = "\(ZJVideoListURL)&time=\(timeStamp)"
         ZJNetWorking.requestData(type: .GET, URlString: urlStr) { (response) in
             print("斗鱼直播视频")
+        }
+    }
+    
+    
+    // 查看其它分类的数据
+    private func  getOtherLOLLiveData() {
+        // 获取全部数据
+        let urlStr = "\(ZJLOLLiveListURL)/\(self.childCateId)/0/20/ios?client_sys=ios"
+        ZJNetWorking.requestData(type: .GET, URlString: urlStr) { (response) in
+            
+            let data = try? ZJDecoder.decode(ZJLiveListData.self, data : response)
+            guard (data != nil) else { return }
+            self.lolLiveData = data!
+            self.mainTable.reloadData()
+            
         }
     }
 }
@@ -117,7 +163,6 @@ extension ZJLOLViewController {
             make.edges.equalTo(0)
         }
         mainTable.tableHeaderView = headView
-    
     }
 }
 
@@ -193,7 +238,7 @@ extension ZJLOLViewController : ZJChildCateSelectDelegate {
         }
         print(self.childCateId)
         // 加载数据
-        getLOLLiveData()
+        getOtherLOLLiveData()
     }
     
 }

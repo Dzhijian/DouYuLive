@@ -38,11 +38,11 @@ extension ZJProfileCell {
             
         })
         
-        self.arrowIcon = UIImageView.zj_createImageView(imageName: "im_arrow_right1", contentMode: nil, supView: self.contentView, closure: { (make) in
+        self.arrowIcon = UIImageView.zj_createImageView(imageName: "im_arrow_right1", supView: self.contentView, closure: { (make) in
             make.centerY.equalTo(self.snp.centerY)
             make.right.equalTo(Adapt(-15))
-            make.width.equalTo(Adapt(10))
-            make.height.equalTo(Adapt(14))
+            make.width.equalTo(Adapt(6))
+            make.height.equalTo(Adapt(10))
         })
         
         self.detailLab = UILabel.zj_createLabel(text: "副标题", textColor:  kGrayTextColor, font: FontSize(12), supView: self.contentView, closure: { (make) in
