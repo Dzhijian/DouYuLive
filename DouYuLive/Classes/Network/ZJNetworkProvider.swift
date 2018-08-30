@@ -86,6 +86,7 @@ public class ZJNetworkProvider{
             }
         }
     }
+    
     ///请求String数据
     func requestDataWithTargetString<T:TargetType>(target:T,successClosure:@escaping SuccessStringClosure,failClosure: @escaping FailClosure) {
         let requestProvider = MoyaProvider<T>(requestClosure:requestTimeoutClosure(target: target))
@@ -104,7 +105,8 @@ public class ZJNetworkProvider{
             
         }
     }
-    //设置一个公共请求超时时间
+    
+    ///设置一个公共请求超时时间
     private func requestTimeoutClosure<T:TargetType>(target:T) -> MoyaProvider<T>.RequestClosure{
         let requestTimeoutClosure = { (endpoint:Endpoint<T>, done: @escaping MoyaProvider<T>.RequestResultClosure) in
             do{

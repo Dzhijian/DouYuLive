@@ -395,7 +395,6 @@
 		043512DD211DDD95001D928A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				048EA3B52107909F00E30720 /* ZJRecreationViewController.swift */,
 				04A473A22124026100D37F33 /* ZJRecreationRecommendViewController.swift */,
 				04A473A421240DA700D37F33 /* ZJFaceScoreViewController.swift */,
 				04A473A621240F5100D37F33 /* ZJOutdoorsViewController.swift */,
@@ -571,6 +570,7 @@
 		048EA3AB2107873B00E30720 /* Recreation */ = {
 			isa = PBXGroup;
 			children = (
+				048EA3B52107909F00E30720 /* ZJRecreationViewController.swift */,
 				043512DD211DDD95001D928A /* Controller */,
 				043512DF211DDDA4001D928A /* Model */,
 				043512DE211DDD9E001D928A /* View */,

@@ -77,5 +77,8 @@ extension ZJFollowViewController {
         view.addSubview(pageTitleView)
         // 添加 ContentView
         view.addSubview(pageContenView)
+        
+        setUpNavigation()
     }
+    
 }

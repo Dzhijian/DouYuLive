@@ -51,7 +51,7 @@ class ZJProfileViewController: ZJBaseViewController {
 // MARK: -
 extension ZJProfileViewController {
     
-    @objc private func leftItemClick() {
+    @objc private func leftItemBackClick() {
         self.navigationController?.popViewController(animated: true)
     }
     @objc private func activityAction() {
@@ -126,7 +126,7 @@ extension ZJProfileViewController {
         let navView = self.navigationController?.navigationBar.subviews.first
         guard navView != nil else {return}
         zj_setUpGradientLayer(view: navView!, frame: CGRect(x: 0, y: 0, width: kScreenW, height: kStatuHeight+kNavigationBarHeight), color: kWhiteColors)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "btn_nav_back"), landscapeImagePhone: nil, style: .done, target: self, action: #selector(self.leftItemClick))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "btn_nav_back"), landscapeImagePhone: nil, style: .done, target: self, action: #selector(self.leftItemBackClick))
         let activity = UIImageView.init(image: UIImage(named: "icon_dycard"))
         activity.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
         activity.contentMode = .scaleAspectFit

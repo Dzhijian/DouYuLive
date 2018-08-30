@@ -68,6 +68,7 @@ class ZJDiscoverViewController: ZJBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
+        
         setUpAllView()
         
         ZJProgressHUD.showProgress(supView: self.collectionView, imgFrame: CGRect.zero,imgArr: getloadingImages(), timeMilliseconds: 90, bgColor: kWhite, scale: 0.8)
@@ -200,6 +201,7 @@ extension ZJDiscoverViewController {
 extension ZJDiscoverViewController : UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     
     private func setUpAllView() {
+        
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { (make) in
             make.edges.equalTo(0)
@@ -212,6 +214,8 @@ extension ZJDiscoverViewController : UICollectionViewDelegate,UICollectionViewDa
             self?.loadData()
         }
         
+        // 配置导航条
+        setUpNavigation()
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {

@@ -7,6 +7,7 @@
 //
 import UIKit
 import Moya
+
 let HomeProvider = MoyaProvider<HomeAPI>()
 
 public enum HomeAPI {
@@ -14,7 +15,6 @@ public enum HomeAPI {
     case liveCateList  //分类列表
     
 }
-
 
 extension HomeAPI : TargetType {
     
@@ -61,11 +61,11 @@ extension HomeAPI : TargetType {
             params["client_sys"] = "ios"
             return .requestParameters(parameters: params,
                                       encoding: URLEncoding.default)
-        
+            
         }
         
     }
-
+    
     //是否执行Alamofire验证
     public var validate: Bool {
         return false
@@ -81,5 +81,5 @@ extension HomeAPI : TargetType {
         return nil
     }
     
-
+    
 }

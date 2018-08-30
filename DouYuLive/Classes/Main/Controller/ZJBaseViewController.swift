@@ -44,14 +44,36 @@ class ZJBaseViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // 配置 NavigationBar
+    func setUpNavigation() -> Void {
+        // 修改状态栏背景颜色
+        self.navigationController?.navigationBar.barTintColor = kMainOrangeColor
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        
+        // 左边的按钮
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "btn_user_normal"), style:.done ,target: self, action: #selector(self.leftItemClick))
+        // 右边的按钮
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "viewHistoryIcon"), style:.done, target: self, action: #selector(self.rightItemClick)) //UIBarButtonItem.createBarButton("search_history", "search_history", size)
+        
+        let searchView  = ZJHomeSearchView()
+        searchView.layer.cornerRadius = 5
+        searchView.backgroundColor = kSearchBGColor
+        navigationItem.titleView = searchView
+        searchView.snp.makeConstraints { (make) in
+            make.center.equalTo((navigationItem.titleView?.snp.center)!)
+            make.width.equalTo(AdaptW(230))
+            make.height.equalTo(33)
+        }
     }
-    */
+    
+    @objc func rightItemClick() {
+        print("rightItem click")
+    }
+    
+    @objc func leftItemClick() {
+        self.navigationController?.pushViewController(ZJProfileViewController(), animated: true)
+        print("leftItem Click")
+    }
+    
 
 }

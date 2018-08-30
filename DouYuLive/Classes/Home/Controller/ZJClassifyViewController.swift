@@ -74,70 +74,50 @@ extension ZJClassifyViewController {
         let semaphoreC = DispatchSemaphore(value: 0)
         
         let queue = DispatchQueue(label: "com.douyuLive.cate1.queue", qos: .utility, attributes: .concurrent)
-        let mainQueue = DispatchQueue.main
         
         queue.async{
             semaphoreA.signal()
-            /*
-            ZJNetWorking.requestData(type: .GET, URlString: ZJLiveCateURL) { (response) in
 
-                let data = try? ZJDecoder.decode(ZJCateOneList.self, data: response)
-                if data != nil {
-                    self.cateListData = data!
-
-                }
-                semaphoreB.signal()
-                print("第一个任务执行完毕" + "\(Thread.current)")
-            }
-            */
             ZJNetworkProvider.shared.requestDataWithTargetJSON(target:HomeAPI.liveCateList,  successClosure: {(response) in
                 
-                let jsonDict = response.dictionaryObject
+                guard let jsonDict = response.dictionaryObject else {
+                    semaphoreB.signal()
+                    return
+                }
                 // 字典转模型
-                let allData : ZJCateAllData = ZJCateAllData(JSON: jsonDict!)!
+                let allData : ZJCateAllData = ZJCateAllData(JSON: jsonDict)!
                 self.cateListData = allData.cate1_list
-//                print(allData)
                 semaphoreB.signal()
                 print("第一个任务执行完毕" + "\(Thread.current)")
                 
             }, failClosure: {_ in
-                
+                 semaphoreB.signal()
             })
         }
         
         queue.async{
             semaphoreB.wait()
-            /*
-            ZJNetWorking.requestData(type: .GET, URlString: ZJRecommendCategoryURL) { (response) in
 
-                let data = try? ZJDecoder.decode(ZJRecommendCate.self, data: response)
-                if data != nil {
-                    self.recommenCateData = data!
-                }
-                semaphoreC.signal()
-                print("第二个任务执行完毕" + "\(Thread.current)" )
-            }
-            */
-            
             // Moya + ObjectMapper + Alamofire 实现网络请求
             ZJNetworkProvider.shared.requestDataWithTargetJSON(target:HomeAPI.recommendCategoryList,  successClosure: {(response) in
-            
-                let jsonDict = response.dictionaryObject
-                
-                // response.dictionaryObject json 转字典
+                guard let jsonDict = response.dictionaryObject else {
+                    semaphoreC.signal()
+                    return
+                }
                 // 字典转模型
-                let cate : ZJRecomCateData = ZJRecomCateData(JSON: jsonDict!)!
+                let cate : ZJRecomCateData = ZJRecomCateData(JSON: jsonDict)!
                 print(cate.cate2_list.count)
                 self.recommenCateData = cate
+                print("第二个任务执行完毕" + "\(Thread.current)" )
                 semaphoreC.signal()
             }, failClosure: {_ in
-                
+                semaphoreC.signal()
             })
         }
         
         queue.async{
             if semaphoreC.wait(wallTimeout: .distantFuture) == .success{
-                mainQueue.async {
+                DispatchQueue.main.async {
                     self.mainTable.es.stopPullToRefresh()
                     ZJProgressHUD.hideAllHUD()
                     print("全部任务执行完毕,刷新页面" + "\(Thread.current)")
