@@ -40,7 +40,7 @@ class ZJClassifyViewController: ZJBaseViewController {
         // 获取分类列表数据
         loadCateListData()
         
-        ZJProgressHUD.showProgress(supView: self.mainTable, bgFrame: nil,imgArr: getloadingImages(), timeMilliseconds: 90, bgColor: kWhite, scale: 0.8)
+        ZJProgressHUD.showProgress(supView: self.view, bgFrame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH - kStatuHeight-kTabBarHeight-kNavigationBarHeight),imgArr: getloadingImages(), timeMilliseconds: 90, bgColor: kWhite, scale: 0.8)
     }
     
     override func didReceiveMemoryWarning() {

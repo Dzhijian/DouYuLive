@@ -14,7 +14,10 @@ class ZJFollowLiveViewController: ZJBaseViewController {
     private lazy var interesList : [ZJFollowInterseList] = [ZJFollowInterseList]()
     
     private lazy var rankList : [ZJFollowRankList] = [ZJFollowRankList]()
-    
+    //初始化信号量为1
+    let semaphoreA = DispatchSemaphore(value: 1)
+    let semaphoreB = DispatchSemaphore(value: 0)
+    let semaphoreC = DispatchSemaphore(value: 0)
     private lazy var headView : ZJFollowLiveHeadView = {
         let headView = ZJFollowLiveHeadView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: Adapt(200)))
         headView.backgroundColor = kWhite
@@ -36,8 +39,9 @@ class ZJFollowLiveViewController: ZJBaseViewController {
         super.viewDidLoad()
         view.backgroundColor = kWhite
         setUpAllview()
-        getInterestListData()
-        getRankListData()
+        asyncLoadData()
+        
+        ZJProgressHUD.showProgress(supView: self.view, bgFrame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH - kStatuHeight-kTabBarHeight-kNavigationBarHeight),imgArr: getloadingImages(), timeMilliseconds: 90, bgColor: kWhite, scale: 0.8)
     }
     
 }
@@ -45,15 +49,37 @@ class ZJFollowLiveViewController: ZJBaseViewController {
 // MARK: - 网络请求
 extension ZJFollowLiveViewController {
     
+    func asyncLoadData() {
+        
+        let queue = DispatchQueue(label: "com.douyuLive.cate1.queue", qos: .utility, attributes: .concurrent)
+        
+        queue.async {
+            self.semaphoreA.signal()
+            self.getInterestListData()
+        }
+        queue.async {
+            self.semaphoreB.wait()
+            self.getRankListData()
+        }
+        queue.async{
+            if self.semaphoreC.wait(wallTimeout: .distantFuture) == .success{
+                DispatchQueue.main.async {
+                    ZJProgressHUD.hideAllHUD()
+                    self.mainTable.reloadData()
+                }
+            }
+        }
+    }
+    
     private func getInterestListData() {
         
         // 获取可能感兴趣列表
         ZJNetWorking.requestData(type: .GET, URlString: ZJFollowInterestURL) { (response) in
-            
+            self.semaphoreB.signal()
             let data = try? ZJDecoder.decode(ZJFollowInterseData.self, data: response)
             if data != nil{
                 self.interesList = (data?.data)!
-                self.mainTable.reloadData()
+//                self.mainTable.reloadData()
             }
         }
     }
@@ -62,7 +88,7 @@ extension ZJFollowLiveViewController {
         
         // 获取排行榜列表
         ZJNetWorking.requestData(type: .GET, URlString: ZJFollowRankURL) { (response) in
-            
+            self.semaphoreC.signal()
             let data = try? ZJDecoder.decode(ZJFollowRankData.self, data: response)
             if data != nil {
                 self.rankList = (data?.data)!
