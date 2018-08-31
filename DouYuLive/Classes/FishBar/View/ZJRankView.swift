@@ -52,12 +52,7 @@ class ZJRankView: ZJBaseView {
             icon.layer.masksToBounds = true
             icon.contentMode = .scaleAspectFill
             icon.tag = index
-            if let imgUrl = URL(string: urlStr) {
-                icon.kf.setImage(with: imgUrl)
-            } else {
-                icon.image = UIImage(named: "icon_logo")
-            }
-            
+            icon.zj_setImage(urlStr: urlStr, placeholder: UIImage(named: "icon_logo"))
             self.addSubview(icon)
             avatarArr.append(icon)
         }

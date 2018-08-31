@@ -14,12 +14,7 @@ class ZJCategoryItem: ZJBaseCollectionCell {
     var model : ZJRecomCateList? {
         didSet{
             titleLab.text = model?.cate2_name
-            //不能使用强制解包策略
-            if let iconURL = URL(string: model?.square_icon_url ?? "") {
-                icon.kf.setImage(with: iconURL)
-            } else {
-                icon.image = UIImage(named: "home_column_more")//home_more_btn
-            }
+            icon.zj_setImage(urlStr: model?.square_icon_url ?? "", placeholder: UIImage(named: "home_column_more"))
         }
     }
     

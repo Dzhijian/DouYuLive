@@ -34,8 +34,9 @@ class ZJGameItemCell: ZJBaseTableCell {
             let time = timeStampToString(timeStamp: model?.start_time?.description ?? "0", format: "HH:mm MM月dd日")
             titleLab.text = timeStampToString(timeStamp: model?.start_time?.description ?? "0", format: "yyyy年MM月dd日")
             descLab.text =  (model?.game_name)!  + " / \(time)" + "  第\(model?.round!.description ?? "0")场"
-            leftImg.kf.setImage(with: URL(string: model?.player1_icon ?? ""))
-            rightImg.kf.setImage(with: URL(string: model?.player2_icon ?? ""))
+            
+            leftImg.zj_setImage(urlStr: model?.player1_icon ?? "")
+            rightImg.zj_setImage(urlStr: model?.player2_icon ?? "")
             leftName.text = model?.player1_name
             rightName.text = model?.player2_name
             leftScore.text = model?.player1_score?.description

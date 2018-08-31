@@ -20,7 +20,6 @@ class ZJRecommendHeadView: UICollectionReusableView {
     
     var recomCateList : [ZJRecomCateList]?{
         didSet{
-//            self.recomCateList = recomCateList
             self.collectionView.reloadData()
         }
     }

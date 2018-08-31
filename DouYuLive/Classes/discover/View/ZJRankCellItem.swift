@@ -19,9 +19,8 @@ class ZJRankCellItem: ZJBaseCollectionCell {
     
     var model : ZJAnchorRankList? {
         didSet{
-            if let avatarUrl = URL(string: model?.avatar ?? "") {
-                self.avatar.kf.setImage(with: avatarUrl)
-            }
+
+            self.avatar.zj_setImage(urlStr: model?.avatar ?? "", placeholder: nil)
             self.nameLab.text = model?.nickname
             self.descLab.text = model?.catagory
             

@@ -35,12 +35,8 @@ class ZJRecreationListItem: ZJBaseCollectionCell {
     var faceHotModel : ZJLiveItemModel? {
         
         didSet{
-            //不能使用强制解包策略
-            if let iconURL = URL(string: faceHotModel?.room_src ?? "") {
-                imgV.kf.setImage(with: iconURL)
-            } else {
-                imgV.image = UIImage(named: "video_default_cover")
-            }
+
+            imgV.zj_setImage(urlStr: faceHotModel?.room_src ?? "", placeholder: UIImage(named: "video_default_cover"))
             
             nameLab.text = faceHotModel?.nickname
             addressLab.text = faceHotModel?.anchor_city

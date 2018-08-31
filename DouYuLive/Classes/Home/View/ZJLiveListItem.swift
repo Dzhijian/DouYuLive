@@ -45,11 +45,8 @@ class ZJLiveListItem: ZJBaseCollectionCell {
             let timeM = (time - timeS) / 60 % 60
             hotLab.text = "\(timeM):\(timeS)"
             //不能使用强制解包策略
-            if let iconURL = URL(string: hotVideoModel?.video_cover ?? "") {
-                imageV.kf.setImage(with: iconURL)
-            } else {
-                imageV.image = UIImage(named: "video_default_cover")
-            }
+            
+            imageV.zj_setImage(urlStr:  hotVideoModel?.video_cover ?? "", placeholder: UIImage(named: "video_default_cover"))
         }
     }
     

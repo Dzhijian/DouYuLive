@@ -127,14 +127,7 @@ extension ZJFollowLiveHeadView {
             icon.contentMode = .scaleAspectFill
             icon.tag = index
             icon.image = UIImage(named: "liveImage")
-            
-            if let imgUrl = URL(string: urlStr) {
-                icon.kf.setImage(with: imgUrl)
-            } else {
-                icon.image = UIImage(named: "liveImage")
-            }
-
-//            icon.kf.setImage(with: URL(string: urlStr))
+            icon.zj_setImage(urlStr: urlStr, placeholder: UIImage(named: "icon_logo"))
             anchorRankView.addSubview(icon)
             iconArr.append(icon)
         }
