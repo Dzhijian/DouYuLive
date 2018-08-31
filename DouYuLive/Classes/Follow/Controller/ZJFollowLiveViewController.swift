@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class ZJFollowLiveViewController: ZJBaseViewController {
     
     private lazy var interesList : [ZJFollowInterseList] = [ZJFollowInterseList]()
@@ -79,7 +78,6 @@ extension ZJFollowLiveViewController {
             let data = try? ZJDecoder.decode(ZJFollowInterseData.self, data: response)
             if data != nil{
                 self.interesList = (data?.data)!
-//                self.mainTable.reloadData()
             }
         }
     }

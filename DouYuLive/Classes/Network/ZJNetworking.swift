@@ -59,7 +59,7 @@ class ZJNetWorking {
             if let dataDict = dict["data"] as? [String : Any] {
                 
                 let jsonData = try? JSONSerialization.data(withJSONObject: dataDict, options: .prettyPrinted)
-//                print(dict)
+                print(dict)
                 if jsonData != nil {
                     finishCallBack(jsonData!)
                     return
@@ -69,7 +69,7 @@ class ZJNetWorking {
             if ((dict["data"] as? [Any]) != nil) {
             
                 let arrData = try? JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
-//                print(dict)
+                print(dict)
                 if arrData != nil {
                     finishCallBack(arrData!)
                 }

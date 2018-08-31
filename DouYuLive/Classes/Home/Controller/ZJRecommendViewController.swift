@@ -21,13 +21,12 @@ private let kRecommendHeaderViewID = "kRecommendHeaderViewID"
 class ZJRecommendViewController: ZJBaseViewController ,UIScrollViewDelegate{
     
     private lazy var activityList : [ZJRecommendActivityList] = [ZJRecommendActivityList]()
+    private lazy var recomCate : [ZJRecomCateList] = [ZJRecomCateList]()
     private lazy var collectionView : UICollectionView = {
-        
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: kItemW, height: kItemH)
         layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = kItemMargin
-//        layout.headerReferenceSize = CGSize(width: kScreenW, height: 50)
         layout.sectionInset = UIEdgeInsetsMake(0, kItemMargin, 0, kItemMargin)
         let collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: layout)
         collectionView.backgroundColor = kWhite
@@ -51,7 +50,7 @@ class ZJRecommendViewController: ZJBaseViewController ,UIScrollViewDelegate{
     
     func loadData() {
         // 获取热门推荐列表数据
-        loadHotRecommendListData()
+//        loadHotRecommendListData()
         
         getActivityList()
         
@@ -79,6 +78,8 @@ extension ZJRecommendViewController {
     private func loadHotRecommendListData() {
         let dict : [String : String] = ["limit":"10","client_sys":"ios","offset":"0"]
         ZJNetWorking.requestData(type: .POST, URlString:ZJRecommendHotURL , parameters: dict) { (response) in
+            print(response)
+            print(response)
         }
     }
     
@@ -96,15 +97,15 @@ extension ZJRecommendViewController {
     
     private func getRecommendCateList(){
         
-        ZJNetworkProvider.shared.requestDataWithTargetJSON(target: HomeAPI.recommendCategoryList, successClosure: { (response) in
-            // json 转字典
-            let jsonStr = response.dictionaryObject
+        // Moya + ObjectMapper + Alamofire 实现网络请求
+        ZJNetworkProvider.shared.requestDataWithTargetJSON(target:HomeAPI.recommendCategoryList,  successClosure: {(response) in
+            guard let jsonDict = response.dictionaryObject else {return}
             // 字典转模型
-            let cate : ZJRecomCateData = ZJRecomCateData(JSON: jsonStr!)!
-            print("cate2_list.count=====>:%d",cate.cate2_list.count)
-        }) { (_) in
-            
-        }
+            let cateArr : ZJRecomCateData = ZJRecomCateData(JSON: jsonDict)!
+            self.recomCate = cateArr.cate2_list
+            self.collectionView.reloadData()
+        }, failClosure: {_ in
+        })
     }
 }
 
@@ -130,6 +131,7 @@ extension ZJRecommendViewController : UICollectionViewDataSource,UICollectionVie
         if indexPath.section == 0 {
             let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: kRecommendHeaderViewID, for: indexPath) as! ZJRecommendHeadView
             headerView.activityList = self.activityList
+            headerView.recomCateList = self.recomCate
             return headerView
             
         }else{

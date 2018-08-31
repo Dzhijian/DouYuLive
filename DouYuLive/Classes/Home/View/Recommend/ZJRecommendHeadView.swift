@@ -18,6 +18,14 @@ class ZJRecommendHeadView: UICollectionReusableView {
         }
     }
     
+    var recomCateList : [ZJRecomCateList]?{
+        didSet{
+//            self.recomCateList = recomCateList
+            self.collectionView.reloadData()
+        }
+    }
+    
+    
     private lazy var layout : UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
@@ -68,13 +76,13 @@ extension ZJRecommendHeadView : UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
+        return (self.recomCateList?.count ?? 0) > 8 ? 8 : (self.recomCateList?.count ?? 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ZJCategoryItem.identifier(), for: indexPath)
-        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ZJCategoryItem.identifier(), for: indexPath) as! ZJCategoryItem
+        cell.model = self.recomCateList?[indexPath.item]
         return cell
     }
 }
