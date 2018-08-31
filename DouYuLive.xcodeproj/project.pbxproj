@@ -44,7 +44,6 @@
 		048EA3792106447200E30720 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EA3782106447200E30720 /* AppDelegate.swift */; };
 		048EA37E2106447200E30720 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 048EA37C2106447200E30720 /* Main.storyboard */; };
 		048EA3802106447300E30720 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 048EA37F2106447300E30720 /* Assets.xcassets */; };
-		048EA3832106447300E30720 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 048EA3812106447300E30720 /* LaunchScreen.storyboard */; };
 		048EA38E2106447300E30720 /* DouYuLiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EA38D2106447300E30720 /* DouYuLiveTests.swift */; };
 		048EA3992106447300E30720 /* DouYuLiveUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EA3982106447300E30720 /* DouYuLiveUITests.swift */; };
 		048EA3AF21078F8400E30720 /* ZJTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EA3AE21078F8400E30720 /* ZJTabBarController.swift */; };
@@ -104,6 +103,8 @@
 		04A473B621252C0300D37F33 /* ZJFollowStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A473B521252C0300D37F33 /* ZJFollowStateViewController.swift */; };
 		04A473BB212533FC00D37F33 /* ZJFollowLiveHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A473BA212533FC00D37F33 /* ZJFollowLiveHeadView.swift */; };
 		04A473BD2125353000D37F33 /* ZJFollowLiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A473BC2125353000D37F33 /* ZJFollowLiveCell.swift */; };
+		04A7D9642138EF0D0069DF01 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 048EA3842106447300E30720 /* Info.plist */; };
+		04A7D9682138EF370069DF01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A7D9662138EF370069DF01 /* LaunchScreen.storyboard */; };
 		04ADE69A212D3E5900B64951 /* ZJProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ADE699212D3E5900B64951 /* ZJProfileViewController.swift */; };
 		04ADE69C212D43AB00B64951 /* ZJProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ADE69B212D43AB00B64951 /* ZJProfileCell.swift */; };
 		04ADE69E212D5D7A00B64951 /* ZJProfileHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ADE69D212D5D7A00B64951 /* ZJProfileHeadView.swift */; };
@@ -185,8 +186,7 @@
 		048EA3782106447200E30720 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		048EA37D2106447200E30720 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		048EA37F2106447300E30720 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		048EA3822106447300E30720 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		048EA3842106447300E30720 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		048EA3842106447300E30720 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		048EA3892106447300E30720 /* DouYuLiveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DouYuLiveTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		048EA38D2106447300E30720 /* DouYuLiveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DouYuLiveTests.swift; sourceTree = "<group>"; };
 		048EA38F2106447300E30720 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -250,6 +250,7 @@
 		04A473B521252C0300D37F33 /* ZJFollowStateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFollowStateViewController.swift; sourceTree = "<group>"; };
 		04A473BA212533FC00D37F33 /* ZJFollowLiveHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFollowLiveHeadView.swift; sourceTree = "<group>"; };
 		04A473BC2125353000D37F33 /* ZJFollowLiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFollowLiveCell.swift; sourceTree = "<group>"; };
+		04A7D9672138EF370069DF01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04ADE699212D3E5900B64951 /* ZJProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJProfileViewController.swift; sourceTree = "<group>"; };
 		04ADE69B212D43AB00B64951 /* ZJProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJProfileCell.swift; sourceTree = "<group>"; };
 		04ADE69D212D5D7A00B64951 /* ZJProfileHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJProfileHeadView.swift; sourceTree = "<group>"; };
@@ -482,8 +483,6 @@
 				048EA3A62107873B00E30720 /* Classes */,
 				048EA3782106447200E30720 /* AppDelegate.swift */,
 				048EA37C2106447200E30720 /* Main.storyboard */,
-				048EA37F2106447300E30720 /* Assets.xcassets */,
-				048EA3812106447300E30720 /* LaunchScreen.storyboard */,
 				048EA3842106447300E30720 /* Info.plist */,
 			);
 			path = DouYuLive;
@@ -518,8 +517,9 @@
 				048EA3B42107904E00E30720 /* FishBar */,
 				048EA3AC2107873B00E30720 /* discover */,
 				04970606212D3DAB00E12562 /* Profile */,
-				048EA3AA2107873B00E30720 /* Other */,
 				048EA3A82107873B00E30720 /* Tools */,
+				04A7D9652138EF370069DF01 /* Other */,
+				04A7D9632138EE240069DF01 /* Rescoure */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -558,13 +558,6 @@
 				04A473B9212533CE00D37F33 /* View */,
 			);
 			path = Follow;
-			sourceTree = "<group>";
-		};
-		048EA3AA2107873B00E30720 /* Other */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Other;
 			sourceTree = "<group>";
 		};
 		048EA3AB2107873B00E30720 /* Recreation */ = {
@@ -783,6 +776,22 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		04A7D9632138EE240069DF01 /* Rescoure */ = {
+			isa = PBXGroup;
+			children = (
+				048EA37F2106447300E30720 /* Assets.xcassets */,
+			);
+			path = Rescoure;
+			sourceTree = "<group>";
+		};
+		04A7D9652138EF370069DF01 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				04A7D9662138EF370069DF01 /* LaunchScreen.storyboard */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
 		04DE708321198BA50073DE82 /* Recommend */ = {
 			isa = PBXGroup;
 			children = (
@@ -947,7 +956,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				048EA3832106447300E30720 /* LaunchScreen.storyboard in Resources */,
+				04A7D9642138EF0D0069DF01 /* Info.plist in Resources */,
+				04A7D9682138EF370069DF01 /* LaunchScreen.storyboard in Resources */,
 				048EA3802106447300E30720 /* Assets.xcassets in Resources */,
 				048EA37E2106447200E30720 /* Main.storyboard in Resources */,
 			);
@@ -1226,10 +1236,10 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		048EA3812106447300E30720 /* LaunchScreen.storyboard */ = {
+		04A7D9662138EF370069DF01 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				048EA3822106447300E30720 /* Base */,
+				04A7D9672138EF370069DF01 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
