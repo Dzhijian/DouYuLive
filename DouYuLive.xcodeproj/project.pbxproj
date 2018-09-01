@@ -41,6 +41,8 @@
 		044736022134530F0086D470 /* ZJNetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044736012134530F0086D470 /* ZJNetworkProvider.swift */; };
 		045DC67321353ADE009902BC /* ZJRecomCateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045DC67221353ADE009902BC /* ZJRecomCateData.swift */; };
 		045DE3902125C75C004718E8 /* ZJFollowInteresData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045DE38F2125C75C004718E8 /* ZJFollowInteresData.swift */; };
+		0464576B213B0641003F816A /* ZJCarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464576A213B0641003F816A /* ZJCarouselCell.swift */; };
+		0464576D213B0936003F816A /* ZJHistoryRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464576C213B0936003F816A /* ZJHistoryRecordViewController.swift */; };
 		048EA3792106447200E30720 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EA3782106447200E30720 /* AppDelegate.swift */; };
 		048EA37E2106447200E30720 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 048EA37C2106447200E30720 /* Main.storyboard */; };
 		048EA3802106447300E30720 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 048EA37F2106447300E30720 /* Assets.xcassets */; };
@@ -184,6 +186,8 @@
 		044736012134530F0086D470 /* ZJNetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJNetworkProvider.swift; sourceTree = "<group>"; };
 		045DC67221353ADE009902BC /* ZJRecomCateData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJRecomCateData.swift; sourceTree = "<group>"; };
 		045DE38F2125C75C004718E8 /* ZJFollowInteresData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFollowInteresData.swift; sourceTree = "<group>"; };
+		0464576A213B0641003F816A /* ZJCarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCarouselCell.swift; sourceTree = "<group>"; };
+		0464576C213B0936003F816A /* ZJHistoryRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJHistoryRecordViewController.swift; sourceTree = "<group>"; };
 		048EA3752106447200E30720 /* DouYuLive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DouYuLive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		048EA3782106447200E30720 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		048EA37D2106447200E30720 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -345,6 +349,7 @@
 				0419BD002111BFBC008661D3 /* ZJJDQSViewController.swift */,
 				0419BCFC2111BEB1008661D3 /* ZJWZRYViewController.swift */,
 				0419BCFE2111BEBE008661D3 /* ZJQQCarViewController.swift */,
+				0464576C213B0936003F816A /* ZJHistoryRecordViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -802,6 +807,7 @@
 			isa = PBXGroup;
 			children = (
 				04A7D96F213AA5E90069DF01 /* ZJCarouselView.swift */,
+				0464576A213B0641003F816A /* ZJCarouselCell.swift */,
 			);
 			path = ZJCarouselView;
 			sourceTree = "<group>";
@@ -1105,6 +1111,7 @@
 				044735FB213195C80086D470 /* SwiftProgressHUD.swift in Sources */,
 				04DE7091211A026C0073DE82 /* ZJCateSectionHeaderView.swift in Sources */,
 				04A4739D2122E93600D37F33 /* LZViewPager.swift in Sources */,
+				0464576D213B0936003F816A /* ZJHistoryRecordViewController.swift in Sources */,
 				049705EE2127E47F00E12562 /* ZJDiscoverGameItem.swift in Sources */,
 				044736022134530F0086D470 /* ZJNetworkProvider.swift in Sources */,
 				04907E822117304A006B70EC /* ZJHomeAPI.swift in Sources */,
@@ -1201,6 +1208,7 @@
 				0419BCE1210ABACB008661D3 /* ZJPageTitleView.swift in Sources */,
 				04907E7D2116D4A2006B70EC /* ZJCategoryScrollItem.swift in Sources */,
 				04A473AE21242A8000D37F33 /* ZJFaceScoreCell.swift in Sources */,
+				0464576B213B0641003F816A /* ZJCarouselCell.swift in Sources */,
 				0419BCEB210EB554008661D3 /* ZJFont.swift in Sources */,
 				04907E8E21185E94006B70EC /* ZJNotificationName.swift in Sources */,
 				043512E321219372001D928A /* ZJRecreationHeaderView.swift in Sources */,

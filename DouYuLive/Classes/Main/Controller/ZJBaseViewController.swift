@@ -68,6 +68,7 @@ class ZJBaseViewController: UIViewController {
     
     @objc func rightItemClick() {
         print("rightItem click")
+        self.navigationController?.pushViewController(ZJHistoryRecordViewController(), animated: true)
     }
     
     @objc func leftItemClick() {

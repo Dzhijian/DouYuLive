@@ -51,7 +51,7 @@ class ZJHomeViewController: ZJBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUpUI()
+        setUpAllView()
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshNavBar), name: NSNotification.Name(rawValue: ZJNotiRefreshHomeNavBar), object: nil)
     }
@@ -108,7 +108,7 @@ extension ZJHomeViewController : PageTitleViewDelegate,PageContentViewDelegate {
 extension ZJHomeViewController {
     
     // 配置 UI
-    func setUpUI(){
+    func setUpAllView(){
         self.navigationController?.navigationBar.shadowImage = UIImage()
         // 不需要调整 scrollview 的内边距
         automaticallyAdjustsScrollViewInsets = false
