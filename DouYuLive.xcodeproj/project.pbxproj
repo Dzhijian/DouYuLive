@@ -106,6 +106,7 @@
 		04A7D9642138EF0D0069DF01 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 048EA3842106447300E30720 /* Info.plist */; };
 		04A7D9682138EF370069DF01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A7D9662138EF370069DF01 /* LaunchScreen.storyboard */; };
 		04A7D96D213916E10069DF01 /* ZJImageView+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A7D96C213916E10069DF01 /* ZJImageView+Kingfisher.swift */; };
+		04A7D970213AA5E90069DF01 /* ZJCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A7D96F213AA5E90069DF01 /* ZJCarouselView.swift */; };
 		04ADE69A212D3E5900B64951 /* ZJProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ADE699212D3E5900B64951 /* ZJProfileViewController.swift */; };
 		04ADE69C212D43AB00B64951 /* ZJProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ADE69B212D43AB00B64951 /* ZJProfileCell.swift */; };
 		04ADE69E212D5D7A00B64951 /* ZJProfileHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ADE69D212D5D7A00B64951 /* ZJProfileHeadView.swift */; };
@@ -253,6 +254,7 @@
 		04A473BC2125353000D37F33 /* ZJFollowLiveCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFollowLiveCell.swift; sourceTree = "<group>"; };
 		04A7D9672138EF370069DF01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		04A7D96C213916E10069DF01 /* ZJImageView+Kingfisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ZJImageView+Kingfisher.swift"; sourceTree = "<group>"; };
+		04A7D96F213AA5E90069DF01 /* ZJCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCarouselView.swift; sourceTree = "<group>"; };
 		04ADE699212D3E5900B64951 /* ZJProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJProfileViewController.swift; sourceTree = "<group>"; };
 		04ADE69B212D43AB00B64951 /* ZJProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJProfileCell.swift; sourceTree = "<group>"; };
 		04ADE69D212D5D7A00B64951 /* ZJProfileHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJProfileHeadView.swift; sourceTree = "<group>"; };
@@ -541,6 +543,7 @@
 		048EA3A82107873B00E30720 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				04A7D96E213AA57B0069DF01 /* ZJCarouselView */,
 				04A473B8212530B600D37F33 /* ZJPageView */,
 				04A473992122E93500D37F33 /* LZViewPager */,
 				043512E82122B1AF001D928A /* DNSPageView */,
@@ -793,6 +796,14 @@
 				04A7D9662138EF370069DF01 /* LaunchScreen.storyboard */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		04A7D96E213AA57B0069DF01 /* ZJCarouselView */ = {
+			isa = PBXGroup;
+			children = (
+				04A7D96F213AA5E90069DF01 /* ZJCarouselView.swift */,
+			);
+			path = ZJCarouselView;
 			sourceTree = "<group>";
 		};
 		04DE708321198BA50073DE82 /* Recommend */ = {
@@ -1130,6 +1141,7 @@
 				0419BD1421135904008661D3 /* ZJInterfaceURL.swift in Sources */,
 				04DE708A2119967E0073DE82 /* ZJBaseView.swift in Sources */,
 				043512F82122B1AF001D928A /* DNSPageStyle.swift in Sources */,
+				04A7D970213AA5E90069DF01 /* ZJCarouselView.swift in Sources */,
 				049705FE212B0C4900E12562 /* ZJCycleCardViewFlowLayout.swift in Sources */,
 				048EA3B121078F9700E30720 /* ZJHomeViewController.swift in Sources */,
 				043512F22122B1AF001D928A /* DNSPageContentView.swift in Sources */,
