@@ -35,7 +35,7 @@ class ZJCarouselView: UIView {
         }
     }
     
-    /// 总数量
+    /// Item总数量
     private var allItemsCount: NSInteger! = 1
     
     
@@ -61,10 +61,6 @@ class ZJCarouselView: UIView {
     private var maxSwipeSize: CGFloat = 0
     /// 占位图
     var placeHolderViewImage : UIImage! = UIImage(named: "")
-    
-    /// 总的 Item 个数
-    var totalItemsCount: NSInteger! = 1
-    
     // 是否开启无限循环,默认 true 开启
     var isInfiniteLoop : Bool = true
     
@@ -84,12 +80,6 @@ class ZJCarouselView: UIView {
     var position : UICollectionViewScrollPosition = .centeredHorizontally
     /// 定时器
     private var timer : DispatchSourceTimer?
-    /// 定时器
-//    private lazy var timer : DispatchSourceTimer? = {
-//        let timer = DispatchSource.makeTimerSource()
-//        timer.schedule(deadline: .now() + autoScrollTimeInterval, repeating: autoScrollTimeInterval)
-//        return timer
-//    }()
     
     /// UICollectionViewFlowLayout
     private lazy var layout : UICollectionViewFlowLayout = {
@@ -99,6 +89,7 @@ class ZJCarouselView: UIView {
         return layout
     }()
     
+    // cell 的标识符 ID
     private let kIdentifier : String = "ZJCarouselCell"
     
     // UICollectionView
@@ -122,12 +113,15 @@ class ZJCarouselView: UIView {
     }
     
     required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        
+//        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        setUpAllView()
     }
     
 }
 
-// 配置 UI 视图
+// MARK: 配置 UI 视图
 extension ZJCarouselView {
     
     private func setUpAllView() {
@@ -147,17 +141,18 @@ extension ZJCarouselView {
             maxSwipeSize = CGFloat(imageNamesOrURL.count) * collectionView.frame.height
         }
         
-        // Cell Size
+        // 设置 Cell Size
         layout.itemSize = self.frame.size
         
-        if collectionView.contentOffset.x == 0 && totalItemsCount > 0 {
+        if collectionView.contentOffset.x == 0 && allItemsCount > 0 {
             var targetIndex = 0
             if isInfiniteLoop {
-                targetIndex = totalItemsCount/2
+                targetIndex = allItemsCount/2
             }
             collectionView.scrollToItem(at: IndexPath.init(item: targetIndex, section: 0), at: position, animated: false)
         }
         
+        // 开启自动滚动
         isAutoScroll = true
     }
 }
@@ -170,8 +165,7 @@ extension ZJCarouselView {
         
         // 图片小于一张不启动定时器
         guard self.imageNamesOrURL.count > 1  else { return }
-        
-        
+    
         let zj_timer = DispatchSource.makeTimerSource()
         zj_timer.schedule(deadline: .now()+autoScrollTimeInterval, repeating: autoScrollTimeInterval)
         zj_timer.setEventHandler { [weak self] in
@@ -183,15 +177,6 @@ extension ZJCarouselView {
         zj_timer.resume()
         
         timer = zj_timer
-        
-//        self.timer?.setEventHandler { [weak self] in
-//            DispatchQueue.main.async {
-//                self?.automaticScroll()
-//            }
-//        }
-        
-        // 开启定时器
-//        self.timer?.resume()
     }
     
     
@@ -209,7 +194,7 @@ extension ZJCarouselView {
     
     /// 自动轮播
     @objc func automaticScroll() {
-        if totalItemsCount == 0 {return}
+        if allItemsCount == 0 {return}
         let targetIndex = currentIndex() + 1
         scrollToIndex(targetIndex: targetIndex)
     }
@@ -237,7 +222,7 @@ extension ZJCarouselView {
             // 如果不开启自动滚动则直接返回不做操作
             guard isInfiniteLoop else {return}
             // 滚动到指定位置
-            collectionView.scrollToItem(at: IndexPath(item: Int(totalItemsCount / 2), section: 0), at: position, animated: false)
+            collectionView.scrollToItem(at: IndexPath(item: Int(allItemsCount / 2), section: 0), at: position, animated: false)
         }
         
         collectionView.scrollToItem(at: IndexPath(item: targetIndex, section: 0), at: position, animated: true)
@@ -251,7 +236,7 @@ extension ZJCarouselView {
     
 }
 
-// MARK: - 遵守协议
+// MARK: - 遵守UICollectionViewDelegate,UICollectionViewDataSource协议与数据源
 extension ZJCarouselView : UICollectionViewDelegate,UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -301,7 +286,7 @@ extension ZJCarouselView : UIScrollViewDelegate {
             }
             
             if currentOffsetX >= CGFloat(self.imageNamesOrURL.count) * scrollView.frame.size.width && isInfiniteLoop {
-                collectionView.scrollToItem(at: IndexPath.init(item: Int(totalItemsCount/2), section: 0), at: position, animated: false)
+                collectionView.scrollToItem(at: IndexPath.init(item: Int(allItemsCount/2), section: 0), at: position, animated: false)
             }
             
         }else{
@@ -312,13 +297,13 @@ extension ZJCarouselView : UIScrollViewDelegate {
                 if currentOffsetY >= -scrollView.frame.size.height{
                     currentOffsetY = CGFloat(indexOnPageControl) * scrollView.frame.size.height
                 }else if currentOffsetY <= -maxSwipeSize{
-                    collectionView.scrollToItem(at: IndexPath.init(item: Int(totalItemsCount/2), section: 0), at: position, animated: false)
+                    collectionView.scrollToItem(at: IndexPath.init(item: Int(allItemsCount/2), section: 0), at: position, animated: false)
                 }else{
                     currentOffsetY = maxSwipeSize + currentOffsetY
                 }
             }
             if currentOffsetY >= CGFloat(self.imageNamesOrURL.count) * scrollView.frame.size.height && isInfiniteLoop{
-                collectionView.scrollToItem(at: IndexPath.init(item: Int(totalItemsCount/2), section: 0), at: position, animated: false)
+                collectionView.scrollToItem(at: IndexPath.init(item: Int(allItemsCount/2), section: 0), at: position, animated: false)
             }
         }
         

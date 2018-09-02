@@ -24,5 +24,8 @@ class ZJHistoryRecordViewController: ZJBaseViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    deinit {
+       print("ZJHistoryRecordViewController 控制器销毁了")
+    }
 
 }

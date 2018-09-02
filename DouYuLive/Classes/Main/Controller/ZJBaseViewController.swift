@@ -76,5 +76,7 @@ class ZJBaseViewController: UIViewController {
         print("leftItem Click")
     }
     
-
+    deinit {
+        
+    }
 }
