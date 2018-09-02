@@ -43,6 +43,7 @@
 		045DE3902125C75C004718E8 /* ZJFollowInteresData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045DE38F2125C75C004718E8 /* ZJFollowInteresData.swift */; };
 		0464576B213B0641003F816A /* ZJCarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464576A213B0641003F816A /* ZJCarouselCell.swift */; };
 		0464576D213B0936003F816A /* ZJHistoryRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464576C213B0936003F816A /* ZJHistoryRecordViewController.swift */; };
+		0464576F213C5120003F816A /* ZJImagePageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464576E213C5120003F816A /* ZJImagePageControl.swift */; };
 		048EA3792106447200E30720 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EA3782106447200E30720 /* AppDelegate.swift */; };
 		048EA37E2106447200E30720 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 048EA37C2106447200E30720 /* Main.storyboard */; };
 		048EA3802106447300E30720 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 048EA37F2106447300E30720 /* Assets.xcassets */; };
@@ -188,6 +189,7 @@
 		045DE38F2125C75C004718E8 /* ZJFollowInteresData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFollowInteresData.swift; sourceTree = "<group>"; };
 		0464576A213B0641003F816A /* ZJCarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCarouselCell.swift; sourceTree = "<group>"; };
 		0464576C213B0936003F816A /* ZJHistoryRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJHistoryRecordViewController.swift; sourceTree = "<group>"; };
+		0464576E213C5120003F816A /* ZJImagePageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJImagePageControl.swift; sourceTree = "<group>"; };
 		048EA3752106447200E30720 /* DouYuLive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DouYuLive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		048EA3782106447200E30720 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		048EA37D2106447200E30720 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -808,6 +810,7 @@
 			children = (
 				04A7D96F213AA5E90069DF01 /* ZJCarouselView.swift */,
 				0464576A213B0641003F816A /* ZJCarouselCell.swift */,
+				0464576E213C5120003F816A /* ZJImagePageControl.swift */,
 			);
 			path = ZJCarouselView;
 			sourceTree = "<group>";
@@ -1197,6 +1200,7 @@
 				04970603212BF38C00E12562 /* ZJRankView.swift in Sources */,
 				049705E22126B9AE00E12562 /* ZJDiscoverHeadView.swift in Sources */,
 				0419BCFF2111BEBE008661D3 /* ZJQQCarViewController.swift in Sources */,
+				0464576F213C5120003F816A /* ZJImagePageControl.swift in Sources */,
 				049705F82129AC9900E12562 /* ZJFishBarRecommendHeadView.swift in Sources */,
 				04A473B421252BE200D37F33 /* ZJFollowVideoViewController.swift in Sources */,
 				0419BD0F2112E920008661D3 /* ZJNetworking.swift in Sources */,

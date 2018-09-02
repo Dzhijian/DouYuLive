@@ -9,12 +9,19 @@
 import UIKit
 
 
-public enum pageControlPosition {
+public enum ZJPageControlPosition {
     case  center
     case  left
     case  right
 }
 
+/// Style
+public enum ZJPageControlStyle {
+    case none
+    case system
+    case image
+
+}
 
 class ZJCarouselView: UIView {
     
@@ -30,6 +37,7 @@ class ZJCarouselView: UIView {
             if imageNamesOrURL.count <= 1 {
                 invalidateTimer()
             }
+            setUpPageControlView()
             // 刷新 collectionView
             collectionView.reloadData()
         }
@@ -106,6 +114,31 @@ class ZJCarouselView: UIView {
         return collectionView
     }()
     
+    /// pageControl
+    private var pageControl : UIPageControl?
+    
+    /// pageControl 样式, 默认为系统样式
+    var pageStyle : ZJPageControlStyle = .image
+    
+    /// pageControlTintColor 默认的点颜色
+    var pageControlTintColor: UIColor = UIColor.lightGray
+    /// pageControlCurrentPageColor 滚动到的索引点颜色
+    var pageControlCurrentPageColor: UIColor = UIColor.red
+    // 图片
+    var pageControlActiveImage: UIImage? = nil
+    var pageControlInActiveImage: UIImage? = nil
+    /// pageControlPosition
+    var pageControlPosition: ZJPageControlPosition = .center
+    /// Bottom
+    var pageControlBottom: CGFloat = 15 {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+    
+    var customPageControl: UIView?
+    
+    
     public override init(frame: CGRect) {
         super.init(frame: frame)
         setUpAllView()
@@ -113,8 +146,6 @@ class ZJCarouselView: UIView {
     }
     
     required public init?(coder aDecoder: NSCoder) {
-        
-//        fatalError("init(coder:) has not been implemented")
         super.init(coder: aDecoder)
         setUpAllView()
     }
@@ -144,6 +175,13 @@ extension ZJCarouselView {
         // 设置 Cell Size
         layout.itemSize = self.frame.size
         
+        // 设置 pageControl的 frame
+        if pageStyle == .none || pageStyle == .system || pageStyle == .image{
+            if pageControlPosition == .center{
+                pageControl?.frame = CGRect.init(x: 0, y: self.frame.size.height-pageControlBottom, width: UIScreen.main.bounds.width, height: 10)
+            }
+        }
+        
         if collectionView.contentOffset.x == 0 && allItemsCount > 0 {
             var targetIndex = 0
             if isInfiniteLoop {
@@ -152,8 +190,43 @@ extension ZJCarouselView {
             collectionView.scrollToItem(at: IndexPath.init(item: targetIndex, section: 0), at: position, animated: false)
         }
         
+        
         // 开启自动滚动
         isAutoScroll = true
+    }
+}
+
+
+// MARK: 配置 PageControl
+extension ZJCarouselView {
+    
+    private func setUpPageControlView() {
+        if pageControl != nil {
+            pageControl?.removeFromSuperview()
+        }
+        guard imageNamesOrURL.count >= 1 else {return}
+        
+        switch pageStyle {
+        case .none:
+            pageControl = UIPageControl()
+            pageControl?.numberOfPages = imageNamesOrURL.count
+            
+        case .system:
+            pageControl = UIPageControl()
+            pageControl?.numberOfPages = imageNamesOrURL.count
+            pageControl?.pageIndicatorTintColor = pageControlTintColor
+            pageControl?.currentPageIndicatorTintColor = pageControlCurrentPageColor
+            self.addSubview(pageControl!)
+        case .image:
+            pageControl = ZJImagePageControl()
+            pageControl?.pageIndicatorTintColor = UIColor.clear
+            pageControl?.currentPageIndicatorTintColor = UIColor.clear
+            pageControl?.numberOfPages = imageNamesOrURL.count
+            self.addSubview(pageControl!)
+        default: break
+            
+        }
+        
     }
 }
 
@@ -269,6 +342,10 @@ extension ZJCarouselView : UIScrollViewDelegate {
         
         // 当前滚动到第几个
         let indexOnPageControl = pageControlIndexWithCurrentCellIndex(index: currentIndex())
+        
+        if pageStyle == .none || pageStyle == .system || pageStyle == .image{
+            pageControl?.currentPage = indexOnPageControl
+        }
         
         if scrollDirection == .horizontal {
             var currentOffsetX = scrollView.contentOffset.x - (CGFloat(allItemsCount) * scrollView.frame.size.width) / 2
