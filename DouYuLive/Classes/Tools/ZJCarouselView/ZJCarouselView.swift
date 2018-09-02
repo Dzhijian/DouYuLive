@@ -27,6 +27,9 @@ class ZJCarouselView: UIView {
             // 图片大于一张允许滚动,小于一张禁止滚动
             collectionView.isScrollEnabled = imageNamesOrURL.count > 1 ? true : false
             
+            if imageNamesOrURL.count <= 1 {
+                invalidateTimer()
+            }
             // 刷新 collectionView
             collectionView.reloadData()
         }
@@ -40,7 +43,7 @@ class ZJCarouselView: UIView {
     var isAutoScroll: Bool = true {
         didSet {
             invalidateTimer()
-            // 如果关闭的无限循环，则不进行计时器的操作，否则每次滚动到最后一张就不在进行了。
+            // 如果关闭无限循环，则不进行计时器的操作，否则每次滚动到最后一张就不在进行了。
             if isAutoScroll && isInfiniteLoop {
                 setUpTimer()
             }
@@ -63,28 +66,30 @@ class ZJCarouselView: UIView {
     var totalItemsCount: NSInteger! = 1
     
     // 是否开启无限循环,默认 true 开启
-    var isInfiniteLoop : Bool = true {
-        didSet{
-            
-        }
-    }
+    var isInfiniteLoop : Bool = true
     
     // 滚动方向,默认为水平方向
-    var scrollDiretion : UICollectionViewScrollDirection? = .horizontal {
+    var scrollDirection : UICollectionViewScrollDirection? = .horizontal {
         didSet{
-            
+            layout.scrollDirection = scrollDirection!
+            if scrollDirection == .horizontal {
+                position = .centeredHorizontally
+            }else{
+                position = .centeredVertically
+            }
         }
     }
     
     /// Collection滚动方向
     var position : UICollectionViewScrollPosition = .centeredHorizontally
-    
     /// 定时器
-    private lazy var timer : DispatchSourceTimer? = {
-        let timer = DispatchSource.makeTimerSource()
-        timer.schedule(deadline: .now() + autoScrollTimeInterval, repeating: autoScrollTimeInterval)
-        return timer
-    }()
+    private var timer : DispatchSourceTimer?
+    /// 定时器
+//    private lazy var timer : DispatchSourceTimer? = {
+//        let timer = DispatchSource.makeTimerSource()
+//        timer.schedule(deadline: .now() + autoScrollTimeInterval, repeating: autoScrollTimeInterval)
+//        return timer
+//    }()
     
     /// UICollectionViewFlowLayout
     private lazy var layout : UICollectionViewFlowLayout = {
@@ -136,7 +141,7 @@ extension ZJCarouselView {
         collectionView.frame = self.bounds
         
         // 计算最大扩展区大小
-        if scrollDiretion == .horizontal {
+        if scrollDirection == .horizontal {
             maxSwipeSize = CGFloat(imageNamesOrURL.count) * collectionView.frame.width
         }else{
             maxSwipeSize = CGFloat(imageNamesOrURL.count) * collectionView.frame.height
@@ -152,6 +157,8 @@ extension ZJCarouselView {
             }
             collectionView.scrollToItem(at: IndexPath.init(item: targetIndex, section: 0), at: position, animated: false)
         }
+        
+        isAutoScroll = true
     }
 }
 
@@ -164,14 +171,27 @@ extension ZJCarouselView {
         // 图片小于一张不启动定时器
         guard self.imageNamesOrURL.count > 1  else { return }
         
-        self.timer?.setEventHandler { [weak self] in
+        
+        let zj_timer = DispatchSource.makeTimerSource()
+        zj_timer.schedule(deadline: .now()+autoScrollTimeInterval, repeating: autoScrollTimeInterval)
+        zj_timer.setEventHandler { [weak self] in
             DispatchQueue.main.async {
                 self?.automaticScroll()
             }
         }
+        // 继续
+        zj_timer.resume()
+        
+        timer = zj_timer
+        
+//        self.timer?.setEventHandler { [weak self] in
+//            DispatchQueue.main.async {
+//                self?.automaticScroll()
+//            }
+//        }
         
         // 开启定时器
-        self.timer?.resume()
+//        self.timer?.resume()
     }
     
     
@@ -265,7 +285,7 @@ extension ZJCarouselView : UIScrollViewDelegate {
         // 当前滚动到第几个
         let indexOnPageControl = pageControlIndexWithCurrentCellIndex(index: currentIndex())
         
-        if scrollDiretion == .horizontal {
+        if scrollDirection == .horizontal {
             var currentOffsetX = scrollView.contentOffset.x - (CGFloat(allItemsCount) * scrollView.frame.size.width) / 2
             
             if currentOffsetX < 0 {
