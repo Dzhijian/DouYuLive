@@ -23,7 +23,15 @@ public enum ZJPageControlStyle {
 
 }
 
+@objc protocol ZJCarouselViewDelegate {
+    /// 选中事件
+    @objc optional func zj_carouseView(_ carouseView : ZJCarouselView, didSelectedItemIndex didSectedIndex :NSInteger)
+    /// 滚动事件
+    @objc optional func zj_carouseView(_ carouseView : ZJCarouselView,scrollTo scrollIndex: NSInteger)
+}
+
 class ZJCarouselView: UIView {
+    
     
     /// 图片地址或名称
     var imageNamesOrURL : [String] = []{
@@ -42,6 +50,9 @@ class ZJCarouselView: UIView {
             collectionView.reloadData()
         }
     }
+    
+    /// 代理
+    weak var delegate : ZJCarouselViewDelegate?
     
     /// Item总数量
     private var allItemsCount: NSInteger! = 1
@@ -268,13 +279,13 @@ extension ZJCarouselView {
     /// 自动轮播
     @objc func automaticScroll() {
         if allItemsCount == 0 {return}
-        let targetIndex = currentIndex() + 1
+        let targetIndex = getCurrentIndex() + 1
         scrollToIndex(targetIndex: targetIndex)
     }
     
     
     // 获取当前的索引 index
-    private func currentIndex() -> NSInteger {
+    private func getCurrentIndex() -> NSInteger {
         
         var index = 0
         
@@ -329,6 +340,9 @@ extension ZJCarouselView : UICollectionViewDelegate,UICollectionViewDataSource {
     // 点击事件
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        delegate?.zj_carouseView!(self, didSelectedItemIndex: pageControlIndexWithCurrentCellIndex(index: indexPath.item))
+    
+        
     }
 }
 
@@ -341,7 +355,7 @@ extension ZJCarouselView : UIScrollViewDelegate {
         guard imageNamesOrURL.count > 0 else { return }
         
         // 当前滚动到第几个
-        let indexOnPageControl = pageControlIndexWithCurrentCellIndex(index: currentIndex())
+        let indexOnPageControl = pageControlIndexWithCurrentCellIndex(index: getCurrentIndex())
         
         if pageStyle == .none || pageStyle == .system || pageStyle == .image{
             pageControl?.currentPage = indexOnPageControl
@@ -398,6 +412,8 @@ extension ZJCarouselView : UIScrollViewDelegate {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         guard imageNamesOrURL.count > 0 else { return }
         
+        // 滚动后的回调协议
+        delegate?.zj_carouseView!(self, scrollTo: pageControlIndexWithCurrentCellIndex(index: getCurrentIndex()))
         // 开启定时器
         if isAutoScroll {
              setUpTimer()
@@ -407,6 +423,10 @@ extension ZJCarouselView : UIScrollViewDelegate {
     /// 自动滚动结束的时候调用的事件
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         guard imageNamesOrURL.count > 0 else { return }
+        
+        
+        // 滚动后的回调协议
+        delegate?.zj_carouseView!(self, scrollTo: pageControlIndexWithCurrentCellIndex(index: getCurrentIndex()))
         
         // 开启定时器
         if timer == nil && isAutoScroll {
