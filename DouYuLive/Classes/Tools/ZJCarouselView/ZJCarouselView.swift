@@ -136,10 +136,18 @@ class ZJCarouselView: UIView {
     /// pageControlCurrentPageColor 滚动到的索引点颜色
     var pageControlCurrentPageColor: UIColor = UIColor.red
     // 图片
-    var pageControlActiveImage: UIImage? = nil
-    var pageControlInActiveImage: UIImage? = nil
+    var pageControlNormalImage: UIImage? = nil
+    var pageControlCurrentImage: UIImage? = nil
     /// pageControlPosition
     var pageControlPosition: ZJPageControlPosition = .center
+    // pageControl 图片的宽
+    var pageControlImageVWidth : CGFloat? = 10
+    // pageControl 图片的高
+    var pageControlImageVHeight: CGFloat? = 0
+    // pageControl 图片的高
+    var pageControlImageVCornerRadius : CGFloat? = 0
+    
+    
     /// Bottom
     var pageControlBottom: CGFloat = 15 {
         didSet {
@@ -152,12 +160,14 @@ class ZJCarouselView: UIView {
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .lightGray
         setUpAllView()
         
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        backgroundColor = .lightGray
         setUpAllView()
     }
     
@@ -218,26 +228,38 @@ extension ZJCarouselView {
         guard imageNamesOrURL.count >= 1 else {return}
         
         switch pageStyle {
+        // 默认样式
         case .none:
             pageControl = UIPageControl()
             pageControl?.numberOfPages = imageNamesOrURL.count
-            
+            // 系统样式
         case .system:
             pageControl = UIPageControl()
             pageControl?.numberOfPages = imageNamesOrURL.count
             pageControl?.pageIndicatorTintColor = pageControlTintColor
             pageControl?.currentPageIndicatorTintColor = pageControlCurrentPageColor
             self.addSubview(pageControl!)
+        
+            //图片
         case .image:
             pageControl = ZJImagePageControl()
             pageControl?.pageIndicatorTintColor = UIColor.clear
             pageControl?.currentPageIndicatorTintColor = UIColor.clear
             pageControl?.numberOfPages = imageNamesOrURL.count
-            self.addSubview(pageControl!)
-        default: break
             
+            // 设置默认图片
+            (pageControl as? ZJImagePageControl)?.kNormalImage = pageControlNormalImage != nil ? pageControlNormalImage : nil
+            // 设置选中图片
+            (pageControl as? ZJImagePageControl)?.kCurrentImage =  pageControlCurrentImage != nil ? pageControlCurrentImage : nil
+            // 设置图片的宽度
+            (pageControl as? ZJImagePageControl)?.kImageVW =  pageControlImageVWidth! > CGFloat(0) ? pageControlImageVWidth! : CGFloat(0)
+            // 设置图片的高度
+            (pageControl as? ZJImagePageControl)?.kImageVH =  pageControlImageVHeight! > CGFloat(0) ? pageControlImageVHeight! : CGFloat(0)
+            // 设置图片的圆角大小
+            (pageControl as? ZJImagePageControl)?.kImageVCornerRadius =  pageControlImageVCornerRadius! > CGFloat(0) ? pageControlImageVCornerRadius! : CGFloat(0)
+
+            self.addSubview(pageControl!)
         }
-        
     }
 }
 
@@ -414,6 +436,7 @@ extension ZJCarouselView : UIScrollViewDelegate {
         
         // 滚动后的回调协议
         delegate?.zj_carouseView!(self, scrollTo: pageControlIndexWithCurrentCellIndex(index: getCurrentIndex()))
+        print("结束拖动时候的事件")
         // 开启定时器
         if isAutoScroll {
              setUpTimer()
@@ -423,8 +446,7 @@ extension ZJCarouselView : UIScrollViewDelegate {
     /// 自动滚动结束的时候调用的事件
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         guard imageNamesOrURL.count > 0 else { return }
-        
-        
+        print("自动滚动结束的时候调用的事件")
         // 滚动后的回调协议
         delegate?.zj_carouseView!(self, scrollTo: pageControlIndexWithCurrentCellIndex(index: getCurrentIndex()))
         

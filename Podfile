@@ -14,10 +14,8 @@ target 'DouYuLive' do
   pod 'IQKeyboardManagerSwift'
   pod 'ESPullToRefresh'
   pod 'ObjectMapper', '~> 3.3'
-#  pod 'ZJKitTool'
   # 轮播图
   pod 'SBCycleScrollView','~> 0.0.8'
-#  pod 'SwiftProgressHUD'
   pod 'RxSwift'
   pod 'RxCocoa'
   target 'DouYuLiveTests' do
