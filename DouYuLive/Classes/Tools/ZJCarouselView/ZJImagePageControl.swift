@@ -38,7 +38,7 @@ class ZJImagePageControl: UIPageControl {
         let marginX : CGFloat = dotW + margin
         
         //计算整个pageControll的宽度
-        let pageW : CGFloat = CGFloat(self.subviews.count - 1 ) * marginX;
+        let pageW : CGFloat = CGFloat(self.subviews.count ) * marginX;
         
         //设置新frame
 //        self.frame = CGRect(x:kScreenW/2 - (pageW + dotW)/2, y:self.frame.origin.y, width:pageW + dotW, height:self.frame.size.height)
@@ -67,9 +67,9 @@ class ZJImagePageControl: UIPageControl {
             }
             
             if i == self.currentPage {
-                imageV!.image = kCurrentImage != nil ? kCurrentImage : UIImage(named: "homebusiness_Image_column_default")!
+                imageV!.image = kCurrentImage != nil ? kCurrentImage : UIImage(named: "link_select_icon_HL")!
             } else {
-                imageV!.image = kNormalImage != nil ? kNormalImage : UIImage(named: "link_select_icon_HL")!
+                imageV!.image = kNormalImage != nil ? kNormalImage : UIImage(named: "homebusiness_Image_column_default")!
             }
             
             i += 1

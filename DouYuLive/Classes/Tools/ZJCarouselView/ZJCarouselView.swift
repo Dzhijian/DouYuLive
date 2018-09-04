@@ -129,8 +129,9 @@ class ZJCarouselView: UIView {
     private var pageControl : UIPageControl?
     
     /// pageControl 样式, 默认为系统样式
-    var pageStyle : ZJPageControlStyle = .image
-    
+    var pageStyle : ZJPageControlStyle = .system
+    /// pageControl 高度,默认为10
+    var pageControlHeight: CGFloat = 10
     /// pageControlTintColor 默认的点颜色
     var pageControlTintColor: UIColor = UIColor.lightGray
     /// pageControlCurrentPageColor 滚动到的索引点颜色
@@ -149,7 +150,7 @@ class ZJCarouselView: UIView {
     
     
     /// Bottom
-    var pageControlBottom: CGFloat = 15 {
+    var pageControlBottom: CGFloat = 5 {
         didSet {
             setNeedsDisplay()
         }
@@ -199,7 +200,7 @@ extension ZJCarouselView {
         // 设置 pageControl的 frame
         if pageStyle == .none || pageStyle == .system || pageStyle == .image{
             if pageControlPosition == .center{
-                pageControl?.frame = CGRect.init(x: 0, y: self.frame.size.height-pageControlBottom, width: UIScreen.main.bounds.width, height: 10)
+                pageControl?.frame = CGRect.init(x: 0, y: self.frame.size.height-pageControlBottom - pageControlHeight, width: UIScreen.main.bounds.width, height: pageControlHeight)
             }
         }
         
