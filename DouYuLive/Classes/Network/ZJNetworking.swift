@@ -21,12 +21,14 @@ class ZJNetWorking {
     class func requestData(type : ZJMethod, URlString: String, parameters : [String : String]? = nil,  finishCallBack : @escaping (_ responseCall : Data)->()){
         
         let type = type == ZJMethod.GET ? HTTPMethod.get : HTTPMethod.post
+        // 配置 HTTPHeaders
         let headers: HTTPHeaders = [
             "Content-Type": "application/json",
             "charset":"utf-8",
             ]
    
         Alamofire.request(URlString, method: type, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
+            // 处理 cookie
             let headerFields = response.response?.allHeaderFields as! [String: String]
             let url = response.request?.url
             let cookies = HTTPCookie.cookies(withResponseHeaderFields: headerFields, for: url!)
@@ -35,7 +37,7 @@ class ZJNetWorking {
                 cookieArray.append(cookie.properties!)
             }
             if !(UserDefaults.standard.object(forKey: ZJ_DOUYU_TOKEN) != nil){
-                
+                // 保存 cookie
                 UserDefaults.standard.set(cookieArray, forKey: ZJ_DOUYU_TOKEN)
             }else{
                 print("token\(String(describing: UserDefaults.standard.object(forKey: ZJ_DOUYU_TOKEN)))")
@@ -56,6 +58,7 @@ class ZJNetWorking {
                 return
             }
             
+            // 返回字典类型 Data
             if let dataDict = dict["data"] as? [String : Any] {
                 
                 let jsonData = try? JSONSerialization.data(withJSONObject: dataDict, options: .prettyPrinted)
@@ -66,8 +69,8 @@ class ZJNetWorking {
                 }
             }
             
+            // 返回数组类型Data
             if ((dict["data"] as? [Any]) != nil) {
-            
                 let arrData = try? JSONSerialization.data(withJSONObject: dict, options: .prettyPrinted)
                 print(dict)
                 if arrData != nil {

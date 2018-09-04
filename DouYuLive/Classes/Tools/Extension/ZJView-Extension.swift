@@ -22,14 +22,12 @@ extension UIView {
     class func zj_createView(bgClor : UIColor , supView : UIView? ,closure:(_ make:ConstraintMaker) ->()) -> UIView {
         let view = UIView()
         view.backgroundColor = bgClor
-        
         if supView != nil {
             supView?.addSubview(view)
             view.snp.makeConstraints { (make) in
                 closure(make)
             }
         }
-        
         return view
     }
     
@@ -116,7 +114,6 @@ extension UIView {
         
         let label = UILabel()
         label.text = text
-        
         if (textColor != nil) { label.textColor = textColor }
         if (font != nil) { label.font = font }
         label.textAlignment = textAlignment

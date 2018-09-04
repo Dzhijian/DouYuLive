@@ -26,6 +26,7 @@ class ZJAllViewController: ZJBaseViewController {
         collectionView.delegate = self
         collectionView.register(ZJLiveListItem.self, forCellWithReuseIdentifier:ZJLiveListItem.identifier())
         collectionView.showsHorizontalScrollIndicator = false
+        
         return collectionView
     }()
     

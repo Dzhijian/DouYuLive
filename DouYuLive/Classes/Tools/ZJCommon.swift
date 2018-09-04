@@ -13,26 +13,29 @@ import SBCycleScrollView
 import RxSwift
 import RxCocoa
 import ESPullToRefresh
-//import SwiftProgressHUD
 
 let ZJ_DOUYU_TOKEN : String = "ZJ_DOUYU_TOKEN"
 
 let kScreenW = UIScreen.main.bounds.size.width
 let kScreenH = UIScreen.main.bounds.size.height
-
+// 判断是否为 iPhone X
+let isIphoneX = kScreenH >= 812 ? true : false
+// 状态栏高度
 let kStatuHeight : CGFloat = 20
-let kNavigationBarHeight :CGFloat = 44
-let kTabBarHeight : CGFloat = 49
+// 导航栏高度
+let kNavigationBarHeight :CGFloat =  isIphoneX ? 68 : 44
+// TabBar高度
+let kTabBarHeight : CGFloat = isIphoneX ? 49 + 34 : 49
 let CateItemHeight = kScreenW / 4
 let kCateTitleH : CGFloat = 42
 
+// 隐藏导航栏
 let kNavBarHidden : [String:String] = ["isHidden":"true"]
-
+// 显示 导航栏
 let kNavBarNotHidden : [String:String] = ["isHidden":"false"]
 
 // 自定义索引值
 let kBaseTarget : Int = 1000
-
 // 宽度比
 let kWidthRatio = kScreenW / 375.0
 // 高度比

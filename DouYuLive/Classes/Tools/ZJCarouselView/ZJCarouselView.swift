@@ -125,7 +125,7 @@ class ZJCarouselView: UIView {
         return collectionView
     }()
     
-    /// pageControl
+    // MARK: pageControl
     private var pageControl : UIPageControl?
     
     /// pageControl 样式, 默认为系统样式
@@ -136,29 +136,30 @@ class ZJCarouselView: UIView {
     var pageControlTintColor: UIColor = UIColor.lightGray
     /// pageControlCurrentPageColor 滚动到的索引点颜色
     var pageControlCurrentPageColor: UIColor = UIColor.red
-    // 图片
-    var pageControlNormalImage: UIImage? = nil
-    var pageControlCurrentImage: UIImage? = nil
     /// pageControlPosition
     var pageControlPosition: ZJPageControlPosition = .center
-    // pageControl 图片的宽
+    /// 默认图片
+    var pageControlNormalImage: UIImage? = nil
+    /// 滚到到的图片
+    var pageControlCurrentImage: UIImage? = nil
+    /// pageControl 图片的宽
     var pageControlImageVWidth : CGFloat? = 10
-    // pageControl 图片的高
+    /// pageControl 图片的高
     var pageControlImageVHeight: CGFloat? = 0
-    // pageControl 图片的高
+    /// pageControl 图片的圆角大小
     var pageControlImageVCornerRadius : CGFloat? = 0
     
-    
-    /// Bottom
+    /// Bottom 距离底边的距离
     var pageControlBottom: CGFloat = 5 {
         didSet {
             setNeedsDisplay()
         }
     }
     
+    /// 自定义 PageControlView
     var customPageControl: UIView?
     
-    
+    // MARK:初始化方法
     public override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .lightGray
@@ -312,10 +313,10 @@ extension ZJCarouselView {
         
         var index = 0
         
+        // 计算当前滚动的索引值
         if layout.scrollDirection == .horizontal {
             index = NSInteger(collectionView.contentOffset.x + layout.itemSize.width * 0.5) / NSInteger(layout.itemSize.width)
         }else{
-            
             index = NSInteger(collectionView.contentOffset.y + layout.itemSize.width * 0.5) / NSInteger(layout.itemSize.height)
         }
         
@@ -330,8 +331,9 @@ extension ZJCarouselView {
             guard isInfiniteLoop else {return}
             // 滚动到指定位置
             collectionView.scrollToItem(at: IndexPath(item: Int(allItemsCount / 2), section: 0), at: position, animated: false)
+            return;
         }
-        
+        // 滚动到指定位置
         collectionView.scrollToItem(at: IndexPath(item: targetIndex, section: 0), at: position, animated: true)
     }
     
@@ -385,6 +387,7 @@ extension ZJCarouselView : UIScrollViewDelegate {
         }
         
         if scrollDirection == .horizontal {
+            // 滚动到的x值
             var currentOffsetX = scrollView.contentOffset.x - (CGFloat(allItemsCount) * scrollView.frame.size.width) / 2
             
             if currentOffsetX < 0 {
