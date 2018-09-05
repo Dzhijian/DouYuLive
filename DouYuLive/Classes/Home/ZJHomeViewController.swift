@@ -10,6 +10,13 @@ import UIKit
 import Alamofire
 import SnapKit
 
+/**
+ *  DouYuLive  斗鱼直播
+ *
+ *  GitHub地址：https://github.com/Dzhijian/DouYuLive
+ *
+ *  本项目是模仿斗鱼直播App使用Swift4.0开发的,功能点较多,后期会不断更新完成，请各位大神们多多指教，支持一下,给个star。😆
+ */
 
 // 记录导航栏是否隐藏
 private var isNavHidden : Bool = false
@@ -117,7 +124,6 @@ extension ZJHomeViewController {
         setUpNavigation()
         // 添加标题栏
         setUpPageTitleAndContentView()
-        
         
     }
     
