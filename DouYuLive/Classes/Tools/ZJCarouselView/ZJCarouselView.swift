@@ -70,7 +70,7 @@ class ZJCarouselView: UIView {
     
     var datas : [AnyObject] = []{
         didSet{
-            allItemsCount = isInfiniteLoop ? datas.count * 100 : datas.count
+            allItemsCount = isInfiniteLoop ? datas.count * 10 : datas.count
             
             // 图片大于一张允许滚动,小于一张禁止滚动
             collectionView.isScrollEnabled = datas.count > 1 ? true : false
@@ -247,9 +247,9 @@ extension ZJCarouselView {
         super.layoutSubviews()
         
         collectionView.frame = self.bounds
-        print(collectionView.frame)
-        print(self.frame.size)
-        print(layout.itemSize)
+//        print(collectionView.frame)
+//        print(self.frame.size)
+//        print(layout.itemSize)
         // 计算最大扩展区大小
         if scrollDirection == .horizontal {
             maxSwipeSize = CGFloat(datas.count) * collectionView.frame.width
@@ -380,10 +380,10 @@ extension ZJCarouselView {
             index = NSInteger(collectionView.contentOffset.x + layout.itemSize.width * 0.5) / NSInteger(layout.itemSize.width)
         }else{
             index = NSInteger(collectionView.contentOffset.y + layout.itemSize.height * 0.5) / NSInteger(layout.itemSize.height)
-            print(collectionView.contentOffset.y + layout.itemSize.height * 0.5)
-            print(layout.itemSize.height)
-            print(index)
-            print(index)
+//            print(collectionView.contentOffset.y + layout.itemSize.height * 0.5)
+//            print(layout.itemSize.height)
+//            print(index)
+//            print(index)
         }
         
         return index
@@ -394,7 +394,6 @@ extension ZJCarouselView {
     private func scrollToIndex(targetIndex : Int){
         if targetIndex >= allItemsCount {
             // 如果不开启自动滚动则直接返回不做操作
-//            guard isInfiniteLoop else {return}
             // 滚动到指定位置
             if isInfiniteLoop {
                 collectionView.scrollToItem(at: IndexPath(item: Int(allItemsCount / 2), section: 0), at: position, animated: false)
@@ -483,9 +482,9 @@ extension ZJCarouselView : UIScrollViewDelegate {
             }
             
         }else if scrollDirection == .vertical {
-            print("scrollViewHeight:\(scrollView.frame.size.height)======>\(allItemsCount)")
+//            print("scrollViewHeight:\(scrollView.frame.size.height)======>\(allItemsCount)")
             var currentOffsetY = scrollView.contentOffset.y - (CGFloat(allItemsCount) * scrollView.frame.size.height) / 2
-            print(currentOffsetY)
+//            print(currentOffsetY)
             
             if currentOffsetY < 0 {
                 if currentOffsetY >= -scrollView.frame.size.height{
