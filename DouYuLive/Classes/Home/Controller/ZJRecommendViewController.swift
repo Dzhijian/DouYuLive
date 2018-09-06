@@ -9,8 +9,8 @@
 import UIKit
 import ESPullToRefresh
 
-private let kItemMargin : CGFloat = 10
-private let kItemW = (kScreenW - kItemMargin * 3) / 2
+private let kItemMargin : CGFloat = 0
+private let kItemW = (kScreenW - 10) / 2
 private let kItemH = kItemW * 6 / 7
 private let kHeaderViewH : CGFloat = 50
 
@@ -22,6 +22,9 @@ class ZJRecommendViewController: ZJBaseViewController ,UIScrollViewDelegate{
     
     private lazy var activityList : [ZJRecommendActivityList] = [ZJRecommendActivityList]()
     private lazy var recomCate : [ZJRecomCateList] = [ZJRecomCateList]()
+    
+    private var allLiveList : [ZJLiveItemModel] = [ZJLiveItemModel]()
+    
     private lazy var collectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: kItemW, height: kItemH)
@@ -55,6 +58,8 @@ class ZJRecommendViewController: ZJBaseViewController ,UIScrollViewDelegate{
         getActivityList()
         
         getRecommendCateList()
+        
+        getLiveList()
     }
     
     // 列表滚动事件
@@ -107,22 +112,33 @@ extension ZJRecommendViewController {
         }, failClosure: {_ in
         })
     }
+    
+    private func getLiveList(){
+        let urlStr : String = ZJLiveItemModelURL + "roomlist/0_0/0/20/ios?client_sys=ios"
+        ZJNetWorking.requestData(type: .GET, URlString: urlStr) { (response) in
+            let data = try? ZJDecoder.decode(ZJLiveListData.self, data: response)
+            if data != nil {
+                self.allLiveList = data!.list
+                self.collectionView.reloadData()
+            }
+        }
+    }
 }
 
 // MARK: - 遵守UICollectionView的协议
 extension ZJRecommendViewController : UICollectionViewDataSource,UICollectionViewDelegate ,UICollectionViewDelegateFlowLayout{
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 4
+        return 1
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return self.allLiveList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kNormalCellID, for: indexPath)
-        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kNormalCellID, for: indexPath) as! ZJLiveListItem
+        cell.liveModel = self.allLiveList[indexPath.item]
         return cell
     }
     

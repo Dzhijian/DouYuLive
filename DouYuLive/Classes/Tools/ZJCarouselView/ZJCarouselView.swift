@@ -17,9 +17,9 @@ public enum ZJPageControlPosition {
 
 /// Style
 public enum ZJPageControlStyle {
-    case none
-    case system
-    case image
+    case none           // 不显示 PageControl
+    case system         // 系统样式
+    case image          // 图片样式
 
 }
 
@@ -30,19 +30,52 @@ public enum ZJPageControlStyle {
     @objc optional func zj_carouseView(_ carouseView : ZJCarouselView,scrollTo scrollIndex: NSInteger)
 }
 
+
+/// 自定义数据源协议 ,必须实现 zj_carouseViewDataScoure 方法
+@objc protocol ZJCarouselViewDataScoure {
+    
+    
+    /// 注册自定义 cell
+    ///
+    /// - Parameter collectionView: collectionView
+    /// - Returns: 注册自定义 cell
+    @objc func zj_registerCell(collectionView : UICollectionView)
+    
+//    @objc func zj_dataNum(collectionView : UICollectionView) -> NSInteger
+    /// 自定义数据源方法
+    ///
+    /// - Parameters:
+    ///   - contentView: CollectionView
+    ///   - indexPath:  索引 indexPath
+    /// - Returns:  继承ZJBaseCarouselCell的cell
+    @objc func zj_carouseViewDataScoure(collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> ZJBaseCarouselCell
+}
+
 class ZJCarouselView: UIView {
     
     
     /// 图片地址或名称
     var imageNamesOrURL : [String] = []{
         didSet{
-            
-            allItemsCount = isInfiniteLoop ? imageNamesOrURL.count * 100 : imageNamesOrURL.count
+            self.datas = imageNamesOrURL as [AnyObject]
+        }
+    }
+    
+    var dataArray : [AnyObject] = []{
+        didSet{
+            self.datas = dataArray as [AnyObject]
+        }
+    }
+    
+    
+    var datas : [AnyObject] = []{
+        didSet{
+            allItemsCount = isInfiniteLoop ? datas.count * 100 : datas.count
             
             // 图片大于一张允许滚动,小于一张禁止滚动
-            collectionView.isScrollEnabled = imageNamesOrURL.count > 1 ? true : false
+            collectionView.isScrollEnabled = datas.count > 1 ? true : false
             
-            if imageNamesOrURL.count <= 1 {
+            if datas.count <= 1 {
                 invalidateTimer()
             }
             setUpPageControlView()
@@ -51,9 +84,27 @@ class ZJCarouselView: UIView {
         }
     }
     
+    
+    /// 刷新
+    func zj_pageControlReloadData() {
+        
+        allItemsCount = isInfiniteLoop ? datas.count * 100 : datas.count
+        
+        // 图片大于一张允许滚动,小于一张禁止滚动
+        collectionView.isScrollEnabled = datas.count > 1 ? true : false
+        
+        if datas.count <= 1 {
+            invalidateTimer()
+        }
+        setUpPageControlView()
+        // 刷新 collectionView
+        collectionView.reloadData()
+    }
+    
     /// 代理
     weak var delegate : ZJCarouselViewDelegate?
-    
+    /// 自定义数据源协议
+    weak var dataScoure : ZJCarouselViewDataScoure?
     /// Item总数量
     private var allItemsCount: NSInteger! = 1
     
@@ -122,6 +173,11 @@ class ZJCarouselView: UIView {
         collectionView.dataSource = self
         collectionView.scrollsToTop = false
         collectionView.register(ZJCarouselCell.self, forCellWithReuseIdentifier:kIdentifier)
+        
+        dataScoure?.zj_registerCell(collectionView: collectionView)
+    
+        collectionView.register(ZJActivityItem.self, forCellWithReuseIdentifier: ZJActivityItem.identifier())
+        
         return collectionView
     }()
     
@@ -179,20 +235,26 @@ class ZJCarouselView: UIView {
 extension ZJCarouselView {
     
     private func setUpAllView() {
+        
+        dataScoure?.zj_registerCell(collectionView: self.collectionView)
         // 添加 UICollectionView
         self.addSubview(self.collectionView)
+        
+//        }
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
         collectionView.frame = self.bounds
-        
+        print(collectionView.frame)
+        print(self.frame.size)
+        print(layout.itemSize)
         // 计算最大扩展区大小
         if scrollDirection == .horizontal {
-            maxSwipeSize = CGFloat(imageNamesOrURL.count) * collectionView.frame.width
+            maxSwipeSize = CGFloat(datas.count) * collectionView.frame.width
         }else{
-            maxSwipeSize = CGFloat(imageNamesOrURL.count) * collectionView.frame.height
+            maxSwipeSize = CGFloat(datas.count) * collectionView.frame.height
         }
         
         // 设置 Cell Size
@@ -227,17 +289,17 @@ extension ZJCarouselView {
         if pageControl != nil {
             pageControl?.removeFromSuperview()
         }
-        guard imageNamesOrURL.count >= 1 else {return}
+        guard datas.count >= 1 else {return}
         
         switch pageStyle {
         // 默认样式
         case .none:
             pageControl = UIPageControl()
-            pageControl?.numberOfPages = imageNamesOrURL.count
+            pageControl?.numberOfPages = datas.count
             // 系统样式
         case .system:
             pageControl = UIPageControl()
-            pageControl?.numberOfPages = imageNamesOrURL.count
+            pageControl?.numberOfPages = datas.count
             pageControl?.pageIndicatorTintColor = pageControlTintColor
             pageControl?.currentPageIndicatorTintColor = pageControlCurrentPageColor
             self.addSubview(pageControl!)
@@ -247,7 +309,7 @@ extension ZJCarouselView {
             pageControl = ZJImagePageControl()
             pageControl?.pageIndicatorTintColor = UIColor.clear
             pageControl?.currentPageIndicatorTintColor = UIColor.clear
-            pageControl?.numberOfPages = imageNamesOrURL.count
+            pageControl?.numberOfPages = datas.count
             
             // 设置默认图片
             (pageControl as? ZJImagePageControl)?.kNormalImage = pageControlNormalImage != nil ? pageControlNormalImage : nil
@@ -272,7 +334,7 @@ extension ZJCarouselView {
     private func setUpTimer() {
         
         // 图片小于一张不启动定时器
-        guard self.imageNamesOrURL.count > 1  else { return }
+        guard self.datas.count > 1  else { return }
     
         let zj_timer = DispatchSource.makeTimerSource()
         zj_timer.schedule(deadline: .now()+autoScrollTimeInterval, repeating: autoScrollTimeInterval)
@@ -317,7 +379,11 @@ extension ZJCarouselView {
         if layout.scrollDirection == .horizontal {
             index = NSInteger(collectionView.contentOffset.x + layout.itemSize.width * 0.5) / NSInteger(layout.itemSize.width)
         }else{
-            index = NSInteger(collectionView.contentOffset.y + layout.itemSize.width * 0.5) / NSInteger(layout.itemSize.height)
+            index = NSInteger(collectionView.contentOffset.y + layout.itemSize.height * 0.5) / NSInteger(layout.itemSize.height)
+            print(collectionView.contentOffset.y + layout.itemSize.height * 0.5)
+            print(layout.itemSize.height)
+            print(index)
+            print(index)
         }
         
         return index
@@ -328,9 +394,11 @@ extension ZJCarouselView {
     private func scrollToIndex(targetIndex : Int){
         if targetIndex >= allItemsCount {
             // 如果不开启自动滚动则直接返回不做操作
-            guard isInfiniteLoop else {return}
+//            guard isInfiniteLoop else {return}
             // 滚动到指定位置
-            collectionView.scrollToItem(at: IndexPath(item: Int(allItemsCount / 2), section: 0), at: position, animated: false)
+            if isInfiniteLoop {
+                collectionView.scrollToItem(at: IndexPath(item: Int(allItemsCount / 2), section: 0), at: position, animated: false)
+            }
             return;
         }
         // 滚动到指定位置
@@ -340,7 +408,7 @@ extension ZJCarouselView {
     
     /// PageControl当前下标对应的Cell位置
     func pageControlIndexWithCurrentCellIndex(index: NSInteger) -> (Int) {
-        return imageNamesOrURL.count == 0 ? 0 : Int(index % imageNamesOrURL.count)
+        return datas.count == 0 ? 0 : Int(index % datas.count)
     }
     
 }
@@ -354,11 +422,19 @@ extension ZJCarouselView : UICollectionViewDelegate,UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+        
+        if dataScoure != nil {
+            // 自定义数据源协议
+            let item =  dataScoure?.zj_carouseViewDataScoure(collectionView: collectionView, cellForItemAt: indexPath)
+            
+            return item!
+        }
+        
         let item = collectionView.dequeueReusableCell(withReuseIdentifier: kIdentifier, for: indexPath) as! ZJCarouselCell
         // 获取当前索引
         let itemIndex = pageControlIndexWithCurrentCellIndex(index: indexPath.item)
         // 配置图片
-        item.configImageNameOrUrl(imgNameOrURL: imageNamesOrURL[itemIndex])
+        item.configImageNameOrUrl(imgNameOrURL: datas[itemIndex] as! String)
         return item
     }
     
@@ -377,7 +453,7 @@ extension ZJCarouselView : UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // 图片少于一张直接返回
-        guard imageNamesOrURL.count > 0 else { return }
+        guard datas.count > 0 else { return }
         
         // 当前滚动到第几个
         let indexOnPageControl = pageControlIndexWithCurrentCellIndex(index: getCurrentIndex())
@@ -402,13 +478,14 @@ extension ZJCarouselView : UIScrollViewDelegate {
                 
             }
             
-            if currentOffsetX >= CGFloat(self.imageNamesOrURL.count) * scrollView.frame.size.width && isInfiniteLoop {
+            if currentOffsetX >= CGFloat(self.datas.count) * scrollView.frame.size.width && isInfiniteLoop {
                 collectionView.scrollToItem(at: IndexPath.init(item: Int(allItemsCount/2), section: 0), at: position, animated: false)
             }
             
-        }else{
-            
+        }else if scrollDirection == .vertical {
+            print("scrollViewHeight:\(scrollView.frame.size.height)======>\(allItemsCount)")
             var currentOffsetY = scrollView.contentOffset.y - (CGFloat(allItemsCount) * scrollView.frame.size.height) / 2
+            print(currentOffsetY)
             
             if currentOffsetY < 0 {
                 if currentOffsetY >= -scrollView.frame.size.height{
@@ -419,7 +496,7 @@ extension ZJCarouselView : UIScrollViewDelegate {
                     currentOffsetY = maxSwipeSize + currentOffsetY
                 }
             }
-            if currentOffsetY >= CGFloat(self.imageNamesOrURL.count) * scrollView.frame.size.height && isInfiniteLoop{
+            if currentOffsetY >= CGFloat(self.datas.count) * scrollView.frame.size.height && isInfiniteLoop{
                 collectionView.scrollToItem(at: IndexPath.init(item: Int(allItemsCount/2), section: 0), at: position, animated: false)
             }
         }
@@ -436,7 +513,7 @@ extension ZJCarouselView : UIScrollViewDelegate {
     
     /// 结束拖动时候的事件
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        guard imageNamesOrURL.count > 0 else { return }
+        guard datas.count > 0 else { return }
         
         // 滚动后的回调协议
         delegate?.zj_carouseView!(self, scrollTo: pageControlIndexWithCurrentCellIndex(index: getCurrentIndex()))
@@ -449,7 +526,7 @@ extension ZJCarouselView : UIScrollViewDelegate {
     
     /// 自动滚动结束的时候调用的事件
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
-        guard imageNamesOrURL.count > 0 else { return }
+        guard datas.count > 0 else { return }
         print("自动滚动结束的时候调用的事件")
         // 滚动后的回调协议
         delegate?.zj_carouseView!(self, scrollTo: pageControlIndexWithCurrentCellIndex(index: getCurrentIndex()))

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ZJActivityItem: ZJBaseCollectionCell {
+class ZJActivityItem: ZJBaseCarouselCell {
     
     var icon = UIImageView()
     var markLab = UILabel()

@@ -14,7 +14,11 @@ class ZJRecommendHeadView: UICollectionReusableView {
     
     var activityList : [ZJRecommendActivityList]?{
         didSet{
-            activityView.activityList = activityList
+            // 刷新
+            guard activityList?.count ?? 0 > 0 else {return }
+            self.activityView.dataArray = activityList! as [AnyObject]
+            self.activityView.zj_pageControlReloadData()
+//            activityView.activityList = activityList
         }
     }
     
@@ -33,8 +37,21 @@ class ZJRecommendHeadView: UICollectionReusableView {
         return layout
     }()
     
-    private lazy var activityView : ZJActivityView = {
-        let activityView = ZJActivityView()
+//    private lazy var activityView : ZJActivityView = {
+//        let activityView = ZJActivityView()
+//        return activityView
+//    }()
+    
+    private lazy var activityView : ZJCarouselView = {
+        let activityView = ZJCarouselView(frame: CGRect(x: 0, y: 0, width: kScreenW-2*ItemMargin, height: Adapt(65)))
+        activityView.imageNamesOrURL = ["liveImage","http://www.g-photography.net/file_picture/3/3587/4.jpg","liveImage"]
+        activityView.position = .centeredVertically
+        activityView.scrollDirection = .vertical
+        activityView.delegate = self
+        activityView.dataScoure = self
+        activityView.pageStyle = .none
+        activityView.autoScrollTimeInterval = 3.0
+//        activityView.height = 
         return activityView
     }()
     
@@ -68,6 +85,36 @@ class ZJRecommendHeadView: UICollectionReusableView {
     
     
 }
+
+
+// MARK: - 遵守协议
+extension ZJRecommendHeadView : ZJCarouselViewDelegate, ZJCarouselViewDataScoure {
+//    func zj_dataNum(collectionView: UICollectionView) {
+//        
+//    }
+    
+    func zj_registerCell(collectionView: UICollectionView) {
+        collectionView.register(ZJActivityItem.self, forCellWithReuseIdentifier: ZJActivityItem.identifier())
+    }
+    
+    func zj_carouseViewDataScoure(collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> ZJBaseCarouselCell {
+        let item = collectionView.dequeueReusableCell(withReuseIdentifier: ZJActivityItem.identifier(), for: indexPath) as! ZJActivityItem
+        item.contentView.backgroundColor = kBGGrayColor
+//        item.model = self.activityList?[indexPath.item]
+        return item
+        
+    }
+    
+    func zj_carouseView(_ carouseView: ZJCarouselView, scrollTo scrollIndex: NSInteger) {
+            print("滚动到第\(scrollIndex)个")
+    }
+    func zj_carouseView(_ carouseView: ZJCarouselView, didSelectedItemIndex didSectedIndex: NSInteger) {
+        print("选中\(didSectedIndex)")
+    }
+    
+    
+}
+
 
 extension ZJRecommendHeadView : UICollectionViewDataSource, UICollectionViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {

@@ -9,16 +9,23 @@
 import UIKit
 
 
-protocol PageContentViewDelegate : class {
-    func pageContentView(contentView : ZJPageContentView,progress : CGFloat, sourceIndex : Int,targetIndex : Int)
+protocol ZJPageContentViewDelegate : class {
+    func zj_pageContentView(contentView : ZJPageContentView,progress : CGFloat, sourceIndex : Int,targetIndex : Int)
 }
 
+
+/// 自定义数据源协议 ,必须实现 zj_pageControlViewDataScoure 方法
+@objc protocol ZJPageControlViewDataScoure : class {
+    @objc func zj_pageControlViewDataScoure(contentView: ZJPageContentView, cellForItemAt indexPath: IndexPath) -> ZJBasePageControlCell
+}
 private let ContentCellID = "ContentCellID"
 
 class ZJPageContentView: UIView {
     
     // 代理协议
-    weak var delegate : PageContentViewDelegate?
+    weak var delegate : ZJPageContentViewDelegate?
+    // 自定义数据源协议
+    weak var dataScoure : ZJPageControlViewDataScoure?
     // 禁止点击的时候走代理的方法
     private var isForbidScrollDelegate : Bool = false
     // 自控制器数组
@@ -113,6 +120,13 @@ extension ZJPageContentView : UICollectionViewDataSource,UICollectionViewDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if (dataScoure != nil) {
+            // 自定义 cell 继承 ZJBasePageControlCell
+            let item = dataScoure?.zj_pageControlViewDataScoure(contentView: self, cellForItemAt: indexPath)
+            return item!
+        }
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ContentCellID, for: indexPath)
         let childVC = childVCs[indexPath.item]
         childVC.view.frame = cell.contentView.bounds 
@@ -176,7 +190,7 @@ extension ZJPageContentView : UICollectionViewDataSource,UICollectionViewDelegat
             }
         }
         
-        delegate?.pageContentView(contentView: self, progress: progress, sourceIndex: sourceIndex, targetIndex: targetIndex)
+        delegate?.zj_pageContentView(contentView: self, progress: progress, sourceIndex: sourceIndex, targetIndex: targetIndex)
 //        print("progress:\(progress)  targetIndex:\(targetIndex)  sourceIndex:\(sourceIndex)")
     }
 

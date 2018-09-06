@@ -57,13 +57,13 @@ class ZJFollowViewController: ZJBaseViewController {
 }
 
 // MARK: - 遵守协议
-extension ZJFollowViewController : PageTitleViewDelegate,PageContentViewDelegate {
+extension ZJFollowViewController : PageTitleViewDelegate,ZJPageContentViewDelegate {
     
     func pageTitleView(titleView: ZJPageTitleView, selectedIndex index: Int) {
         pageContenView.setCurrentIndex(currentIndex: index)
     }
     
-    func pageContentView(contentView: ZJPageContentView, progress: CGFloat, sourceIndex: Int, targetIndex: Int) {
+    func zj_pageContentView(contentView: ZJPageContentView, progress: CGFloat, sourceIndex: Int, targetIndex: Int) {
         pageTitleView.setPageTitleWithProgress(progress: progress, sourceIndex: sourceIndex, targetIndex: targetIndex)
     }
     
