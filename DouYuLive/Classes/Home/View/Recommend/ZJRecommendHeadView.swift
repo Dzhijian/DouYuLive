@@ -35,23 +35,18 @@ class ZJRecommendHeadView: UICollectionReusableView {
         return layout
     }()
     
-//    private lazy var activityView : ZJActivityView = {
-//        let activityView = ZJActivityView()
-//        return activityView
-//    }()
-    
+
+    // 活动滚动视图
     private lazy var activityView : ZJCarouselView = {
         let activityView = ZJCarouselView(frame: CGRect(x: 0, y: 0, width: kScreenW-2*ItemMargin, height: Adapt(65)))
-        activityView.imageNamesOrURL = ["liveImage","http://www.g-photography.net/file_picture/3/3587/4.jpg","liveImage"]
         activityView.position = .centeredVertically
         activityView.scrollDirection = .vertical
         activityView.delegate = self
         activityView.dataScoure = self
         activityView.pageStyle = .none
         activityView.autoScrollTimeInterval = 3.0
-//        activityView.
+        
         activityView.customCellClass = ZJActivityItem.self
-//        activityView.height = 
         return activityView
     }()
     
@@ -63,6 +58,7 @@ class ZJRecommendHeadView: UICollectionReusableView {
         return titleLab
     }()
     
+    /// 推荐分类视图
     private lazy var collectionView : UICollectionView = {
         let colletionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         colletionView.delegate = self
@@ -89,25 +85,14 @@ class ZJRecommendHeadView: UICollectionReusableView {
 
 // MARK: - 遵守协议
 extension ZJRecommendHeadView : ZJCarouselViewDelegate, ZJCarouselViewDataScoure {
-
-    
-    /// 注册 cell
-    ///
-    /// - Parameter collectionView:
-    func zj_registerCell(collectionView: UICollectionView) {
-        collectionView.register(ZJActivityItem.self, forCellWithReuseIdentifier: ZJActivityItem.identifier())
-    }
-    
     
     func zj_carouseViewDataScoure(collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> ZJBaseCarouselCell {
         let item = collectionView.dequeueReusableCell(withReuseIdentifier: ZJActivityItem.identifier(), for: indexPath) as! ZJActivityItem
         item.contentView.backgroundColor = kBGGrayColor
-        print(indexPath)
         if self.activityList?.count ?? 0 > 0 {
             item.model = self.activityList?[indexPath.item]
         }
         return item
-        
     }
     
     func zj_carouseView(_ carouseView: ZJCarouselView, scrollTo scrollIndex: NSInteger) {

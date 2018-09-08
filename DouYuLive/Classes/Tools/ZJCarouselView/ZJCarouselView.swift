@@ -34,13 +34,6 @@ public enum ZJPageControlStyle {
 /// 自定义数据源协议 ,必须实现 zj_carouseViewDataScoure 方法
 @objc protocol ZJCarouselViewDataScoure {
     
-    
-    /// 注册自定义 cell
-    ///
-    /// - Parameter collectionView: collectionView
-    /// - Returns: 注册自定义 cell
-    @objc func zj_registerCell(collectionView : UICollectionView)
-    
 //    @objc func zj_dataNum(collectionView : UICollectionView) -> NSInteger
     /// 自定义数据源方法
     ///
@@ -64,8 +57,11 @@ class ZJCarouselView: UIView {
     var dataArray : [AnyObject] = []{
         didSet{
             let array = dataArray
-            
             self.datas = array as [AnyObject]
+            
+            if datas.count > 1 && isAutoScroll && isInfiniteLoop {
+                startTimer()
+            }
         }
     }
     
@@ -78,14 +74,16 @@ class ZJCarouselView: UIView {
             collectionView.isScrollEnabled = datas.count > 1 ? true : false
             
             if datas.count <= 1 {
-                invalidateTimer()
+                cancelTimer()
             }
+            
             setUpPageControlView()
             // 刷新 collectionView
             collectionView.reloadData()
         }
     }
-    
+    // 时间选择器
+    private var timer: Timer?
     
     /// 刷新
     func zj_pageControlReloadData() {
@@ -96,7 +94,8 @@ class ZJCarouselView: UIView {
         collectionView.isScrollEnabled = datas.count > 1 ? true : false
         
         if datas.count <= 1 {
-            invalidateTimer()
+//            invalidateTimer()
+            cancelTimer()
         }
         setUpPageControlView()
         // 刷新 collectionView
@@ -114,10 +113,10 @@ class ZJCarouselView: UIView {
     /// 自动滚动 默认开启
     var isAutoScroll: Bool = true {
         didSet {
-            invalidateTimer()
+            cancelTimer()
             // 如果关闭无限循环，则不进行计时器的操作，否则每次滚动到最后一张就不在进行了。
             if isAutoScroll && isInfiniteLoop {
-                setUpTimer()
+                startTimer()
             }
         }
     }
@@ -150,8 +149,6 @@ class ZJCarouselView: UIView {
     
     /// Collection滚动方向
     var position : UICollectionViewScrollPosition = .centeredHorizontally
-    /// 定时器
-    private var timer : DispatchSourceTimer?
     
     /// UICollectionViewFlowLayout
     private lazy var layout : UICollectionViewFlowLayout = {
@@ -174,12 +171,8 @@ class ZJCarouselView: UIView {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.scrollsToTop = false
+        collectionView.register(ZJBaseCarouselCell.self, forCellWithReuseIdentifier:ZJBaseCarouselCell.identifier())
         collectionView.register(ZJCarouselCell.self, forCellWithReuseIdentifier:kIdentifier)
-        
-        dataScoure?.zj_registerCell(collectionView: collectionView)
-    
-//        collectionView.register(ZJActivityItem.self, forCellWithReuseIdentifier: ZJActivityItem.identifier())
-        
         return collectionView
     }()
     
@@ -231,7 +224,14 @@ class ZJCarouselView: UIView {
         setUpAllView()
         
     }
-    
+    override public func willMove(toWindow newWindow: UIWindow?) {
+        super.willMove(toWindow: newWindow)
+        if newWindow != nil {
+            self.startTimer()
+        } else {
+            self.cancelTimer()
+        }
+    }
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         backgroundColor = .lightGray
@@ -244,9 +244,9 @@ class ZJCarouselView: UIView {
 extension ZJCarouselView {
     
     private func setUpAllView() {
-        
-        dataScoure?.zj_registerCell(collectionView: self.collectionView)
         // 添加 UICollectionView
+        // 开启自动滚动
+        isAutoScroll = true
         self.addSubview(self.collectionView)
         
     }
@@ -281,9 +281,6 @@ extension ZJCarouselView {
             collectionView.scrollToItem(at: IndexPath.init(item: targetIndex, section: 0), at: position, animated: false)
         }
         
-        
-        // 开启自动滚动
-        isAutoScroll = true
     }
 }
 
@@ -337,29 +334,20 @@ extension ZJCarouselView {
 extension ZJCarouselView {
     
     // 开启定时器
-    private func setUpTimer() {
-        
-        // 图片小于一张不启动定时器
-        guard self.datas.count > 1  else { return }
-    
-        let zj_timer = DispatchSource.makeTimerSource()
-        zj_timer.schedule(deadline: .now()+autoScrollTimeInterval, repeating: autoScrollTimeInterval)
-        zj_timer.setEventHandler { [weak self] in
-            DispatchQueue.main.async {
-                self?.automaticScroll()
-            }
-        }
-        // 继续
-        zj_timer.resume()
-        
-        timer = zj_timer
+    private func startTimer() {
+        if !isAutoScroll { return }
+        if allItemsCount <= 1 { return }
+        cancelTimer()
+        timer = Timer.init(timeInterval: Double(autoScrollTimeInterval), target: self, selector: #selector(automaticScroll), userInfo: nil, repeats: true)
+        RunLoop.main.add(timer!, forMode: .commonModes)
     }
     
-    
-    // 暂停定时器
-    private func invalidateTimer() {
-        self.timer?.cancel()
-        self.timer = nil
+    // 取消定时器
+    private func cancelTimer() {
+        if timer != nil {
+            timer?.invalidate()
+            timer = nil
+        }
     }
     
 }
@@ -386,11 +374,8 @@ extension ZJCarouselView {
         // 计算当前滚动的索引值
         if layout.scrollDirection == .horizontal {
             index = NSInteger(collectionView.contentOffset.x + layout.itemSize.width * 0.5) / NSInteger(layout.itemSize.width)
-//            print(layout.itemSize)
         }else{
             index = NSInteger(collectionView.contentOffset.y + layout.itemSize.height * 0.5) / NSInteger(layout.itemSize.height)
-//            print(layout.itemSize)
-
         }
         
         return index
@@ -431,8 +416,12 @@ extension ZJCarouselView : UICollectionViewDelegate,UICollectionViewDataSource {
         
         if dataScoure != nil {
             // 自定义数据源协议
+            guard datas.count > 0 else {
+                let item = collectionView.dequeueReusableCell(withReuseIdentifier: ZJBaseCarouselCell.identifier(), for: indexPath)
+                return item
+                
+            }
             let item =  dataScoure?.zj_carouseViewDataScoure(collectionView: collectionView, cellForItemAt: IndexPath(item: indexPath.item % datas.count, section: 0))
-            
             return item!
         }
         
@@ -448,8 +437,7 @@ extension ZJCarouselView : UICollectionViewDelegate,UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         delegate?.zj_carouseView!(self, didSelectedItemIndex: pageControlIndexWithCurrentCellIndex(index: indexPath.item))
-    
-        
+
     }
 }
 
@@ -463,7 +451,7 @@ extension ZJCarouselView : UIScrollViewDelegate {
         
         // 当前滚动到第几个
         let indexOnPageControl = pageControlIndexWithCurrentCellIndex(index: getCurrentIndex())
-//        print("当前滚动到indexOnPageControl: \(indexOnPageControl)")
+
         if pageStyle == .none || pageStyle == .system || pageStyle == .image{
             pageControl?.currentPage = indexOnPageControl
         }
@@ -512,7 +500,7 @@ extension ZJCarouselView : UIScrollViewDelegate {
     /// 开始拖动的时候关闭定时器
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         if isAutoScroll {
-            invalidateTimer()
+            cancelTimer()
         }
     }
     
@@ -525,20 +513,19 @@ extension ZJCarouselView : UIScrollViewDelegate {
 //        print("结束拖动时候的事件")
         // 开启定时器
         if isAutoScroll {
-             setUpTimer()
+             startTimer()
         }
     }
     
     /// 自动滚动结束的时候调用的事件
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         guard datas.count > 0 else { return }
-//        print("自动滚动结束的时候调用的事件")
         // 滚动后的回调协议
         delegate?.zj_carouseView!(self, scrollTo: pageControlIndexWithCurrentCellIndex(index: getCurrentIndex()))
         
         // 开启定时器
         if timer == nil && isAutoScroll {
-            setUpTimer()
+            startTimer()
         }
     }
 }
