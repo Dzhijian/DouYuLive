@@ -17,8 +17,6 @@ class ZJRecommendHeadView: UICollectionReusableView {
             // 刷新
             guard activityList?.count ?? 0 > 0 else {return }
             self.activityView.dataArray = activityList! as [AnyObject]
-            self.activityView.zj_pageControlReloadData()
-//            activityView.activityList = activityList
         }
     }
     
@@ -51,6 +49,8 @@ class ZJRecommendHeadView: UICollectionReusableView {
         activityView.dataScoure = self
         activityView.pageStyle = .none
         activityView.autoScrollTimeInterval = 3.0
+//        activityView.
+        activityView.customCellClass = ZJActivityItem.self
 //        activityView.height = 
         return activityView
     }()
@@ -89,18 +89,23 @@ class ZJRecommendHeadView: UICollectionReusableView {
 
 // MARK: - 遵守协议
 extension ZJRecommendHeadView : ZJCarouselViewDelegate, ZJCarouselViewDataScoure {
-//    func zj_dataNum(collectionView: UICollectionView) {
-//        
-//    }
+
     
+    /// 注册 cell
+    ///
+    /// - Parameter collectionView:
     func zj_registerCell(collectionView: UICollectionView) {
         collectionView.register(ZJActivityItem.self, forCellWithReuseIdentifier: ZJActivityItem.identifier())
     }
     
+    
     func zj_carouseViewDataScoure(collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> ZJBaseCarouselCell {
         let item = collectionView.dequeueReusableCell(withReuseIdentifier: ZJActivityItem.identifier(), for: indexPath) as! ZJActivityItem
         item.contentView.backgroundColor = kBGGrayColor
-//        item.model = self.activityList?[indexPath.item]
+        print(indexPath)
+        if self.activityList?.count ?? 0 > 0 {
+            item.model = self.activityList?[indexPath.item]
+        }
         return item
         
     }

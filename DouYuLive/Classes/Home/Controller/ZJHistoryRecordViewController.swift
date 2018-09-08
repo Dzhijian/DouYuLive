@@ -14,7 +14,7 @@ class ZJHistoryRecordViewController: ZJBaseViewController {
         super.viewDidLoad()
         
         let view = ZJCarouselView(frame: CGRect(x: 0, y: 100, width: kScreenW, height: 200))
-        view.imageNamesOrURL = ["liveImage","http://www.g-photography.net/file_picture/3/3587/4.jpg","liveImage"]
+        view.imageNamesOrURL = ["liveImage","http://www.g-photography.net/file_picture/3/3587/4.jpg","liveImage","liveImage","http://www.g-photography.net/file_picture/3/3587/4.jpg","liveImage"]
         view.delegate = self
         self.view.addSubview(view)
         
