@@ -38,6 +38,7 @@
 		043512F82122B1AF001D928A /* DNSPageStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043512F02122B1AF001D928A /* DNSPageStyle.swift */; };
 		04423B512141821D00329F32 /* ZJBasePageControlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04423B502141821D00329F32 /* ZJBasePageControlCell.swift */; };
 		04423B532141866300329F32 /* ZJBaseCarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04423B522141866300329F32 /* ZJBaseCarouselCell.swift */; };
+		04423B6B214696A800329F32 /* ZJPopLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04423B6A214696A800329F32 /* ZJPopLoginView.swift */; };
 		044735FB213195C80086D470 /* SwiftProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044735FA213195C80086D470 /* SwiftProgressHUD.swift */; };
 		04473600213283DC0086D470 /* ZJProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044735FF213283DC0086D470 /* ZJProgressHUD.swift */; };
 		044736022134530F0086D470 /* ZJNetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044736012134530F0086D470 /* ZJNetworkProvider.swift */; };
@@ -186,6 +187,7 @@
 		043512F02122B1AF001D928A /* DNSPageStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSPageStyle.swift; sourceTree = "<group>"; };
 		04423B502141821D00329F32 /* ZJBasePageControlCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJBasePageControlCell.swift; sourceTree = "<group>"; };
 		04423B522141866300329F32 /* ZJBaseCarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJBaseCarouselCell.swift; sourceTree = "<group>"; };
+		04423B6A214696A800329F32 /* ZJPopLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJPopLoginView.swift; sourceTree = "<group>"; };
 		044735FA213195C80086D470 /* SwiftProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftProgressHUD.swift; sourceTree = "<group>"; };
 		044735FF213283DC0086D470 /* ZJProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJProgressHUD.swift; sourceTree = "<group>"; };
 		044736012134530F0086D470 /* ZJNetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJNetworkProvider.swift; sourceTree = "<group>"; };
@@ -742,6 +744,7 @@
 			children = (
 				04ADE69B212D43AB00B64951 /* ZJProfileCell.swift */,
 				04ADE69D212D5D7A00B64951 /* ZJProfileHeadView.swift */,
+				04423B6A214696A800329F32 /* ZJPopLoginView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1160,6 +1163,7 @@
 				043512F82122B1AF001D928A /* DNSPageStyle.swift in Sources */,
 				04A7D970213AA5E90069DF01 /* ZJCarouselView.swift in Sources */,
 				049705FE212B0C4900E12562 /* ZJCycleCardViewFlowLayout.swift in Sources */,
+				04423B6B214696A800329F32 /* ZJPopLoginView.swift in Sources */,
 				048EA3B121078F9700E30720 /* ZJHomeViewController.swift in Sources */,
 				043512F22122B1AF001D928A /* DNSPageContentView.swift in Sources */,
 				049705EC2127526E00E12562 /* ZJRankCellItem.swift in Sources */,

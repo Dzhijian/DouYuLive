@@ -71,8 +71,6 @@ class ZJRecommendViewController: ZJBaseViewController ,UIScrollViewDelegate{
             NotificationCenter.default.post(name: Notification.Name(rawValue: ZJNotiRefreshHomeNavBar), object: nil, userInfo: kNavBarNotHidden)
         }
     }
-
-    
 }
 
 // MARK: - 网络请求
