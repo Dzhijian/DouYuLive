@@ -24,8 +24,15 @@ class ZJProfileViewController: ZJBaseViewController {
                                        ["icon_focus","icon_remind"]]
     private lazy var headerView : ZJProfileHeadView = {
         let headView  = ZJProfileHeadView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: Adapt(240)))
+        headView.deleagte = self
         return headView
     }()
+    
+    private lazy var loginView : ZJPopLoginView = {
+        let loginView = ZJPopLoginView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH))
+        return loginView
+    }()
+    
     private lazy var mainTable : UITableView = {
         let mainTable = UITableView(frame: CGRect.zero, style: .grouped)
         mainTable.delegate = self
@@ -55,6 +62,15 @@ class ZJProfileViewController: ZJBaseViewController {
     }
 
 
+}
+
+// MARK: -
+extension ZJProfileViewController : ZJProfileHeadViewDelegate {
+    
+    func zj_loginBtnAction(sender: UIButton) {
+        UIApplication.shared.keyWindow?.addSubview(self.loginView)
+        self.loginView.zj_showLoginView()
+    }
 }
 
 // MARK: -

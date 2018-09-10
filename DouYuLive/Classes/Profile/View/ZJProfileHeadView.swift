@@ -8,8 +8,13 @@
 
 import UIKit
 
+@objc protocol ZJProfileHeadViewDelegate {
+    @objc optional func zj_loginBtnAction(sender : UIButton)
+}
+
 class ZJProfileHeadView: ZJBaseView {
     
+    weak var deleagte : ZJProfileHeadViewDelegate?
     private lazy var titleLab : UILabel = UILabel()
     private lazy var loginBtn : UIButton = UIButton()
     private lazy var registerBtn : UIButton = UIButton()
@@ -48,7 +53,8 @@ extension ZJProfileHeadView {
         self.loginBtn.backgroundColor = kMainOrangeColor
         zj_setUpGradientLayer(view: self.loginBtn, frame: CGRect(x: 0, y: 0, width: Adapt(80), height: Adapt(30)), color: kGradientColors,corneradiu: 4)
     
-    
+        loginBtn.addTarget(self, action: #selector(loginBtnClick), for: .touchUpInside)
+        
         self.registerBtn = UIButton.zj_createButton(title: "注册", titleStatu: . normal, imageName: nil, imageStatu: nil, supView: self, closure: { (make) in
             make.left.equalTo(self.loginBtn.snp.right).offset(Adapt(12))
             make.top.equalTo(self.titleLab.snp.bottom).offset(Adapt(15))
@@ -93,6 +99,10 @@ extension ZJProfileHeadView {
         
         }
         
+    }
+    
+    @objc func loginBtnClick(sender: UIButton) {
+        deleagte?.zj_loginBtnAction!(sender: sender)
     }
     
     func setUpOneItem(supView : UIView, title: String, iconName: String, itemX: CGFloat) {
