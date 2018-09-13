@@ -114,12 +114,12 @@ extension ZJPopLoginView {
             make.height.equalTo(Adapt(50))
         })
         
-        self.registerBtn.setTitleColor(kMainOrangeColor, for: .normal)
-        self.registerBtn.backgroundColor =  kWhite
-        self.registerBtn.titleLabel?.font = FontSize(15)
-        self.registerBtn.layer.cornerRadius = 3
-        self.registerBtn.layer.borderColor = kMainOrangeColor.cgColor
-        self.registerBtn.layer.borderWidth = 0.6
+        registerBtn.setTitleColor(kMainOrangeColor, for: .normal)
+        registerBtn.backgroundColor =  kWhite
+        registerBtn.titleLabel?.font = FontSize(15)
+        registerBtn.layer.cornerRadius = 3
+        registerBtn.layer.borderColor = kMainOrangeColor.cgColor
+        registerBtn.layer.borderWidth = 0.6
         
         self.descLab = UILabel.zj_createLabel(text: "使用即为同意使用《斗鱼注册协议及版权声明》", textColor: kGrayTextColor, font: FontSize(12), supView: self.bgView, closure: { (make) in
             make.top.equalTo(self.registerBtn.snp.bottom).offset(20)
@@ -131,7 +131,13 @@ extension ZJPopLoginView {
             make.top.equalTo(descLab.snp.bottom).offset(Adapt(30))
         })
         
+        self.closeBtn = UIButton.zj_createButton(title: "", titleStatu: .normal, imageName: "linkdanmuAlertClose", imageStatu: .normal, supView: self.bgView, closure: { (make) in
+            make.top.equalTo(bgView.snp.top).offset(Adapt(5))
+            make.right.equalTo(bgView.snp.right).offset(Adapt(-5))
+            make.width.height.equalTo(Adapt(20))
+        })
         
+        self.closeBtn.addTarget(self, action: #selector(zj_HiddenLoginView), for: .touchUpInside)
         //  三方登录 icon
         var i = 0
         let btnWH : CGFloat = Adapt(50)
