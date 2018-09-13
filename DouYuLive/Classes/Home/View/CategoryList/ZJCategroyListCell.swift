@@ -111,9 +111,10 @@ extension ZJCategroyListCell {
         
         addSubview(pageControl)
         pageControl.snp.makeConstraints { (make) in
-            make.bottom.equalTo(0)
+            make.top.equalTo(collectionView.snp.bottom)
             make.centerX.equalTo(self.snp.centerX)
             make.width.equalTo(150)
+            make.height.equalTo(37)
         }
         
         
