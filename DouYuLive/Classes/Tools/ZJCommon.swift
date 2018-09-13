@@ -21,9 +21,9 @@ let kScreenH = UIScreen.main.bounds.size.height
 // 判断是否为 iPhone X
 let isIphoneX = kScreenH >= 812 ? true : false
 // 状态栏高度
-let kStatuHeight : CGFloat = 20
+let kStatuHeight : CGFloat = isIphoneX ? 44 : 20
 // 导航栏高度
-let kNavigationBarHeight :CGFloat =  isIphoneX ? 68 : 44
+let kNavigationBarHeight :CGFloat = 44
 // TabBar高度
 let kTabBarHeight : CGFloat = isIphoneX ? 49 + 34 : 49
 let CateItemHeight = kScreenW / 4
