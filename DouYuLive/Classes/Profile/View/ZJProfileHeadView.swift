@@ -61,12 +61,13 @@ extension ZJProfileHeadView {
             make.width.equalTo(Adapt(80))
             make.height.equalTo(34)
         })
+        registerBtn.addTarget(self, action: #selector(loginBtnClick), for: .touchUpInside)
         
-        self.registerBtn.titleLabel?.font = FontSize(14)
-        self.registerBtn.setTitleColor(kMainOrangeColor, for: .normal)
-        self.registerBtn.layer.cornerRadius = 3
-        self.registerBtn.layer.borderColor = kMainOrangeColor.cgColor
-        self.registerBtn.layer.borderWidth = 1
+        registerBtn.titleLabel?.font = FontSize(14)
+        registerBtn.setTitleColor(kMainOrangeColor, for: .normal)
+        registerBtn.layer.cornerRadius = 3
+        registerBtn.layer.borderColor = kMainOrangeColor.cgColor
+        registerBtn.layer.borderWidth = 1
         
         self.descLab = UILabel.zj_createLabel(text: "重返石器时代,回合制始", textColor:  kGrayTextColor, font: FontSize(12), supView: self, closure: { (make) in
             make.top.equalTo(self.loginBtn.snp.bottom).offset(Adapt(30))
