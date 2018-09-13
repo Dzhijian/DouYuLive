@@ -23,7 +23,7 @@ private var isNavHidden : Bool = false
 class ZJHomeViewController: ZJBaseViewController {
     
     // 标题数组
-    private lazy var titles : [String] = ["分类","推荐","全部","LoL","绝地求生","王者荣耀","QQ飞车"]
+    private lazy var titles : [String] = ["分类","推荐","全部","LOL","绝地求生","王者荣耀","QQ飞车"]
     // 控制器数组
     private lazy var controllers : [UIViewController] = {
         let controllers = [ZJClassifyViewController(),ZJRecommendViewController(),ZJAllViewController(),ZJLOLViewController(),ZJJDQSViewController(),ZJWZRYViewController(),ZJQQCarViewController()]

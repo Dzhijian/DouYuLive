@@ -14,7 +14,7 @@ class ZJBaseViewController: UIViewController {
     lazy var  statuView : UIView = {
         let view = UIView()
         view.backgroundColor = kMainOrangeColor;
-        view.frame = CGRect(x: 0, y: 0, width: kScreenW, height: 20)
+        view.frame = CGRect(x: 0, y: 0, width: kScreenW, height: kStatuHeight)
         // 设置背景渐变
         let gradientLayer: CAGradientLayer = CAGradientLayer()
         gradientLayer.colors = kGradientColors

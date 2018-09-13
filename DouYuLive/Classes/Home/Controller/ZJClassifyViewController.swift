@@ -171,8 +171,28 @@ extension ZJClassifyViewController : UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        guard self.cateListData.count != 0 else { return 0 }
+        let maxItemCount = 8
+        let pageControlHeight: CGFloat = 37
+        let spaceHeight: CGFloat = 10   //没有pageControl时添加
+        var dataCount = 0   // item的数量
         
-        return Adapt(220);
+        if indexPath.section == 0 {
+            let model = self.recommenCateData?.cate2_list ?? []
+            dataCount = model.count
+        } else {
+            let model = self.cateListData[indexPath.section - 1].cate2_list
+            dataCount = model.count
+        }
+        
+        // 根据item个数计算cell高度
+        if dataCount > maxItemCount {
+            return CateItemHeight * 2 + pageControlHeight
+        } else if dataCount > 4 && dataCount <= maxItemCount {
+            return CateItemHeight * 2 + spaceHeight
+        } else {
+            return CateItemHeight + spaceHeight
+        }
     }
     
     
@@ -186,6 +206,7 @@ extension ZJClassifyViewController : UITableViewDelegate,UITableViewDataSource {
                 header.configTitle(title:item.cate_name!)
             }
         }
+        header.topLine.isHidden = true
         
         return header
     }
