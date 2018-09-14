@@ -30,6 +30,7 @@ class ZJProfileViewController: ZJBaseViewController {
     
     private lazy var loginView : ZJPopLoginView = {
         let loginView = ZJPopLoginView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH))
+        loginView.delegate = self
         return loginView
     }()
     
@@ -64,7 +65,21 @@ class ZJProfileViewController: ZJBaseViewController {
 
 }
 
-// MARK: -
+// 配置 UI 视图
+extension ZJProfileViewController : ZJPopLoginViewDelegate {
+    func zj_goToLoginVC() {
+        let nav = ZJNavigationController(rootViewController: ZJLoginViewController())
+        self.present(nav, animated: true, completion: nil)
+    }
+    
+    func zj_goToRegisterVC() {
+        
+        let nav = ZJNavigationController(rootViewController: ZJRegisterViewController())
+        self.present(nav, animated: true, completion: nil)
+    }
+}
+
+// MARK: - ZJProfileHeadViewDelegate
 extension ZJProfileViewController : ZJProfileHeadViewDelegate {
     
     func zj_loginBtnAction(sender: UIButton) {

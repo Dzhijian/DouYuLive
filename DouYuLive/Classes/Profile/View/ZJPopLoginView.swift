@@ -8,9 +8,14 @@
 //
 
 import UIKit
-
+protocol ZJPopLoginViewDelegate : class {
+    func zj_goToLoginVC()
+    func zj_goToRegisterVC()
+}
 class ZJPopLoginView: ZJBaseView {
 
+    weak var delegate : ZJPopLoginViewDelegate?
+    
     private lazy var bgView : UIView = UIView()
     private lazy var topImgV : UIImageView = UIImageView()
     private lazy var titleLab : UILabel = UILabel()
@@ -100,11 +105,11 @@ extension ZJPopLoginView {
             make.height.equalTo(Adapt(50))
         })
         
-        self.loginBtn.setTitleColor(kWhite, for: .normal)
-        self.loginBtn.backgroundColor = kMainOrangeColor
-        self.loginBtn.titleLabel?.font = FontSize(15)
-        self.loginBtn.layer.cornerRadius = 3
-        
+        loginBtn.addTarget(self, action: #selector(loginBtnClick), for: .touchUpInside)
+        loginBtn.setTitleColor(kWhite, for: .normal)
+        loginBtn.backgroundColor = kMainOrangeColor
+        loginBtn.titleLabel?.font = FontSize(15)
+        loginBtn.layer.cornerRadius = 3
         
         
         self.registerBtn = UIButton.zj_createButton(title: "快速注册", titleStatu: .normal, imageName: nil, imageStatu: nil, supView: self.bgView, closure: { (make) in
@@ -120,7 +125,7 @@ extension ZJPopLoginView {
         registerBtn.layer.cornerRadius = 3
         registerBtn.layer.borderColor = kMainOrangeColor.cgColor
         registerBtn.layer.borderWidth = 0.6
-        
+        registerBtn.addTarget(self, action: #selector(registerBtnClick), for: .touchUpInside)
         self.descLab = UILabel.zj_createLabel(text: "使用即为同意使用《斗鱼注册协议及版权声明》", textColor: kGrayTextColor, font: FontSize(12), supView: self.bgView, closure: { (make) in
             make.top.equalTo(self.registerBtn.snp.bottom).offset(20)
             make.left.equalTo(self.registerBtn.snp.left)
@@ -160,6 +165,17 @@ extension ZJPopLoginView {
             }
             i += 1
         }
+    }
+    
+    @objc func loginBtnClick() {
+        self.zj_HiddenLoginView()
+        delegate?.zj_goToLoginVC()
+    }
+    
+    @objc func registerBtnClick() {
+        
+        self.zj_HiddenLoginView()
+        delegate?.zj_goToRegisterVC()
     }
     
 }

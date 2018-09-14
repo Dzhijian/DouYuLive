@@ -45,7 +45,7 @@ class ZJBaseViewController: UIViewController {
     
 
     // 配置 NavigationBar
-    func setUpNavigation() -> Void {
+    func setUpNavigation(){
         // 修改状态栏背景颜色
         self.navigationController?.navigationBar.barTintColor = kMainOrangeColor
         self.navigationController?.navigationBar.tintColor = UIColor.white
