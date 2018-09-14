@@ -71,7 +71,7 @@ extension UIView {
     ///   - supView: 父视图
     ///   - closure: 约束
     /// - Returns:  UIButton
-    class func zj_createButton(title : String?,titleStatu : UIControlState?,imageName : String?,imageStatu : UIControlState?,supView : UIView? ,closure:(_ make : ConstraintMaker) ->()) -> UIButton{
+    class func zj_createButton(title : String?,titleStatu : UIControlState?,titleColor: UIColor? = nil,imageName : String?,imageStatu : UIControlState?, font : UIFont? = FontSize(14),supView : UIView? ,closure:(_ make : ConstraintMaker) ->()) -> UIButton{
         let btn = UIButton()
         
         if title != nil {
@@ -90,6 +90,10 @@ extension UIView {
            btn.setImage(UIImage(named: imageName!), for: imageStatu!)
         }
         
+        if titleColor != nil {
+            btn.setTitleColor(titleColor, for: .normal)
+        }
+        btn.titleLabel?.font = font
         if supView != nil {
             supView?.addSubview(btn)
             btn.snp.makeConstraints { (make) in
@@ -125,5 +129,38 @@ extension UIView {
             }
         }
         return label
+    }
+    
+    
+    /// 快速创建 UITextField,设置文本,文本颜色,placeholder,字体大小,文本位置,边框样式, 自动布局
+    ///
+    /// - Parameters:
+    ///   - text: 文本
+    ///   - textColor: 文本颜色
+    ///   - placeholder: placeholder
+    ///   - font: 字体大小
+    ///   - textAlignment: 文本位置
+    ///   - borderStyle: 边框样式
+    ///   - supView: 父视图
+    ///   - closure:  make
+    /// - Returns: UITextField
+    class func zj_createTextField(text : String? , textColor : UIColor?, placeholder: String, font : UIFont?, textAlignment : NSTextAlignment = .left, borderStyle :UITextBorderStyle = .none,supView : UIView? ,closure:(_ make : ConstraintMaker) ->()) -> UITextField {
+        
+        let textField = UITextField()
+        textField.text = text
+        textField.placeholder = placeholder
+        textField.borderStyle = borderStyle
+        if (textColor != nil) { textField.textColor = textColor }
+        if (font != nil) { textField.font = font }
+        
+        textField.textAlignment = textAlignment
+        
+        if supView != nil {
+            supView?.addSubview(textField)
+            textField.snp.makeConstraints { (make) in
+                closure(make)
+            }
+        }
+        return textField
     }
 }

@@ -11,7 +11,7 @@ import UIKit
 class ZJRegisterViewController: ZJBaseViewController {
 
     private lazy var registerView : ZJLoginView = {
-        let registerView = ZJLoginView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH-kTabBarHeight))
+        let registerView = ZJLoginView(frame: CGRect.zero,viewType: ZJLoginType.ZJRegister)
         return registerView
     }()
     
@@ -21,9 +21,9 @@ class ZJRegisterViewController: ZJBaseViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "注册", style: .plain, target: self, action: #selector(goBackAction))
         
         self.view.addSubview(registerView)
-//        registerView.snp.makeConstraints { (make) in
-//            make.edges.equalTo(0)
-//        }
+        registerView.snp.makeConstraints { (make) in
+            make.edges.equalTo(0)
+        }
     }
     
     @objc func goBackAction() {
