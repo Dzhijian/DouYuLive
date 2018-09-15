@@ -7,9 +7,11 @@
 //
 
 import UIKit
-
+import RxSwift
 class ZJRegisterViewController: ZJBaseViewController {
 
+    private lazy var bag : DisposeBag = DisposeBag()
+    
     private lazy var registerView : ZJLoginView = {
         let registerView = ZJLoginView(frame: CGRect.zero,viewType: ZJLoginType.ZJRegister)
         return registerView
@@ -24,6 +26,13 @@ class ZJRegisterViewController: ZJBaseViewController {
         registerView.snp.makeConstraints { (make) in
             make.edges.equalTo(0)
         }
+        
+        registerView.actionBtn.rx.tap
+            .subscribe(onNext: {
+                print("注册")
+            })
+            .disposed(by: bag)
+            
     }
     
     @objc func goBackAction() {

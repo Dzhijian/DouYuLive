@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import RxSwift
 enum ZJLoginType {
     case ZJLogin
     case ZJRegister
 }
+private let mobileNumLength = 11
+private let minPwdLength = 6
 class ZJLoginView: ZJBaseView {
     
     var type : ZJLoginType? = .ZJLogin
@@ -25,11 +28,12 @@ class ZJLoginView: ZJBaseView {
     private lazy var mobileView : UIView = UIView()
     private lazy var mobileBtn : UIButton = UIButton()
     private lazy var mobileTF : UITextField = UITextField()
-    
+    private lazy var mobileValid : UILabel = UILabel()
     // 密码
     private lazy var pwdView : UIView = UIView()
     private lazy var pwdImgV : UIImageView = UIImageView()
     private lazy var pwdTF : UITextField = UITextField()
+    private lazy var pwdValid : UILabel = UILabel()
     
     // 验证码
     private lazy var codeView : UIView = UIView()
@@ -38,7 +42,7 @@ class ZJLoginView: ZJBaseView {
     private lazy var codeBtn : UIButton = UIButton()
     
     // 登录或注册按钮
-    private lazy var actionBtn : UIButton = UIButton()
+    lazy var actionBtn : UIButton = UIButton()
     // 忘记密码按钮
     private lazy var forgetBtn : UIButton = UIButton()
     // 验证码登录按钮
@@ -48,11 +52,14 @@ class ZJLoginView: ZJBaseView {
     // 马上登录按钮
     private lazy var nowLoginBtn : UIButton = UIButton()
     
+    private lazy var bag : DisposeBag = DisposeBag()
+    
     // 自定义初始化方法
     init(frame : CGRect, viewType : ZJLoginType) {
         self.type = viewType
         super.init(frame: frame)
         setUpAllView()
+        textFieldvalid()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -62,6 +69,50 @@ class ZJLoginView: ZJBaseView {
 
 }
 
+
+extension ZJLoginView {
+    
+    // textfield 的验证
+    func textFieldvalid() {
+        // 获取输入手机号码的状态
+        let mobileLengValid = mobileTF.rx.text.orEmpty
+            .map { $0.count == mobileNumLength }
+            .share(replay: 1) //如果没有这个映射，每个绑定只执行一次，那么rx在默认情况下是无状态的
+        // 获取输入密码的状态
+        let pwdLengValid = pwdTF.rx.text.orEmpty
+            .map { $0.count >= minPwdLength }
+            .share(replay: 1)
+        
+        let everythingValid = Observable.combineLatest(mobileLengValid, pwdLengValid) { $0 && $1 }
+            .share(replay: 1)
+        
+        
+        // 动态绑定手机号码提示,是否需要隐藏
+        // disposed(by: disposeBag)就是将绑定的生命周期交给 disposeBag 来管理。
+        // 当 disposeBag 被释放的时候，那么里面尚未清除的绑定也就被清除了。这就相当于是在用 ARC 来管理绑定的生命周期
+        mobileLengValid
+            .bind(to: mobileValid.rx.isHidden)
+            .disposed(by: bag)
+        
+        // 动态绑定密码的提示,是否需要隐藏
+        pwdLengValid
+            .bind(to: pwdValid.rx.isHidden)
+            .disposed(by: bag)
+        
+        // 动态绑定状态
+        everythingValid
+            .bind(to: actionBtn.rx.isEnabled)
+            .disposed(by: bag)
+        
+        // 登录或注册按钮的点击事件
+//        actionBtn.rx.tap
+//            .subscribe(onNext: {
+//                
+//            })
+//            .disposed(by: bag)
+    }
+    
+}
 
 // 配置 UI 视图
 extension ZJLoginView {
@@ -122,6 +173,13 @@ extension ZJLoginView {
             make.right.equalTo(Adapt(-15))
             make.height.equalTo(35)
         })
+        mobileValid = UILabel.zj_createLabel(text: "请输入正确的手机号码", textColor:  kRed, font: FontSize(10), supView: self, closure: { (make) in
+            make.top.equalTo(mobileView.snp.bottom)
+            make.left.equalTo(mobileView.snp.left)
+            make.right.equalTo(mobileView.snp.right)
+            make.height.equalTo(Adapt(18))
+        })
+        mobileValid.isHidden = true
         
         pwdView = UIView.zj_createView(bgClor: kWhite, supView: self, closure: { (make) in
             make.top.equalTo(mobileView.snp.bottom).offset(Adapt(20))
@@ -143,6 +201,15 @@ extension ZJLoginView {
             make.right.equalTo(Adapt(-15))
             make.height.equalTo(Adapt(35))
         })
+        
+        pwdValid = UILabel.zj_createLabel(text: "密码必须大于6位数", textColor:  kRed, font: FontSize(10), supView: self, closure: { (make) in
+            make.top.equalTo( pwdView.snp.bottom)
+            make.left.equalTo(pwdView.snp.left)
+            make.right.equalTo(pwdView.snp.right)
+            make.height.equalTo(Adapt(18))
+        })
+        
+        pwdValid.isHidden = true
         
         if self.type == ZJLoginType.ZJLogin {
             // 添加登录按钮
@@ -243,6 +310,6 @@ extension ZJLoginView {
         actionBtn.layer.cornerRadius = 5
         actionBtn.backgroundColor = kMainOrangeColor
         actionBtn.setTitleColor(kWhite, for: .normal)
-        actionBtn.titleLabel?.font = FontSize(14)
+        actionBtn.titleLabel?.font = FontSize(15)
     }
 }
