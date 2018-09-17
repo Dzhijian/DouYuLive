@@ -54,7 +54,6 @@ class ZJProgressHUD: NSObject {
         }
         
         bgView.frame = supFrame
-//        bgView.center = rv!.center
         supView.addSubview(bgView)
         showViews.append(bgView)
         

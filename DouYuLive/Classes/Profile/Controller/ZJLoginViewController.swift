@@ -40,7 +40,13 @@ class ZJLoginViewController: ZJBaseViewController {
     
     
     func showAlert() {
-        
+        SwiftProgressHUD.showWait()
+        /// 模拟 1s后 加载完成
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            SwiftProgressHUD.hideAllHUD()
+            self.dismiss(animated: true, completion: nil)
+//             UIApplication.shared.keyWindow?.rootViewController = ZJTabBarController()
+        }
     }
     
     override func didReceiveMemoryWarning() {
