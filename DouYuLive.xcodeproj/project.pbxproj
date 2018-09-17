@@ -134,6 +134,7 @@
 		04DE709E211BE2140073DE82 /* ZJAllLiveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE709D211BE2140073DE82 /* ZJAllLiveData.swift */; };
 		04DE70A0211C22300073DE82 /* ZJSelectCateItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE709F211C22300073DE82 /* ZJSelectCateItem.swift */; };
 		04DE70A2211C95F70073DE82 /* ZJVideoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE70A1211C95F70073DE82 /* ZJVideoListCell.swift */; };
+		04F23F872150089A00EC3617 /* ZJAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F23F862150089A00EC3617 /* ZJAlertView.swift */; };
 		366FC9B6D5DFAAE0CA4E59A1 /* Pods_DouYuLiveUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB779BB5E54804A55579F7C4 /* Pods_DouYuLiveUITests.framework */; };
 		8456442C257792BF58C6C119 /* Pods_DouYuLiveTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3A917041522094C4F3A3FD4 /* Pods_DouYuLiveTests.framework */; };
 		8E737CB4577C25D2F3200271 /* Pods_DouYuLive.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 573FFBD125983AA274BAA29B /* Pods_DouYuLive.framework */; };
@@ -291,6 +292,7 @@
 		04DE709D211BE2140073DE82 /* ZJAllLiveData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJAllLiveData.swift; sourceTree = "<group>"; };
 		04DE709F211C22300073DE82 /* ZJSelectCateItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJSelectCateItem.swift; sourceTree = "<group>"; };
 		04DE70A1211C95F70073DE82 /* ZJVideoListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJVideoListCell.swift; sourceTree = "<group>"; };
+		04F23F862150089A00EC3617 /* ZJAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJAlertView.swift; sourceTree = "<group>"; };
 		453A662B8E021BC466F245AE /* Pods-DouYuLiveUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DouYuLiveUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DouYuLiveUITests/Pods-DouYuLiveUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		53CFB983BF35608199568833 /* Pods-DouYuLive.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DouYuLive.release.xcconfig"; path = "Pods/Target Support Files/Pods-DouYuLive/Pods-DouYuLive.release.xcconfig"; sourceTree = "<group>"; };
 		573FFBD125983AA274BAA29B /* Pods_DouYuLive.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DouYuLive.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -551,6 +553,7 @@
 				048EA3AC2107873B00E30720 /* discover */,
 				04970606212D3DAB00E12562 /* Profile */,
 				048EA3A82107873B00E30720 /* Tools */,
+				04F23F842150073D00EC3617 /* CustomView */,
 				04A7D9652138EF370069DF01 /* Other */,
 				04A7D9632138EE240069DF01 /* Rescoure */,
 			);
@@ -571,8 +574,6 @@
 		048EA3A82107873B00E30720 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				04A7D96E213AA57B0069DF01 /* ZJCarouselView */,
-				04A473B8212530B600D37F33 /* ZJPageView */,
 				04A473992122E93500D37F33 /* LZViewPager */,
 				043512E82122B1AF001D928A /* DNSPageView */,
 				0419BCE9210EB514008661D3 /* Marco */,
@@ -875,6 +876,24 @@
 			path = Other;
 			sourceTree = "<group>";
 		};
+		04F23F842150073D00EC3617 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				04F23F852150076500EC3617 /* ZJPopView */,
+				04A7D96E213AA57B0069DF01 /* ZJCarouselView */,
+				04A473B8212530B600D37F33 /* ZJPageView */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
+		04F23F852150076500EC3617 /* ZJPopView */ = {
+			isa = PBXGroup;
+			children = (
+				04F23F862150089A00EC3617 /* ZJAlertView.swift */,
+			);
+			path = ZJPopView;
+			sourceTree = "<group>";
+		};
 		1D1F37440CECC817327578EC /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1157,6 +1176,7 @@
 				04A473AB21240FA300D37F33 /* ZJMusicViewController.swift in Sources */,
 				04ADE69C212D43AB00B64951 /* ZJProfileCell.swift in Sources */,
 				049705F42128745800E12562 /* ZJRecommendActivityData.swift in Sources */,
+				04F23F872150089A00EC3617 /* ZJAlertView.swift in Sources */,
 				04DE708D2119C55C0073DE82 /* ZJLiveListCell.swift in Sources */,
 				04A473A921240F7C00D37F33 /* ZJQuadraticElementViewController.swift in Sources */,
 				043512F32122B1AF001D928A /* DNSPageHelper.swift in Sources */,
@@ -1423,7 +1443,10 @@
 				DEVELOPMENT_TEAM = R65337KS8W;
 				INFOPLIST_FILE = DouYuLive/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = codeDeng.DouYuLive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "DouYuLive/Classes/Tools/Header-Swift.h";
@@ -1444,7 +1467,10 @@
 				DEVELOPMENT_TEAM = R65337KS8W;
 				INFOPLIST_FILE = DouYuLive/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = codeDeng.DouYuLive;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "DouYuLive/Classes/Tools/Header-Swift.h";
@@ -1464,7 +1490,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R65337KS8W;
 				INFOPLIST_FILE = DouYuLiveTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = codeDeng.DouYuLiveTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -1482,7 +1512,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R65337KS8W;
 				INFOPLIST_FILE = DouYuLiveTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = codeDeng.DouYuLiveTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -1499,7 +1533,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R65337KS8W;
 				INFOPLIST_FILE = DouYuLiveUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = codeDeng.DouYuLiveUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -1516,7 +1554,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = R65337KS8W;
 				INFOPLIST_FILE = DouYuLiveUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = codeDeng.DouYuLiveUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
