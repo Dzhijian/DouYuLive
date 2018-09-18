@@ -112,7 +112,6 @@
 		04A473B621252C0300D37F33 /* ZJFollowStateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A473B521252C0300D37F33 /* ZJFollowStateViewController.swift */; };
 		04A473BB212533FC00D37F33 /* ZJFollowLiveHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A473BA212533FC00D37F33 /* ZJFollowLiveHeadView.swift */; };
 		04A473BD2125353000D37F33 /* ZJFollowLiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A473BC2125353000D37F33 /* ZJFollowLiveCell.swift */; };
-		04A7D9642138EF0D0069DF01 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 048EA3842106447300E30720 /* Info.plist */; };
 		04A7D9682138EF370069DF01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04A7D9662138EF370069DF01 /* LaunchScreen.storyboard */; };
 		04A7D96D213916E10069DF01 /* ZJImageView+Kingfisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A7D96C213916E10069DF01 /* ZJImageView+Kingfisher.swift */; };
 		04A7D970213AA5E90069DF01 /* ZJCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A7D96F213AA5E90069DF01 /* ZJCarouselView.swift */; };
@@ -1016,7 +1015,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04A7D9642138EF0D0069DF01 /* Info.plist in Resources */,
 				04A7D9682138EF370069DF01 /* LaunchScreen.storyboard in Resources */,
 				048EA3802106447300E30720 /* Assets.xcassets in Resources */,
 				048EA37E2106447200E30720 /* Main.storyboard in Resources */,
