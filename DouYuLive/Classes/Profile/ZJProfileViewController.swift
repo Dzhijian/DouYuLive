@@ -52,6 +52,7 @@ class ZJProfileViewController: ZJBaseViewController {
         super.viewDidLoad()
         setUpAllView()
         
+    
         // 显示加载动画
         ZJProgressHUD.showProgress(supView: UIApplication.shared.keyWindow!, bgFrame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH),imgArr: getloadingImages(), timeMilliseconds: 90, bgColor: kWhite, scale: 0.8)
         

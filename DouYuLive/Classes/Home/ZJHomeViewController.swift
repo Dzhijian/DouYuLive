@@ -92,6 +92,12 @@ class ZJHomeViewController: ZJBaseViewController {
            
         }
     }
+    
+    override func rightItemClick() {
+        super.rightItemClick()
+        let popView = ZJPopupView()
+        popView.zj_showPopView()
+    }
 }
 
 

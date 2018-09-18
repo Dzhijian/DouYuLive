@@ -10,15 +10,15 @@ import UIKit
 
 class ZJAlertController {
 
-    static func zj_showAlertView(currentController : UIViewController, title: String, message: String, confirmTitle: String, cancelTitle: String , confirmHandler:((UIAlertAction) -> Void)? , cancelHandel:((UIAlertAction) -> Void)?) {
+    static func zj_showAlertView(currentController : UIViewController, title: String, message: String, confirmTitle: String, cancelTitle: String , confirmHandler:@escaping ((UIAlertAction) -> Void) , cancelHandel:@escaping ((UIAlertAction) -> Void)) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         // 取消按钮
         let cancel = UIAlertAction(title: cancelTitle, style: .default) { (action) in
-            cancelHandel!(action)
+            cancelHandel(action)
         }
         // 确定按钮
         let confirm = UIAlertAction(title: confirmTitle, style: .default) { (action) in
-            confirmHandler!(action)
+            confirmHandler(action)
         }
         alert.addAction(confirm)
         alert.addAction(cancel)
@@ -27,19 +27,18 @@ class ZJAlertController {
         
     }
     
-    static func zj_showSheetView(currentController : UIViewController, title: String, message: String, actionArray: [String], confirmTitle: String, cancelTitle: String , actionHandler:((UIAlertAction) -> Void)? , cancelHandel:((UIAlertAction) -> Void)?) {
+    static func zj_showSheetView(currentController : UIViewController, title: String, message: String, actionArray: [String], confirmTitle: String, cancelTitle: String , actionHandler:@escaping ((UIAlertAction) -> Void) , cancelHandel:@escaping ((UIAlertAction) -> Void)) {
         let sheet = UIAlertController(title: title, message: message, preferredStyle: .actionSheet)
         
         actionArray.forEach { (item) in
             let action = UIAlertAction(title: item, style: .default, handler: { (action) in
-                actionHandler!(action)
+                actionHandler(action)
             })
+            
             sheet.addAction(action)
-        }
-        
-        // 取消按钮
+        }        // 取消按钮
         let cancel = UIAlertAction(title: cancelTitle, style: .cancel) { (action) in
-            cancelHandel!(action)
+            cancelHandel(action)
         }
         sheet.addAction(cancel)
         

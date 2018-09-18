@@ -119,6 +119,7 @@
 		04ADE69C212D43AB00B64951 /* ZJProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ADE69B212D43AB00B64951 /* ZJProfileCell.swift */; };
 		04ADE69E212D5D7A00B64951 /* ZJProfileHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ADE69D212D5D7A00B64951 /* ZJProfileHeadView.swift */; };
 		04ADE6A0212E67F500B64951 /* ZJRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04ADE69F212E67F500B64951 /* ZJRefreshView.swift */; };
+		04D3E27F21510A78007085F0 /* ZJPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D3E27E21510A78007085F0 /* ZJPopupView.swift */; };
 		04DE708621198D4E0073DE82 /* ZJRecommendHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE708521198D4E0073DE82 /* ZJRecommendHeadView.swift */; };
 		04DE70882119953F0073DE82 /* ZJActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE70872119953F0073DE82 /* ZJActivityView.swift */; };
 		04DE708A2119967E0073DE82 /* ZJBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DE70892119967E0073DE82 /* ZJBaseView.swift */; };
@@ -277,6 +278,7 @@
 		04ADE69B212D43AB00B64951 /* ZJProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJProfileCell.swift; sourceTree = "<group>"; };
 		04ADE69D212D5D7A00B64951 /* ZJProfileHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJProfileHeadView.swift; sourceTree = "<group>"; };
 		04ADE69F212E67F500B64951 /* ZJRefreshView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJRefreshView.swift; sourceTree = "<group>"; };
+		04D3E27E21510A78007085F0 /* ZJPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJPopupView.swift; sourceTree = "<group>"; };
 		04DE708521198D4E0073DE82 /* ZJRecommendHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJRecommendHeadView.swift; sourceTree = "<group>"; };
 		04DE70872119953F0073DE82 /* ZJActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJActivityView.swift; sourceTree = "<group>"; };
 		04DE70892119967E0073DE82 /* ZJBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJBaseView.swift; sourceTree = "<group>"; };
@@ -516,10 +518,10 @@
 			children = (
 				048EA3A62107873B00E30720 /* Classes */,
 				0419BD0D2112E90B008661D3 /* Network */,
-				04A7D9632138EE240069DF01 /* Rescoure */,
-				04F23F842150073D00EC3617 /* CustomView */,
+				04F23F842150073D00EC3617 /* ZJCustomView */,
 				048EA3A82107873B00E30720 /* Tools */,
 				04A7D9652138EF370069DF01 /* Other */,
+				04A7D9632138EE240069DF01 /* Rescoure */,
 				048EA3782106447200E30720 /* AppDelegate.swift */,
 				048EA37C2106447200E30720 /* Main.storyboard */,
 				048EA3842106447300E30720 /* Info.plist */,
@@ -875,22 +877,23 @@
 			path = Other;
 			sourceTree = "<group>";
 		};
-		04F23F842150073D00EC3617 /* CustomView */ = {
+		04F23F842150073D00EC3617 /* ZJCustomView */ = {
 			isa = PBXGroup;
 			children = (
-				04F23F852150076500EC3617 /* ZJPopView */,
+				04F23F852150076500EC3617 /* ZJPopupView */,
 				04A7D96E213AA57B0069DF01 /* ZJCarouselView */,
 				04A473B8212530B600D37F33 /* ZJPageView */,
 			);
-			path = CustomView;
+			path = ZJCustomView;
 			sourceTree = "<group>";
 		};
-		04F23F852150076500EC3617 /* ZJPopView */ = {
+		04F23F852150076500EC3617 /* ZJPopupView */ = {
 			isa = PBXGroup;
 			children = (
 				04F23F862150089A00EC3617 /* ZJAlertController.swift */,
+				04D3E27E21510A78007085F0 /* ZJPopupView.swift */,
 			);
-			path = ZJPopView;
+			path = ZJPopupView;
 			sourceTree = "<group>";
 		};
 		1D1F37440CECC817327578EC /* Pods */ = {
@@ -1221,6 +1224,7 @@
 				0454C170214AB88500F57928 /* ZJLoginViewController.swift in Sources */,
 				04907E752116BEC0006B70EC /* ZJCategoryItem.swift in Sources */,
 				0419BCDD210AB99A008661D3 /* ZJCommon.swift in Sources */,
+				04D3E27F21510A78007085F0 /* ZJPopupView.swift in Sources */,
 				04970600212BB76F00E12562 /* ZJCycleCardItem.swift in Sources */,
 				0419BCD8210A2245008661D3 /* ZJBarButtonItem_Extension.swift in Sources */,
 				04907E8621174246006B70EC /* ZJCategoryList.swift in Sources */,

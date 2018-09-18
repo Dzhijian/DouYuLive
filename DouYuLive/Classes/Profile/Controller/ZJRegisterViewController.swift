@@ -37,7 +37,7 @@ class ZJRegisterViewController: ZJBaseViewController {
 //                })
                 
                 ZJAlertController.zj_showSheetView(currentController: self, title: "haha", message: "hehe", actionArray: ["123","asd"], confirmTitle: "确定", cancelTitle: "取消", actionHandler: { (action) in
-                    print(action.title ?? "000")
+                    print(action.title!)
                 }, cancelHandel: { (action) in
                     
                 })
