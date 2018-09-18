@@ -12,8 +12,6 @@ import ESPullToRefresh
 
 private let itemWH = kScreenW / 4
 
-private let CellID = "CellID"
-
 class ZJClassifyViewController: ZJBaseViewController {
     var cateOneList : Array<JSON> = []
     
@@ -29,7 +27,7 @@ class ZJClassifyViewController: ZJBaseViewController {
         //设置 footerview 的高度为0
         tableView.sectionFooterHeight = 0
         tableView.backgroundColor = kWhite
-        tableView.register(ZJCategroyListCell.self, forCellReuseIdentifier: CellID)
+        tableView.register(ZJCategroyListCell.self, forCellReuseIdentifier: ZJCategroyListCell.identifier())
         return tableView
     }()
     
@@ -157,7 +155,7 @@ extension ZJClassifyViewController : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellID, for: indexPath) as! ZJCategroyListCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: ZJCategroyListCell.identifier(), for: indexPath) as! ZJCategroyListCell
         cell.selectionStyle = .none
         if indexPath.section == 0 {
             cell.cateTwoList = self.recommenCateData?.cate2_list

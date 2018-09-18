@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ZJAlertView {
+class ZJAlertController {
 
     static func zj_showAlertView(currentController : UIViewController, title: String, message: String, confirmTitle: String, cancelTitle: String , confirmHandler:((UIAlertAction) -> Void)? , cancelHandel:((UIAlertAction) -> Void)?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)

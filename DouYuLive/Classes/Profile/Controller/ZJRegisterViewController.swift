@@ -30,13 +30,13 @@ class ZJRegisterViewController: ZJBaseViewController {
         registerView.actionBtn.rx.tap
             .subscribe(onNext: {
                 print("注册")
-//                ZJAlertView.zj_showAlertView(currentController: self, title: "提示", message: "message", confirmTitle: "确定", cancelTitle: "取消", confirmHandler: { (action) in
+//                ZJAlertController.zj_showAlertView(currentController: self, title: "提示", message: "message", confirmTitle: "确定", cancelTitle: "取消", confirmHandler: { (action) in
 //                    print("确定")
 //                }, cancelHandel: { (action) in
 //                    print("取消")
 //                })
                 
-                ZJAlertView.zj_showSheetView(currentController: self, title: "haha", message: "hehe", actionArray: ["123","asd"], confirmTitle: "确定", cancelTitle: "取消", actionHandler: { (action) in
+                ZJAlertController.zj_showSheetView(currentController: self, title: "haha", message: "hehe", actionArray: ["123","asd"], confirmTitle: "确定", cancelTitle: "取消", actionHandler: { (action) in
                     print(action.title ?? "000")
                 }, cancelHandel: { (action) in
                     
