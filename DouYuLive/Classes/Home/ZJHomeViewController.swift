@@ -95,7 +95,7 @@ class ZJHomeViewController: ZJBaseViewController {
     
     override func rightItemClick() {
         super.rightItemClick()
-        let popView = ZJPopupView()
+        let popView = ZJPopupView(size: CGSize(width: 250, height: 200), style: .ZJPopupSacle)
         popView.zj_showPopView()
     }
 }

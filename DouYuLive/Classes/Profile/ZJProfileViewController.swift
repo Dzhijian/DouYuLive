@@ -22,12 +22,15 @@ class ZJProfileViewController: ZJBaseViewController {
                                        ["icon_my_video","icon_video_income","icon_collection"],
                                        ["icon_account","icon_free"],
                                        ["icon_focus","icon_remind"]]
+    
+    // 头部视图
     private lazy var headerView : ZJProfileHeadView = {
         let headView  = ZJProfileHeadView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: Adapt(240)))
         headView.deleagte = self
         return headView
     }()
     
+    // 登录弹窗
     private lazy var loginView : ZJPopLoginView = {
         let loginView = ZJPopLoginView(frame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH))
         loginView.delegate = self
@@ -164,27 +167,36 @@ extension ZJProfileViewController {
         }
         mainTable.tableHeaderView = headerView
         
-        self.navigationController?.navigationBar.tintColor = kWhite
-        
-        let navView = self.navigationController?.navigationBar.subviews.first
-        guard navView != nil else {return}
-        zj_setUpGradientLayer(view: navView!, frame: CGRect(x: 0, y: 0, width: kScreenW, height: kStatuHeight+kNavigationBarHeight), color: kWhiteColors)
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "btn_nav_back"), landscapeImagePhone: nil, style: .done, target: self, action: #selector(self.leftItemBackClick))
-        let activity = UIImageView.init(image: UIImage(named: "icon_dycard"))
-        activity.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
-        activity.contentMode = .scaleAspectFit
-        let activityItem = UIBarButtonItem(customView: activity)
-        activityItem.width = 30
-        let spaceItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: self, action: nil)
-        spaceItem.width = Adapt(-55)
         
-        let setItem = UIBarButtonItem(image: UIImage(named: "icon_setting"), landscapeImagePhone: nil, style: .plain, target: self, action: #selector(self.settingAction))
-        setItem.width = 25
-        navigationItem.rightBarButtonItems = [setItem,spaceItem,activityItem]
         
-        //修改导航栏背景色
-        self.navigationController?.navigationBar.barTintColor =
-            UIColor(red: 55/255, green: 186/255, blue: 89/255, alpha: 1)
+        //设置按钮
+        let button1 = UIButton(frame:CGRect(x:0, y:0, width:18, height:18))
+        button1.setImage(UIImage(named: "icon_nav_dycard"), for: .normal)
+        button1.addTarget(self,action:#selector(self.leftItemBackClick),for:.touchUpInside)
+        let barButton1 = UIBarButtonItem(customView: button1)
+        
+        //设置按钮
+        let button2 = UIButton(frame:CGRect(x:0, y:0, width:18, height:18))
+        button2.setImage(UIImage(named: "Image_headerView_settings"), for: .normal)
+        button2.addTarget(self,action:#selector(self.settingAction),for:.touchUpInside)
+        let barButton2 = UIBarButtonItem(customView: button2)
+        
+        //按钮间的空隙
+        let gap = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil,
+                                  action: nil)
+        gap.width = 15
+        
+        //用于消除右边边空隙，要不然按钮顶不到最边上
+        let spacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil,
+                                     action: nil)
+        spacer.width = -10
+        
+        //设置按钮（注意顺序）
+        self.navigationItem.rightBarButtonItems = [spacer,barButton2,gap,barButton1]
+        
+        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
