@@ -170,17 +170,17 @@ extension ZJProfileViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "btn_nav_back"), landscapeImagePhone: nil, style: .done, target: self, action: #selector(self.leftItemBackClick))
         
         
-        //设置按钮
-        let button1 = UIButton(frame:CGRect(x:0, y:0, width:18, height:18))
-        button1.setImage(UIImage(named: "icon_nav_dycard"), for: .normal)
-        button1.addTarget(self,action:#selector(self.leftItemBackClick),for:.touchUpInside)
-        let barButton1 = UIBarButtonItem(customView: button1)
+        //直播按钮
+        let liveBtn = UIButton(frame:CGRect(x:0, y:0, width:20, height:20))
+        liveBtn.setImage(UIImage(named: "icon_nav_dycard"), for: .normal)
+        liveBtn.addTarget(self,action:#selector(self.leftItemBackClick),for:.touchUpInside)
+        let barButton1 = UIBarButtonItem(customView: liveBtn)
         
         //设置按钮
-        let button2 = UIButton(frame:CGRect(x:0, y:0, width:18, height:18))
-        button2.setImage(UIImage(named: "Image_headerView_settings"), for: .normal)
-        button2.addTarget(self,action:#selector(self.settingAction),for:.touchUpInside)
-        let barButton2 = UIBarButtonItem(customView: button2)
+        let setBtn = UIButton(frame:CGRect(x:0, y:0, width:20, height:20))
+        setBtn.setImage(UIImage(named: "Image_headerView_settings"), for: .normal)
+        setBtn.addTarget(self,action:#selector(self.settingAction),for:.touchUpInside)
+        let barButton2 = UIBarButtonItem(customView: setBtn)
         
         //按钮间的空隙
         let gap = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil,
