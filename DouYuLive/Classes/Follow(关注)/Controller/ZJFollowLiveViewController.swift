@@ -40,7 +40,14 @@ class ZJFollowLiveViewController: ZJBaseViewController {
         setUpAllview()
         asyncLoadData()
         
+        headView.loginBtnCallBack = {[weak self] in
+            
+            self?.navigationController?.pushViewController(ZJProfileViewController(), animated: true)
+        }
+        
         ZJProgressHUD.showProgress(supView: self.view, bgFrame: CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH - kStatuHeight-kTabBarHeight-kNavigationBarHeight),imgArr: getloadingImages(), timeMilliseconds: 90, bgColor: kWhite, scale: 0.8)
+        
+        
     }
     
 }

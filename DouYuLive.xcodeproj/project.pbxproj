@@ -551,17 +551,17 @@
 			isa = PBXGroup;
 			children = (
 				048EA3AD2107873B00E30720 /* Main */,
-				048EA3A72107873B00E30720 /* Home */,
-				048EA3AB2107873B00E30720 /* Recreation */,
-				048EA3A92107873B00E30720 /* Follow */,
-				048EA3B42107904E00E30720 /* FishBar */,
-				048EA3AC2107873B00E30720 /* discover */,
-				04970606212D3DAB00E12562 /* Profile */,
+				048EA3A72107873B00E30720 /* Home(首页) */,
+				048EA3AB2107873B00E30720 /* Recreation(娱乐) */,
+				048EA3A92107873B00E30720 /* Follow(关注) */,
+				048EA3B42107904E00E30720 /* FishBar(鱼吧) */,
+				048EA3AC2107873B00E30720 /* discover(发现) */,
+				04970606212D3DAB00E12562 /* Profile(个人中心) */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		048EA3A72107873B00E30720 /* Home */ = {
+		048EA3A72107873B00E30720 /* Home(首页) */ = {
 			isa = PBXGroup;
 			children = (
 				048EA3B021078F9700E30720 /* ZJHomeViewController.swift */,
@@ -569,7 +569,7 @@
 				0419BD102112EDA8008661D3 /* ViewModel */,
 				0419BCDF210ABAAE008661D3 /* View */,
 			);
-			path = Home;
+			path = "Home(首页)";
 			sourceTree = "<group>";
 		};
 		048EA3A82107873B00E30720 /* Tools */ = {
@@ -585,7 +585,7 @@
 			path = Tools;
 			sourceTree = "<group>";
 		};
-		048EA3A92107873B00E30720 /* Follow */ = {
+		048EA3A92107873B00E30720 /* Follow(关注) */ = {
 			isa = PBXGroup;
 			children = (
 				048EA3B7210790A900E30720 /* ZJFollowViewController.swift */,
@@ -593,10 +593,10 @@
 				045DE38E2125C72E004718E8 /* Model */,
 				04A473B9212533CE00D37F33 /* View */,
 			);
-			path = Follow;
+			path = "Follow(关注)";
 			sourceTree = "<group>";
 		};
-		048EA3AB2107873B00E30720 /* Recreation */ = {
+		048EA3AB2107873B00E30720 /* Recreation(娱乐) */ = {
 			isa = PBXGroup;
 			children = (
 				048EA3B52107909F00E30720 /* ZJRecreationViewController.swift */,
@@ -604,10 +604,10 @@
 				043512DF211DDDA4001D928A /* Model */,
 				043512DE211DDD9E001D928A /* View */,
 			);
-			path = Recreation;
+			path = "Recreation(娱乐)";
 			sourceTree = "<group>";
 		};
-		048EA3AC2107873B00E30720 /* discover */ = {
+		048EA3AC2107873B00E30720 /* discover(发现) */ = {
 			isa = PBXGroup;
 			children = (
 				048EA3BB210790E400E30720 /* ZJDiscoverViewController.swift */,
@@ -615,7 +615,7 @@
 				049705DF2126B2F100E12562 /* View */,
 				049705E02126B2F500E12562 /* Model */,
 			);
-			path = discover;
+			path = "discover(发现)";
 			sourceTree = "<group>";
 		};
 		048EA3AD2107873B00E30720 /* Main */ = {
@@ -627,7 +627,7 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		048EA3B42107904E00E30720 /* FishBar */ = {
+		048EA3B42107904E00E30720 /* FishBar(鱼吧) */ = {
 			isa = PBXGroup;
 			children = (
 				048EA3B9210790B700E30720 /* ZJFishBarViewController.swift */,
@@ -635,8 +635,8 @@
 				049705D62126705600E12562 /* View */,
 				049705D72126705A00E12562 /* Model */,
 			);
-			name = FishBar;
-			path = DouYuLive/Classes/FishBar;
+			name = "FishBar(鱼吧)";
+			path = "DouYuLive/Classes/FishBar(鱼吧)";
 			sourceTree = SOURCE_ROOT;
 		};
 		04907E762116C307006B70EC /* View */ = {
@@ -739,14 +739,14 @@
 			path = CycleView;
 			sourceTree = "<group>";
 		};
-		04970606212D3DAB00E12562 /* Profile */ = {
+		04970606212D3DAB00E12562 /* Profile(个人中心) */ = {
 			isa = PBXGroup;
 			children = (
 				04ADE699212D3E5900B64951 /* ZJProfileViewController.swift */,
 				0454C16E214AB86300F57928 /* Controller */,
 				04970608212D3DD600E12562 /* View */,
 			);
-			path = Profile;
+			path = "Profile(个人中心)";
 			sourceTree = "<group>";
 		};
 		04970608212D3DD600E12562 /* View */ = {

@@ -73,7 +73,6 @@ class ZJBaseViewController: UIViewController {
     
     @objc func leftItemClick() {
         self.navigationController?.pushViewController(ZJProfileViewController(), animated: true)
-        print("leftItem Click")
     }
     
     deinit {

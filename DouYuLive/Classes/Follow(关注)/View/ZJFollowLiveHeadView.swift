@@ -10,10 +10,14 @@ import UIKit
 
 class ZJFollowLiveHeadView : UIView {
     
+    // 闭包 类似oc中的block
+    var loginBtnCallBack:(() -> ())?
+    
     private lazy var iconArr : [UIImageView] = {
         let iconArr = [UIImageView]()
         return iconArr
     }()
+    
     private lazy var loginBtn : UIButton = UIButton()
     private lazy var descLab : UILabel = UILabel()
     private lazy var bgImgV : UIImageView = UIImageView()
@@ -70,10 +74,10 @@ extension ZJFollowLiveHeadView {
             make.width.equalTo(Adapt(130))
             make.height.equalTo(Adapt(30))
         })
-        self.loginBtn.setTitleColor(kWhite, for: .normal)
-        self.loginBtn.titleLabel?.font = BoldFontSize(14)
-        self.loginBtn.layer.cornerRadius = 3
-        
+        loginBtn.setTitleColor(kWhite, for: .normal)
+        loginBtn.titleLabel?.font = BoldFontSize(14)
+        loginBtn.layer.cornerRadius = 3
+        loginBtn.addTarget(self, action: #selector(loginBtnAction), for: .touchUpInside)
 
         zj_setUpGradientLayer(view: self.loginBtn, frame: CGRect(x: 0, y: 0, width: Adapt(120), height: Adapt(30)), color: kGradientColors, corneradiu: 3)
         
@@ -135,7 +139,11 @@ extension ZJFollowLiveHeadView {
         self.layoutSubviews()
     }
     
- 
+    @objc func loginBtnAction(){
+        if loginBtnCallBack != nil{
+            loginBtnCallBack!()
+        }
+    }
     
     override func layoutSubviews() {
         super.layoutSubviews()
