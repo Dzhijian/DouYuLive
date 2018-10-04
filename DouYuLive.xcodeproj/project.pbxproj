@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040732362166625B00400008 /* ZJCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040732352166625B00400008 /* ZJCustomView.swift */; };
 		0419BCD8210A2245008661D3 /* ZJBarButtonItem_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419BCD7210A2245008661D3 /* ZJBarButtonItem_Extension.swift */; };
 		0419BCDD210AB99A008661D3 /* ZJCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419BCDC210AB99A008661D3 /* ZJCommon.swift */; };
 		0419BCE1210ABACB008661D3 /* ZJPageTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419BCE0210ABACB008661D3 /* ZJPageTitleView.swift */; };
@@ -158,6 +159,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		040732352166625B00400008 /* ZJCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCustomView.swift; sourceTree = "<group>"; };
 		0419BCD7210A2245008661D3 /* ZJBarButtonItem_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJBarButtonItem_Extension.swift; sourceTree = "<group>"; };
 		0419BCDC210AB99A008661D3 /* ZJCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCommon.swift; sourceTree = "<group>"; };
 		0419BCE0210ABACB008661D3 /* ZJPageTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJPageTitleView.swift; sourceTree = "<group>"; };
@@ -892,6 +894,7 @@
 			children = (
 				04F23F862150089A00EC3617 /* ZJAlertController.swift */,
 				04D3E27E21510A78007085F0 /* ZJPopupView.swift */,
+				040732352166625B00400008 /* ZJCustomView.swift */,
 			);
 			path = ZJPopupView;
 			sourceTree = "<group>";
@@ -1243,6 +1246,7 @@
 				04DE7094211A88D20073DE82 /* ZJBannerModel.swift in Sources */,
 				04907E8821174B70006B70EC /* ZJRecommendCate.swift in Sources */,
 				04970603212BF38C00E12562 /* ZJRankView.swift in Sources */,
+				040732362166625B00400008 /* ZJCustomView.swift in Sources */,
 				049705E22126B9AE00E12562 /* ZJDiscoverHeadView.swift in Sources */,
 				0419BCFF2111BEBE008661D3 /* ZJQQCarViewController.swift in Sources */,
 				0464576F213C5120003F816A /* ZJImagePageControl.swift in Sources */,
