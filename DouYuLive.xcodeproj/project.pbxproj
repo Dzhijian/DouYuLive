@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		040732362166625B00400008 /* ZJCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040732352166625B00400008 /* ZJCustomView.swift */; };
+		040732382167BC5500400008 /* ZJPopupViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040732372167BC5500400008 /* ZJPopupViewDelegate.swift */; };
 		0419BCD8210A2245008661D3 /* ZJBarButtonItem_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419BCD7210A2245008661D3 /* ZJBarButtonItem_Extension.swift */; };
 		0419BCDD210AB99A008661D3 /* ZJCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419BCDC210AB99A008661D3 /* ZJCommon.swift */; };
 		0419BCE1210ABACB008661D3 /* ZJPageTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419BCE0210ABACB008661D3 /* ZJPageTitleView.swift */; };
@@ -160,6 +161,7 @@
 
 /* Begin PBXFileReference section */
 		040732352166625B00400008 /* ZJCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCustomView.swift; sourceTree = "<group>"; };
+		040732372167BC5500400008 /* ZJPopupViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJPopupViewDelegate.swift; sourceTree = "<group>"; };
 		0419BCD7210A2245008661D3 /* ZJBarButtonItem_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJBarButtonItem_Extension.swift; sourceTree = "<group>"; };
 		0419BCDC210AB99A008661D3 /* ZJCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCommon.swift; sourceTree = "<group>"; };
 		0419BCE0210ABACB008661D3 /* ZJPageTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJPageTitleView.swift; sourceTree = "<group>"; };
@@ -895,6 +897,7 @@
 				04F23F862150089A00EC3617 /* ZJAlertController.swift */,
 				04D3E27E21510A78007085F0 /* ZJPopupView.swift */,
 				040732352166625B00400008 /* ZJCustomView.swift */,
+				040732372167BC5500400008 /* ZJPopupViewDelegate.swift */,
 			);
 			path = ZJPopupView;
 			sourceTree = "<group>";
@@ -1255,6 +1258,7 @@
 				0419BD0F2112E920008661D3 /* ZJNetworking.swift in Sources */,
 				04907E90211954A8006B70EC /* ZJDecoder.swift in Sources */,
 				04A473B621252C0300D37F33 /* ZJFollowStateViewController.swift in Sources */,
+				040732382167BC5500400008 /* ZJPopupViewDelegate.swift in Sources */,
 				0454C174214C015600F57928 /* ZJLoginView.swift in Sources */,
 				0419BCFD2111BEB1008661D3 /* ZJWZRYViewController.swift in Sources */,
 				048EA3AF21078F8400E30720 /* ZJTabBarController.swift in Sources */,

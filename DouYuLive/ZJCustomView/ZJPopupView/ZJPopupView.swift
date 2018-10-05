@@ -73,6 +73,9 @@ class ZJPopupView: UIView {
             }
             break
         case .ZJRotation?:
+            UIView.animate(withDuration: durationTime) {
+             self.cusView.transform = CGAffineTransform(rotationAngle: 180)
+            }
             break
         case .ZJPopupSacle?:
             self.cusView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
@@ -84,6 +87,13 @@ class ZJPopupView: UIView {
             }
             break
         case .ZJAlpha?:
+            self.cusView.alpha = 0.0
+            UIView.animate(withDuration: durationTime, animations: {
+                self.alpha = 1.0
+                self.cusView.alpha = 1.0
+            }) { (isSuccess) in
+                
+            }
             break
         default:
             break
@@ -111,6 +121,12 @@ class ZJPopupView: UIView {
             }
             break
         case .ZJAlpha?:
+            UIView.animate(withDuration: durationTime, animations: {
+                self.cusView.alpha = 0.0
+            }) { (isSccess) in
+                self.isHidden = true
+                self.removeFromSuperview()
+            }
             break
         default:
             break
