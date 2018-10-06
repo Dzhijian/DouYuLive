@@ -31,6 +31,11 @@ class ZJPopupView: UIView,ZJPopupViewDelegate {
     var durationTime : Double = 0.25
     /// 背景透明度
     var bgAlpha : CGFloat = 0.5
+    /// 视图尺寸
+    var cusViewSize : CGSize
+    
+    
+    
     /// 初始化方法
     ///
     /// - Parameters:
@@ -38,6 +43,8 @@ class ZJPopupView: UIView,ZJPopupViewDelegate {
     ///   - customView: 自定义视图
     ///   - style: 动画样式
     init(size: CGSize, customView: ZJPopupBaseView? = nil ,style : ZJPopupAnimationStyle) {
+        
+        cusViewSize = size
         super.init(frame:UIScreen.main.bounds)
         popupStyle = style
         self.isHidden = true
@@ -45,7 +52,7 @@ class ZJPopupView: UIView,ZJPopupViewDelegate {
         self.frame = CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH)
         if customView != nil {
             assert((customView?.isKind(of: ZJPopupBaseView.self))!, "customView 必须继承 ZJPopupBaseView")
-            self.customView = customView! as! ZJPopupBaseView
+            self.customView = customView!
             
         }
         UIApplication.shared.keyWindow?.addSubview(self)
@@ -75,15 +82,16 @@ class ZJPopupView: UIView,ZJPopupViewDelegate {
         self.alpha = 0.0
         self.isHidden = false
 
-        
         switch popupStyle {
         case .ZJPopTransition?:
+            self.customView.transform = self.customView.transform.concatenating(CGAffineTransform(translationX: 0, y: -(kScreenH-self.cusViewSize.height)/2))
             UIView.animate(withDuration: durationTime, animations: {
                 self.alpha = 1.0
-                self.customView.transform = self.customView.transform.concatenating(CGAffineTransform(translationX: 100, y: 100))
+                self.customView.transform = self.customView.transform.concatenating(CGAffineTransform(translationX: 0, y: (kScreenH-self.cusViewSize.height)/2))
             }) { (isSuccess) in
                 
             }
+            
             break
         case .ZJRotation?:
             
@@ -106,7 +114,7 @@ class ZJPopupView: UIView,ZJPopupViewDelegate {
             
             break
         case .ZJPopupSacle?:
-            self.customView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+            self.customView.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
             UIView.animate(withDuration: durationTime, animations: {
                 self.alpha = 1.0
                 self.customView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)

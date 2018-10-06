@@ -95,10 +95,9 @@ class ZJHomeViewController: ZJBaseViewController {
     
     override func rightItemClick() {
         super.rightItemClick()
-        // 自定义视图
+        // ZJPopupView 自定义视图
         let customView = ZJCustomView.init(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        
-        let popView = ZJPopupView(size: CGSize(width: 250, height: 200),customView: customView , style: .ZJRotation)
+        let popView = ZJPopupView(size: CGSize(width: 250, height: 200),customView: customView , style: .ZJPopupSacle)
         popView.zj_showPopView()
         
     }
