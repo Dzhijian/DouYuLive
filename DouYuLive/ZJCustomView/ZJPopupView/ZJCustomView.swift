@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ZJCustomView: ZJPopupBaseCustomView {
+class ZJCustomView: ZJPopupBaseView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -17,7 +17,8 @@ class ZJCustomView: ZJPopupBaseCustomView {
         let btn = UIButton.zj_createButton(title: "这是一个自定义弹窗视图,点击关闭", titleStatu: .normal, imageName: nil, imageStatu: nil, supView: self) { (make) in
             make.center.equalTo(self.snp.center)
         }
-        btn.addTarget(self, action: #selector(popupViewhiddenAction), for: .touchUpInside)
+        // 添加zj_popupViewhiddenAction 事件,点击隐藏视图
+        btn.addTarget(self, action: #selector(zj_popupViewhiddenAction), for: .touchUpInside)
         
     }
     

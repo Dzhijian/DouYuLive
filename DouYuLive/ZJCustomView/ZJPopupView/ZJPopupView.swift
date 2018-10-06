@@ -16,54 +16,54 @@ enum ZJPopupAnimationStyle {
 }
 
 class ZJPopupView: UIView,ZJPopupViewDelegate {
-
+    /// 动画样式
     var popupStyle : ZJPopupAnimationStyle? = .ZJPopupSacle
-    // 自定义 View
-    lazy var cusView : ZJPopupBaseCustomView = {
-        let cusView = ZJPopupBaseCustomView()
-        cusView.backgroundColor = kWhite
-        cusView.layer.cornerRadius = 5
-        return cusView;
+    /// 自定义 View
+    lazy var customView : ZJPopupBaseView = {
+        let customView = ZJPopupBaseView()
+        customView.backgroundColor = kWhite
+        customView.layer.cornerRadius = 5
+        return customView;
     }()
-    /// 是否可以点击透明背景层,默认为 true
+    /// 是否可以点击透明背景层隐藏视图,默认为 true
     var isBGClickAction : Bool = true
-//        didSet{
-//            if isBGClickAction {
-//                self.addGestureRecognizer(bgTap)
-//            }else{
-//                self.removeGestureRecognizer(bgTap)
-//            }
-//        }
-//    }
-    // 动画时间
+    /// 动画时间
     var durationTime : Double = 0.25
-    // 背景透明度
+    /// 背景透明度
     var bgAlpha : CGFloat = 0.5
-    
-    
     /// 初始化方法
     ///
     /// - Parameters:
     ///   - size: 视图尺寸宽高
     ///   - customView: 自定义视图
     ///   - style: 动画样式
-    init(size: CGSize, customView: UIView? = nil ,style : ZJPopupAnimationStyle) {
+    init(size: CGSize, customView: ZJPopupBaseView? = nil ,style : ZJPopupAnimationStyle) {
         super.init(frame:UIScreen.main.bounds)
         popupStyle = style
         self.isHidden = true
         self.backgroundColor = colorWithRGBA(33, 33, 33, bgAlpha)
         self.frame = CGRect(x: 0, y: 0, width: kScreenW, height: kScreenH)
-        if customView != nil { self.cusView = customView! as! ZJPopupBaseCustomView }
+        if customView != nil {
+            assert((customView?.isKind(of: ZJPopupBaseView.self))!, "customView 必须继承 ZJPopupBaseView")
+            self.customView = customView! as! ZJPopupBaseView
+            
+        }
         UIApplication.shared.keyWindow?.addSubview(self)
-        
-        let bgTap = UITapGestureRecognizer(target: self, action: #selector(zj_dissmissPopView))
+        // 背景透明层点击事件
+        let bgTap = UITapGestureRecognizer(target: self, action: #selector(zj_bgViewTap))
         self.addGestureRecognizer(bgTap)
         // 配置 UI ,设置 size
         setUpAllView(size: size)
         // 背景层点击事件
         // 自定义视图点击事件,默认不做处理
         let cusTap = UITapGestureRecognizer(target: self, action: #selector(zj_cusTap))
-        self.cusView.addGestureRecognizer(cusTap)
+        self.customView.addGestureRecognizer(cusTap)
+        
+        // customView的点击事件,隐藏弹窗
+        self.customView.cusBlock = { [weak self] in
+            print("customView点击事件,隐藏弹窗");
+            self?.zj_dissmissPopView()
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -80,7 +80,7 @@ class ZJPopupView: UIView,ZJPopupViewDelegate {
         case .ZJPopTransition?:
             UIView.animate(withDuration: durationTime, animations: {
                 self.alpha = 1.0
-                self.cusView.transform = self.cusView.transform.concatenating(CGAffineTransform(translationX: 100, y: 100))
+                self.customView.transform = self.customView.transform.concatenating(CGAffineTransform(translationX: 100, y: 100))
             }) { (isSuccess) in
                 
             }
@@ -102,23 +102,23 @@ class ZJPopupView: UIView,ZJPopupViewDelegate {
             groupAnima.animations = [scaleAnima,rotaAnima]
             groupAnima.duration = durationTime*2
             // 添加到 layer 上
-            self.cusView.layer.add(groupAnima, forKey: "groupAnimation")
+            self.customView.layer.add(groupAnima, forKey: "groupAnimation")
             
             break
         case .ZJPopupSacle?:
-            self.cusView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+            self.customView.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
             UIView.animate(withDuration: durationTime, animations: {
                 self.alpha = 1.0
-                self.cusView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                self.customView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
             }) { (isSuccess) in
                 
             }
             break
         case .ZJAlpha?:
-            self.cusView.alpha = 0.0
+            self.customView.alpha = 0.0
             UIView.animate(withDuration: durationTime, animations: {
                 self.alpha = 1.0
-                self.cusView.alpha = 1.0
+                self.customView.alpha = 1.0
             }) { (isSuccess) in
                 
             }
@@ -136,12 +136,19 @@ class ZJPopupView: UIView,ZJPopupViewDelegate {
         
         switch popupStyle {
         case .ZJPopTransition?:
+            UIView.animate(withDuration: durationTime, animations: {
+                self.alpha = 0.0
+                self.customView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+            }) { (isSuccess) in
+                self.isHidden = true
+                self.removeFromSuperview()
+            }
             break
         case .ZJRotation?:
             
             UIView.animate(withDuration: durationTime, animations: {
                 self.alpha = 0.0
-                self.cusView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+                self.customView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
             }) { (isSuccess) in
                 self.isHidden = true
                 self.removeFromSuperview()
@@ -151,7 +158,7 @@ class ZJPopupView: UIView,ZJPopupViewDelegate {
         case .ZJPopupSacle?:
             UIView.animate(withDuration: durationTime, animations: {
                 self.alpha = 0.0
-                self.cusView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+                self.customView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
             }) { (isSuccess) in
                 self.isHidden = true
                 self.removeFromSuperview()
@@ -159,7 +166,7 @@ class ZJPopupView: UIView,ZJPopupViewDelegate {
             break
         case .ZJAlpha?:
             UIView.animate(withDuration: durationTime, animations: {
-                self.cusView.alpha = 0.0
+                self.customView.alpha = 0.0
             }) { (isSccess) in
                 self.isHidden = true
                 self.removeFromSuperview()
@@ -172,7 +179,15 @@ class ZJPopupView: UIView,ZJPopupViewDelegate {
         
     }
     
-    @objc func zj_cusTap() {
+    //
+    @objc private func zj_bgViewTap() {
+        guard isBGClickAction else {
+            return
+        }
+        self.zj_dissmissPopView()
+    }
+    
+    @objc private  func zj_cusTap() {
         
     }
 }
@@ -182,9 +197,9 @@ class ZJPopupView: UIView,ZJPopupViewDelegate {
 extension ZJPopupView {
     
     private func setUpAllView(size: CGSize) {
-        self.addSubview(cusView)
+        self.addSubview(customView)
         
-        cusView.snp.makeConstraints { (make) in
+        customView.snp.makeConstraints { (make) in
             make.center.equalTo(self.snp.center)
             make.width.equalTo(size.width)
             make.height.equalTo(size.height)
