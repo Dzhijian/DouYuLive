@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		040732362166625B00400008 /* ZJCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040732352166625B00400008 /* ZJCustomView.swift */; };
 		040732382167BC5500400008 /* ZJPopupViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040732372167BC5500400008 /* ZJPopupViewDelegate.swift */; };
+		0407323A2167DA7100400008 /* ZJPopupBaseCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040732392167DA7100400008 /* ZJPopupBaseCustomView.swift */; };
 		0419BCD8210A2245008661D3 /* ZJBarButtonItem_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419BCD7210A2245008661D3 /* ZJBarButtonItem_Extension.swift */; };
 		0419BCDD210AB99A008661D3 /* ZJCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419BCDC210AB99A008661D3 /* ZJCommon.swift */; };
 		0419BCE1210ABACB008661D3 /* ZJPageTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419BCE0210ABACB008661D3 /* ZJPageTitleView.swift */; };
@@ -162,6 +163,7 @@
 /* Begin PBXFileReference section */
 		040732352166625B00400008 /* ZJCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCustomView.swift; sourceTree = "<group>"; };
 		040732372167BC5500400008 /* ZJPopupViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJPopupViewDelegate.swift; sourceTree = "<group>"; };
+		040732392167DA7100400008 /* ZJPopupBaseCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJPopupBaseCustomView.swift; sourceTree = "<group>"; };
 		0419BCD7210A2245008661D3 /* ZJBarButtonItem_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJBarButtonItem_Extension.swift; sourceTree = "<group>"; };
 		0419BCDC210AB99A008661D3 /* ZJCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCommon.swift; sourceTree = "<group>"; };
 		0419BCE0210ABACB008661D3 /* ZJPageTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJPageTitleView.swift; sourceTree = "<group>"; };
@@ -898,6 +900,7 @@
 				04D3E27E21510A78007085F0 /* ZJPopupView.swift */,
 				040732352166625B00400008 /* ZJCustomView.swift */,
 				040732372167BC5500400008 /* ZJPopupViewDelegate.swift */,
+				040732392167DA7100400008 /* ZJPopupBaseCustomView.swift */,
 			);
 			path = ZJPopupView;
 			sourceTree = "<group>";
@@ -1268,6 +1271,7 @@
 				04A473AE21242A8000D37F33 /* ZJFaceScoreCell.swift in Sources */,
 				0464576B213B0641003F816A /* ZJCarouselCell.swift in Sources */,
 				0419BCEB210EB554008661D3 /* ZJFont.swift in Sources */,
+				0407323A2167DA7100400008 /* ZJPopupBaseCustomView.swift in Sources */,
 				04907E8E21185E94006B70EC /* ZJNotificationName.swift in Sources */,
 				043512E321219372001D928A /* ZJRecreationHeaderView.swift in Sources */,
 				0419BCF3210F7FE5008661D3 /* ZJPageContentView.swift in Sources */,

@@ -9,5 +9,7 @@
 import UIKit
 
 protocol ZJPopupViewDelegate {
+    func zj_showPopView()
+    func zj_dissmissPopView()
     
 }
