@@ -87,9 +87,11 @@ class ZJPopupView: UIView,ZJPopupViewDelegate {
             self.customView.transform = self.customView.transform.concatenating(CGAffineTransform(translationX: 0, y: -(kScreenH-self.cusViewSize.height)/2))
             UIView.animate(withDuration: durationTime, animations: {
                 self.alpha = 1.0
-                self.customView.transform = self.customView.transform.concatenating(CGAffineTransform(translationX: 0, y: (kScreenH-self.cusViewSize.height)/2))
+                self.customView.transform = self.customView.transform.concatenating(CGAffineTransform(translationX: 0, y: (kScreenH-self.cusViewSize.height)/2+50))
             }) { (isSuccess) in
-                
+                UIView.animate(withDuration: self.durationTime/2, animations: {
+                    self.customView.transform = self.customView.transform.concatenating(CGAffineTransform(translationX: 0, y: -50))
+                })
             }
             
             break
