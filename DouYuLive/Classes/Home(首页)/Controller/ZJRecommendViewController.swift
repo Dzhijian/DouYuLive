@@ -91,10 +91,10 @@ extension ZJRecommendViewController {
             let data = try? ZJDecoder.decode(ZJRecommendActivityData.self, data: response)
             if data != nil {
                 self.activityList = (data?.list)!
-                self.collectionView.es.stopPullToRefresh()
                 self.collectionView.reloadData()
             }
             
+            self.collectionView.es.stopPullToRefresh()
         }
     }
     

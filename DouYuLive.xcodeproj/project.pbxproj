@@ -1403,7 +1403,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = codeDeng.DouYuLive;
+				PRODUCT_BUNDLE_IDENTIFIER = codeDeng.douyu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "DouYuLive/Tools/Header-Swift.h";
 				SWIFT_VERSION = 4.0;
@@ -1427,7 +1427,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = codeDeng.DouYuLive;
+				PRODUCT_BUNDLE_IDENTIFIER = codeDeng.douyu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "DouYuLive/Tools/Header-Swift.h";
 				SWIFT_VERSION = 4.0;

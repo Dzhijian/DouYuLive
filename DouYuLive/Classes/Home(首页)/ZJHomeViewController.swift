@@ -140,9 +140,6 @@ extension ZJHomeViewController {
         view.addSubview(pageContenView)
         
     }
-    
-    
-    
 }
 
 
