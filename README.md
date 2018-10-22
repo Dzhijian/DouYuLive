@@ -12,7 +12,7 @@
 
 ##### iOS开发学习交流群
 
-！[iOS学习交流群] (http://p7l9kf5i4.bkt.clouddn.com/iosdevelopmentqqqun.png)
+![iOS学习交流群](http://p7l9kf5i4.bkt.clouddn.com/iosdevelopmentqqqun.png)
 
 ### 示例图
 ![斗鱼](http://p7l9kf5i4.bkt.clouddn.com/2018-08-31-斗鱼.gif)
