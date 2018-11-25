@@ -78,7 +78,20 @@ extension HomeAPI : TargetType {
     
     //请求头
     public var headers: [String : String]? {
-        return nil
+        
+        // 配置 HTTPHeaders
+        let headers: [String : String] = [
+            "charset":"utf-8",
+            "Cookie" : "acf_did=6412f66c83a322e90fa3307d00001521",
+            "User-Device": "NjQxMmY2NmM4M2EzMjJlOTBmYTMzMDdkMDAwMDE1MjF8NS4wMDA=",
+            "time" : getTimeStamp(),
+            "auth" : "f390ebfa09d1dbe6765e91f82ee62b34",
+            "aid"  : "ios",
+            "User-Agent" : "ios/5.000 (ios 12.1; ; iPhone 6 (A1549/A1586))",
+            "Accept-Encoding" : "br, gzip, deflate",
+            "Content-Type" : "application/x-www-form-urlencoded",
+            ]
+        return headers
     }
     
     

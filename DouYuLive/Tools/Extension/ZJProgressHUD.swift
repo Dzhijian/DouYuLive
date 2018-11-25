@@ -29,7 +29,7 @@ class ZJProgressHUD: NSObject {
             supFrame = bgFrame!
         }
         
-        print(supFrame)
+//        print(supFrame)
         let bgView = UIView()
         bgView.isHidden = false
         bgView.backgroundColor = bgColor

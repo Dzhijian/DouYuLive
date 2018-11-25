@@ -63,7 +63,7 @@ class ZJPageContentView: UIView {
         
         self.childVCs = childVCs
         self.parentViewController = parentViewController
-        print(frame)
+//        print(frame)
         super.init(frame:frame)
         
         setUpView()

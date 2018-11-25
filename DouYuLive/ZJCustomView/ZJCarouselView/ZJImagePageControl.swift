@@ -62,7 +62,7 @@ class ZJImagePageControl: UIPageControl {
                 view.addSubview(imageV!)
                 
                 view.clipsToBounds = false
-                print(view.frame)
+//                print(view.frame)
                 
             }
             

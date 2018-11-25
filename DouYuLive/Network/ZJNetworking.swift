@@ -34,23 +34,8 @@ class ZJNetWorking {
             "Content-Type" : "application/x-www-form-urlencoded",
         ]
         
-        
-        Alamofire.request(URlString, method: type, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
+        Alamofire.request(URlString, method: type, parameters: parameters, encoding: JSONEncoding.prettyPrinted, headers: headers).responseJSON { (response) in
             
-            // 处理 cookie
-//            let headerFields = response.response?.allHeaderFields as! [String: String]
-//            let url = response.request?.url
-//            let cookies = HTTPCookie.cookies(withResponseHeaderFields: headerFields, for: url!)
-//            var cookieArray = [ [HTTPCookiePropertyKey : Any ] ]()
-//            for cookie in cookies {
-//                cookieArray.append(cookie.properties!)
-//            }
-//            if !(UserDefaults.standard.object(forKey: ZJ_DOUYU_TOKEN) != nil){
-//                // 保存 cookie
-//                UserDefaults.standard.set(cookieArray, forKey: ZJ_DOUYU_TOKEN)
-//            }else{
-////                print("token\(String(describing: UserDefaults.standard.object(forKey: ZJ_DOUYU_TOKEN)))")
-//            }
             print("\n====================== ZJNetWorking ===============================")
             print("Method:\(type)请求\nURL: \(URlString)\n请求参数parameters:")
 //            print(parameters as! [String : String])
