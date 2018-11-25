@@ -62,9 +62,19 @@ class ZJHomeViewController: ZJBaseViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.refreshNavBar), name: NSNotification.Name(rawValue: ZJNotiRefreshHomeNavBar), object: nil)
         
-        douyuNewApiTest()
+//        douyuNewApiTest()
+        homeGetRecData()
     }
 
+
+    func homeGetRecData() {
+        
+        ZJNetworkProvider.shared.requestDataWithTargetJSON(target: HomeAPI.getRecList1, successClosure: { (response) in
+            print(response)
+        }) { (error) in
+            
+        }
+    }
     
     func douyuNewApiTest() {
 //        ZJNetWorking.requestData(type: .GET, URlString: ZJiosCheckUpdate) { (response) in

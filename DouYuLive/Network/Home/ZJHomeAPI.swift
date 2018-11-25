@@ -11,19 +11,22 @@ import Moya
 let HomeProvider = MoyaProvider<HomeAPI>()
 
 public enum HomeAPI {
-    case recommendCategoryList //分类推荐列表
-    case liveCateList  //分类列表
+    case recommendCategoryList       //分类推荐列表
+    case liveCateList                //分类列表
+    case getRecList1                 // 热门推荐
     
 }
 
 extension HomeAPI : TargetType {
-    
+    //https://apiv2.douyucdn.cn/mgapi/livenc/home/getRecList1?client_sys=ios&limit=10&offset=0
     //服务器地址
     public var baseURL: URL {
         switch self {
         case .recommendCategoryList:
             return URL(string: "https://apiv2.douyucdn.cn")!
         case .liveCateList:
+            return URL(string: "https://apiv2.douyucdn.cn")!
+        case .getRecList1:
             return URL(string: "https://apiv2.douyucdn.cn")!
         }
     }
@@ -35,6 +38,8 @@ extension HomeAPI : TargetType {
             return "/live/cate/getLiveRecommendCate2"
         case .liveCateList:
             return "/live/cate/getLiveCate1List"
+        case .getRecList1:
+            return "/mgapi/livenc/home/getRecList1"
         }
     }
     
@@ -45,6 +50,8 @@ extension HomeAPI : TargetType {
             return .get
         case .liveCateList:
             return .get
+        case.getRecList1:
+            return .post
         }
     }
     
@@ -61,7 +68,49 @@ extension HomeAPI : TargetType {
             params["client_sys"] = "ios"
             return .requestParameters(parameters: params,
                                       encoding: URLEncoding.default)
+        case .getRecList1:
+            var params: [String: Any] = [:]
+            params["client_sys"] = "ios"
+            params["limit"] = "10"
+            params["offset"] = "0"
             
+            let appDictM : NSMutableDictionary = NSMutableDictionary.init()
+            appDictM.setValue("斗鱼", forKey: "aname")
+            appDictM.setValue("tv.douyu.live", forKey: "pname")
+            
+            // device
+            let deviceDictM : NSMutableDictionary = NSMutableDictionary.init()
+            deviceDictM.setValue("750", forKey: "w")
+            deviceDictM.setValue("1334", forKey: "h")
+            deviceDictM.setValue("", forKey: "mac")
+            deviceDictM.setValue("D2501EBB-E442-4168-8D37-E854FD9298C5", forKey: "idfa")
+            deviceDictM.setValue("0", forKey: "devtype")
+            deviceDictM.setValue("12.1", forKey: "osv")
+            deviceDictM.setValue("iOS", forKey: "os")
+            deviceDictM.setValue("", forKey: "imei")
+            deviceDictM.setValue("Mozilla/5.0 (iPhone; CPU iPhone OS 12_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/16B92, Douyu_IOS", forKey: "ua")
+            deviceDictM.setValue("1", forKey: "op")
+            deviceDictM.setValue("1", forKey: "nt")
+            deviceDictM.setValue("iPhone 6", forKey: "model")
+            
+            let paramDictM : NSMutableDictionary = NSMutableDictionary.init()
+            paramDictM.setValue(appDictM, forKey: "app")
+            paramDictM.setValue("D2501EBB-E442-4168-8D37-E854FD9298C5", forKey: "idfa")
+            paramDictM.setValue("iphone", forKey: "mdid")
+            paramDictM.setValue(deviceDictM, forKey: "device")
+            paramDictM.setValue("ios", forKey: "client_sys")
+            
+            if (!JSONSerialization.isValidJSONObject(paramDictM)) {
+                print("无法解析出JSONString")
+                
+            }
+            let data : NSData! = try? JSONSerialization.data(withJSONObject: paramDictM, options: .prettyPrinted) as NSData
+            let JSONString = NSString(data:data as Data,encoding: String.Encoding.utf8.rawValue)
+           
+            params["ad"] = JSONString! as String
+            
+            return .requestParameters(parameters: params,
+                                      encoding: URLEncoding.default)
         }
         
     }
