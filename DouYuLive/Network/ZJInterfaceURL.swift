@@ -8,6 +8,24 @@
 
 import Foundation
 
+/**
+ *  斗鱼最新 API 测试
+ */
+// 斗鱼配置数据 https://mconf.douyucdn.cn/package/ios_start.json?client_sys=ios
+let ZJDouYuConfig : String = "https://mconf.douyucdn.cn/package/ios_start.json?client_sys=ios"
+// https://apiv3.douyucdn.cn/mgapi/livenc/mhome/iosCheckUpdate?client_sys=ios
+let ZJiosCheckUpdate : String = "https://apiv3.douyucdn.cn/mgapi/livenc/mhome/iosCheckUpdate?client_sys=ios"
+// https://capi.douyucdn.cn/wb_share/config?client_sys=ios
+let ZJWB_ShareConfig : String = "https://capi.douyucdn.cn/wb_share/config?client_sys=ios"
+// https://apiv2.douyucdn.cn/lapi/authority/timestamp?client_sys=ios
+let ZJtimestamp : String = "https://apiv2.douyucdn.cn/lapi/authority/timestamp?client_sys=ios"
+// https://apiv2.douyucdn.cn/mgapi/livenc/home/getRecList1?client_sys=ios&limit=10&offset=0
+let ZJHomegetRecList1 : String = "https://apiv2.douyucdn.cn/mgapi/livenc/home/getRecList1?client_sys=ios&limit=10&offset=0"
+
+
+
+
+
 // 首页
 // 热门推荐
 let ZJRecommendHotURL : String = "https://apiv2.douyucdn.cn/mgapi/livenc/home/getRecList1"

@@ -41,6 +41,7 @@
 		0454C170214AB88500F57928 /* ZJLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0454C16F214AB88500F57928 /* ZJLoginViewController.swift */; };
 		0454C172214AB89100F57928 /* ZJRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0454C171214AB89100F57928 /* ZJRegisterViewController.swift */; };
 		0454C174214C015600F57928 /* ZJLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0454C173214C015600F57928 /* ZJLoginView.swift */; };
+		0459BBA621AA615700CC78B4 /* ZJDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0459BBA521AA615700CC78B4 /* ZJDateExtension.swift */; };
 		045DC67321353ADE009902BC /* ZJRecomCateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045DC67221353ADE009902BC /* ZJRecomCateData.swift */; };
 		045DE3902125C75C004718E8 /* ZJFollowInteresData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045DE38F2125C75C004718E8 /* ZJFollowInteresData.swift */; };
 		0464576B213B0641003F816A /* ZJCarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464576A213B0641003F816A /* ZJCarouselCell.swift */; };
@@ -186,6 +187,7 @@
 		0454C16F214AB88500F57928 /* ZJLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJLoginViewController.swift; sourceTree = "<group>"; };
 		0454C171214AB89100F57928 /* ZJRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJRegisterViewController.swift; sourceTree = "<group>"; };
 		0454C173214C015600F57928 /* ZJLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJLoginView.swift; sourceTree = "<group>"; };
+		0459BBA521AA615700CC78B4 /* ZJDateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJDateExtension.swift; sourceTree = "<group>"; };
 		045DC67221353ADE009902BC /* ZJRecomCateData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJRecomCateData.swift; sourceTree = "<group>"; };
 		045DE38F2125C75C004718E8 /* ZJFollowInteresData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJFollowInteresData.swift; sourceTree = "<group>"; };
 		0464576A213B0641003F816A /* ZJCarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZJCarouselCell.swift; sourceTree = "<group>"; };
@@ -444,6 +446,14 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		0459BBA421AA5D4E00CC78B4 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				048EA3782106447200E30720 /* AppDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
 		045DC67121352673009902BC /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -486,13 +496,13 @@
 		048EA3772106447200E30720 /* DouYuLive */ = {
 			isa = PBXGroup;
 			children = (
+				0459BBA421AA5D4E00CC78B4 /* AppDelegate */,
 				048EA3A62107873B00E30720 /* Classes */,
 				0419BD0D2112E90B008661D3 /* Network */,
 				04F23F842150073D00EC3617 /* ZJCustomView */,
 				048EA3A82107873B00E30720 /* Tools */,
 				04A7D9652138EF370069DF01 /* Other */,
 				04A7D9632138EE240069DF01 /* Rescoure */,
-				048EA3782106447200E30720 /* AppDelegate.swift */,
 				048EA37C2106447200E30720 /* Main.storyboard */,
 				048EA3842106447300E30720 /* Info.plist */,
 			);
@@ -549,6 +559,7 @@
 				0419BCD9210AB934008661D3 /* Extension */,
 				0419BCDC210AB99A008661D3 /* ZJCommon.swift */,
 				0419BCE4210AC50D008661D3 /* Header-Swift.h */,
+				0459BBA521AA615700CC78B4 /* ZJDateExtension.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -1140,6 +1151,7 @@
 				04DE708D2119C55C0073DE82 /* ZJLiveListCell.swift in Sources */,
 				04A473A921240F7C00D37F33 /* ZJQuadraticElementViewController.swift in Sources */,
 				04DE709E211BE2140073DE82 /* ZJAllLiveData.swift in Sources */,
+				0459BBA621AA615700CC78B4 /* ZJDateExtension.swift in Sources */,
 				049705E82127397000E12562 /* ZJDiscoverModel.swift in Sources */,
 				04DE7098211AC5270073DE82 /* ZJCateCollectionHeadView.swift in Sources */,
 				04A473BB212533FC00D37F33 /* ZJFollowLiveHeadView.swift in Sources */,
@@ -1396,7 +1408,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R65337KS8W;
+				DEVELOPMENT_TEAM = 28E7TBMSGR;
 				INFOPLIST_FILE = DouYuLive/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1420,7 +1432,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R65337KS8W;
+				DEVELOPMENT_TEAM = 28E7TBMSGR;
 				INFOPLIST_FILE = DouYuLive/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (

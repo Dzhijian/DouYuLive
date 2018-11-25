@@ -15,6 +15,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        // acf_did
+//        var cookieProperties = [HTTPCookiePropertyKey: String]()
+//        cookieProperties[HTTPCookiePropertyKey.name] = "acf_did" as String
+//        cookieProperties[HTTPCookiePropertyKey.value] = "6412f66c83a322e90fa3307d00001521" as String
+//        
+//        let cookie = HTTPCookie(properties: cookieProperties)
+//        HTTPCookieStorage.shared.setCookie(cookie!)
+        
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.backgroundColor = UIColor.white
@@ -31,12 +39,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         }
-        
+//        getDouYuConfig()
         self.window?.makeKeyAndVisible()
         
         return true
     }
 
+    func getDouYuConfig() {
+//        let dict : [String : String] = ["client_sys" : "ios"]
+        ZJNetWorking .requestData(type: .GET, URlString: ZJDouYuConfig, parameters: nil) { (response) in
+            
+        }
+    }
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
