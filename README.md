@@ -11,11 +11,12 @@
 **Email**: 646724452@qq.com 
 
 ##### iOS开发学习交流群
-
-![iOS学习交流群](http://p7l9kf5i4.bkt.clouddn.com/iosdevelopmentqqqun.png)
+**群号:616477537**
+加群请备注 iOS 学习交流
+![iOS学习交流群](http://image.coderdeng.xyz/iOS_study_chat.jpg)
 
 ### 示例图
-![斗鱼](http://p7l9kf5i4.bkt.clouddn.com/2018-08-31-斗鱼.gif)
+![斗鱼](http://image.coderdeng.xyz/2018-08-31-%E6%96%97%E9%B1%BC.gif)
 #### 项目环境
 Xcode : 9.3
 Swift : 4.0
