@@ -4,18 +4,19 @@
 本项目是模仿斗鱼iOS最新版本，使用 `Swift4.0`开发，所有资源均来自斗鱼，API接口通过抓取斗鱼App获得，仅供学习参考使用。
 整个项目比较大，我是利用闲余时间写的，未完成功能较多，后面会持续更新完成。。。
 请大佬们多多指教，给个 Star，你的支持就是我不断前进的动力，谢谢。
-### Author
+### iOS开发学习交流群
 
-**作者**：**coderDeng**, 
-**QQ**: 646724452
-**Email**: 646724452@qq.com 
-
-##### iOS开发学习交流群
-**QQ群号:616477537**
+**群号:616477537**
 
 > 加群请备注 iOS学习交流
 
 ![iOS学习交流群](http://image.coderdeng.xyz/iOS_study_chat.jpg/style03)
+
+### Contact
+Author: James
+Email: 646724452@qq.com
+QQ: 646724452
+WeChat: 18819206239
 
 ### 示例图
 ![斗鱼](http://image.coderdeng.xyz/2018-08-31-%E6%96%97%E9%B1%BC.gif)
