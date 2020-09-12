@@ -114,7 +114,6 @@ extension ZJClassifyViewController {
                 DispatchQueue.main.async {
                     self.mainTable.es.stopPullToRefresh()
                     ZJProgressHUD.hideAllHUD()
-                    print("全部任务执行完毕,刷新页面" + "\(Thread.current)")
                     self.mainTable.reloadData()
                 }
             }

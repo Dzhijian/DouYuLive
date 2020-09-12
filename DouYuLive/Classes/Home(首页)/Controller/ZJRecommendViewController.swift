@@ -52,13 +52,14 @@ class ZJRecommendViewController: ZJBaseViewController ,UIScrollViewDelegate{
     }
     
     func loadData() {
+        //广告轮播
+        loadRecommendAdvertisingData()
         // 获取热门推荐列表数据
-//        loadHotRecommendListData()
+        loadHotRecommendListData()
         
         getActivityList()
         
         getRecommendCateList()
-        
         getLiveList()
     }
     
@@ -76,12 +77,23 @@ class ZJRecommendViewController: ZJBaseViewController ,UIScrollViewDelegate{
 // MARK: - 网络请求
 extension ZJRecommendViewController {
     
-    // 获取热门推荐数据
+    // 广告轮播
+    private func loadRecommendAdvertisingData() {
+//        let dict : [String : String] = ["client_sys":"ios"]
+        ZJNetWorking.requestData(type: .GET, URlString:ZJRecommendAdvertisingURL , parameters: nil) { (response) in
+            print(response)
+            let data = try? ZJDecoder.decode(ZJRecAdvertising.self, data: response)
+                       if data != nil {
+//                           self.activityList = (data?.data)!
+                           self.collectionView.reloadData()
+                       }
+        }
+    }
     
+    // 获取热门推荐数据
     private func loadHotRecommendListData() {
         let dict : [String : String] = ["limit":"10","client_sys":"ios","offset":"0"]
         ZJNetWorking.requestData(type: .POST, URlString:ZJRecommendHotURL , parameters: dict) { (response) in
-            print(response)
             print(response)
         }
     }

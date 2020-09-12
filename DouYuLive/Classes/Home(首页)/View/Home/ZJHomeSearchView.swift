@@ -16,11 +16,9 @@ class ZJHomeSearchView : UIView {
         textField.borderStyle = .none
         textField.font = FontSize(14)
         textField.textColor = kWhite
-        textField.placeholder = "请输入搜索内容"
-        //字体大小
-        textField.setValue(FontSize(14),forKeyPath: "_placeholderLabel.font")
-        //字体颜色
-        textField.setValue(colorWithRGBA(100, 100, 100, 0.5), forKeyPath: "_placeholderLabel.textColor")
+        let placeholserAttributes = [NSAttributedStringKey.foregroundColor : colorWithRGBA(100, 100, 100, 0.5),NSAttributedStringKey.font : FontSize(14)]
+    
+        textField.attributedPlaceholder = NSAttributedString.init(string:"请输入搜索内容", attributes: placeholserAttributes)
         
         return textField
     }()

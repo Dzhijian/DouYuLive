@@ -13,7 +13,7 @@ class ZJRefreshView: ZJBaseView , ESRefreshProtocol,ESRefreshAnimatorProtocol {
 
     public var insets: UIEdgeInsets = UIEdgeInsets.zero
     public var view: UIView { return self }
-    public var duration: TimeInterval = 0.3
+    public var duration: TimeInterval = 0.5
     public var trigger: CGFloat = 56.0
     public var executeIncremental: CGFloat = 56.0
     public var state: ESRefreshViewState = .pullToRefresh

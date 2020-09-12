@@ -25,10 +25,12 @@ let ZJHomegetRecList1 : String = "https://apiv2.douyucdn.cn/mgapi/livenc/home/ge
 
 
 
-
 // 首页
 // 热门推荐
 let ZJRecommendHotURL : String = "https://apiv2.douyucdn.cn/mgapi/livenc/home/getRecList1"
+//https://apiv3.douyucdn.cn/mgapi/live/mhome/getSlidesRec?client_sys=ios
+// 推荐广告轮播 GET
+let ZJRecommendAdvertisingURL : String = "https://apiv3.douyucdn.cn/mgapi/live/mhome/getSlidesRec?client_sys=ios"
 
 // 活动列表
 let ZJActivityListURL : String = "https://apiv2.douyucdn.cn/Live/Subactivity/getActivityList?client_sys=ios&cid2=0"
@@ -36,7 +38,7 @@ let ZJActivityListURL : String = "https://apiv2.douyucdn.cn/Live/Subactivity/get
 // https://apiv2.douyucdn.cn/live/Cate/getTabCate1List?client_sys=ios
 let ZJLiveCateURL : String = "https://apiv2.douyucdn.cn/live/cate/getLiveCate1List?client_sys=ios"
 
-let ZJSignAppURL : String = "https://rtbapi.douyucdn.cn/japi/sign/app/getinfo?uid=&client_sys=ios&mdid=iphone"
+let ZJSignAppURL : String = "https://rtbapi.douyucdn.cn/japi/sign/app/getinfo"
 
 // 分类推荐列表
 let ZJRecommendCategoryURL : String = "https://apiv2.douyucdn.cn/live/cate/getLiveRecommendCate2?client_sys=ios"
